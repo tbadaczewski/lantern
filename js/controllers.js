@@ -96,8 +96,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					            	$scope.city = marker.city;
 					            	$scope.region = marker.region;
 					            	$scope.zip = marker.zip;
-					            	$scope.daddr = encodeURI(marker.address + " " + marker.city + ", " + marker.region + marker.zip);
-					            	$scope.saddr = encodeURI($rootScope.address);
 
 					            	if(prev) {
 					            		prev.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(25,40) };
@@ -106,7 +104,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 					            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
 					            	//marker.options = { animation: google.maps.Animation.BOUNCE };
-
 					            	//$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
 					            	$scope.showdetails = "show";
 					            	prev = marker;
