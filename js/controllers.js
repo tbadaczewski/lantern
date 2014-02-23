@@ -32,6 +32,10 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
         	$scope.saddr = encodeURI($rootScope.address);
 		});
 
+		$scope.getDirections = function(url) {
+			window.location = url;
+		}
+
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = true;
 		$rootScope.navbtnlabel = "Map";
