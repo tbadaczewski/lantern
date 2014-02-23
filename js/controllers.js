@@ -33,7 +33,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		});
 
 		$scope.getDirections = function(url) {
-			window.open(encodeURI(url), '_system', 'location=no');
+			window.open(encodeURI(url + '&saddr=' + encodeURI($rootScope.address)), '_system', 'location=no');
 		}
 
 		$rootScope.backstate = "visible";
@@ -122,6 +122,10 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		        }
 		    }
 		};
+
+		$scope.getDirections = function(url) {
+			window.open(encodeURI(url + '&saddr=' + encodeURI($rootScope.address)), '_system', 'location=no');
+		}
 		
 		$scope.markers = station_markers;
 		
