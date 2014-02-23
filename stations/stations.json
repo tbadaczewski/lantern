@@ -1,0 +1,29 @@
+[
+	{
+		"id": "cardinal",
+		"name": "Cardinal Plaza Shell",
+		"address": "70041 Mifflen Court E. #31", 
+		"city": "East Setauket", 
+		"state": "NY",
+		"zipcode": "13456",
+		"phone": "999-999-9999"
+	},
+	{
+		"id": "kamp",
+		"name": "Kamp Shell Service Center",
+		"address": "11175 Lee Hwy", 
+		"city": "Towson", 
+		"state": "VA",
+		"zipcode": "78704",
+		"phone" : "999-999-9999"
+	},
+	{
+		"id": "dan",
+		"name": "Dan's Merrifield Sunoco",
+		"address": "2084 Chain Branc Rd.", 
+		"city": "Germantown", 
+		"state": "MD",
+		"zipcode": "20874",
+		"phone": "999-999-9999"
+	}
+]

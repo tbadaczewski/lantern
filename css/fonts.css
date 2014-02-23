@@ -1,0 +1,90 @@
+@font-face {
+	font-family: 'open_sansregular';
+	src:url('../fonts/OpenSans-Regular-webfont.eot');
+	src:url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+		url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+		url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?ksde97');
+	src:url('../fonts/icomoon.eot?#iefixksde97') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?ksde97') format('woff'),
+		url('../fonts/icomoon.ttf?ksde97') format('truetype'),
+		url('../fonts/icomoon.svg?ksde97#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-list:before {
+	content: "\e600";
+}
+.icon-target:before {
+	content: "\e601";
+}
+.icon-arrow-right:before {
+	content: "\e602";
+}
+.icon-pin:before {
+	content: "\e603";
+}
+.icon-twitter:before {
+	content: "\e609";
+}
+.icon-facebook:before {
+	content: "\e60a";
+}
+.icon-lightning:before {
+	content: "\e604";
+}
+.icon-lantern:before {
+	content: "\e605";
+}
+.icon-guide:before {
+	content: "\e606";
+}
+.icon-gas:before {
+	content: "\e607";
+}
+.icon-camera:before {
+	content: "\e608";
+}
+.icon-car:before {
+	content: "\e60b";
+}
+.icon-phone:before {
+	content: "\e60c";
+}
+.icon-tag:before {
+	content: "\e60d";
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+	    font-family: open_sansregular-neue;
+	    src: url('../fonts/BebasNeue-webfont.svg#open_sansregular') format('svg');
+	}
+
+	@font-face {
+		font-family: 'icomoon';
+		src: url('../fonts/icomoon.svg#icomoon') format('svg');
+	}
+}

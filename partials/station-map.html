@@ -1,0 +1,17 @@
+<div id="station-details" class="{{showdetails}}">
+	<div class="item list">
+        <h4>{{station}}</h4>
+        <div class="small">
+        	{{address}}<br />
+        	{{city}}, {{region}} {{zip}}
+    	</div>
+	</div>
+    <div class="item-options clearfix">
+    	<div><a href="http://maps.apple.com/?daddr={{daddr}}&saddr={{saddr}}"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
+    	<div><a href="tel:"><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
+    	<div><a href=""><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+    </div>
+</div>
+<google-map center="map.center" zoom="map.zoom" events="map.events" control="map.control" draggable="true">
+	<markers models="markers" fit="true" icon="'icon'" click="'onClicked'" options="'options'" coords="'self'"></markers>
+</google-map>
