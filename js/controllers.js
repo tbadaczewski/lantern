@@ -33,7 +33,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		});
 
 		$scope.getDirections = function(url) {
-			window.location = url;
+			window.open(encodeURI(url), '_system', 'location=no');
 		}
 
 		$rootScope.backstate = "visible";
