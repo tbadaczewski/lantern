@@ -1,3 +1,15 @@
+<div class='ng-dialog' ng-show="dialog">
+	<div class='ng-modal-dialog'>
+		<div class='ng-modal-dialog-content'>
+			<h3>This Station is Closed</h3>
+			<p>Mark this station as currently closed or unoperational.</p>
+		</div>
+	    <div class="item-options clearfix">
+    		<div><a href="#close-dialog" ng-click="toggleModal(stationid,$event)">Cancel</a></div>
+	    	<div><a href="#tag-closed" ng-click="tagClosed($event)"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+	    </div>		
+	</div>
+</div>
 <div class="stations">
     <div ng-repeat="station in stations">
     	<div class="item list">
@@ -10,7 +22,7 @@
 	    <div class="item-options clearfix">
     		<div><a href="#directions" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
 	    	<div><a href="tel:"><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
-	    	<div><a href="#tag"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+	    	<div><a href="#tag-closed" ng-click="toggleModal(station.id, $event)"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
 	    </div>
     </div>
 </div>

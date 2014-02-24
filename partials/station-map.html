@@ -1,3 +1,6 @@
+<modal-dialog show='modalShown' width='100%' height='100%'>
+	<p>Modal Content Goes here<p>
+</modal-dialog>
 <div id="station-details" class="{{showdetails}}">
 	<div class="item list">
         <h4>{{station}}</h4>
@@ -7,9 +10,9 @@
     	</div>
 	</div>
     <div class="item-options clearfix">
-    	<div><a href="#directions" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
+    	<div><a href ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
     	<div><a href="tel:"><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
-    	<div><a href="#tag"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+    	<div><a href ng-click="toggleModal()"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
     </div>
 </div>
 <google-map center="map.center" zoom="map.zoom" events="map.events" control="map.control" draggable="true">

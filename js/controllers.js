@@ -27,6 +27,28 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http',
     function ($scope, $rootScope, $http) {	
+    	$scope.dialog = false;
+
+		$scope.toggleModal = function(id, $event) {
+			$event.preventDefault();
+
+			if($scope.dialog == true) {
+				$scope.dialog = false;
+				$scope.stationid = '';
+			} else {
+				$scope.dialog = true;
+				$scope.stationid = id;
+			}
+		};
+
+		$scope.tagClosed = function($event) {
+			$event.preventDefault();
+
+			$http('http://doelanternapi.parseapp.com/gasstations/status/tag/' + $scope.stationid + '/closed').success(function (data) {
+				alert(data);
+			});
+		};
+
 		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/10/reg/distance/rfej9napna.json').success(function (data) {
 			$scope.stations = eval(data).stations;
         	$scope.saddr = encodeURI($rootScope.address);
@@ -123,6 +145,12 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
 		}
+
+		$scope.modalShown = false;
+
+		$scope.toggleModal = function() {
+			$scope.modalShown = !$scope.modalShown;
+		};
 		
 		$scope.markers = station_markers;
 		

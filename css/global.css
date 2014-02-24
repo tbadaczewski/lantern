@@ -456,6 +456,10 @@ a.arrow-back + input#search-text {
 	width: 38%;
 }
 
+.ng-modal-dialog .item-options > div {
+	width: 50%;
+}
+
 .arrow-list {
 	list-style: none;
 }
@@ -505,4 +509,31 @@ a.arrow-back + input#search-text {
 
 #station-details.show {
 	bottom: 0;
+}
+
+.ng-dialog {
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+}
+
+.ng-modal-dialog {
+	z-index: 1000;
+	position: absolute;
+	width: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	background-color: #fff;
+}
+
+.ng-modal-dialog-content {
+	padding: 1em;
+	text-align: center;
 }
