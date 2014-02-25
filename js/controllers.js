@@ -91,6 +91,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		var station_markers = new Array();
 		var prev = null;
 
+<<<<<<< HEAD
 		$scope.map = {
 			control:{},
 			center: {
@@ -110,6 +111,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.markers = station_markers;
 
+=======
+>>>>>>> b71ba0c8ba9b575a6d83b27dba42037f764630a2
 		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/2/reg/distance/rfej9napna.json').success(function (data) {
 			var stations = eval(data).stations;
 			var size = new google.maps.Size(25,40);
@@ -130,6 +133,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				});
 			}
 
+<<<<<<< HEAD
     	    _.each($scope.markers, function (marker) {
 		        marker.onClicked = function () {
 		        	$scope.$apply(function () {
@@ -148,6 +152,41 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
 		            	$scope.showdetails = "show";
 		            	prev = marker;
+=======
+		$scope.map = {
+			control:{},
+			center: {
+				latitude: $rootScope.position.coords.latitude,
+				longitude: $rootScope.position.coords.longitude
+			},
+			zoom: 10,
+		    events: {
+		        tilesloaded: function (map) {
+		            $scope.$apply(function () {
+                	    _.each($scope.markers, function (marker) {
+					        marker.onClicked = function () {
+					        	//$scope.$apply(function () {
+					        		$scope.station = marker.station;
+					            	$scope.latitude = marker.latitude;
+					            	$scope.longitude = marker.longitude;
+					            	$scope.address = marker.address;
+					            	$scope.city = marker.city;
+					            	$scope.region = marker.region;
+					            	$scope.zip = marker.zip;
+
+					            	if(prev) {
+					            		prev.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(25,40) };
+					            	}
+
+					            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
+					            	//$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
+					            	$scope.showdetails = "show";
+					            	prev = marker;
+					            	$scope.$apply();
+					            //});
+					        };
+					    });	                
+>>>>>>> b71ba0c8ba9b575a6d83b27dba42037f764630a2
 		            });
 		        };
 		    });
