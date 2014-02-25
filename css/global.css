@@ -64,6 +64,7 @@ button, .button {
 	text-transform: uppercase;
 	text-align: left;
 	width: 100%;
+	cursor: pointer;
 }
 
 a.button {
@@ -78,15 +79,17 @@ button.inline, .button.inline {
 }
 
 .small {
-	font-size: 75%;
+	font-size: 80%;
 }
 
 .type {
 	position: absolute;
-	right: 18%;
+	right: 15%;
 	top: 50%;
+	min-width: 50px;
+	text-align: center;
 	margin-top: -1em;
-	padding: 0.25em 0.75em;
+	padding: 0.25em 0;
 	text-transform: uppercase;
 }
 
@@ -158,7 +161,6 @@ nav.hide {
 	z-index: 100;
 	background: orange;
 	padding: 1em;
-	display: block;
 	display: none;
 }
 
@@ -296,7 +298,7 @@ a.arrow-back + input#search-text {
 	font-size: 23px;
 	color: #c7c7c7;
 	height: 70px;
-	width: 2.5em;
+	width: 50px;
 	margin: 0;
 	padding: 0;
 	background: #fff;
@@ -305,7 +307,6 @@ a.arrow-back + input#search-text {
 
 #btn-target .icon-target {
 	margin-right: 0;
-	width: 30px;
 }
 
 #search-button {
@@ -377,9 +378,7 @@ a.arrow-back + input#search-text {
 .angular-google-map-container {
 	position: absolute;
 	top: 0;
-	bottom: 0;
 	left: 0;
-	right: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -392,6 +391,7 @@ a.arrow-back + input#search-text {
 	background: #fff;
 	cursor: pointer;
 	padding: 1em;
+	clear: both;
 }
 
 .item.list a:link, .item.list a:visited, .item.list a:hover {
@@ -404,10 +404,12 @@ a.arrow-back + input#search-text {
 }
 
 .item-options {
+	position: relative;
 	display: block;
 	background: #fff;
 	border-top: solid 1px #c7c7c7;
 	font-size: 75%;
+	clear: both;
 }
 
 .item-options span[class^="icon-"] {
@@ -422,14 +424,13 @@ a.arrow-back + input#search-text {
 }
 
 .item-options > div {
-	position: relative;
 	float: left;	
 	text-align: center;	
 	width: 38%;
 	margin-left: 0;
 	margin-right: -100em;
 	border-left: none;
-	display: inline-block;
+	display: block;
 }
 
 .item-options > div + div {
@@ -485,9 +486,8 @@ a.arrow-back + input#search-text {
 }
 
 #station-details {
-	position: absolute;
-	z-index: 5;
-	top: auto;
+	position: fixed;
+	z-index: 15;
 	bottom: -100%;
 	left: 0;
 	background: #fff;

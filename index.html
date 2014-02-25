@@ -22,7 +22,6 @@
             <div class="divider"></div>
             <button id="btn-twitter" class="rounded icon white"><span class="icon-twitter" aria-hidden="true"></span>Connect Twitter Account</button>
             <button id="btn-facebook" class="rounded icon white"><span class="icon-facebook" aria-hidden="true"></span>Connect Facebook Account</button>
-            <div class="divider"></div>
             <ul class="arrow-list">
                 <li><a href="#" target="_blank">About Lantern</a></li>
                 <li><a href="#" target="_blank">Contact <strong>ENERGY.GOV</strong></a></li>
@@ -33,15 +32,15 @@
     <div id="search-bar" ng-controller="SearchCtrl">
         <div id="search-area">
             <a href="#/" class="arrow-back {{backstate}}" title="Back"></a>
-            <input id="search-text" value="{{address}}" type="text" placeholder="Enter a Location" />
+            <input id="search-text" ng-model="address" type="text" placeholder="Enter a Location" />
         </div>
-        <button id="search-button" type="button" ><span class="icon-lantern size-32" aria-hidden="true"></span></button>
-        <button id="btn-target" ng-click="findme()"><span class="icon-target" aria-hidden="true"></span></button>
+        <button id="search-button" ng-click="findme()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span></button>
+        <button id="btn-target" ng-click="findme()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
     </div>   
     <nav ng-show="navstate">        
         <span class="icon-{{navclass}}" aria-hidden="true"></span>
         <span>{{navtext}}</span>
-        <a href="#/{{navtarget}}" class="rounded orange small type">{{navbtnlabel}}</a>
+        <a href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
     </nav> 
     <div id="{{id}}" ng-view class="{{animate}}"></div>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

@@ -13,7 +13,7 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
     geolocation().then(function(position) {
         $rootScope.position = position;
 
-        geoencoder().then(function(address) {
+        geoencoder('latLng').then(function(address) {
             $rootScope.address = address[0];
             $rootScope.county = address[1];
             $rootScope.state = address[2];
@@ -70,13 +70,19 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
 
 lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
-        return function () {
+        return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
             var position = $rootScope.position;
-            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            
-            geocoder.geocode({'latLng': latlng}, function(results, status) {
+            var params = null;
+
+            if($type == 'latLng') {
+                params = {'latLng': new google.maps.LatLng(position.coords.latitude, position.coords.longitude)};
+            } else {
+                params = {'address': $rootScope.address};
+            }
+
+            geocoder.geocode(params, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     var location = new Array("","","");
 
