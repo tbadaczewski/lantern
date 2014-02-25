@@ -78,7 +78,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		var station_markers = new Array();
 		var prev = null;
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/10/reg/distance/rfej9napna.json').success(function (data) {
+		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/5/reg/distance/rfej9napna.json').success(function (data) {
 			var stations = eval(data).stations;
 			var size = new google.maps.Size(25,40);
 
@@ -122,12 +122,10 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 					            	if(prev) {
 					            		prev.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(25,40) };
-					            		prev.options = { animation: '' };
 					            	}
 
 					            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
-					            	//marker.options = { animation: google.maps.Animation.BOUNCE };
-					            	//$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
+					            	$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
 					            	$scope.showdetails = "show";
 					            	prev = marker;
 					            });
@@ -137,7 +135,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		        },
 		        idle: function (map) {
 		            $scope.$apply(function () {
-		                console.log("idle");	
 		            });
 		        }
 		    }
