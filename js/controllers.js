@@ -112,6 +112,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
                 	    _.each($scope.markers, function (marker) {
 					        marker.onClicked = function () {
 					        	$scope.$apply(function () {
+					        		alert("Test");
 					        		$scope.station = marker.station;
 					            	$scope.latitude = marker.latitude;
 					            	$scope.longitude = marker.longitude;
