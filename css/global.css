@@ -219,30 +219,6 @@ nav.hide {
 	transition: none !important;
 }
 
-.twitter {
-	position: relative;
-	padding-top: 1em;
-	background: rgba(0, 0, 0, 0.25);
-	color: #fff;
-	width: 100%;
-	margin: 25px 0;
-}
-
-.twitter:before {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(0, 0, 0, 0);
-	border-top-color: rgba(0, 0, 0, 0.25);
-	border-width: 20px 30px 20px 30px;
-	margin-left: -30px;
-}
-
 #search-bar {
 	position: relative;
 	background: #fff;
@@ -401,7 +377,9 @@ a.arrow-back + input#search-text {
 .angular-google-map-container {
 	position: absolute;
 	top: 0;
+	bottom: 0;
 	left: 0;
+	right: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -414,6 +392,10 @@ a.arrow-back + input#search-text {
 	background: #fff;
 	cursor: pointer;
 	padding: 1em;
+}
+
+.item.list a:link, .item.list a:visited, .item.list a:hover {
+	color: #f18425;
 }
 
 .item.detail {
@@ -444,20 +426,29 @@ a.arrow-back + input#search-text {
 	float: left;	
 	text-align: center;	
 	width: 38%;
+	margin-left: 0;
+	margin-right: -100em;
 	border-left: none;
+	display: inline-block;
 }
 
 .item-options > div + div {
 	width: 24%;
+	margin-left: 38%;
 	border-left: solid 1px #c7c7c7;	
 }
 
 .item-options > div + div + div {
+	margin-left: 62%;
 	width: 38%;
 }
 
 .ng-modal-dialog .item-options > div {
 	width: 50%;
+}
+
+.ng-modal-dialog .item-options > div + div {
+	margin-left: 50%;
 }
 
 .arrow-list {
@@ -522,9 +513,9 @@ a.arrow-back + input#search-text {
 }
 
 .ng-modal-dialog {
-	z-index: 1000;
+	z-index: 999;
 	position: absolute;
-	width: 50%;
+	width: 90%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

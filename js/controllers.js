@@ -9,7 +9,9 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 				$rootScope.position = position;
 
 				geoencoder().then(function(address) {
-					$rootScope.address = address;
+					$rootScope.address = address[0];
+					$rootScope.county = address[1];
+					$rootScope.state = address[2];
 				});
 			});
 		}
@@ -44,12 +46,14 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.tagClosed = function($event) {
 			$event.preventDefault();
 
-			$http('http://doelanternapi.parseapp.com/gasstations/status/tag/' + $scope.stationid + '/closed').success(function (data) {
-				alert(data);
+			console.log('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed');
+
+			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
+				console.log(data);
 			});
 		};
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/10/reg/distance/rfej9napna.json').success(function (data) {
+		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/5/reg/distance/rfej9napna.json').success(function (data) {
 			$scope.stations = eval(data).stations;
         	$scope.saddr = encodeURI($rootScope.address);
 		});
@@ -90,10 +94,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					"icon" : {
 						url: 'img/pin.png',
 						scaledSize: size
-					}/*,
-					"options": {
-						animation : ''
-					}*/
+					}
 				});
 			}
 		});
@@ -166,10 +167,15 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 ]);
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http, $location) {	
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/10/reg/distance/rfej9napna.json').success(function (data) {
-			$scope.outages = eval(data).stations;
+    function ($scope, $rootScope, $http, $location) {
+		$http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
+			$scope.outages = data;
+			console.log(data);
 		});
+
+		$scope.getMap = function(url) {
+			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_blank', 'location=no','closebuttoncaption=back');
+		}
 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = true;
@@ -178,47 +184,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.navtarget = "outage-map";
 		$scope.id = "outage-list";
-		$scope.animate = "scale"
-    }
-]);
-
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation',
-    function ($scope, $rootScope, $http, geolocation) {	
-		var outage_markers = new Array();
-
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/10/reg/distance/rfej9napna.json').success(function (data) {
-			var outages = eval(data).stations;
-			var size = new google.maps.Size(25,40);
-
-			for(var i=0; i < outages.length; i++) {
-				outage_markers.push({
-					"latitude" : stations[i].lat,
-					"longitude" : stations[i].lng,
-					"icon" : {
-						url: 'img/pin.png',
-						scaledSize: size
-					}
-				});
-			}
-		});
-
-		$scope.map = {
-			center: {
-				latitude: $rootScope.position.coords.latitude,
-				longitude: $rootScope.position.coords.longitude
-			},
-			zoom: 8
-		};
-
-		$scope.markers = outage_markers;
-
-		$rootScope.backstate = "visible";
-		$rootScope.navstate = true;
-		$rootScope.navbtnlabel = "List";
-		$rootScope.navtext = "POWER OUTAGES";
-		$rootScope.navclass = "lightning";
-		$rootScope.navtarget = "outage-list";
-		$scope.id = "outage-map";
 		$scope.animate = "scale"
     }
 ]);

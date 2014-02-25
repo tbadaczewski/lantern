@@ -1,6 +1,15 @@
-<modal-dialog show='modalShown' width='100%' height='100%'>
-	<p>Modal Content Goes here<p>
-</modal-dialog>
+<div class='ng-dialog' ng-show="dialog">
+	<div class='ng-modal-dialog'>
+		<div class='ng-modal-dialog-content'>
+			<h3>This Station is Closed</h3>
+			<p>Mark this station as currently closed or unoperational.</p>
+		</div>
+	    <div class="item-options clearfix">
+    		<div><a href="#close-dialog" ng-click="toggleModal(stationid,$event)">Cancel</a></div>
+	    	<div><a href="#tag-closed" ng-click="tagClosed($event)"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+	    </div>		
+	</div>
+</div>
 <div id="station-details" class="{{showdetails}}">
 	<div class="item list">
         <h4>{{station}}</h4>

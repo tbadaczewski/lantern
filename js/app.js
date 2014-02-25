@@ -5,17 +5,18 @@ var lanternApp = angular.module('lanternApp', [
     'ngRoute',
 	'ngTouch',
     'google-maps',
-    'angular-carousel',
     'lanternControllers'
 ]);
 
 
-lanternApp.run(function($rootScope, geolocation, geoencoder){
+lanternApp.run(function($rootScope, geolocation, geoencoder) {
     geolocation().then(function(position) {
         $rootScope.position = position;
 
         geoencoder().then(function(address) {
-            $rootScope.address = address;
+            $rootScope.address = address[0];
+            $rootScope.county = address[1];
+            $rootScope.state = address[2];
         });
     });
 });
@@ -40,12 +41,8 @@ lanternApp.config(['$routeProvider',
             controller: 'StationMapCtrl'
         }).
         when('/outage-list', {
-            templateUrl: 'partials/station-list.html',
+            templateUrl: 'partials/outage-list.html',
             controller: 'OutageListCtrl'
-        }).
-        when('/outage-map', {
-            templateUrl: 'partials/station-map.html',
-            controller: 'OutageMapCtrl'
         }).
         otherwise({
             redirectTo: '/'
@@ -81,9 +78,26 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
             
             geocoder.geocode({'latLng': latlng}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        deferred.resolve(results[1].formatted_address);
+                    var location = new Array("","","");
+
+                    //Beautified Address
+                    location[0] = results[0].formatted_address;
+
+                    //County
+                    for(var i=0; i < results[0].address_components.length; i++) {
+                        if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
+                            location[1] = results[0].address_components[i].long_name.toLowerCase().replace("county","").trim();
+                        }
                     }
+
+                    //State
+                    for(var i=0; i < results[0].address_components.length; i++) {
+                        if (results[0].address_components[i].types[0] == "administrative_area_level_1") {
+                            location[2] = results[0].address_components[i].short_name;
+                        }
+                    }
+
+                    deferred.resolve(location);
                 }
             });
 

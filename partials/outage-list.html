@@ -1,11 +1,9 @@
 <div class="outages">
     <div ng-repeat="outage in outages">
     	<div class="item list">
-	        <h4>{{outage.station}}</h4>
-	        <div class="small">
-	        	{{outage.address}}<br />
-	        	{{outage.city}}, {{outage.region}} {{outage.zipcode}}
-	    	</div>
+	        <h4>{{outage.commericial_company_name}}</h4>
+	        {{outage.county}} County, {{outage.state}}<br />
+	        <a href="#company-url" ng-click="getMap(outage.outage_map_url)">Open Outage Map</a>
     	</div>
     </div>
 </div>
