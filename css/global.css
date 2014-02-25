@@ -377,9 +377,7 @@ a.arrow-back + input#search-text {
 .angular-google-map-container {
 	position: absolute;
 	top: 0;
-	bottom: 0;
 	left: 0;
-	right: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -392,6 +390,7 @@ a.arrow-back + input#search-text {
 	background: #fff;
 	cursor: pointer;
 	padding: 1em;
+	clear: both;
 }
 
 .item.list a:link, .item.list a:visited, .item.list a:hover {
@@ -404,10 +403,12 @@ a.arrow-back + input#search-text {
 }
 
 .item-options {
+	position: relative;
 	display: block;
 	background: #fff;
 	border-top: solid 1px #c7c7c7;
 	font-size: 75%;
+	clear: both;
 }
 
 .item-options span[class^="icon-"] {
@@ -422,14 +423,13 @@ a.arrow-back + input#search-text {
 }
 
 .item-options > div {
-	position: relative;
 	float: left;	
 	text-align: center;	
 	width: 38%;
 	margin-left: 0;
 	margin-right: -100em;
 	border-left: none;
-	display: inline-block;
+	display: block;
 }
 
 .item-options > div + div {
@@ -485,9 +485,8 @@ a.arrow-back + input#search-text {
 }
 
 #station-details {
-	position: absolute;
-	z-index: 5;
-	top: auto;
+	position: fixed;
+	z-index: 15;
 	bottom: -100%;
 	left: 0;
 	background: #fff;

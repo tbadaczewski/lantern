@@ -46,14 +46,12 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.tagClosed = function($event) {
 			$event.preventDefault();
 
-			console.log('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed');
-
 			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 				console.log(data);
 			});
 		};
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/5/reg/distance/rfej9napna.json').success(function (data) {
+		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/2/reg/distance/rfej9napna.json').success(function (data) {
 			$scope.stations = eval(data).stations;
         	$scope.saddr = encodeURI($rootScope.address);
 		});
@@ -78,7 +76,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		var station_markers = new Array();
 		var prev = null;
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/5/reg/distance/rfej9napna.json').success(function (data) {
+		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/2/reg/distance/rfej9napna.json').success(function (data) {
 			var stations = eval(data).stations;
 			var size = new google.maps.Size(25,40);
 
@@ -105,14 +103,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				latitude: $rootScope.position.coords.latitude,
 				longitude: $rootScope.position.coords.longitude
 			},
-			zoom: 8,
+			zoom: 10,
 		    events: {
 		        tilesloaded: function (map) {
 		            $scope.$apply(function () {
                 	    _.each($scope.markers, function (marker) {
 					        marker.onClicked = function () {
-					        	$scope.$apply(function () {
-					        		alert("Test");
+					        	//$scope.$apply(function () {
 					        		$scope.station = marker.station;
 					            	$scope.latitude = marker.latitude;
 					            	$scope.longitude = marker.longitude;
@@ -126,10 +123,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					            	}
 
 					            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
-					            	$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
+					            	//$scope.map.control.getGMap().panTo(new google.maps.LatLng(marker.latitude, marker.longitude));
 					            	$scope.showdetails = "show";
 					            	prev = marker;
-					            });
+					            	$scope.$apply();
+					            //});
 					        };
 					    });	                
 		            });
