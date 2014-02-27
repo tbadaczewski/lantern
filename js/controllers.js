@@ -41,8 +41,12 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			}
 
 			function onFail(message) {
-			    window.alert('Failed because: ' + message);
 			}
+		}
+
+		$scope.openTwitter = function($event) {
+			$event.preventDefault();
+			window.open(encodeURI("partials/twitter.html"), '_blank', 'location=no','closebuttoncaption=back');
 		}
 
 		$rootScope.backstate = "";
