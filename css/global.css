@@ -364,7 +364,7 @@ a.arrow-back + input#search-text {
 	text-align: center;
 }
 
-*[id^='btn-']:hover {
+*[id^='btn-']:active {
 	background: rgba(0, 0, 0, 0.5);
 }
 
