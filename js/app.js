@@ -162,7 +162,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
-                        console.log("Clicked");
                         scope.showdetails = "hide";
                     });
                 });
