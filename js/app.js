@@ -132,7 +132,9 @@ lanternApp.directive('draggable', function($document) {
 
 lanternApp.directive('tweets', function($document) {
     return function(scope, elem, attr) {
+        /*
         if(!window.twttr) {
+
             window.twttr = (function (d,s,id) {
                 var t, js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
@@ -140,7 +142,10 @@ lanternApp.directive('tweets', function($document) {
                 return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
             }(document, "script", "twitter-wjs"));
         } else {
+            */
             twttr.widgets.load();
+            /*
         }
+        */
     }
 });
