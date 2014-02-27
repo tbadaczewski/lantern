@@ -4,7 +4,6 @@ var lanternApp = angular.module('lanternApp', [
 	'ngAnimate',
     'ngRoute',
 	'ngTouch',
-    'google-maps',
     'lanternControllers'
 ]);
 
@@ -139,4 +138,90 @@ lanternApp.directive('tweets', function($document) {
             twttr.widgets.load();
         }
     }
+});
+
+lanternApp.directive('googlemap', function($rootScope) {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: '<div></div>',
+        link: function(scope, element, attrs) {
+            var map;
+            var mapOptions = {
+                zoom: 10,
+                center: new google.maps.LatLng($rootScope.position.coords.latitude, $rootScope.position.coords.longitude),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                panControl: false,
+                zoomControl: false,
+                streetViewControl: false
+            };            
+
+            scope.init = function() {
+                map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
+
+                google.maps.event.addListener(map, 'click', function(e) {
+                    scope.$apply(function() {
+                        console.log("Clicked");
+                        scope.showdetails = "hide";
+                    });
+                });
+
+                scope.addMarkers(scope.markers);
+            } 
+
+            scope.addMarkers = function (markers) {
+                _.each(markers, function (marker) {
+                    var size = new google.maps.Size(25,40);
+                    var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
+                    var point = new google.maps.Marker({
+                        position: myLatlng, 
+                        latitude: marker.latitude,
+                        longitude: marker.longitude,
+                        map: map,
+                        station : marker.station,
+                        address : marker.address,
+                        city : marker.city,
+                        region : marker.region,
+                        zip : marker.zip,
+                        "icon" : {
+                            url: 'img/pin.png',
+                            scaledSize: size
+                        } 
+                    });
+
+                    google.maps.event.addListener(point, 'click', function() {
+                        scope.$apply(function () {
+                            scope.station = point.station;
+                            scope.latitude = point.latitude;
+                            scope.longitude = point.longitude;
+                            scope.address = point.address;
+                            scope.city = point.city;
+                            scope.region = point.region;
+                            scope.zip = point.zip;
+
+                            var normal = { 
+                                url: 'img/pin.png',
+                                scaledSize: new google.maps.Size(25,40)
+                            };
+
+                            var large = {
+                                url: 'img/pin.png',
+                                scaledSize: new google.maps.Size(50,80)
+                            };
+
+                            if(scope.prev) {
+                                scope.prev.setIcon(normal);
+                            }
+
+                            point.setIcon(large);                          
+
+                            scope.showdetails = "show";
+                            scope.prev = point;
+                        });
+                    });
+                });
+            }
+        }
+    };
 });

@@ -79,7 +79,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-			$scope.stations = eval(data);
+			$scope.stations = $rootScope.stations = eval(data);
         	$scope.saddr = encodeURI($rootScope.address);
 		});
 
@@ -104,25 +104,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		var station_markers = new Array();
 		var prev = null;
 
-		$scope.map = {
-			control:{},
-			center: {
-				latitude: $rootScope.position.coords.latitude,
-				longitude: $rootScope.position.coords.longitude
-			},
-			zoom: 10,
-		    events: {
-		    	click: function (map) {
-		            $scope.$apply(function () {
-		            	$scope.showdetails = "";
-		            	prev.icon = { url : prev.icon.url, scaledSize: new google.maps.Size(25,40) };
-		            });
-		    	}
-		    }
-		};
-
-		$scope.markers = station_markers;
-
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
 			var stations = eval(data);
 			var size = new google.maps.Size(25,40);
@@ -142,28 +123,10 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					}
 				});
 			}
+			
+			$scope.markers = station_markers;
 
-    	    _.each($scope.markers, function (marker) {
-		        marker.onClicked = function () {
-		        	$scope.$apply(function () {
-		        		$scope.station = marker.station;
-		            	$scope.latitude = marker.latitude;
-		            	$scope.longitude = marker.longitude;
-		            	$scope.address = marker.address;
-		            	$scope.city = marker.city;
-		            	$scope.region = marker.region;
-		            	$scope.zip = marker.zip;
-
-		            	if(prev) {
-		            		prev.icon = { url : prev.icon.url, scaledSize: new google.maps.Size(25,40) };
-		            	}
-
-		            	marker.icon = { url : marker.icon.url, scaledSize: new google.maps.Size(50,80) };
-		            	$scope.showdetails = "show";
-		            	prev = marker;
-		            });
-		        };
-		    });
+			$scope.init();		
 		});
 
 		$scope.getDirections = function(url) {
