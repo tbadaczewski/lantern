@@ -2,6 +2,19 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+    	$rootScope.backstate = "visible";
+		$rootScope.typestate = false;
+		$rootScope.navstate = true;
+		$rootScope.navtext = "Twitter";
+		$rootScope.navclass = "twitter";
+		$rootScope.navtarget = "";
+		$scope.id = "twitter-list";
+		$scope.animate = "scale"
+    }
+]);
+
 lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {
     	$scope.findme = function() {
@@ -21,12 +34,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 50 }); 
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 60 }); 
 			
 			function onSuccess(imageData) {
-			    //var image = document.getElementById('myImage');
-			    //image.src = "data:image/jpeg;base64," + imageData;
-			    window.alert("Success");
+				$rootScope.photo = "data:image/jpeg;base64," + imageData;
 			}
 
 			function onFail(message) {
@@ -60,13 +71,11 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.tagClosed = function($event) {
 			$event.preventDefault();
 
-			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
-				console.log(data);
-			});
+			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) { });
 		};
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/2/reg/distance/rfej9napna.json').success(function (data) {
-			$scope.stations = eval(data).stations;
+		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+			$scope.stations = eval(data);
         	$scope.saddr = encodeURI($rootScope.address);
 		});
 
@@ -101,7 +110,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		    events: {
 		    	click: function (map) {
 		            $scope.$apply(function () {
-		            	$scope.showdetails = "hide";
+		            	$scope.showdetails = "";
 		            	prev.icon = { url : prev.icon.url, scaledSize: new google.maps.Size(25,40) };
 		            });
 		    	}
@@ -110,8 +119,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.markers = station_markers;
 
-		$http.get('http://devapi.mygasfeed.com/stations/radius/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude + '/2/reg/distance/rfej9napna.json').success(function (data) {
-			var stations = eval(data).stations;
+		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+			var stations = eval(data);
 			var size = new google.maps.Size(25,40);
 
 			for(var i=0; i < stations.length; i++) {
@@ -176,7 +185,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 ]);
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http, $location) {
+    function ($scope, $rootScope, $http) {
 		$http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
 			$scope.outages = data;
 		});
@@ -193,6 +202,21 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.navtarget = "outage-map";
 		$scope.id = "outage-list";
+		$scope.animate = "scale"
+    }
+]);
+
+lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+    	document.getElementById("photo").attr("src", $rootScope.photo);
+
+		$rootScope.backstate = "visible";
+		$rootScope.typestate = false;
+		$rootScope.navstate = true;
+		$rootScope.navtext = "DOWNED POWERLINES";
+		$rootScope.navclass = "camera";
+		$rootScope.navtarget = "downed-powerlines";
+		$scope.id = "downed-powerlines";
 		$scope.animate = "scale"
     }
 ]);

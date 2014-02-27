@@ -28,9 +28,9 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/main.html',
             controller: 'MainCtrl'
         }).
-        when('/settings', {
-            templateUrl: 'partials/settings.html',
-            controller: 'LanternSettingsCtrl'
+        when('/twitter', {
+            templateUrl: 'partials/twitter.html',
+            controller: 'TwitterCtrl'
         }).
         when('/station-list', {
             templateUrl: 'partials/station-list.html',
@@ -43,6 +43,10 @@ lanternApp.config(['$routeProvider',
         when('/outage-list', {
             templateUrl: 'partials/outage-list.html',
             controller: 'OutageListCtrl'
+        }).
+        when('/downed-powerlines', {
+            templateUrl: 'partials/owned-powerlines.html',
+            controller: 'DownedPowerLinesCtrl'
         }).
         otherwise({
             redirectTo: '/'
@@ -123,5 +127,20 @@ lanternApp.directive('draggable', function($document) {
                 element[0].parentNode.className = "open";
             }
         });
+    }
+});
+
+lanternApp.directive('tweets', function($document) {
+    return function(scope, elem, attr) {
+        if(!window.twttr) {
+            window.twttr = (function (d,s,id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+        } else {
+            twttr.widgets.load();
+        }
     }
 });

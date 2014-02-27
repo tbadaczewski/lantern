@@ -19,12 +19,11 @@
 <body>
     <div id="handle" class="close">
         <div class="inner">
-            <div class="divider"></div>
             <button id="btn-twitter" class="rounded icon white"><span class="icon-twitter" aria-hidden="true"></span>Connect Twitter Account</button>
             <button id="btn-facebook" class="rounded icon white"><span class="icon-facebook" aria-hidden="true"></span>Connect Facebook Account</button>
             <ul class="arrow-list">
                 <li><a href="#" target="_blank">About Lantern</a></li>
-                <li><a href="#" target="_blank">Contact <strong>ENERGY.GOV</strong></a></li>
+                <li><a href="http://energy.gov/" target="_blank">Contact <strong>ENERGY.GOV</strong></a></li>
             </ul>            
         </div>
         <a id="hamburger" draggable><span class="icon-list" aria-hidden="true"></span></a>
@@ -43,14 +42,12 @@
         <a href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
     </nav> 
     <div id="{{id}}" ng-view class="{{animate}}"></div>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src='lib/underscore.min.js'></script>
     <script type="text/javascript" src='lib/angular/angular-google-maps.min.js'></script>
 	<script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
+    <script type="text/javascript">app.initialize();</script>
 </body>
 
 </html>

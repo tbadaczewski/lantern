@@ -2,7 +2,7 @@
 <widget id="com.phonegap.lantern" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Lantern</name>
     <description>Power outage utility</description>
-    <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
+    <author email="timothy.badaczewski@icfi.com" href="http://www.icfi.com">PhoneGap Team</author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
@@ -39,17 +39,20 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <access origin="http://127.0.0.1*" />
+    <access origin="*.twitter.com" />
+    <access origin="*.parse.com" />
     <access origin="*.apple.com" />
     <access origin="*.mygasfeed.com" />
     <access origin="*.google.com" />
     <access origin="*.googleapis.com" />
     <access origin="*.gstatic.com" />
     <access origin="*.googleusercontent.com" />
+    <access origin="*.twitter.com" subdomains="true"/>
+    <access origin="*.parse.com" subdomains="true"/>
     <access origin="*.apple.com" subdomains="true"/>
     <access origin="*.mygasfeed.com" subdomains="true"/>
     <access origin="google.com" subdomains="true"/>
