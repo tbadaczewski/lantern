@@ -42,6 +42,7 @@
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.dialogs" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
     <access origin="http://127.0.0.1*" />
     <access origin="*.twitter.com" />
     <access origin="*.parse.com" />
