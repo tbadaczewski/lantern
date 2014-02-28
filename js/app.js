@@ -244,6 +244,7 @@ lanternApp.directive('modaldialog', function($rootScope) {
         restrict: 'E',
         replace: true,
         transclude: true,
+        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
             var parent = element[0].parentNode;
             scope.show = false;
@@ -266,7 +267,23 @@ lanternApp.directive('modaldialog', function($rootScope) {
                     parent.appendChild(element[0]);
                 }
             }
+        }
+    };
+});
+
+lanternApp.directive('progress', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            show: '='
         },
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+        replace: true,
+        transclude: true,
+        template: '<div class="progress" ng-show="show"><div ng-transclude>Loading</div></div>',
+        link: function (scope, element, attrs) {
+            scope.hideModal = function() {
+                scope.show = false;
+            };
+        },
     };
 });

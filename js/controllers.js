@@ -39,8 +39,6 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {
     	$scope.findme = function() {
-    		$rootScope.address = $scope.address ;
-
 			geoencoder('address').then(function(address) {
 				$rootScope.address = $scope.address = address[0];
 				$rootScope.county = address[1];
@@ -52,6 +50,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {
+    	$scope.progressShown = true;
+    	
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
@@ -74,11 +74,15 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 		$rootScope.navstate = false;
 		$scope.id = "main";
 		$scope.animate = "scale"
+		$scope.show = false;
+		$scope.progressShown = false;
     }
 ]);
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http) {	
+    function ($scope, $rootScope, $http) {
+    	$scope.progressShown = true;
+
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
 		};
@@ -105,6 +109,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
 			$scope.stations = $rootScope.stations = eval(data);
         	$scope.saddr = encodeURI($rootScope.address);
+        	$scope.progressShown = false;
 		});
 
 		$scope.getDirections = function(url) {
@@ -125,7 +130,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {	
-		var station_markers = new Array();		
+    	$scope.progressShown = true;
+		var station_markers = new Array();
 
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
 			var stations = eval(data);
@@ -150,33 +156,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
-			$scope.init();		
-		});
-
-		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-			var stations = eval(data);
-			var size = new google.maps.Size(25,40);
-
-			for(var i=0; i < stations.length; i++) {
-				station_markers.push({
-					"id" : stations[i].id,
-					"station" : stations[i].station,
-					"operatingStatus" : stations[i].operatingStatus,
-					"address" : stations[i].address,
-					"city" : stations[i].city,
-					"region" : stations[i].region,
-					"zip" : stations[i].zip,
-					"latitude" : stations[i].lat,
-					"longitude" : stations[i].lng,					
-					"icon" : {
-						url: 'img/pin-' + stations[i].operatingStatus.toLowerCase() + '.png',
-						scaledSize: size
-					}
-				});
-			}
-			
-			$scope.markers = station_markers;
-			$scope.init();		
+			$scope.init();
+			$scope.progressShown = false;		
 		});
 
 		$scope.getDirections = function(url) {
@@ -220,8 +201,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http',
     function ($scope, $rootScope, $http) {
+    	$scope.progressShown = true;
+
 		$http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
 			$scope.outages = data;
+			$scope.progressShown = false;
 		});
 
 		$scope.getMap = function($event, url) {
@@ -242,6 +226,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.progressShown = true;
     	document.getElementById("photo").attr("src", $rootScope.photo);
 
 		$rootScope.backstate = "visible";
@@ -252,5 +237,6 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
 		$rootScope.navtarget = "downed-powerlines";
 		$scope.id = "downed-powerlines";
 		$scope.animate = "scale"
+		$scope.progressShown = false;
     }
 ]);
