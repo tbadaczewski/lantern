@@ -159,11 +159,11 @@ lanternApp.directive('googlemap', function($rootScope) {
                 panControl: false,
                 zoomControl: false,
                 streetViewControl: false
-            };            
+            };
+
+            map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);           
 
             scope.init = function() {
-                map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
-
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = "hide";

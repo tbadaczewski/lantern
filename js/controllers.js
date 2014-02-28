@@ -125,7 +125,33 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {	
-		var station_markers = new Array();
+		var station_markers = new Array();		
+
+		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+			var stations = eval(data);
+			var size = new google.maps.Size(25,40);
+
+			for(var i=0; i < stations.length; i++) {
+				station_markers.push({
+					"id" : stations[i].id,
+					"station" : stations[i].station,
+					"operatingStatus" : stations[i].operatingStatus,
+					"address" : stations[i].address,
+					"city" : stations[i].city,
+					"region" : stations[i].region,
+					"zip" : stations[i].zip,
+					"latitude" : stations[i].lat,
+					"longitude" : stations[i].lng,					
+					"icon" : {
+						url: 'img/pin-' + stations[i].operatingStatus.toLowerCase() + '.png',
+						scaledSize: size
+					}
+				});
+			}
+			
+			$scope.markers = station_markers;
+			$scope.init();		
+		});
 
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
 			var stations = eval(data);
