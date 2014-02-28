@@ -152,7 +152,7 @@ lanternApp.directive('googlemap', function($rootScope) {
         link: function(scope, element, attrs) {
             var map;
             var mapOptions = {
-                zoom: 15,
+                zoom: 12,
                 center: new google.maps.LatLng($rootScope.position.coords.latitude, $rootScope.position.coords.longitude),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,
@@ -174,6 +174,8 @@ lanternApp.directive('googlemap', function($rootScope) {
             } 
 
             scope.addMarkers = function (markers) {
+                var bounds = new google.maps.LatLngBounds();
+
                 _.each(markers, function (marker) {
                     var prev = null;
                     var size = new google.maps.Size(25,40);
@@ -195,6 +197,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                             scaledSize: size
                         } 
                     });
+
+                    bounds.extend(myLatlng);
 
                     google.maps.event.addListener(point, 'click', function() {
                         scope.$apply(function () {
@@ -228,6 +232,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                         });
                     });
                 });
+
+                map.fitBounds(bounds);
             }
         }
     };
