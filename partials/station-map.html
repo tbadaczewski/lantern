@@ -14,8 +14,10 @@
 </div>
 <googlemap id="map_canvas"></googlemap>
 <modaldialog>
-	<h3>This Station is {{status == "closed" ? "Closed" : "Open"}}</h3>
-	<p>Mark this station as currently {{status == "closed" ? "closed or unoperational" : "open or operational"}}.</p>
+	<div class="description">
+		<h3>This Station is {{status == "closed" ? "Closed" : "Open"}}</h3>
+		<p>Mark this station as currently {{status == "closed" ? "closed or unoperational" : "open or operational"}}.</p>
+	</div>
     <div class="item-options clearfix">
     	<div><a href="" ng-click="tagCancel()">Cancel</a></div>
 	    <div><a href="" ng-click="tagStation(stationid, status)"><span class="icon-tag" aria-hidden="true"></span> Tag {{status == "closed" ? "Closed" : "Open"}}</a></div>

@@ -647,3 +647,7 @@ iframe[id*="twitter-widget-"] {
 .ng-modal-dialog-content {
 	text-align: center;
 }
+
+.ng-modal-dialog-content .description {
+	padding: 1em 1em 0 1em;
+}
