@@ -561,12 +561,11 @@ iframe[id*="twitter-widget-"] {
 	top: 50%;
 	left: 50%;
 	z-index: 1100;
-	display: inline-block;
+	display: block;
 	width: 5em;
 	height: 5em;
 	margin: 0.5em;
 	margin-left: -2.5em;
-	margin-top: -2.5em;
 	font-size: 12px;
 	text-indent: 999em;
 	overflow: hidden;
