@@ -1,21 +1,13 @@
 @font-face {
 	font-family: 'open_sansregular';
-	src:url('../fonts/OpenSans-Regular-webfont.eot');
-	src:url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
-		url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
-		url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+	src: url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?ksde97');
-	src:url('../fonts/icomoon.eot?#iefixksde97') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?ksde97') format('woff'),
-		url('../fonts/icomoon.ttf?ksde97') format('truetype'),
-		url('../fonts/icomoon.svg?ksde97#icomoon') format('svg');
+	src:url('../fonts/icomoon.ttf?ksde97') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -75,16 +67,4 @@
 }
 .icon-tag:before {
 	content: "\e60d";
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	@font-face {
-	    font-family: open_sansregular-neue;
-	    src: url('../fonts/BebasNeue-webfont.svg#open_sansregular') format('svg');
-	}
-
-	@font-face {
-		font-family: 'icomoon';
-		src: url('../fonts/icomoon.svg#icomoon') format('svg');
-	}
 }

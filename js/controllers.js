@@ -1,6 +1,27 @@
 "use strict";
 
 var lanternControllers = angular.module('lanternControllers', []);
+var inAppBrowserRef = null;
+
+lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$http',
+    function ($scope, $rootScope, $http) {
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = true;
+		$scope.id = "tips";
+		$scope.animate = "scale"
+		
+		inAppBrowserRef = window.open('http://energy.gov/oe/community-guidelines-energy-emergencies', '_blank', 'hidden=yes,presentationstyle=pagesheet');
+        inAppBrowserRef.addEventListener('loadstop', function() { 
+         	inAppBrowserRef.executeScript({
+            		code: "var div=document.getElementById('header-wrapper');div.parentNode.removeChild(div);"
+        	}, function() {
+            	//alert("Header Successfully Removed");
+        	});
+        
+        	inAppBrowserRef.show();
+         });
+    }
+]);
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
@@ -58,24 +79,27 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http',
     function ($scope, $rootScope, $http) {	
-    	$scope.dialog = false;
-
-		$scope.toggleModal = function(id, $event) {
-			$event.preventDefault();
-
-			if($scope.dialog == true) {
-				$scope.dialog = false;
-				$scope.stationid = '';
-			} else {
-				$scope.dialog = true;
-				$scope.stationid = id;
-			}
+   		$scope.tagCancel = function() {  			
+			$scope.toggleModal();
 		};
 
-		$scope.tagClosed = function($event) {
-			$event.preventDefault();
+		$scope.tagStation = function(id, status) {
+			$scope.toggleModal();
 
-			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) { });
+			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
+				$scope.stationid = '';
+				navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			});
+		};
+
+		$scope.tagOpen = function(id, status) {
+			if(status == "red") {
+				$scope.status = "open";
+			} else {
+				$scope.status = "closed";
+			}
+
+			$scope.toggleModal();
 		};
 
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
@@ -102,7 +126,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {	
 		var station_markers = new Array();
-		var prev = null;
 
 		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
 			var stations = eval(data);
@@ -110,7 +133,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 			for(var i=0; i < stations.length; i++) {
 				station_markers.push({
+					"id" : stations[i].id,
 					"station" : stations[i].station,
+					"operatingStatus" : stations[i].operatingStatus,
 					"address" : stations[i].address,
 					"city" : stations[i].city,
 					"region" : stations[i].region,
@@ -118,14 +143,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					"latitude" : stations[i].lat,
 					"longitude" : stations[i].lng,					
 					"icon" : {
-						url: 'img/pin.png',
+						url: 'img/pin-' + stations[i].operatingStatus.toLowerCase() + '.png',
 						scaledSize: size
 					}
 				});
 			}
 			
 			$scope.markers = station_markers;
-
 			$scope.init();		
 		});
 
@@ -133,10 +157,27 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
 		}
 
-		$scope.modalShown = false;
+   		$scope.tagCancel = function() {  			
+			$scope.toggleModal();
+		};
 
-		$scope.toggleModal = function() {
-			$scope.modalShown = !$scope.modalShown;
+		$scope.tagStation = function(id, status) {
+			$scope.toggleModal();
+
+			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
+				$scope.stationid = '';
+				navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			});
+		};
+
+		$scope.tagOpen = function(id, status) {
+			if(status == "red") {
+				$scope.status = "open";
+			} else {
+				$scope.status = "closed";
+			}
+
+			$scope.toggleModal();
 		};
 
 		$rootScope.typestate = true;		

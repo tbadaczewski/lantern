@@ -43,6 +43,10 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/owned-powerlines.html',
             controller: 'DownedPowerLinesCtrl'
         }).
+        when('/tips', {
+            templateUrl: 'partials/tips.html',
+            controller: 'TipsCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });
@@ -148,7 +152,7 @@ lanternApp.directive('googlemap', function($rootScope) {
         link: function(scope, element, attrs) {
             var map;
             var mapOptions = {
-                zoom: 10,
+                zoom: 15,
                 center: new google.maps.LatLng($rootScope.position.coords.latitude, $rootScope.position.coords.longitude),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false,
@@ -171,6 +175,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             scope.addMarkers = function (markers) {
                 _.each(markers, function (marker) {
+                    var prev = null;
                     var size = new google.maps.Size(25,40);
                     var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
                     var point = new google.maps.Marker({
@@ -178,19 +183,23 @@ lanternApp.directive('googlemap', function($rootScope) {
                         latitude: marker.latitude,
                         longitude: marker.longitude,
                         map: map,
+                        id : marker.id,
+                        operatingStatus : marker.operatingStatus,
                         station : marker.station,
                         address : marker.address,
                         city : marker.city,
                         region : marker.region,
                         zip : marker.zip,
                         "icon" : {
-                            url: 'img/pin.png',
+                            url: 'img/pin-' + marker.operatingStatus.toLowerCase() + '.png',
                             scaledSize: size
                         } 
                     });
 
                     google.maps.event.addListener(point, 'click', function() {
                         scope.$apply(function () {
+                            scope.id = point.id,
+                            scope.operatingStatus = point.operatingStatus,
                             scope.station = point.station;
                             scope.latitude = point.latitude;
                             scope.longitude = point.longitude;
@@ -199,22 +208,21 @@ lanternApp.directive('googlemap', function($rootScope) {
                             scope.region = point.region;
                             scope.zip = point.zip;
 
-                            var normal = { 
-                                url: 'img/pin.png',
-                                scaledSize: new google.maps.Size(25,40)
-                            };
+                            if(scope.prev != null) {
+                                var normal = { 
+                                    url: scope.prev.icon.url,
+                                    scaledSize: new google.maps.Size(25,40)
+                                };
 
-                            var large = {
-                                url: 'img/pin.png',
-                                scaledSize: new google.maps.Size(50,80)
-                            };
-
-                            if(scope.prev) {
                                 scope.prev.setIcon(normal);
                             }
 
-                            point.setIcon(large);                          
+                            var large = {
+                                url: point.icon.url,
+                                scaledSize: new google.maps.Size(50,80)
+                            };
 
+                            point.setIcon(large);
                             scope.showdetails = "show";
                             scope.prev = point;
                         });
@@ -222,5 +230,37 @@ lanternApp.directive('googlemap', function($rootScope) {
                 });
             }
         }
+    };
+});
+
+lanternApp.directive('modaldialog', function($rootScope) {
+    return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        link: function (scope, element, attrs) {
+            var parent = element[0].parentNode;
+            scope.show = false;
+
+            if (attrs.status) {
+                scope.status = attrs.status;
+            }
+
+            scope.hideModal = function () {
+                scope.show = false;
+            }
+
+            scope.toggleModal = function() {
+                if(scope.show === false) {
+                    parent = element[0].parentNode;
+                    document.body.appendChild(element[0]);
+                    scope.show = true;
+                } else {
+                    scope.show = false;
+                    parent.appendChild(element[0]);
+                }
+            }
+        },
+        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
     };
 });
