@@ -119,11 +119,12 @@ lanternApp.directive('draggable', function($document) {
     return function(scope, element, attr) {
         element.on('touchstart', function(e) {
             e.preventDefault();
+            var menu = document.getElementById("handle");            
 
-            if(element[0].parentNode.className == "open") {
-                element[0].parentNode.className = "close";
+            if(menu.className == "open") {
+               menu.className = "close";
             } else {
-                element[0].parentNode.className = "open";
+                menu.className = "open";
             }
         });
     }
@@ -135,7 +136,8 @@ lanternApp.directive('googlemap', function($rootScope) {
         replace: true,
         template: '<div></div>',
         link: function(scope, element, attrs) {
-            var map;
+            var map = null;
+            var markers = [];
             var mapOptions = {
                 zoom: 12,
                 center: new google.maps.LatLng($rootScope.position.coords.latitude, $rootScope.position.coords.longitude),
@@ -144,16 +146,20 @@ lanternApp.directive('googlemap', function($rootScope) {
                 panControl: false,
                 zoomControl: false,
                 streetViewControl: false
-            };
-
-            map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);           
+            };                 
 
             scope.init = function() {
+                map = new google.maps.Map(document.getElementById(attrs.id), mapOptions); 
+
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = "hide";
                     });
                 });
+
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
 
                 scope.addMarkers(scope.markers);
             } 
@@ -183,6 +189,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                         } 
                     });
 
+                    markers.push(point);
                     bounds.extend(myLatlng);
 
                     google.maps.event.addListener(point, 'click', function() {

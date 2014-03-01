@@ -1,27 +1,6 @@
 "use strict";
 
 var lanternControllers = angular.module('lanternControllers', []);
-var inAppBrowserRef = null;
-
-lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http) {
-		$rootScope.backstate = "visible";
-		$rootScope.navstate = true;
-		$scope.id = "tips";
-		$scope.animate = "scale"
-		
-		inAppBrowserRef = window.open('http://energy.gov/oe/community-guidelines-energy-emergencies', '_blank', 'hidden=yes,presentationstyle=pagesheet');
-        inAppBrowserRef.addEventListener('loadstop', function() { 
-         	inAppBrowserRef.executeScript({
-            		code: "var div=document.getElementById('header-wrapper');div.parentNode.removeChild(div);"
-        	}, function() {
-            	//alert("Header Successfully Removed");
-        	});
-        
-        	inAppBrowserRef.show();
-         });
-    }
-]);
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
@@ -69,6 +48,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			$event.preventDefault();
 			window.open(encodeURI("partials/twitter.html"), '_blank', 'location=no','closebuttoncaption=back');
 		}
+		
+		$scope.openTips = function($event) {
+			$event.preventDefault();
+			window.open("http://energy.gov/oe/community-guidelines-energy-emergencies", '_blank', 'location=no','closebuttoncaption=back');
+		}
 
 		$rootScope.backstate = "";
 		$rootScope.navstate = false;
@@ -89,33 +73,38 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
+			//navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
 
 			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
-				$scope.stationid = '';				
+				$scope.loadStations();				
 			});
 		};
 
-		$scope.tagOpen = function(id, status) {
-			if(status == "red") {
+		$scope.tagOpenWindow = function(id, status) {
+			if(status != "green") {
 				$scope.status = "open";
 			} else {
 				$scope.status = "closed";
 			}
 
+			$scope.stationid = id;
 			$scope.toggleModal();
-		};
+		};		
 
-		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-			$scope.stations = $rootScope.stations = eval(data);
-        	$scope.saddr = encodeURI($rootScope.address);
-        	$scope.progressShown = false;
-		});
+		$scope.loadStations = function() {
+			$scope.progressShown = true;
+
+			$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+				$scope.stations = eval(data);
+	        	$scope.saddr = encodeURI($rootScope.address);
+	        	$scope.progressShown = false;
+			});
+		};		
 
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
 		}
-
+		
 		$rootScope.backstate = "visible";
 		$rootScope.typestate = true;
 		$rootScope.navstate = true;
@@ -125,40 +114,46 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$rootScope.navtarget = "station-map";
 		$scope.id = "station-list";
 		$scope.animate = "scale"
+		$scope.loadStations();
     }
 ]);
 
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {	
     	$scope.progressShown = true;
-		var station_markers = new Array();
+		var station_markers = null;
 
-		$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-			var stations = eval(data);
-			var size = new google.maps.Size(25,40);
+		$scope.loadStations = function() {
+			$http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+				var stations = eval(data);
+				var size = new google.maps.Size(25,40);
 
-			for(var i=0; i < stations.length; i++) {
-				station_markers.push({
-					"id" : stations[i].id,
-					"station" : stations[i].station,
-					"operatingStatus" : stations[i].operatingStatus,
-					"address" : stations[i].address,
-					"city" : stations[i].city,
-					"region" : stations[i].region,
-					"zip" : stations[i].zip,
-					"latitude" : stations[i].lat,
-					"longitude" : stations[i].lng,					
-					"icon" : {
-						url: 'img/pin-' + stations[i].operatingStatus.toLowerCase() + '.png',
-						scaledSize: size
-					}
-				});
-			}
-			
-			$scope.markers = station_markers;
-			$scope.init();
-			$scope.progressShown = false;		
-		});
+				station_markers = new Array();
+
+				for(var i=0; i < stations.length; i++) {
+					station_markers.push({
+						"id" : stations[i].id,
+						"station" : stations[i].station,
+						"operatingStatus" : stations[i].operatingStatus,
+						"address" : stations[i].address,
+						"city" : stations[i].city,
+						"region" : stations[i].region,
+						"zip" : stations[i].zip,
+						"latitude" : stations[i].lat,
+						"longitude" : stations[i].lng,					
+						"icon" : {
+							url: 'img/pin-' + stations[i].operatingStatus.toLowerCase() + '.png',
+							scaledSize: size
+						}
+					});
+				}
+				
+				$scope.markers = station_markers;
+				$scope.init();
+				$scope.progressShown = false;		
+			});
+		}
+
 
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
@@ -166,26 +161,29 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
-		};
+		}
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
+			//navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
+
+			console.log('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status);
 
 			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
-				$scope.stationid = '';				
+				$scope.loadStations();			
 			});
 		};
 
-		$scope.tagOpen = function(id, status) {
-			if(status == "red") {
+		$scope.tagOpenWindow = function(id, status) {
+			if(status != "green") {
 				$scope.status = "open";
 			} else {
 				$scope.status = "closed";
 			}
 
+			$scope.stationid = id
 			$scope.toggleModal();
-		};
+		};		
 
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";
@@ -196,6 +194,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtarget = "station-list";
 		$scope.id = "station-map";
 		$scope.animate = "scale";
+		$scope.loadStations();
     }
 ]);
 

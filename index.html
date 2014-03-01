@@ -19,6 +19,7 @@
 <body>
     <div id="handle" class="close">
         <div class="inner">
+            <br />
             <button id="btn-twitter" class="rounded icon white"><span class="icon-twitter" aria-hidden="true"></span>Connect Twitter Account</button>
             <button id="btn-facebook" class="rounded icon white"><span class="icon-facebook" aria-hidden="true"></span>Connect Facebook Account</button>
             <ul class="arrow-list">
@@ -33,7 +34,7 @@
             <a href="#/" class="arrow-back {{backstate}}" title="Back"></a>
             <input id="search-text" ng-model="address" type="text" placeholder="Enter a Location" />
         </div>
-        <button id="search-button" ng-click="findme()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span></button>
+        <button id="search-button" draggable type="button"><span class="icon-lantern size-32" aria-hidden="true"></span></button>
         <button id="btn-target" ng-click="findme()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
     </div>   
     <nav ng-show="navstate">        
