@@ -167,10 +167,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			$scope.toggleModal();
 			navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
 
-			console.log('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status);
-
 			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
-				$scope.loadStations();			
+				$scope.loadStations();
+				$scope.showdetails = "";	
 			});
 		};
 
