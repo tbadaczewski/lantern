@@ -36,9 +36,10 @@ var app = {
         app.receivedEvent('deviceready');
         navigator.splashscreen.show();
 
-        setTimeout(function() {
-            navigator.splashscreen.hide();
-            navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
+        navigator.notification.alert(null, null, 'Device Ready', 'Close');
+
+        window.setTimeout(function() {
+            navigator.splashscreen.hide();            
         }, 5000);
     }
     // Update DOM on a Received Event
