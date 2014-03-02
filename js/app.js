@@ -9,8 +9,6 @@ var lanternApp = angular.module('lanternApp', [
 
 
 lanternApp.run(function($rootScope, geolocation, geoencoder) {
-    navigator.splashscreen.hide();
-
     geolocation().then(function(position) {
         $rootScope.position = position;
 
