@@ -45,5 +45,6 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+        angular.bootstrap(document, ["lanternApp"]);
     }
 };
