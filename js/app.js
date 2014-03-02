@@ -21,6 +21,10 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
     });
 });
 
+
+angular.module('lanternApp').run(['$rootScope', function($rootScope) {
+    });
+
 lanternApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
