@@ -7,7 +7,6 @@ var lanternApp = angular.module('lanternApp', [
     'lanternControllers'
 ]);
 
-
 lanternApp.run(function($rootScope, geolocation, geoencoder) {
     geolocation().then(function(position) {
         $rootScope.position = position;

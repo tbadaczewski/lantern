@@ -4,9 +4,6 @@
     <description>Power outage utility</description>
     <author email="timothy.badaczewski@icfi.com" href="http://www.icfi.com">PhoneGap Team</author>
     <feature name="http://api.phonegap.com/1.0/device" />
-    <feature name="SplashScreen">
-        <param name="ios-package" value="CDVSplashScreen"/>
-    </feature>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
@@ -17,10 +14,8 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="auto-hide-splash-screen" value="true" />
-    <preference name="show-splash-screen-spinner" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />      
-    <preference name="SplashScreenDelay" value="5000" />    
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="show-splash-screen-spinner" value="false" />  
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
@@ -47,7 +42,6 @@
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
     <access origin="http://127.0.0.1*" />
     <access origin="*.twitter.com" />
     <access origin="*.parse.com" />
