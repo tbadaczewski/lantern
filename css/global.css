@@ -86,6 +86,7 @@ button.inline, .button.inline {
 	z-index: 1;
 	height: 40px;
 	width: 100%;
+	padding: 0 1em;
 	background: #f18425;	
 }
 
@@ -249,6 +250,7 @@ nav.hide {
 	width: 85%;
 	height: 70px;
 	overflow: hidden;
+	border-top: solid 1px #e0e0e0;
 }
 
 #search-text {
@@ -316,6 +318,7 @@ a.arrow-back + input#search-text {
 	margin: 0;
 	padding: 0;
 	background: #fff;
+	border-top: solid 1px #e0e0e0;
 	text-align: center;
 }
 
@@ -651,3 +654,18 @@ iframe[id*="twitter-widget-"] {
 .ng-modal-dialog-content .description {
 	padding: 1em 1em 0 1em;
 }
+
+#energy-logo, img#text-logo {
+	margin-top: 5px;
+	float: right;
+}
+
+#energy-logo img, img#text-logo {
+	height: 30px;
+	width: auto;
+}
+
+img#text-logo {
+	float: left;
+}
+
