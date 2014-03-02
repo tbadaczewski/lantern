@@ -79,6 +79,16 @@ button.inline, .button.inline {
 	width: auto;
 }
 
+#branding-bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 50;
+	height: 40px;
+	width: 100%;
+	background: #f18425;	
+}
+
 .small {
 	font-size: 80%;
 }
@@ -100,16 +110,16 @@ button.inline, .button.inline {
 }
 
 #main, #station-list, #station-map, #outage-list, #outage-map {
-	padding: 145px 1em 1em 1em;
+	padding: 145px 1em 50px 1em;
 	background-color: #c7c7c7;
 }
 
 #station-list, #outage-list {
-	padding: 125px 1em 1em 1em;
+	padding: 125px 1em 50px 1em;
 }
 
 #main {
-	padding: 90px 1em 1em 1em;
+	padding: 90px 1em 50px 1em;
 }
 
 nav {
@@ -145,7 +155,8 @@ nav.hide {
 	background: rgba(0,0,0,0.5);
 	z-index: 300;
 }
-            
+
+/*            
 .overlay {
     padding: 4em 1em 1em 1em;
     background: rgba(0,0,0,0.5);
@@ -154,6 +165,7 @@ nav.hide {
     vertical-align: middle;
     text-align: center;
 }
+*/
 
 #main-menu {
 	position: fixed;
@@ -504,11 +516,10 @@ a.arrow-back + input#search-text {
 	margin-top: 0;
 }
 
-
 #station-details.show, #station-details.ng-show {
 	position: fixed;
 	z-index: 15;
-	bottom: 0;
+	bottom: 40px;
 	left: 0;
 	background: #fff;
 	width: 100%;
