@@ -34,7 +34,12 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        navigator.splashscreen.hide();
+        navigator.splashscreen.show();
+
+        setTimeout(function() {
+            navigator.splashscreen.hide();
+            navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
+        }, 5000);
     }
     // Update DOM on a Received Event
     receivedEvent: function(id) {

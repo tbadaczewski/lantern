@@ -14,10 +14,12 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
+    <!--
     <preference name="show-splash-screen-spinner" value="false" />
-    <preference name="auto-hide-splash-screen" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="auto-hide-splash-screen" value="false" />    
     <preference name="SplashScreenDelay" value="5000" />
+    -->
+    <preference name="AutoHideSplashScreen" value="false" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
@@ -64,6 +66,5 @@
     <access origin="googleusercontent.com" subdomains="true"/>
     <feature name="SplashScreen">
         <param name="ios-package" value="CDVSplashScreen"/>
-        <param name="onload" value="true" />
     </feature>
 </widget>
