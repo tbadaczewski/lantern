@@ -157,17 +157,6 @@ nav.hide {
 	z-index: 300;
 }
 
-/*            
-.overlay {
-    padding: 4em 1em 1em 1em;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    font-size: 2em;
-    vertical-align: middle;
-    text-align: center;
-}
-*/
-
 #main-menu {
 	position: fixed;
 	left: 0;
@@ -580,7 +569,7 @@ iframe[id*="twitter-widget-"] {
 	height: 5em;
 	margin: 0.5em;
 	margin-left: -2.5em;
-	font-size: 12px;
+	font-size: 6px;
 	text-indent: 999em;
 	overflow: hidden;
 	-webkit-animation: spin 1s infinite steps(8);
@@ -668,4 +657,3 @@ iframe[id*="twitter-widget-"] {
 img#text-logo {
 	float: left;
 }
-
