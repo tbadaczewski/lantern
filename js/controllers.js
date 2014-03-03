@@ -46,12 +46,12 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 		$scope.openTwitter = function($event) {
 			$event.preventDefault();
-			window.open(encodeURI("partials/twitter.html"), '_blank', 'location=no','closebuttoncaption=back');
+			window.open(encodeURI("partials/twitter.html"), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
 		}
 		
 		$scope.openTips = function($event) {
 			$event.preventDefault();
-			window.open("http://energy.gov/oe/community-guidelines-energy-emergencies", '_blank', 'location=no','closebuttoncaption=back');
+			window.open("http://energy.gov/oe/community-guidelines-energy-emergencies", '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
 		}
 
 		$rootScope.backstate = "";
@@ -102,7 +102,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};		
 
 		$scope.getDirections = function(url) {
-			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
+			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 		
 		$rootScope.backstate = "visible";
@@ -154,9 +154,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			});
 		}
 
-
 		$scope.getDirections = function(url) {
-			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no');
+			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 
    		$scope.tagCancel = function() {  			
@@ -208,7 +207,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
-			window.open(encodeURI(url), '_blank', 'location=no','closebuttoncaption=back');
+			window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
 		}
 
 		$rootScope.backstate = "visible";
