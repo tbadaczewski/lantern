@@ -137,6 +137,7 @@ lanternApp.directive('googlemap', function($rootScope) {
         replace: true,
         template: '<div></div>',
         link: function(scope, element, attrs) {
+            var prev = null;
             var map = null;
             var mapmarkers = [];
             var mapOptions = {
@@ -156,6 +157,15 @@ lanternApp.directive('googlemap', function($rootScope) {
                     scope.$apply(function() {
                         scope.showdetails = "hide";
                     });
+
+                    if(scope.prev != null) {
+                        var normal = { 
+                            url: scope.prev.icon.url,
+                            scaledSize: new google.maps.Size(25,40)
+                        };
+
+                        scope.prev.setIcon(normal);
+                    }
                 });
 
                 for (var i = 0; i < mapmarkers.length; i++) {
@@ -170,8 +180,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();
 
-                _.each(markers, function (marker) {
-                    var prev = null;
+                _.each(markers, function (marker) {                    
                     var size = new google.maps.Size(25,40);
                     var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
                     var point = new google.maps.Marker({
