@@ -472,14 +472,13 @@ nav.hide {
 #station-details {
 	position: fixed;
 	z-index: 15;
-	bottom: -100%;
 	left: 0;
 	background: #fff;
 	width: 100%;
 	-webkit-transition: bottom 500ms linear;
 	transition: bottom 500ms linear;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	-webkit-transform: translate3d(0,-100%,0);
+	transform: translate3d(0,-100%,0);
 }
 
 #station-details .item {
@@ -489,14 +488,13 @@ nav.hide {
 #station-details.show, #station-details.ng-show {
 	position: fixed;
 	z-index: 15;
-	bottom: 40px;
 	left: 0;
 	background: #fff;
 	width: 100%;
-	-webkit-transition: bottom 500ms linear;
-	transition: bottom 500ms linear;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	-webkit-transition: all 500ms linear;
+	transition: all 500ms linear;
+	-webkit-transform: translate3d(0,40px,0);
+	transform: translate3d(0,40px,0);
 }
 
 iframe[id*="twitter-widget-"] { 
