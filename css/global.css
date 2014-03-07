@@ -168,18 +168,6 @@ nav.hide {
 	display: none;
 }
 
-#hamburger {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	color: #fff;
-	text-align: center;
-	height: 20px;
-	width: 15%;
-	font-size: 10px;
-	line-height: 1.5em;
-}
-
 #handle {
 	position: absolute;
 	bottom: 100%;
@@ -228,6 +216,7 @@ nav.hide {
 #search-bar {
 	position: relative;
 	background: #fff;
+	width: 100%;
 }
 
 #search-area {
@@ -235,11 +224,17 @@ nav.hide {
 	top: 0;
 	left: 0;
 	z-index: 3;
-	background: #fff;
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	width: 85%;
 	height: 70px;
-	overflow: hidden;
-	border-top: solid 1px #e0e0e0;
+	-webkit-transition: left 300ms linear 0.5s;
+	transition: left 300ms linear 0.5s;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+#search-area.visible {
+	left: 2em;
 }
 
 #search-text {
@@ -250,24 +245,20 @@ nav.hide {
 	width: 100%;
 	height: 70px;
 	font-size: 1.2em;
+	padding: 0 1em;
 	color: #353c41;
-	-webkit-transition: left 300ms linear 0.5s;
-	transition: left 300ms linear 0.5s;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 }
 
 .arrow-back {
 	position: absolute;
-	left: -1em;
-	top: 0;
-	width: 1.5em;
+	left: -2em;
+	top: 0px;
+	width: 2em;
 	height: 70px;
 	z-index: 4;
-	-webkit-transition: left 300ms linear 0.5s;
-	transition: left 300ms linear 0.5s;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	text-align: center;
 }
 
 .arrow-back:before {
@@ -282,19 +273,6 @@ nav.hide {
 	border-right: 15px solid #f18525;	
 }
 
-.arrow-back.visible {
-	left: 1em;
-}
-
-a.arrow-back.visible + input#search-text {
-	left: 2.5em;
-	width: 70%;
-}
-
-a.arrow-back + input#search-text {
-	left: 1em;
-}
-
 #btn-target {
 	position: absolute;
 	z-index: 4;
@@ -306,13 +284,13 @@ a.arrow-back + input#search-text {
 	width: 50px;
 	margin: 0;
 	padding: 0;
-	background: #fff;
-	border-top: solid 1px #e0e0e0;
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	text-align: center;
 }
 
 #btn-target .icon-target {
 	margin-right: 0;
+	margin-top: 6px;
 }
 
 #search-button {
@@ -320,7 +298,7 @@ a.arrow-back + input#search-text {
 	top: 0;
 	right: 0;
 	z-index: 3;
-	height: 50px;
+	height: 70px;
 	width: 15%;
 	background: #f18425;
 	text-align: center;
@@ -383,14 +361,6 @@ a.arrow-back + input#search-text {
 	height: 1px;
 	background: rgba(255, 255, 255, 0.5);
 	margin: 0.5em 0;
-}
-
-.angular-google-map-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
 }
 
 .item {
@@ -493,6 +463,10 @@ a.arrow-back + input#search-text {
 
 .size-16 {
 	font-size: 16px;
+}
+
+.size-15 {
+	font-size: 15px;
 }
 
 #station-details {
