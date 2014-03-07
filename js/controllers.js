@@ -74,14 +74,24 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
 			navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
-
-			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
-				$scope.loadStations();				
-			});
+			
+			if ($scope.status == "open") {
+				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
+					$scope.loadStations();
+					$scope.showdetails = "";	
+				});
+				
+			} else {
+				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
+					$scope.loadStations();
+					$scope.showdetails = "";	
+				});
+			
+			} 
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if(status != "green") {
+			if(status != "red") {
 				$scope.status = "open";
 			} else {
 				$scope.status = "closed";
@@ -89,7 +99,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 			$scope.stationid = id;
 			$scope.toggleModal();
-		};		
+		};
 
 		$scope.loadStations = function() {
 			$scope.progressShown = true;
@@ -164,16 +174,26 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
+			
 			navigator.notification.alert(null, null, 'Station Status Reported', 'Close');
-
-			$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/' + $scope.status).success(function (data) {
-				$scope.loadStations();
-				$scope.showdetails = "";	
-			});
+			
+			if ($scope.status == "open") {
+				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
+					$scope.loadStations();
+					$scope.showdetails = "";	
+				});
+				
+			} else {
+				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
+					$scope.loadStations();
+					$scope.showdetails = "";	
+				});
+			
+			} 
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if(status != "green") {
+			if(status != "red") {
 				$scope.status = "open";
 			} else {
 				$scope.status = "closed";
