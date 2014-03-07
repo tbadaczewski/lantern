@@ -222,19 +222,19 @@ nav.hide {
 #search-area {
 	position: absolute;
 	top: 0;
-	left: 0;
 	z-index: 3;
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	width: 85%;
 	height: 70px;
-	-webkit-transition: left 300ms linear 0.5s;
-	transition: left 300ms linear 0.5s;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	-webkit-transition: all 300ms linear 0.5s;
+	transition: all 300ms linear 0.5s;
+	-webkit-transform: translate3d(0em,0,0);
+	transform: translate3d(0em,0,0);
 }
 
 #search-area.visible {
-	left: 2em;
+	-webkit-transform: translate3d(2em,0,0);
+	transform: translate3d(2em,0,0);
 }
 
 #search-text {
