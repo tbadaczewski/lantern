@@ -89,14 +89,12 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 					$scope.loadStations();
 					$scope.showdetails = "";	
-				});
-				
+				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 					$scope.loadStations();
 					$scope.showdetails = "";	
-				});
-			
+				});			
 			} 
 		};
 

@@ -171,16 +171,15 @@ nav.hide {
 #handle {
 	position: fixed;
 	top: -100%;
-	bottom: auto;
 	left: 0;
-	z-index: 2;
+	z-index: 3;
 	width: 100%;
 	height: 100%;
 	background: #f18425;
 	cursor: pointer;
 	padding: 4em 1em 1em 1em;
-	-webkit-transition: all 0.1s linear;
-	transition: all 0.1s linear;
+	-webkit-transition: top 0.1s linear;
+	transition: top 0.1s linear;
 }
 
 #handle.open {
@@ -249,11 +248,12 @@ nav.hide {
 	position: absolute;
 	left: -15px;
 	top: 0px;
-	width: 15px;
+	width: 30px;
 	height: 70px;
 	z-index: 4;
 	background: transparent;
 	display: block;
+	text-align: left;
 }
 
 .arrow-back:before {
