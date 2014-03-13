@@ -110,7 +110,7 @@ button.inline, .button.inline {
 	left: -1000em;
 }
 
-#main, #station-list, #station-map, #outage-list, #outage-map {
+#main, #station-list, #station-map, #outage-list {
 	padding: 145px 1em 50px 1em;
 	background-color: #c7c7c7;
 }
@@ -144,7 +144,7 @@ nav.hide {
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+	display: none !important;
 }
 
 #main {
@@ -169,35 +169,26 @@ nav.hide {
 }
 
 #handle {
-	position: absolute;
-	bottom: 100%;
+	position: fixed;
+	top: -100%;
+	bottom: auto;
 	left: 0;
-	z-index: 2;
+	z-index: 1;
 	width: 100%;
 	height: 100%;
 	background: #f18425;
 	cursor: pointer;
-	margin-bottom: -70px;
 	padding: 4em 1em 1em 1em;
-}
-
-#handle h5 {
-	text-align: center;
-	text-transform: uppercase;
-	color: #a65c19;
-}
-
-#handle.open, #handle.close {
-	-webkit-transition: bottom 0.1s linear;
-	transition: bottom 0.1s linear;
+	-webkit-transition: all 0.1s linear;
+	transition: all 0.1s linear;
 }
 
 #handle.open {
-	bottom: 70px !important;
+	top: 0;
 }
 
 #handle.close {
-	bottom: 100% !important;
+	top: -100%;
 }
 
 #handle .inner {
@@ -214,9 +205,13 @@ nav.hide {
 }
 
 #search-bar {
-	position: relative;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 5;
 	background: #fff;
 	width: 100%;
+	height: 70px;
 }
 
 #search-area {
@@ -241,7 +236,7 @@ nav.hide {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 3;
+	z-index: 1;
 	width: 100%;
 	height: 70px;
 	font-size: 1.2em;

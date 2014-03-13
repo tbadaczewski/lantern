@@ -24,6 +24,16 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 				$rootScope.state = address[2];
 			});
 		}
+
+		$scope.toggleMenu = function() {
+            if($rootScope.menu == "open") {
+               $rootScope.menu = "close";
+            } else {
+               $rootScope.menu = "open";
+            }
+
+            return false;
+		}
     }
 ]);
 

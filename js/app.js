@@ -8,6 +8,9 @@ var lanternApp = angular.module('lanternApp', [
 ]);
 
 lanternApp.run(function($rootScope, geolocation, geoencoder) {
+    $rootScope.menu = "close";
+    $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
+    
     document.addEventListener('deviceready', function() {
         geolocation().then(function(position) {
             $rootScope.position = position;
@@ -115,21 +118,6 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
         };
     }
 ]);
-
-lanternApp.directive('draggable', function($document) {
-    return function(scope, element, attr) {
-        element.on('touchstart', function(e) {
-            e.preventDefault();
-            var menu = document.getElementById("handle");            
-
-            if(menu.className == "open") {
-               menu.className = "close";
-            } else {
-                menu.className = "open";
-            }
-        });
-    }
-});
 
 lanternApp.directive('googlemap', function($rootScope) {
     return {
