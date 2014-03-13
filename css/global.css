@@ -173,7 +173,7 @@ nav.hide {
 	top: -100%;
 	bottom: auto;
 	left: 0;
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
 	height: 100%;
 	background: #f18425;
@@ -209,7 +209,7 @@ nav.hide {
 	left: 0;
 	top: 0;
 	z-index: 5;
-	background: #fff;
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	width: 100%;
 	height: 70px;
 }
@@ -217,8 +217,8 @@ nav.hide {
 #search-area {
 	position: absolute;
 	top: 0;
-	z-index: 3;
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	z-index: 0;
+	background: transparent;
 	width: 85%;
 	height: 70px;
 	-webkit-transition: all 300ms linear 0.5s;
@@ -242,18 +242,18 @@ nav.hide {
 	font-size: 1.2em;
 	padding: 0 1em;
 	color: #353c41;
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	background: transparent;
 }
 
 .arrow-back {
 	position: absolute;
-	left: -2em;
+	left: -15px;
 	top: 0px;
-	width: 2em;
+	width: 15px;
 	height: 70px;
 	z-index: 4;
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
-	text-align: center;
+	background: transparent;
+	display: block;
 }
 
 .arrow-back:before {
@@ -269,7 +269,7 @@ nav.hide {
 }
 
 #btn-target {
-	position: absolute;
+	position: fixed;
 	z-index: 4;
 	right: 15%;
 	top: 0;
@@ -279,7 +279,7 @@ nav.hide {
 	width: 50px;
 	margin: 0;
 	padding: 0;
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	background: transparent;
 	text-align: center;
 }
 
@@ -292,7 +292,7 @@ nav.hide {
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: 3;
+	z-index: 30;
 	height: 70px;
 	width: 15%;
 	background: #f18425;
