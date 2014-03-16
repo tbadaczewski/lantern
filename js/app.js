@@ -12,6 +12,7 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
     document.addEventListener('deviceready', function() {
+
         geolocation().then(function(position) {
             $rootScope.position = position;
 
@@ -63,11 +64,17 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var deferred = $q.defer();
 
             if ($window.navigator) {
-                $window.navigator.geolocation.getCurrentPosition(function (position) {
+                $window.navigator.geolocation.getCurrentPosition(function (position) {                    
                     $rootScope.$apply(function () {
                         deferred.resolve(position);
                     });
-                });
+                }, function(error) {
+                    $rootScope.$apply(function () {
+                        deferred.resolve($rootScope.position);
+                    });
+                },{maximumAge: 5000, timeout: 5000, enableHighAccuracy: true});
+            } else {
+                deferred.resolve($rootScope.position);
             }
 
             return deferred.promise;
