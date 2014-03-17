@@ -61,7 +61,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
-            var options = {maximumAge: 10000, timeout: 30000, enableHighAccuracy: true}
+            var options = {maximumAge: Infinity, timeout: 0, enableHighAccuracy: true}
             var onSuccess = function(position) {
                 alert(position.coords.latitude + ' - ' + position.coords.longitude);
 
