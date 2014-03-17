@@ -12,11 +12,15 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
     document.addEventListener('deviceready', function() {
-
+        alert("Device Ready");
         geolocation().then(function(position) {
             $rootScope.position = position;
 
+            alert("Position Loaded");
+
             geoencoder('latLng').then(function(address) {
+                alert("Address Data Retrieved");
+
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
