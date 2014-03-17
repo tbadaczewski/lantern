@@ -61,26 +61,36 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
+            var options = {maximumAge: 7000, timeout: 10000, enableHighAccuracy: true}
+            var onSuccess = function(position) {
+                alert(position.coords.latitude + ' - ' + position.coords.longitude);
 
+                $rootScope.$apply(function () {
+                    deferred.resolve(position);
+                });
+            };
+
+            function onError(error) {
+                alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+            }
+
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+            /*
             if ($window.navigator) {
-                $window.navigator.geolocation.getCurrentPosition(function (position) {    
-                    alert("Geo-Location Supported");
-
+                $window.navigator.geolocation.getCurrentPosition(function (position) {
                     $rootScope.$apply(function () {
                         deferred.resolve(position);
                     });
                 }, function(error) {
-                    alert("Geo-Location Error: " + error.message());
-
                     $rootScope.$apply(function () {
                         deferred.resolve($rootScope.position);
                     });
                 },{maximumAge: 5000, timeout: 5000, enableHighAccuracy: true});
-            } else {
-                alert("Geo-Location Not Supported");
-                
+            } else {                
                 deferred.resolve($rootScope.position);
             }
+            */
 
             return deferred.promise;
         };
