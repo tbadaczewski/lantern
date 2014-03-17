@@ -2,19 +2,6 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
-    	$rootScope.backstate = "visible";
-		$rootScope.typestate = false;
-		$rootScope.navstate = true;
-		$rootScope.navtext = "Twitter";
-		$rootScope.navclass = "twitter";
-		$rootScope.navtarget = "";
-		$scope.id = "twitter-list";
-		$scope.animate = "scale"
-    }
-]);
-
 lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, geolocation, geoencoder) {
     	$scope.findme = function() {
