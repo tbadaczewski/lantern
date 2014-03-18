@@ -63,34 +63,18 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
             var onSuccess = function(position) {
-                alert(position.coords.latitude + ' - ' + position.coords.longitude);
-
                 $rootScope.$apply(function () {
                     deferred.resolve(position);
                 });
             };
 
             function onError(error) {
-                alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                $rootScope.$apply(function () {
+                    deferred.resolve($rootScope.position);
+                });
             }
 
             navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-
-            /*
-            if ($window.navigator) {
-                $window.navigator.geolocation.getCurrentPosition(function (position) {
-                    $rootScope.$apply(function () {
-                        deferred.resolve(position);
-                    });
-                }, function(error) {
-                    $rootScope.$apply(function () {
-                        deferred.resolve($rootScope.position);
-                    });
-                },{maximumAge: 5000, timeout: 5000, enableHighAccuracy: true});
-            } else {                
-                deferred.resolve($rootScope.position);
-            }
-            */
 
             return deferred.promise;
         };
