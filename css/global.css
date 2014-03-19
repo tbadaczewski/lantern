@@ -277,7 +277,7 @@ nav.hide {
 	width: 50px;
 	margin: 0;
 	padding: 0;
-	background: red url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	text-align: center;
 }
 
