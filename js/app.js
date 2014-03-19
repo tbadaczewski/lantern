@@ -20,9 +20,9 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
-                //loadstations().then(function(data) {
-                    //$rootscope.stations = data;
-                //}); 
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                }); 
             });
         });
     });
@@ -61,8 +61,8 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope',
-    function ($q, $rootScope) {
+lanternApp.factory('geolocation', ['$q', '$rootScope', '$window'
+    function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
@@ -78,7 +78,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope',
                 });
             }
 
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+            $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
             return deferred.promise;
         };
