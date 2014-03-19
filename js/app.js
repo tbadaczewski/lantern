@@ -61,7 +61,7 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope', '$window'
+lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
