@@ -129,19 +129,15 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
     }
 ]);
 
-lanternApp.factory('loadstations', ['$q', '$rootScope',
-    function ($q, $rootScope) {
+lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
+    function ($q, $rootScope, $http) {
         return function () {
             var deferred = $q.defer();
 
             $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
-                $rootScope.$apply(function () {
-                    deferred.resolve($rootScope.stations);
-                }); 
+                deferred.resolve(eval(data));
             }).error(function(data, status, headers, config) {
-                $rootScope.$apply(function () {
-                    deferred.resolve(null);
-                }); 
+                deferred.resolve(null);
             });
 
             return deferred.promise;
