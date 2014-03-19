@@ -143,17 +143,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     	$scope.progressShown = true;
 		var station_markers = null;
 
-		if($rootScope.stations == null) {
-	        loadstations().then(function(data) {
-	        	$rootScope.stations = data;
-	        	$scope.addmarkers();
-	        });
-		} else {			
-	        $scope.addMarkers();
-		}
-
-		$scope.addMarkers = function() {
-			var stations = eval(data);
+		$scope.loadMarkers = function() {
+			var stations = $rootScope.stations;
 			var size = new google.maps.Size(25,40);
 
 			station_markers = new Array();
@@ -178,7 +169,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			
 			$scope.markers = station_markers;
 			$scope.init();
-			$scope.progressShown = false;
 		}
 
 		$scope.getDirections = function(url) {
@@ -220,11 +210,21 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 			$scope.stationid = id
 			$scope.toggleModal();
-		};		
+		};
 
+
+		if($rootScope.stations == null) {
+	        loadstations().then(function(data) {
+	        	$rootScope.stations = data;
+	        	$scope.loadMarkers();
+	        });
+		} else {			
+	        $scope.loadMarkers();
+		}
+		
+		$scope.progressShown = false;
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";
-		$rootScope.typestate = true;
 		$rootScope.navbtnlabel = "List";
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
