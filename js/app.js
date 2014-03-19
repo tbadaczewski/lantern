@@ -19,6 +19,10 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
+
+                loadstations().then(function(data) {
+                    $rootscope.stations = data;
+                }); 
             });
         });
     });
@@ -57,8 +61,8 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
-    function ($q, $rootScope, $window) {
+lanternApp.factory('geolocation', ['$q', '$rootScope',
+    function ($q, $rootScope) {
         return function () {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
@@ -81,8 +85,8 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
-    function ($q, $rootScope, $window) {
+lanternApp.factory('geoencoder', ['$q', '$rootScope',
+    function ($q, $rootScope) {
         return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
@@ -118,6 +122,26 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
 
                     deferred.resolve(location);
                 }
+            });
+
+            return deferred.promise;
+        };
+    }
+]);
+
+lanternApp.factory('loadstations', ['$q', '$rootScope',
+    function ($q, $rootScope) {
+        return function () {
+            var deferred = $q.defer();
+
+            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
+                $rootScope.$apply(function () {
+                    deferred.resolve($rootScope.stations);
+                }); 
+            }).error(function(data, status, headers, config) {
+                $rootScope.$apply(function () {
+                    deferred.resolve(null);
+                }); 
             });
 
             return deferred.promise;
