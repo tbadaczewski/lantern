@@ -232,7 +232,6 @@ nav.hide {
 }
 
 #search-text {
-	position: relative;
 	width: 100%;
 	height: 70px;
 	font-size: 1em;
@@ -266,7 +265,7 @@ nav.hide {
 }
 
 #btn-target {
-	position: absolute;
+	position: fixed;
 	z-index: 30;
 	right: 15%;
 	top: 0;
