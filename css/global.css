@@ -232,13 +232,10 @@ nav.hide {
 }
 
 #search-text {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
+	position: relative;
 	width: 100%;
 	height: 70px;
-	font-size: 1.2em;
+	font-size: 1em;
 	padding: 0 1em;
 	color: #353c41;
 	background: transparent;
