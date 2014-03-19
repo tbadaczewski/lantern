@@ -164,9 +164,9 @@ lanternApp.directive('googlemap', function($rootScope) {
                 streetViewControl: false
             };
 
-            map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);  
+            map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
-            scope.init = function() {
+            google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = "hide";
@@ -189,7 +189,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
-            } 
+            });
 
             scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();

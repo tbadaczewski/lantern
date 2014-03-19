@@ -100,20 +100,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			$scope.toggleModal();
 		};
 
-		/*
-		$scope.loadStations = function() {
-			$scope.progressShown = true;
-
-			$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
-				$scope.stations = eval(data);
-	        	$scope.saddr = encodeURI($rootScope.address);
-	        	$scope.progressShown = false;
-			}).error(function(data, status, headers, config) {
-				navigator.notification.alert('', '', status, 'Close');
-			});
-		};		
-		*/
-
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
@@ -167,8 +153,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				});
 			}
 			
-			$scope.markers = station_markers;
-			$scope.init();
+			$scope.markers = station_markers;			
 		}
 
 		$scope.getDirections = function(url) {
@@ -219,7 +204,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        	$scope.loadMarkers();
 	        });
 		} else {			
-	        $scope.loadMarkers();
+	        $scope.loadMarkers();	        
 		}
 		
 		$scope.progressShown = false;
@@ -231,7 +216,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtarget = "station-list";
 		$scope.id = "station-map";
 		$scope.animate = "scale";
-		//$scope.loadStations();
     }
 ]);
 
