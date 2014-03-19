@@ -20,9 +20,9 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
-                loadstations().then(function(data) {
-                    $rootscope.stations = data;
-                }); 
+                //loadstations().then(function(data) {
+                    //$rootscope.stations = data;
+                //}); 
             });
         });
     });
