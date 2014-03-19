@@ -202,12 +202,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
+	        	$scope.progressShown = false;
 	        });
 		} else {			
-	        $scope.loadMarkers();	        
-		}
+	        $scope.loadMarkers();
+	        $scope.progressShown = false;
+		}		
 		
-		$scope.progressShown = false;
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";
 		$rootScope.navbtnlabel = "List";
