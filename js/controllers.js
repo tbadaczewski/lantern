@@ -62,6 +62,35 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
     function ($scope, $rootScope, $http, loadstations) {
+    	var $url = 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude;
+		
+		$http({method: 'GET', url: $url}).
+		success(function(data, status, headers, config) {
+			alert("1 Success" +  status);
+		}).
+		error(function(data, status, headers, config) {
+			alert("1 Fail" +  status);
+		});
+
+		$http.get($url).
+		success(function(data, status, headers, config) {
+			alert("2 Success" +  status);
+		}).
+		error(function(data, status, headers, config) {
+			alert("2 Fail" +  status);
+		});
+
+		$http.jsonp($url).
+		success(function(data, status, headers, config) {
+			alert("3 Success" +  status);
+		}).
+		error(function(data, status, headers, config) {
+			alert("3 Fail" +  status);
+		});
+
+
+
+
 		if($rootScope.stations == null) {
 			/*     
             $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
@@ -71,13 +100,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
             });
 			*/
 
-			$http.jsonp('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude)
-			.success(function (data, status, headers, config) {
-				alert("Hooray!");
-			})
-			.error(function (data, status, headers, config) {
-				alert(status + " - "+ data);
-			});
 
             /*
 	        loadstations().then(function(data) {
