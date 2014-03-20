@@ -69,7 +69,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
-            var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
+            var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: false}
             var onSuccess = function(position) {
                 $rootScope.$apply(function () {
                     deferred.resolve(position);
