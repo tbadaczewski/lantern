@@ -26,21 +26,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
                 loadoutages().then(function(data) {
                     $rootScope.outages = data;
-                }); 
-
-                /*
-                $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-                    $rootScope.stations = eval(data);
-                }).error(function(data) {
-                    $rootScope.stations = null;
                 });
-
-                $http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
-                    $rootScope.outages = eval(data);
-                }).error(function(data) {
-                    $rootScope.outages = null;
-                });
-*/
             });
         });
     });
@@ -79,8 +65,8 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope',
-    function ($q, $rootScope) {
+lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
+    function ($q, $rootScope, $window) {
         return function () {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
@@ -91,12 +77,13 @@ lanternApp.factory('geolocation', ['$q', '$rootScope',
             };
 
             function onError(error) {
+                alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
                 $rootScope.$apply(function () {
                     deferred.resolve($rootScope.position);
                 });
             }
 
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+            $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
             return deferred.promise;
         };
