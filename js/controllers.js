@@ -64,8 +64,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     function ($scope, $rootScope, $http, loadstations) {
     	$scope.progressShown = true;
 
-    	alert($rootScope.stations);
-
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
 		};

@@ -20,6 +20,8 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
+                alert($rootScope.position.coords.latitude);
+
                 loadstations().then(function(data) {
                     $rootScope.stations = data;
                 }); 
@@ -140,9 +142,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
 
             $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
                 deferred.resolve(eval(data));
-                alert(eval(data));
             }).error(function(data, status, headers, config) {
-                alert("Error");
                 deferred.resolve(null);
             });
 
