@@ -140,9 +140,11 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+                alert("Yea");
                 deferred.resolve(eval(data));
             }).error(function(data) {
-              deferred.resolve(null);
+                alert("Boo");
+                deferred.resolve(null);
             });
 
             return deferred.promise;
