@@ -222,8 +222,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http) {
+lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages',
+    function ($scope, $rootScope, $http, loadoutages) {
     	$scope.progressShown = true;
 
 		if($rootScope.outages == null) {

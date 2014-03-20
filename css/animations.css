@@ -23,18 +23,20 @@
 }
 
 .scale.ng-enter-active {
+	transition-delay: 0.5s !important;
+	-webkit-transition-delay: 0.5s !important;
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	opacity: 1;
 }
 
-.scale.ng-leave {	
+.scale.ng-leave {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	opacity: 1;
 }
 
-.scale.ng-leave-active {	
+.scale.ng-leave-active {
 	-webkit-transform: scale(.7);
 	transform: scale(.7);
 	opacity: 0;

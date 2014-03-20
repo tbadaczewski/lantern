@@ -301,8 +301,8 @@ nav.hide {
 
 .rounded {
 	background: none;
-	-webkit-border-radius: 5px 5px 5px 5px;
-	border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	border: solid 1px #f18525;
 	color: #fff;
 }
