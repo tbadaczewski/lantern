@@ -21,9 +21,9 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
                 $rootScope.state = address[2];
 
                 $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-                    alert("Yea");
+                    $rootScope.stations = eval(data);
                 }).error(function(data) {
-                    alert("Boo");
+                    $rootScope.stations = null;
                 });
             });
         });
