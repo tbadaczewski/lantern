@@ -79,8 +79,8 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
-    function ($q, $rootScope, $window) {
+lanternApp.factory('geolocation', ['$q', '$rootScope',
+    function ($q, $rootScope) {
         return function () {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
@@ -96,7 +96,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
                 });
             }
 
-            $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
             return deferred.promise;
         };
