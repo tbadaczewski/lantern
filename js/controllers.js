@@ -64,6 +64,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     function ($scope, $rootScope, $http, loadstations) {
     	$scope.progressShown = true;
 
+    	alert($rootScope.stations);
+
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
 		};
@@ -118,7 +120,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
-	        	$scope.stations = data;
 	        	$scope.progressShown = false;
 	        });
 		}
