@@ -112,13 +112,14 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-map";
 		$scope.id = "station-list";
-		$scope.animate = "scale";
-		$scope.progressShown = false;
+		$scope.animate = "scale";		
 		$scope.saddr = encodeURI($rootScope.address);
 
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
+	        	$scope.stations = data;
+	        	$scope.progressShown = false;
 	        });
 		}
     }
