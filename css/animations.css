@@ -19,7 +19,7 @@
 .scale.ng-enter {	
 	-webkit-transform: scale(.7);
 	transform: scale(.7);
-	opacity: 1;
+	opacity: 0;
 }
 
 .scale.ng-enter-active {
@@ -37,7 +37,7 @@
 .scale.ng-leave-active {
 	-webkit-transform: scale(.7);
 	transform: scale(.7);
-	opacity: 1;
+	opacity: 0;
 }
 
 /* Slide Horizontal */
