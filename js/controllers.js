@@ -80,16 +80,11 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			alert("2 Fail" +  status);
 		});
 
-		$http.jsonp($url).
-		success(function(data, status, headers, config) {
-			alert("3 Success" +  status);
-		}).
-		error(function(data, status, headers, config) {
-			alert("3 Fail" +  status);
-		});
-
-
-
+        loadstations().then(function(data) {
+        	alert(data);
+        	$rootScope.stations = data;
+        	$scope.progressShown = false;
+        });
 
 		if($rootScope.stations == null) {
 			/*     
