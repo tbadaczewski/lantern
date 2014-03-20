@@ -25,6 +25,12 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
                 }).error(function(data) {
                     $rootScope.stations = null;
                 });
+
+                $http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
+                    $rootScope.outages = eval(data);
+                }).error(function(data) {
+                    $rootScope.outages = null;
+                });
             });
         });
     });
@@ -69,16 +75,12 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: true}
             var onSuccess = function(position) {
-                //alert(position.coords.latitude + ' - ' + position.coords.longitude);
-
                 $rootScope.$apply(function () {
                     deferred.resolve(position);
                 });
             };
 
             function onError(error) {
-                //alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-
                 $rootScope.$apply(function () {
                     deferred.resolve($rootScope.position);
                 });
@@ -141,10 +143,24 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
-                alert("Yea");
                 deferred.resolve(eval(data));
             }).error(function(data) {
-                alert("Boo");
+                deferred.resolve(null);
+            });
+
+            return deferred.promise;
+        };
+    }
+]);
+
+lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
+    function ($q, $rootScope, $http) {
+        return function () {
+            var deferred = $q.defer();
+
+            $http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
+                deferred.resolve(eval(data));
+            }).error(function(data) {
                 deferred.resolve(null);
             });
 

@@ -62,8 +62,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
     function ($scope, $rootScope, $http, loadstations) {
-    	//var $url = 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude;
-    	
     	$scope.progressShown = true;
 
 		if($rootScope.stations == null) {
@@ -204,12 +202,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
-	        	$rootScope.stations = $scope.stations = data;
+	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
 	        	$scope.progressShown = false;
 	        });
 		} else {
-			$scope.stations = $rootScope.stations;
         	$scope.loadMarkers();
         	$scope.progressShown = false;
 		}	
@@ -229,10 +226,15 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     function ($scope, $rootScope, $http) {
     	$scope.progressShown = true;
 
-		$http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
-			$scope.outages = data;
+		if($rootScope.outages == null) {
+	        loadoutages().then(function(data) {
+	        	$rootScope.outages = $scope.outages = data;
+	        	$scope.progressShown = false;
+	        });
+		} else {
+			$scope.outages = $rootScope.outages;
 			$scope.progressShown = false;
-		});
+		}
 
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
