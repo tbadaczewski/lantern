@@ -63,7 +63,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
     function ($scope, $rootScope, $http, loadstations) {
     	var $url = 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude;
-		
+		/*
 		$http({method: 'GET', url: $url}).
 		success(function(data, status, headers, config) {
 			alert("1 Success" +  status);
@@ -79,11 +79,17 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		error(function(data, status, headers, config) {
 			alert("2 Fail" +  status);
 		});
+		*/
 
         loadstations().then(function(data) {
         	alert(data);
         	$rootScope.stations = data;
         	$scope.progressShown = false;
+
+            scope.$apply(function() {
+	        	$rootScope.stations = data;
+	        	$scope.progressShown = false;
+            });
         });
 
 		if($rootScope.stations == null) {
