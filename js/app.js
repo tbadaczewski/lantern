@@ -21,6 +21,7 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.state = address[2];
 
                 loadstations().then(function(data) {
+                    alert(data);
                     $rootScope.stations = data;
                 }); 
             });
