@@ -20,16 +20,17 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
-                loader.success(function(data) { 
-                    $rootScope.stations = data;
-                    alert(data);
+                $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
+                    alert(eval(data));
+                }).error(function(data, status, headers, config) {
+                    alert(status);
                 });
 
                 /*
                 loadstations().then(function(data) {
                     $rootScope.stations = data;
                 });
-                */
+*/
             });
         });
     });
@@ -148,8 +149,6 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function () {
             var deferred = $q.defer();
-
-            alert("Getting");
 
             $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude}).success(function (data) {
                 deferred.resolve(eval(data));
