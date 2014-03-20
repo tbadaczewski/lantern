@@ -20,9 +20,16 @@ lanternApp.run(function($rootScope, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
+                loader.success(function(data) { 
+                    $rootScope.stations = data;
+                    alert(data);
+                });
+
+                /*
                 loadstations().then(function(data) {
                     $rootScope.stations = data;
-                }); 
+                });
+                */
             });
         });
     });
@@ -132,6 +139,10 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
         };
     }
 ]);
+
+lanternApp.factory('loader', function($http) {
+    return $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude);
+});
 
 lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
