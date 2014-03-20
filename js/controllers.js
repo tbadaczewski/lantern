@@ -62,19 +62,19 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
     function ($scope, $rootScope, $http, loadstations) {
-    	var $url = 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude;
-
-        loadstations().then(function(data) {
-        	$scope.stations = data;
-        	$rootScope.stations = data;
-        	$scope.progressShown = false;
-        });
+    	//var $url = 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude;
+    	
+    	$scope.progressShown = true;
 
 		if($rootScope.stations == null) {
-
+	        loadstations().then(function(data) {
+	        	$rootScope.stations = $scope.stations = data;
+	        	$scope.progressShown = false;
+	        });
+		} else {
+			$scope.stations = $rootScope.stations;
+			$scope.progressShown = false;
 		}
-
-    	$scope.progressShown = true;
 
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
@@ -202,17 +202,17 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			$scope.toggleModal();
 		};
 
-
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
-	        	$rootScope.stations = data;
+	        	$rootScope.stations = $scope.stations = data;
 	        	$scope.loadMarkers();
 	        	$scope.progressShown = false;
 	        });
-		} else {			
-	        $scope.loadMarkers();
-	        $scope.progressShown = false;
-		}		
+		} else {
+			$scope.stations = $rootScope.stations;
+        	$scope.loadMarkers();
+        	$scope.progressShown = false;
+		}	
 		
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";

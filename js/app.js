@@ -19,7 +19,10 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
-                $rootScope.stations = null;
+
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                });
             });
         });
     });
@@ -130,10 +133,6 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
     }
 ]);
 
-lanternApp.factory('loader', function($http) {
-    return $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude);
-});
-
 lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function () {
@@ -141,6 +140,8 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
 
             $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
                 deferred.resolve(eval(data));
+            }).error(function(data) {
+              deferred.resolve(null);
             });
 
             return deferred.promise;
