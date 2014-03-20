@@ -22,6 +22,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
 
                 loadstations().then(function(data) {
                     $rootScope.stations = data;
+                    alert(data);
                 });
             });
         });
