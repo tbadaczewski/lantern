@@ -83,7 +83,7 @@ button.inline, .button.inline {
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 2;
 	height: 40px;
 	width: 100%;
 	padding: 0 1em;
@@ -125,7 +125,7 @@ button.inline, .button.inline {
 
 nav {
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	top: 70px;
 	left: 0;
 	padding: 1em 15% 1em 1em;
@@ -301,9 +301,9 @@ nav.hide {
 
 .rounded {
 	background: none;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	border: solid 2px #f18525;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: solid 1px #f18525;
 	color: #fff;
 }
 
