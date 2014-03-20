@@ -76,7 +76,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				alert("Hooray!");
 			})
 			.error(function (data, status, headers, config) {
-				alert("Dang It!");
+				alert(status + " - "+ data);
 			});
 
             /*
