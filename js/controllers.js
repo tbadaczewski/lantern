@@ -115,11 +115,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.animate = "scale";		
 		$scope.saddr = encodeURI($rootScope.address);
 
-		alert($rootScope.stations);
-
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
-	        	alert("Loaded");
+	        	alert(data);
 	        	$rootScope.stations = data;
 	        	$scope.progressShown = false;
 	        });
