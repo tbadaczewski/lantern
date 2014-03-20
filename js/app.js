@@ -7,7 +7,7 @@ var lanternApp = angular.module('lanternApp', [
     'lanternControllers'
 ]);
 
-lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
+lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
@@ -20,6 +20,15 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                }); 
+
+                loadoutages().then(function(data) {
+                    $rootScope.outages = data;
+                }); 
+
+                /*
                 $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
                     $rootScope.stations = eval(data);
                 }).error(function(data) {
@@ -31,6 +40,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder) {
                 }).error(function(data) {
                     $rootScope.outages = null;
                 });
+*/
             });
         });
     });
