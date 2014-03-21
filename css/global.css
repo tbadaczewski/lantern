@@ -216,6 +216,7 @@ nav > span[class^='icon-'] {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
 	width: 100%;
 	height: 70px;
+	overflow: hidden;
 }
 
 #search-area {
@@ -229,7 +230,6 @@ nav > span[class^='icon-'] {
 	transition: all 300ms linear 0.5s;
 	-webkit-transform: translate3d(0em,0,0);
 	transform: translate3d(0em,0,0);
-	overflow: hidden;
 }
 
 #search-area.visible {
