@@ -29,7 +29,7 @@
         <button id="btn-target" ng-click="findme()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
         <button id="search-button" ng-click="toggleMenu()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span><div class="icon-list size-22" aria-hidden="true"></div></button>
     </div>
-    <nav class="{{navstate}}">        
+    <nav id="{{navstate}}">        
         <span class="icon-{{navclass}}" aria-hidden="true"></span>
         <span>{{navtext}}</span>
         <a id="btn-type=" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
