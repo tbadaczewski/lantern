@@ -220,9 +220,9 @@ nav > span[class^='icon-'] {
 }
 
 #search-area {
-	position: absolute;
+	position: relative;
 	top: 0;
-	z-index: 1;
+	z-index: 0;
 	background: transparent;
 	width: 100%;
 	height: 100%;
@@ -238,14 +238,12 @@ nav > span[class^='icon-'] {
 }
 
 #search-text {
-	position: relative;
 	width: 100%;
 	height: 100%;
 	font-size: 1em;
 	padding: 0 1em;
 	color: #353c41;
 	background: transparent;
-	z-index: 0;
 }
 
 .arrow-back {
