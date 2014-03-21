@@ -209,7 +209,7 @@ nav > span[class^='icon-'] {
 }
 
 #search-bar {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 5;
