@@ -212,7 +212,7 @@ nav > span[class^='icon-'] {
 	position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 10;
+	z-index: 5;
 	border-top: #e0e0e0;
 	background: #fff;
 	height: 70px;
@@ -238,12 +238,14 @@ nav > span[class^='icon-'] {
 }
 
 #search-text {
+	position: relative;
 	width: 100%;
 	height: 100%;
 	font-size: 1em;
 	padding: 0 1em;
 	color: #353c41;
 	background: transparent;
+	z-index: 0;
 }
 
 .arrow-back {
