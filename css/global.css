@@ -229,6 +229,7 @@ nav > span[class^='icon-'] {
 	transition: all 300ms linear 0.5s;
 	-webkit-transform: translate3d(0em,0,0);
 	transform: translate3d(0em,0,0);
+	overflow: hidden;
 }
 
 #search-area.visible {
