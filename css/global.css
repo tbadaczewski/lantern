@@ -126,21 +126,26 @@ button.inline, .button.inline {
 nav {
 	position: absolute;
 	z-index: 2;
-	top: 70px;
+	top: 0;
 	left: 0;
 	padding: 1em 15% 1em 1em;
 	width: 100%;
 	background: rgba(0,0,0,0.75);
 	color: #fff;
 	font-size: 0.9em;
+	-webkit-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+nav.visible {
+	-webkit-transform: translate3d(0,70px,0);
+	transform: translate3d(0,70px,0);
 }
 
 nav > span[class^='icon-'] {
 	margin-right: 0.5em;
-}
-
-nav.hide {
-	opacity: 0;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

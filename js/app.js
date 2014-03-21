@@ -77,7 +77,6 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             };
 
             function onError(error) {
-                alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
                 $rootScope.$apply(function () {
                     deferred.resolve($rootScope.position);
                 });

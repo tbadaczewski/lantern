@@ -52,7 +52,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 		}
 
 		$rootScope.backstate = "";
-		$rootScope.navstate = false;
+		$rootScope.navstate = "";
 		$scope.id = "main";
 		$scope.animate = "scale"
 		$scope.show = false;
@@ -114,9 +114,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 		
-		$rootScope.backstate = "visible";
 		$rootScope.typestate = true;
-		$rootScope.navstate = true;
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "Map";
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
@@ -213,6 +213,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "List";
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
@@ -242,8 +243,8 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
-		$rootScope.navstate = true;
 		$rootScope.navtext = "POWER OUTAGES";
 		$rootScope.navclass = "lightning";
 		$rootScope.navtarget = "outage-map";
@@ -258,8 +259,8 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
     	document.getElementById("photo").attr("src", $rootScope.photo);
 
 		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
-		$rootScope.navstate = true;
 		$rootScope.navtext = "DOWNED POWERLINES";
 		$rootScope.navclass = "camera";
 		$rootScope.navtarget = "downed-powerlines";
