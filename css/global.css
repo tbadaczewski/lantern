@@ -123,7 +123,7 @@ button.inline, .button.inline {
 	padding: 90px 1em 50px 1em;
 }
 
-nav {
+nav, nav.hidden {
 	position: absolute;
 	z-index: 2;
 	top: 0 !important;
@@ -139,13 +139,7 @@ nav {
 	transform: translate3d(0,0px,0) !important;
 }
 
-nav.visible,
-nav.ng-hide-add,
-nav.ng-hide-remove,
-nav.ng-hide-add,
-nav.ng-hide-add.ng-hide-add-active,
-nav.ng-hide-remove,
-nav.ng-hide-remove.ng-hide-remove-active {
+nav.visible {
 	-webkit-transform: translate3d(0,70px,0) !important;
 	transform: translate3d(0,70px,0) !important;
 }
@@ -480,8 +474,8 @@ nav > span[class^='icon-'] {
 	left: 0;
 	background: #fff;
 	width: 100%;
-	-webkit-transition: all 500ms linear;
-	transition: all 500ms linear;
+	-webkit-transition: -webkit-transform 500ms linear;
+	transition: transform 500ms linear;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
@@ -497,8 +491,8 @@ nav > span[class^='icon-'] {
 	left: 0;
 	background: #fff;
 	width: 100%;
-	-webkit-transition: all 500ms linear;
-	transition: all 500ms linear;
+	-webkit-transition: -webkit-transform 500ms linear;
+	transition: transform 500ms linear;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }

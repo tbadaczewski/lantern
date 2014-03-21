@@ -52,7 +52,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 		}
 
 		$rootScope.backstate = "";
-		$rootScope.navstate = "";
+		$rootScope.navstate = "hidden";
 		$scope.id = "main";
 		$scope.animate = "scale"
 		$scope.show = false;
