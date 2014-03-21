@@ -631,3 +631,9 @@ iframe[id*="twitter-widget-"] {
 img#text-logo {
 	float: left;
 }
+
+nav.ng-hide-add, nav.ng-hide-remove {} 
+nav.ng-hide-add {}
+nav.ng-hide-add.ng-hide-add-active {}
+nav.ng-hide-remove {}
+nav.ng-hide-remove.ng-hide-remove-active {}
