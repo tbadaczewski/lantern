@@ -222,7 +222,7 @@ nav > span[class^='icon-'] {
 	position: absolute;
 	top: 0;
 	z-index: 1;
-	background: transparent;
+	background: red;
 	width: 85%;
 	height: 70px;
 	-webkit-transition: all 300ms linear 0.5s;
