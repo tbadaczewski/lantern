@@ -220,12 +220,11 @@ nav > span[class^='icon-'] {
 }
 
 #search-area {
-	z-index: 0;
 	background: transparent;
 	width: 100%;
-	height: 100%;
-	-webkit-transition: all 300ms linear 0.5s;
-	transition: all 300ms linear 0.5s;
+	height: inherit;
+	-webkit-transition: -webkit-transform 300ms linear 0.5s;
+	transition: transform 300ms linear 0.5s;
 	-webkit-transform: translate3d(0em,0,0);
 	transform: translate3d(0em,0,0);
 }
@@ -237,7 +236,7 @@ nav > span[class^='icon-'] {
 
 #search-text {
 	width: 85%;
-	height: 100%;
+	height: inherit;
 	font-size: 1em;
 	padding: 0 50px 0 1em;
 	color: #353c41;
@@ -249,7 +248,7 @@ nav > span[class^='icon-'] {
 	left: -15px;
 	top: 0px;
 	width: 30px;
-	height: 100%;
+	height: inherit;
 	z-index: 4;
 	background: transparent;
 	display: block;
@@ -269,22 +268,20 @@ nav > span[class^='icon-'] {
 }
 
 #btn-target {
-	position: absolute;
-	z-index: 10;
-	right: 15%;
+	position: fixed;
 	top: 0;
+	right: 15%;
+	z-index: 4;
 	font-size: 23px;
 	color: #c7c7c7;
-	height: 100%;
 	overflow: hidden;
 	width: 50px;
+	height: inherit;
 	margin: 0;
 	padding: 0;
 	border-top: #e0e0e0;
 	background: #fff;
 	text-align: center;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
 }
 
 #btn-target .icon-target {
@@ -293,12 +290,12 @@ nav > span[class^='icon-'] {
 }
 
 #search-button {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	z-index: 4;
-	height: 100%;
 	width: 15%;
+	height: inherit;
 	background: #f18425;
 	text-align: center;
 	padding: 0;
