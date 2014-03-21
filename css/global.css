@@ -238,7 +238,7 @@ nav > span[class^='icon-'] {
 	width: 85%;
 	height: 100%;
 	font-size: 1em;
-	padding: 0 1em;
+	padding: 0 50px 0 1em;
 	color: #353c41;
 	background: transparent;
 }
