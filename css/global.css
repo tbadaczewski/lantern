@@ -133,16 +133,26 @@ nav {
 	background: rgba(0,0,0,0.75);
 	color: #fff;
 	font-size: 0.9em;
-	-webkit-transition: top 0.5s ease-in-out;
-	transition: top 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-webkit-transform: translate3d(0,0px,0) !important;
+	transform: translate3d(0,0px,0) !important;
+}
+
+nav.ng-hide-add,
+nav.ng-hide-remove,
+nav.ng-hide-add,
+nav.ng-hide-add.ng-hide-add-active,
+nav.ng-hide-remove,
+nav.ng-hide-remove.ng-hide-remove-active {
+	top: 0 !important;
+	-webkit-transform: translate3d(0,0px,0) !important;
+	transform: translate3d(0,0px,0) !important;
 }
 
 nav.visible {
-	top: 70px !important;
-	/*
 	-webkit-transform: translate3d(0,70px,0) !important;
 	transform: translate3d(0,70px,0) !important;
-	*/
 }
 
 nav > span[class^='icon-'] {
