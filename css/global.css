@@ -213,7 +213,7 @@ nav > span[class^='icon-'] {
 	left: 0;
 	top: 0;
 	z-index: 5;
-	background: blue url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;
+	background: blue; /* url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2N88ODBfwAI6QOhHB04FwAAAABJRU5ErkJggg==) left top repeat-x;*/
 	height: 70px;
 	width: 100%;
 }
