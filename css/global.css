@@ -137,9 +137,9 @@ nav {
 	transition: all 0.5s ease-in-out;
 }
 
-nav.visible {
-	-webkit-transform: translate3d(0,70px,0);
-	transform: translate3d(0,70px,0);
+nav.visible, nav[class*=''] {
+	-webkit-transform: translate3d(0,70px,0) !important;
+	transform: translate3d(0,70px,0) !important;
 }
 
 nav > span[class^='icon-'] {
@@ -631,9 +631,3 @@ iframe[id*="twitter-widget-"] {
 img#text-logo {
 	float: left;
 }
-
-nav.ng-hide-add, nav.ng-hide-remove {} 
-nav.ng-hide-add {}
-nav.ng-hide-add.ng-hide-add-active {}
-nav.ng-hide-remove {}
-nav.ng-hide-remove.ng-hide-remove-active {}
