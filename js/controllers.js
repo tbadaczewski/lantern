@@ -80,18 +80,18 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			navigator.notification.alert('', '', 'Station Status Reported', 'Close');
+			navigator.notification.alert('Station Status Reported', '', '', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
+			        	$rootScope.stations = $scope.stations = data;
 			        });						
 				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;			        	
+			        	$rootScope.stations = $scope.stations = data;			        	
 			        });
 				});			
 			}
@@ -170,19 +170,19 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
 			
-			navigator.notification.alert('','', 'Station Status Reported', 'Close');
+			navigator.notification.alert('Station Status Reported', '', '', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
+			        	$rootScope.stations = $scope.stations = data;
 			        	$scope.showdetails = "";
 			        });	
 				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
+			        	$rootScope.stations = $scope.stations = data;
 			        	$scope.showdetails = "";
 			        });
 				});			
