@@ -174,15 +174,17 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;
+			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
+			        	$scope.loadMarkers();
 			        });	
 				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;
+			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
+			        	$scope.loadMarkers();
 			        });
 				});			
 			} 
