@@ -127,8 +127,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations',
-    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations) {	
     	$scope.progressShown = true;
 		var station_markers = null;
 
@@ -168,9 +168,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();
-			
-			navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			$scope.toggleModal();			
+			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
