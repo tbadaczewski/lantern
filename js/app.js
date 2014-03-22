@@ -170,7 +170,7 @@ lanternApp.directive('googlemap', function($rootScope) {
         restrict: 'E',
         replace: true,
         template: '<div></div>',
-        link: function(scope, element, attrs) {
+        link: function($scope, element, attrs) {
             var prev = null;
             var map = null;
             var mapmarkers = [];
@@ -188,20 +188,22 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
-                    scope.$apply(function() {
-                        scope.showdetails = "hide";
+                    $scope.$apply(function() {
+                        $scope.showdetails = "hide";
                     });
 
-                    if(scope.prev != null) {
+                    if($scope.prev != null) {
                         var normal = { 
-                            url: scope.prev.icon.url,
+                            url: $scope.prev.icon.url,
                             scaledSize: new google.maps.Size(25,40)
                         };
 
-                        scope.prev.setIcon(normal);
+                        $scope.prev.setIcon(normal);
                     }
                 });
 
+                $scope.init();
+                /*
                 for (var i = 0; i < mapmarkers.length; i++) {
                     mapmarkers[i].setMap(null);
                 }
@@ -209,9 +211,20 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
+                */
             });
 
-            scope.addMarkers = function (markers) {
+            $scope.init = function () {
+                for (var i = 0; i < mapmarkers.length; i++) {
+                    mapmarkers[i].setMap(null);
+                }
+
+                mapmarkers = [];
+
+                $scope.addMarkers($scope.markers);
+            }
+
+            $scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();
 
                 _.each(markers, function (marker) {                    
@@ -239,24 +252,24 @@ lanternApp.directive('googlemap', function($rootScope) {
                     bounds.extend(myLatlng);
 
                     google.maps.event.addListener(point, 'click', function() {
-                        scope.$apply(function () {
-                            scope.id = point.id,
-                            scope.operatingStatus = point.operatingStatus,
-                            scope.station = point.station;
-                            scope.latitude = point.latitude;
-                            scope.longitude = point.longitude;
-                            scope.address = point.address;
-                            scope.city = point.city;
-                            scope.region = point.region;
-                            scope.zip = point.zip;
+                        $scope.$apply(function () {
+                            $scope.id = point.id,
+                            $scope.operatingStatus = point.operatingStatus,
+                            $scope.station = point.station;
+                            $scope.latitude = point.latitude;
+                            $scope.longitude = point.longitude;
+                            $scope.address = point.address;
+                            $scope.city = point.city;
+                            $scope.region = point.region;
+                            $scope.zip = point.zip;
 
-                            if(scope.prev != null) {
+                            if($scope.prev != null) {
                                 var normal = { 
-                                    url: scope.prev.icon.url,
+                                    url: $scope.prev.icon.url,
                                     scaledSize: new google.maps.Size(25,40)
                                 };
 
-                                scope.prev.setIcon(normal);
+                                $scope.prev.setIcon(normal);
                             }
 
                             var large = {
@@ -265,8 +278,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                             };
 
                             point.setIcon(large);
-                            scope.showdetails = "show";
-                            scope.prev = point;
+                            $scope.showdetails = "show";
+                            $scope.prev = point;
                         });
                     });
                 });
