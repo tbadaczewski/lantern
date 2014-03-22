@@ -157,7 +157,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;	
-			$scope.addMarkers();		
+			$scope.addMarkers($scope.markers);		
 		}
 
 		$scope.getDirections = function(url) {
