@@ -201,8 +201,6 @@ lanternApp.directive('googlemap', function($rootScope) {
                         scope.prev.setIcon(normal);
                     }
                 });
-
-                scope.init();
             });
 
             scope.$watch('markers', function() {
