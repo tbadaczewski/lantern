@@ -60,8 +60,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations',
-    function ($scope, $rootScope, $http, $window, loadstations) {
+lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
+    function ($scope, $rootScope, $http, loadstations) {
     	$scope.progressShown = true;
 
 		if($rootScope.stations == null) {
@@ -80,18 +80,18 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			navigator.notification.alert('', '', 'Station Status Reported', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;
+			        	$rootScope.stations = data;
 			        });						
 				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;			        	
+			        	$rootScope.stations = data;			        	
 			        });
 				});			
 			}
@@ -127,8 +127,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations',
+    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations) {	
     	$scope.progressShown = true;
 		var station_markers = null;
 
@@ -156,7 +156,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				});
 			}
 			
-			$scope.markers = station_markers;
+			$scope.markers = station_markers;			
 		}
 
 		$scope.getDirections = function(url) {
@@ -168,15 +168,15 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();			
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			$scope.toggleModal();
+			
+			navigator.notification.alert('','', 'Station Status Reported', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
-			        	$scope.loadMarkers();
 			        });	
 				});				
 			} else {
@@ -184,7 +184,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
-			        	$scope.loadMarkers();
 			        });
 				});			
 			} 
