@@ -186,10 +186,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
-            scope.$watch('markers', function(newVal, oldVal) {
-                scope.init();
-            });
-
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
@@ -205,9 +201,9 @@ lanternApp.directive('googlemap', function($rootScope) {
                         scope.prev.setIcon(normal);
                     }
                 });
+
+                scope.init();
             });
-
-
 
             scope.init = function () {
                 for (var i = 0; i < mapmarkers.length; i++) {
