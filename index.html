@@ -29,8 +29,8 @@
         <div id="search-options">            
             <button id="btn-clear" ng-click="clear()" ng-focus="showClear()" ng-show="searchfocus" type="button"><span class="icon-close" aria-hidden="true"></span></button>
             <button id="btn-search" ng-click="search()" type="button"><span class="icon-search" aria-hidden="true"></span></button>
-            <button id="btn-target" ng-click="locate()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
-            <button id="search-button" ng-click="toggleMenu()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span><div class="icon-list size-22" aria-hidden="true"></div></button>
+            <button id="btn-target" ng-click="locate()" ng-hide="searchfocus" type="button"><span class="icon-target" aria-hidden="true"></span></button>
+            <button id="btn-lantern" ng-click="toggleMenu()" type="button"><div class="icon-lantern size-32" aria-hidden="true"></div><div class="icon-list size-22" aria-hidden="true"></div></button>
         </div>    
     </div>
     <nav id="nav-{{navstate}}">        

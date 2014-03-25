@@ -183,10 +183,6 @@ nav > span[class^='icon-'] {
 	background: #f18425;
 	cursor: pointer;
 	padding: 4em 1em 1em 1em;
-	/*
-	-webkit-transition: top 0.1s linear;
-	transition: top 0.1s linear;
-	*/
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
 	transition: transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,-100%,0);
@@ -194,20 +190,13 @@ nav > span[class^='icon-'] {
 }
 
 #handle.open {
-	/*top: 0;*/
-	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	transition: transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
 
 #handle.close {
-	/*top: -100%;*/
-	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	transition: transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,-100%,0);
 	transform: translate3d(0,-100%,0);
-
 }
 
 #handle .inner {
@@ -303,12 +292,6 @@ nav > span[class^='icon-'] {
 }
 
 #btn-target, #btn-search, #btn-clear {
-	/*
-	position: fixed;
-	top: 0;
-	right: 15%;
-	z-index: 4;
-	*/
 	font-size: 23px;
 	color: #c7c7c7;
 	overflow: hidden;
@@ -326,13 +309,7 @@ nav > span[class^='icon-'] {
 	margin-top: 6px;
 }
 
-#search-button {
-	/*
-	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 4;
-	*/
+#btn-lantern {
 	width: 50px;
 	height: inherit;
 	background: #f18425;
@@ -519,7 +496,7 @@ nav > span[class^='icon-'] {
 	margin-top: 0;
 }
 
-#station-details.poo {
+#station-details.show {
 	-webkit-transform: translate3d(0,-171px,0);
 	transform: translate3d(0,-171px,0);
 }
