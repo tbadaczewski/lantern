@@ -124,6 +124,10 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                         }
                     }
 
+                    if($type == 'address') {
+                        $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
+                    }
+
                     deferred.resolve(location);
                 }
             });
@@ -186,6 +190,11 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
+            scope.$watch('markers', function() {
+                scope.init();
+                console.log("Init");
+            });
+
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
@@ -202,7 +211,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     }
                 });
 
-                scope.init();
+                //scope.init();
             });
 
             scope.init = function () {

@@ -2,14 +2,62 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
-    function ($scope, $rootScope, $http, geolocation, geoencoder) {
-    	$scope.findme = function() {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', '$http', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
+    function ($scope, $rootScope, $timeout, $http, geolocation, geoencoder, loadstations, loadoutages) {
+    	$scope.search = function() {
+    		$rootScope.address = $scope.address;
+
 			geoencoder('address').then(function(address) {
 				$rootScope.address = $scope.address = address[0];
 				$rootScope.county = address[1];
 				$rootScope.state = address[2];
+
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                    $rootScope.$emit('stationsUpdated', new Date());
+                }); 
+
+                loadoutages().then(function(data) {
+                    $rootScope.outages = data;
+                    $rootScope.$emit('outagesUpdated', new Date());
+                });
 			});
+		}
+
+		$scope.clear = function() {
+			$scope.address = $scope.searchfocus = "";
+		}
+
+		$scope.showClear = function() {
+			$scope.searchfocus = "true";
+		}
+
+		$scope.hideClear = function() {
+			$timeout(function() {
+				$scope.searchfocus = "";
+			}, 500);
+		}
+
+    	$scope.locate = function() {
+	        geolocation().then(function(position) {
+	            $rootScope.position = position;
+
+	            geoencoder('latLng').then(function(address) {
+	                $rootScope.address = $scope.address = address[0];
+	                $rootScope.county = address[1];
+	                $rootScope.state = address[2];
+
+	                loadstations().then(function(data) {
+	                    $rootScope.stations = data;
+	                    $rootScope.$emit('stationsUpdated', new Date());
+	                }); 
+
+	                loadoutages().then(function(data) {
+	                    $rootScope.outages = data;
+	                    $rootScope.$emit('outagesUpdated', new Date());
+	                });
+	            });
+	        });
 		}
 
 		$scope.toggleMenu = function() {
@@ -60,8 +108,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', 'loadstations',
-    function ($scope, $rootScope, $http, loadstations) {
+lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations',
+    function ($scope, $rootScope, $http, $window, loadstations) {
     	$scope.progressShown = true;
 
 		if($rootScope.stations == null) {
@@ -74,24 +122,28 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			$scope.progressShown = false;
 		}
 
+        $rootScope.$on('stationsUpdated', function() {
+        	$scope.stations = $rootScope.stations;
+    	});
+
    		$scope.tagCancel = function() {  			
 			$scope.toggleModal();
 		};
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			navigator.notification.alert('', '', 'Station Status Reported', 'Close');
+			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
+			        	$rootScope.stations = $scope.stations = data;
 			        });						
 				});				
 			} else {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;			        	
+			        	$rootScope.stations = $scope.stations = data;			        	
 			        });
 				});			
 			}
@@ -127,8 +179,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations',
-    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations) {	
     	$scope.progressShown = true;
 		var station_markers = null;
 
@@ -156,8 +208,12 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				});
 			}
 			
-			$scope.markers = station_markers;			
+			$scope.markers = station_markers;
 		}
+
+        $rootScope.$on('stationsUpdated', function() {
+        	$scope.loadMarkers();
+    	});
 
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
@@ -168,15 +224,15 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();
-			
-			navigator.notification.alert('','', 'Station Status Reported', 'Close');
+			$scope.toggleModal();			
+			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
+			        	$scope.loadMarkers();
 			        });	
 				});				
 			} else {
@@ -184,6 +240,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = data;
 			        	$scope.showdetails = "";
+			        	$scope.loadMarkers();
 			        });
 				});			
 			} 
@@ -228,18 +285,26 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     	$scope.progressShown = true;
 
 		if($rootScope.outages == null) {
-	        loadoutages().then(function(data) {
-	        	$rootScope.outages = $scope.outages = data;
-	        	$scope.progressShown = false;
-	        });
+	        $scope.init();
 		} else {
 			$scope.outages = $rootScope.outages;
 			$scope.progressShown = false;
 		}
 
+        $rootScope.$on('outagesUpdated', function() {
+        	$scope.init();
+    	});
+
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
 			window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
+		}
+
+		$scope.init = function() {
+	        loadoutages().then(function(data) {
+	        	$rootScope.outages = $scope.outages = data;
+	        	$scope.progressShown = false;
+	        });
 		}
 
 		$rootScope.backstate = "visible";

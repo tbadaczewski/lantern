@@ -26,23 +26,20 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-list:before {
+.icon-search:before {
 	content: "\e600";
 }
-.icon-target:before {
+.icon-close:before {
+	content: "\e60e";
+}
+.icon-list:before {
 	content: "\e601";
 }
-.icon-arrow-right:before {
+.icon-target:before {
 	content: "\e602";
 }
-.icon-pin:before {
+.icon-arrow-right:before {
 	content: "\e603";
-}
-.icon-twitter:before {
-	content: "\e609";
-}
-.icon-facebook:before {
-	content: "\e60a";
 }
 .icon-lightning:before {
 	content: "\e604";
@@ -58,6 +55,12 @@
 }
 .icon-camera:before {
 	content: "\e608";
+}
+.icon-twitter:before {
+	content: "\e609";
+}
+.icon-facebook:before {
+	content: "\e60a";
 }
 .icon-car:before {
 	content: "\e60b";

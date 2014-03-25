@@ -24,10 +24,14 @@
     <div id="search-bar" ng-controller="SearchCtrl"> 
         <div id="search-area" class="{{backstate}}">
             <a href="#/" class="arrow-back" title="Back"></a>
-            <input id="search-text" ng-model="address" type="text" placeholder="Enter a Location" />
+            <input id="search-text" ng-model="address" ng-focus="showClear()" ng-blur="hideClear()" type="text" placeholder="Enter a Location" />
         </div>
-        <button id="btn-target" ng-click="findme()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
-        <button id="search-button" ng-click="toggleMenu()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span><div class="icon-list size-22" aria-hidden="true"></div></button>
+        <div id="search-options">            
+            <button id="btn-clear" ng-click="clear()" ng-focus="showClear()" ng-show="searchfocus" type="button"><span class="icon-close" aria-hidden="true"></span></button>
+            <button id="btn-search" ng-click="search()" type="button"><span class="icon-search" aria-hidden="true"></span></button>
+            <button id="btn-target" ng-click="locate()" type="button"><span class="icon-target" aria-hidden="true"></span></button>
+            <button id="search-button" ng-click="toggleMenu()" type="button"><span class="icon-lantern size-32" aria-hidden="true"></span><div class="icon-list size-22" aria-hidden="true"></div></button>
+        </div>    
     </div>
     <nav id="nav-{{navstate}}">        
         <span class="icon-{{navclass}}" aria-hidden="true"></span>
