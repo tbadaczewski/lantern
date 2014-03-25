@@ -54,7 +54,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$timeout',
 
 	                loadoutages().then(function(data) {
 	                    $rootScope.outages = data;
-	                    $rootScope.$emit('outagesUpdated', new Date());
+	                    //$rootScope.$emit('outagesUpdated', new Date());
 	                });
 	            });
 	        });

@@ -192,7 +192,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             scope.$watch('markers', function() {
                 scope.init();
-                console.log("Init");
             });
 
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
