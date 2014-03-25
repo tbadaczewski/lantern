@@ -8,9 +8,9 @@
     	</div>
 	</div>
     <div class="item-options">
-    	<div><a href="" ng-click="getDirections($event, 'http://maps.apple.com/?daddr=' + address + ' ' + city + ', ' + region + ' ' + zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
+    	<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + address + ' ' + city + ', ' + region + ' ' + zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
     	<div><a><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
-    	<div><a href="" ng-click="tagOpenWindow($event, id, operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
+    	<div><a href="" ng-click="tagOpenWindow(id, operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
     </div>
 </div>
 <googlemap id="map_canvas"></googlemap>
@@ -20,7 +20,7 @@
 		<p>Mark this station as currently {{status == "closed" ? "open or operational" : "closed or unoperational"}}.</p>
 	</div>
     <div class="item-options clearfix">
-    	<div><a href="" ng-click="tagCancel($event)">Cancel</a></div>
-	    <div><a href="" ng-click="tagStation($event, stationid, status)"><span class="icon-tag" aria-hidden="true"></span> Tag {{status == "closed" ? "Open" : "Closed" }}</a></div>
+    	<div><a href="" ng-click="tagCancel()">Cancel</a></div>
+	    <div><a href="" ng-click="tagStation(stationid, status)"><span class="icon-tag" aria-hidden="true"></span> Tag {{status == "closed" ? "Open" : "Closed" }}</a></div>
     </div>	
 </modaldialog>
