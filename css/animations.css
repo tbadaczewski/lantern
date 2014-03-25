@@ -13,37 +13,12 @@
 }
 
 /* Scale */
-.scale.ng-enter {	
-	-webkit-animation: scaleDownCenter .4s ease-in both;
-	z-index: 1;
-}
-
-.scale.ng-enter-active {
+.scale.ng-enter, .scale.ng-enter-active {	
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
-.scale.ng-leave {
-	-webkit-animation: scaleUpCenter .4s ease-out both;
-}
-
-.scale.ng-leave-active {
+.scale.ng-leave, .scale.ng-leave-active {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
-}
-
-@-webkit-keyframes scaleDown {
-	to { opacity: 0; -webkit-transform: scale(.8); }
-}
-
-@-webkit-keyframes scaleUp {
-	from { opacity: 0; -webkit-transform: scale(.8); }
-}
-
-@-webkit-keyframes scaleUpDown {
-	from { opacity: 0; -webkit-transform: scale(1.2); }
-}
-
-@-webkit-keyframes scaleDownUp {
-	to { opacity: 0; -webkit-transform: scale(1.2); }
 }
 
 @-webkit-keyframes scaleDownCenter {
