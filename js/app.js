@@ -296,7 +296,6 @@ lanternApp.directive('modaldialog', function($rootScope, $timeout) {
         transclude: true,
         template: "<div class='ng-modal fade' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
-            var parent = element[0].parentNode;
             scope.show = false;
 
             if (attrs.status) {
@@ -309,7 +308,6 @@ lanternApp.directive('modaldialog', function($rootScope, $timeout) {
 
             scope.toggleModal = function() {
                 if(scope.show === false) {
-                    parent = element[0].parentNode;
                     document.body.appendChild(element[0]);
                     scope.show = true;
                 } else {
