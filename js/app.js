@@ -273,7 +273,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                             };
 
                             point.setIcon(large);
-                            scope.showdetails = "show";
+                            scope.showdetails = "poo";
                             scope.prev = point;
                         });
                     });

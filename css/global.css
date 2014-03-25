@@ -507,23 +507,21 @@ nav > span[class^='icon-'] {
 #station-details {
 	position: fixed;
 	z-index: 15;
-	bottom: 0;
+	top: 100%;
 	left: 0;
 	background: #fff;
 	width: 100%;
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
 	transition: transform 500ms ease-in-out;
-	-webkit-transform: translate3d(0,100%,0);
-	transform: translate3d(0,100%,0);
 }
 
 #station-details .item {
 	margin-top: 0;
 }
 
-#station-details.show {
-	-webkit-transform: translate3d(0,-40px,0);
-	transform: translate3d(0,-40px,0);
+#station-details.poo {
+	-webkit-transform: translate3d(0,-171px,0);
+	transform: translate3d(0,-171px,0);
 }
 
 iframe[id*="twitter-widget-"] { 
