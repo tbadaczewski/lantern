@@ -283,8 +283,8 @@ lanternApp.directive('googlemap', function($rootScope) {
             }
 
             scope.$watch('markers', function() {
-                scope.init(); 
-                map.setOptions(mapOptions);               
+                map.setOptions(mapOptions);
+                scope.init();
             });
         }
     };
