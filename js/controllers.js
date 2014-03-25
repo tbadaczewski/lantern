@@ -25,7 +25,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$timeout',
 		}
 
 		$scope.clear = function() {
-			$scope.address = $scope.searchfocus = "";
+			$scope.address = "";
 		}
 
 		$scope.showClear = function() {

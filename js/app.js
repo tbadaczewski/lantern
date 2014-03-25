@@ -283,7 +283,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             }
 
             scope.$watch('markers', function() {                
-                //scope.init();
+                scope.init();
                 map.setZoom(12);
             });
         }
