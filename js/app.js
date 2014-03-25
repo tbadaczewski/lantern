@@ -316,7 +316,7 @@ lanternApp.directive('modaldialog', function($rootScope, $timeout) {
                     scope.show = false;
 
                     $timeout(function() {
-                        element[0].remove();
+                        parent.appendChild(element[0]);
                     }, 500);
                 }
             }
