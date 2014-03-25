@@ -190,10 +190,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
-            scope.$watch('markers', function() {
-                scope.init();
-            });
-
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
@@ -210,6 +206,11 @@ lanternApp.directive('googlemap', function($rootScope) {
                     }
                 });
 
+                scope.init();     
+
+            });
+
+            scope.$watch('markers', function() {
                 scope.init();
             });
 
