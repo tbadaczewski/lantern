@@ -312,10 +312,10 @@ lanternApp.directive('modaldialog', function($rootScope, $timeout) {
                     scope.show = true;
                 } else {
                     scope.show = false;
-                    
-                    $timeout(function() {
-                        element.remove();
-                    }, 500);
+
+                    //$timeout(function() {
+                        //element.remove();                        
+                    //}, 1000);
                 }
             }
         }

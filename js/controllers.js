@@ -127,7 +127,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     	});
 
    		$scope.tagCancel = function() {  			
-			$scope.toggleModal();
+			$scope.hideModal();
 		};
 
 		$scope.tagStation = function(id, status) {
@@ -220,7 +220,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
    		$scope.tagCancel = function() {  			
-			$scope.toggleModal();
+			$scope.hideModal();
 		}
 
 		$scope.tagStation = function(id, status) {
