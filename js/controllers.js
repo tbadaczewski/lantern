@@ -126,11 +126,13 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
         	$scope.stations = $rootScope.stations;
     	});
 
-   		$scope.tagCancel = function() {  			
+   		$scope.tagCancel = function($event) {
+   			$event.preventDefault();	
 			$scope.toggleModal();
 		};
 
-		$scope.tagStation = function(id, status) {
+		$scope.tagStation = function($event, id, status) {
+			$event.preventDefault();
 			$scope.toggleModal();
 			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
@@ -151,7 +153,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			$scope.showdetails = ""; 
 		};
 
-		$scope.tagOpenWindow = function(id, status) {
+		$scope.tagOpenWindow = function($event, id, status) {
+			$event.preventDefault();
+
 			if(status != "red") {
 				$scope.status = "open";
 			} else {
@@ -162,7 +166,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			$scope.toggleModal();
 		};
 
-		$scope.getDirections = function(url) {
+		$scope.getDirections = function($event, url) {
+			$event.preventDefault();
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 		
@@ -215,15 +220,18 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
         	$scope.loadMarkers();
     	});
 
-		$scope.getDirections = function(url) {
+		$scope.getDirections = function($event, url) {
+			$event.preventDefault();
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 
-   		$scope.tagCancel = function() {  			
+   		$scope.tagCancel = function($event) {
+   			$event.preventDefault();
 			$scope.toggleModal();
 		}
 
-		$scope.tagStation = function(id, status) {
+		$scope.tagStation = function($event, id, status) {
+			$event.preventDefault();
 			$scope.toggleModal();			
 			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
@@ -246,7 +254,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			} 
 		};
 
-		$scope.tagOpenWindow = function(id, status) {
+		$scope.tagOpenWindow = function($event, id, status) {
+			$event.preventDefault();
+			
 			if(status != "red") {
 				$scope.status = "open";
 			} else {
