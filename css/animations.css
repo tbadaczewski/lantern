@@ -30,14 +30,11 @@
 }
 
 /* Fade */
-.fade {
-	-webkit-animation: fadeIn .5s ease both;
-}
- 
 .fade.ng-hide-add, .fade.ng-hide-remove {
+	-webkit-animation: fadeIn .5s ease both;
 	display: block !important;
 }
- 
+
 .fade.ng-hide {
 	-webkit-animation: fadeOut .5s ease both;
 }

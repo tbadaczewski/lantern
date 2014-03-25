@@ -289,7 +289,7 @@ lanternApp.directive('googlemap', function($rootScope) {
     };
 });
 
-lanternApp.directive('modaldialog', function($rootScope) {
+lanternApp.directive('modaldialog', function($rootScope, $timeout) {
     return {
         restrict: 'E',
         replace: true,
@@ -314,7 +314,6 @@ lanternApp.directive('modaldialog', function($rootScope) {
                     scope.show = true;
                 } else {
                     scope.show = false;
-                    parent.appendChild(element[0]);
                 }
             }
         }
