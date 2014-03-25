@@ -193,7 +193,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
-                        scope.showdetails = "hide";
+                        scope.showdetails = "";
                     });
 
                     if(scope.prev != null) {
@@ -206,7 +206,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     }
                 });
 
-                scope.init();
+                //scope.init();
             });
 
             scope.init = function () {
@@ -282,12 +282,10 @@ lanternApp.directive('googlemap', function($rootScope) {
                 map.fitBounds(bounds);
             }
 
-            /*
             scope.$watch('markers', function() {
-                map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
                 scope.init();
+                map.setZoom(12);
             });
-            */
         }
     };
 });
