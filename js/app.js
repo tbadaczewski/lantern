@@ -210,7 +210,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     }
                 });
 
-                //scope.init();
+                scope.init();
             });
 
             scope.init = function () {

@@ -312,13 +312,13 @@ nav > span[class^='icon-'] {
 	font-size: 23px;
 	color: #c7c7c7;
 	overflow: hidden;
-	width: 40px;
+	width: 35px;
 	height: inherit;
 	margin: 0;
 	padding: 0;
 	border-top: solid 1px #e0e0e0;
 	background: #fff;
-	text-align: left;
+	text-align: center;
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
