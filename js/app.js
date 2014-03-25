@@ -284,7 +284,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             scope.$watch('markers', function() {                
                 scope.init();
-                map.setZoom(12);
             });
         }
     };
@@ -295,7 +294,7 @@ lanternApp.directive('modaldialog', function($rootScope) {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
+        template: "<div class='ng-modal fade' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
             var parent = element[0].parentNode;
             scope.show = false;

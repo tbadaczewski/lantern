@@ -29,45 +29,25 @@
 	from { opacity: 0; -webkit-transform: scale(.7); }
 }
 
-
-
-
-
-/* Slide Horizontal */
-.slide.ng-enter {	
-	-webkit-transform: translateX(100%);
+/* Fade */
+.fade {
+	-webkit-animation: fadeIn .5s ease both;
+}
+ 
+.fade.ng-hide-add, .fade.ng-hide-remove {
+	display: block !important;
+}
+ 
+.fade.ng-hide {
+	-webkit-animation: fadeOut .5s ease both;
 }
 
-.slide.ng-enter-active {
-	-webkit-transform: translateX(0%);
+@-webkit-keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
 }
 
-.slide.ng-leave {	
-	-webkit-transform: translateX(0%);
-}
-
-.slide.ng-leave-active {	
-	-webkit-transform: translateX(100%);
-}
-
-/* Overlay */
-.animate-show {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 3;
-    -webkit-transition: all linear 0.5s;
-    transition: all linear 0.5s;
-    opacity: 1;
-}
-
-.animate-show.ng-hide-add,
-.animate-show.ng-hide-remove {
-    display: block !important;
-}
-
-.animate-show.ng-hide {
-    opacity: 0;
+@-webkit-keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }

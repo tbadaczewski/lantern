@@ -572,11 +572,16 @@ iframe[id*="twitter-widget-"] {
 	background: #bbb;
 }
 
-.ng-modal-overlay {
+.ng-modal {
 	position: fixed;
 	z-index: 100;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.ng-modal-overlay {
 	width: 100%;
 	height: 100%;
 	background: rgba(0,0,0,0.8);
