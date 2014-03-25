@@ -7,58 +7,71 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	-webkit-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
 	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 }
 
 /* Scale */
 .scale.ng-enter {	
-	-webkit-transform: scale(.7);
-	transform: scale(.7);
-	opacity: 0;
+	-webkit-animation: scaleDown .7s ease both;
 }
 
 .scale.ng-enter-active {
-	-webkit-transform: scale(1);
-	transform: scale(1);
-	opacity: 1;
+	-webkit-animation: scaleUp .7s ease both;
 }
 
 .scale.ng-leave {
-	-webkit-transform: scale(1);
-	transform: scale(1);
-	opacity: 1;
+	-webkit-animation: scaleUp .7s ease both;
 }
 
 .scale.ng-leave-active {
-	-webkit-transform: scale(.7);
-	transform: scale(.7);
-	opacity: 0;
+	-webkit-animation: scaleDown .7s ease both;
 }
+
+@-webkit-keyframes scaleDown {
+	to { opacity: 0; -webkit-transform: scale(.8); }
+}
+
+@-webkit-keyframes scaleUp {
+	from { opacity: 0; -webkit-transform: scale(.8); }
+}
+
+@-webkit-keyframes scaleUpDown {
+	from { opacity: 0; -webkit-transform: scale(1.2); }
+}
+
+@-webkit-keyframes scaleDownUp {
+	to { opacity: 0; -webkit-transform: scale(1.2); }
+}
+
+@-webkit-keyframes scaleDownCenter {
+	to { opacity: 0; -webkit-transform: scale(.7); }
+}
+
+@-webkit-keyframes scaleUpCenter {
+	from { opacity: 0; -webkit-transform: scale(.7); }
+}
+
+
+
+
 
 /* Slide Horizontal */
 .slide.ng-enter {	
 	-webkit-transform: translateX(100%);
-	transform: translateX(100%);
 }
 
 .slide.ng-enter-active {
 	-webkit-transform: translateX(0%);
-	transform: translateX(0%);
 }
 
 .slide.ng-leave {	
 	-webkit-transform: translateX(0%);
-	transform: translateX(0%);
 }
 
 .slide.ng-leave-active {	
 	-webkit-transform: translateX(100%);
-	transform: translateX(100%);
 }
 
 /* Overlay */
@@ -76,7 +89,7 @@
 
 .animate-show.ng-hide-add,
 .animate-show.ng-hide-remove {
-    display: block!important;
+    display: block !important;
 }
 
 .animate-show.ng-hide {
