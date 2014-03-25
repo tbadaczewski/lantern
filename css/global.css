@@ -505,7 +505,7 @@ nav > span[class^='icon-'] {
 }
 
 #station-details {
-	position: absolute;
+	position: fixed;
 	z-index: 15;
 	bottom: 0;
 	left: 0;
