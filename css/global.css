@@ -521,9 +521,7 @@ nav > span[class^='icon-'] {
 	margin-top: 0;
 }
 
-#station-details.show, #station-details.ng-show {
-	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	transition: transform 500ms ease-in-out;
+#station-details.show {
 	-webkit-transform: translate3d(0,-40px,0);
 	transform: translate3d(0,-40px,0);
 }
