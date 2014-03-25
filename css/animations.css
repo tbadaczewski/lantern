@@ -2,31 +2,32 @@
 .scale, .slide, .overlay {
 	display: block;
 	width: 100%;
+	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
 	-webkit-transform: translate3d(0,0,0);
+	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 }
 
 /* Scale */
 .scale.ng-enter {	
-	-webkit-animation: scaleDown .7s ease both;
+	-webkit-animation: scaleDownCenter .4s ease-in both;
+	z-index: 1;
 }
 
 .scale.ng-enter-active {
-	-webkit-animation: scaleUp .7s ease both;
+	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
 .scale.ng-leave {
-	-webkit-animation: scaleUp .7s ease both;
+	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
 .scale.ng-leave-active {
-	-webkit-animation: scaleDown .7s ease both;
+	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
 
 @-webkit-keyframes scaleDown {
