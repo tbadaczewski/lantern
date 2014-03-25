@@ -31,7 +31,7 @@
 
 /* Fade */
 .fade {
-	-webkit-transition: opacity linear 0.5s;
+	-webkit-transition: opacity linear .2s;
 }
  
 .fade.ng-hide-add, .fade.ng-hide-remove {
