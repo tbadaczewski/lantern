@@ -572,7 +572,7 @@ iframe[id*="twitter-widget-"] {
 	background: #bbb;
 }
 
-#ng-modal {
+.ng-modal {
 	position: fixed;
 	z-index: 100;
 	top: 0;
