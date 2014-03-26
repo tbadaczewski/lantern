@@ -131,7 +131,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();
+			$scope.hideModal();
 			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
@@ -159,7 +159,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			}
 
 			$scope.stationid = id;
-			$scope.toggleModal();
+			$scope.showModal();
 		};
 
 		$scope.getDirections = function(url) {
