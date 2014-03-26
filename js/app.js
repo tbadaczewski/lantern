@@ -294,21 +294,12 @@ lanternApp.directive('modaldialog', function($rootScope) {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<div class='ng-modal fade' ng-show='show'><div class='ng-modal-overlay'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
+        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
             scope.show = false;
 
             if (attrs.status) {
                 scope.status = attrs.status;
-            }
-
-            scope.hideModal = function () {
-                scope.show = false;
-            }
-
-            scope.showModal = function () {
-                document.body.appendChild(element[0]);
-                scope.show = true;
             }
 
             scope.toggleModal = function() {

@@ -28,17 +28,3 @@
 @-webkit-keyframes scaleUpCenter {
 	from { opacity: 0; -webkit-transform: scale(.7); }
 }
-
-/* Fade */
-.fade {
-	opacity: 1;
-	-webkit-transition: opacity linear .2s;
-}
- 
-.fade.ng-hide-add, .fade.ng-hide-remove {
-	display: block !important;
-}
- 
-.fade.ng-hide {
-	opacity: 0;
-}

@@ -127,11 +127,11 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     	});
 
    		$scope.tagCancel = function() {  			
-			$scope.hideModal();
+			$scope.toggleModal();
 		};
 
 		$scope.tagStation = function(id, status) {
-			$scope.hideModal();
+			$scope.toggleModal();
 			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
@@ -159,7 +159,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			}
 
 			$scope.stationid = id;
-			$scope.showModal();
+			$scope.toggleModal();
 		};
 
 		$scope.getDirections = function(url) {
@@ -220,7 +220,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
    		$scope.tagCancel = function() {  			
-			$scope.hideModal();
+			$scope.toggleModal();
 		}
 
 		$scope.tagStation = function(id, status) {
