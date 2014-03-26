@@ -304,19 +304,17 @@ lanternApp.directive('modaldialog', function($rootScope, $timeout) {
 
             scope.hideModal = function () {
                 scope.show = false;
-                alert(scope.show);
+                alert("Cancel: " + scope.show);
             }
 
             scope.toggleModal = function() {
-                alert(scope.show);
-
                 if(scope.show === false) {                    
                     //document.body.appendChild(element[0]);
                     scope.show = true;
-                    alert(scope.show)
+                    alert("Open: " + scope.show)
                 } else {
                     scope.show = false;
-
+                    alert("Close: " + scope.show);
                     //$timeout(function() {
                         //element.remove();                        
                     //}, 1000);
