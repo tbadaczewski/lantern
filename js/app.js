@@ -294,7 +294,7 @@ lanternApp.directive('modaldialog', function($rootScope) {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
+        template: "<div id='ng-modal' class='fade' ng-show='show'><div class='ng-modal-overlay'></div><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
             scope.show = false;
 
@@ -304,25 +304,19 @@ lanternApp.directive('modaldialog', function($rootScope) {
 
             scope.hideModal = function () {
                 scope.show = false;
-                alert("Cancel: " + scope.show);
             }
 
             scope.showModal = function () {
+                document.body.appendChild(element[0]);
                 scope.show = true;
-                alert("Tag: " + scope.show);
             }
 
             scope.toggleModal = function() {
                 if(scope.show === false) {                    
-                    //document.body.appendChild(element[0]);
+                    document.body.appendChild(element[0]);
                     scope.show = true;
-                    alert("Open: " + scope.show)
                 } else {
                     scope.show = false;
-                    alert("Close: " + scope.show);
-                    //$timeout(function() {
-                        //element.remove();                        
-                    //}, 1000);
                 }
             }
         }
