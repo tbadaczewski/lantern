@@ -16,19 +16,19 @@
 
 /* Scale */
 .scale.ng-enter {	
-	-webkit-animation: .4s scaleUpCenter;
+	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
+/*
 .scale.ng-leave {
-	-webkit-animation: .4s scaleDownCenter;
+	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
+*/
 
 @-webkit-keyframes scaleDownCenter {
-	from { opacity: 1; -webkit-transform: scale(1); }
 	to { opacity: 0; -webkit-transform: scale(.7); }
 }
 
 @-webkit-keyframes scaleUpCenter {
 	from { opacity: 0; -webkit-transform: scale(.7); }
-	to { opacity: 1; -webkit-transform: scale(1); }
 }
