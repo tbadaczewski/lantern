@@ -12,7 +12,6 @@
 	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
-	opacity: 1;
 }
 
 /* Scale */
@@ -25,9 +24,11 @@
 }
 
 @-webkit-keyframes scaleDownCenter {
+	from { opacity: 1; -webkit-transform: scale(1); }
 	to { opacity: 0; -webkit-transform: scale(.7); }
 }
 
 @-webkit-keyframes scaleUpCenter {
 	from { opacity: 0; -webkit-transform: scale(.7); }
+	to { opacity: 1; -webkit-transform: scale(1); }
 }
