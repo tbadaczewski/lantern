@@ -11,24 +11,27 @@
 	-webkit-overflow-scrolling: touch;
 	-webkit-perspective: 1000;
 	-webkit-transform-style: flat;
+	-webkit-transition: all .4s ease-in-out;
 	overflow: auto;
 }
 
 /* Scale */
 .scale.ng-enter {
-  -webkit-animation: enter_sequence .4s ease-in;
-}
+  	-webkit-transform: scale(.7);
+  	opacity: 0;
+} /* starting animations for enter */
+
+.scale.ng-enter-active {
+  	-webkit-transform: scale(1);
+  	opacity: 1;
+} /* terminal animations for enter */
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence .3s ease-in;
-}
+  	-webkit-transform: scale(1);
+  	opacity: 1;
+} /* starting animations for leave */
 
-@-webkit-keyframes enter_sequence {
-  from { -webkit-transform: scale(.7); opacity: 0; }
-  to { -webkit-transform: scale(1); opacity: 1; }
-}
-
-@-webkit-keyframes leave_sequence {
-  from { -webkit-transform: scale(1); opacity: 1; }
-  to { -webkit-transform: scale(.7); opacity: 0; }
-}
+.scale.ng-leave-active {
+  	-webkit-transform: scale(.7);
+  	opacity: 0;
+} /* terminal animations for leave */
