@@ -6,21 +6,19 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	/*
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
-	*/
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 }
 
 /* Scale */
 .scale.ng-enter {
-  -webkit-animation: enter_sequence 0.5s linear;
+  -webkit-animation: enter_sequence 0.4s ease-in both;
 }
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence 0.5s linear;
+  -webkit-animation: leave_sequence 0.4s ease-in both;
 }
 
 @-webkit-keyframes enter_sequence {
