@@ -452,14 +452,15 @@ nav > span[class^='icon-'] {
 	vertical-align: top;
 	margin: 0.5em 0;
 	color: #fff;
+	font-size: 0.8em;
 }
 
 .arrow-list li:before {
 	position: absolute;
 	left: 0;
-	top: 6px;
+	top: 3px;
 	font-family: 'icomoon';
-	font-size: 12px;
+	font-size: inherit;
 	content: "\e603";
 	color: #703e11;
 }
