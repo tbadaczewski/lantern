@@ -313,7 +313,6 @@ lanternApp.directive('modaldialog', function($rootScope) {
                     document.body.insertBefore(element[0], document.body.firstChild);
                     scope.show = true;
                 } else {
-                    element[0].remove();
                     scope.show = false;
                 }
             }
