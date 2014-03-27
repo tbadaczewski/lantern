@@ -204,10 +204,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                         scope.prev.setIcon(normal);
                     }
-                });
-
-                scope.init();
-                alert(sc;ope.markers);
+                });                
             });
 
             scope.init = function () {
@@ -218,6 +215,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
+
+                alert(scope.markers.length);
             }
 
             scope.addMarkers = function (markers) {
@@ -289,6 +288,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                     alert("Watch");
                 }
             }, true);
+
+            scope.init();
         }
     };
 });
