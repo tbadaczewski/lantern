@@ -82,7 +82,7 @@ button.inline, .button.inline {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	z-index: 5;
+	z-index: 20;
 	height: 40px;
 	width: 100%;
 	padding: 0 1em;
@@ -110,8 +110,18 @@ button.inline, .button.inline {
 }
 
 #main, #station-list, #station-map, #outage-list {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: auto;	
 	padding: 145px 1em 50px 1em;
 	background-color: #c7c7c7;
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-backface-visibility: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 
 #station-list, #outage-list {
@@ -441,6 +451,7 @@ nav > span[class^='icon-'] {
 	padding-left: 20px;
 	vertical-align: top;
 	margin: 0.5em 0;
+	color: #fff;
 }
 
 .arrow-list li:before {

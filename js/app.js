@@ -175,6 +175,7 @@ lanternApp.directive('googlemap', function($rootScope) {
         replace: true,
         template: '<div></div>',
         link: function(scope, element, attrs) {
+            var intialized = false;
             var prev = null;
             var map = null;
             var mapmarkers = [];
@@ -206,7 +207,10 @@ lanternApp.directive('googlemap', function($rootScope) {
                     }
                 });
 
-                scope.init();
+                if(!intialized) {
+                    alert("Initialized")
+                    scope.init();
+                }
             });
 
             scope.init = function () {
@@ -217,6 +221,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
+                intialized = true;
             }
 
             scope.addMarkers = function (markers) {
@@ -282,8 +287,11 @@ lanternApp.directive('googlemap', function($rootScope) {
                 map.fitBounds(bounds);
             }
 
-            scope.$watch('markers', function() {                
-                scope.init();
+            scope.$watch('markers', function(newValue, oldValue) {
+                if (newValue !== oldValue) {               
+                    scope.init();
+                    alert("Watch");
+                }
             });
         }
     };

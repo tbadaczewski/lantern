@@ -17,7 +17,13 @@
         <div class="inner">
             <br />
             <ul class="arrow-list">
-                <li><a href="#" target="_blank">About Lantern</a></li>
+                <li>DOE will make all reasonable attempts to keep this App bug free and up-to-date. However, this App and all information, content, and materials included on or otherwise made available to you through this App are provided by DOE on an "as is" and "as available" basis. DOE makes no representations or warranties of any kind express or implied, as to the operation of this site or the information, content, or materials included on or otherwise made available to you through this App. You expressly agree that your use of this site is at your own risk. To the full extent permissible, by applicable Federal law, DOE disclaim all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose. DOE does not warrant that this App, information, content, or materials included on or otherwise made available to you through this App are free of viruses or other harmful components. DOE will not be liable for any damages of any kind arising from the use of this App from any information, content, or materials, included on or otherwise made available to you through this App, including, but not limited to direct, indirect, incidental, punitive, and consequential damages.</li>
+                <li>DOE does not see, collect, or store any personal data you enter into the App. Any and all information you enter into the App is stored on your device and not on DOE’s website or server. As such, DOE is not responsible for any damages resulting from the loss or theft of that information.</li>
+                <li>The App only transmits photos/texts uploaded by the user, along with geospatial coordinates; the App does not transmit any personal information (i.e., phone number, user’s name) associated with your device.</li>
+                <li>DOE does use Google Maps (DOE does not endorse any non-Federal government entities or products) on this App. While Google has advised DOE that they do not collect any personal information, they do collect the number of times a map is accessed via the mapping feature on the DOE App, This information is not shared with DOE. DOE is not responsible for any information collected by Google.</li>
+                <li>While DOE does not charge for the use of this App normal carrier data fees may apply. Please consult your carrier to discuss any charges related to the use of this App.</li>
+                <li>DOE is a Federal Government entity and as such does not endorse any non-Federal US Government entities. You may not use this App or any of the information in this App to imply that DOE endorse you or your organization.</li>
+                <li>This App should not be used to contact DOE during an emergency. If you are in need of emergency assistance please contact 9-1-1.</li>
             </ul>            
         </div>        
     </div>
@@ -38,7 +44,7 @@
         <span>{{navtext}}</span>
         <a id="btn-type=" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
     </nav> 
-    <div id="{{id}}" ng-view class="scale"></div>
+    <div id="{{id}}" ng-view></div>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>

@@ -102,7 +102,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 		$rootScope.backstate = "";
 		$rootScope.navstate = "hidden";
 		$scope.id = "main";
-		$scope.animate = "scale"
 		$scope.show = false;
 		$scope.progressShown = false;
     }
@@ -132,7 +131,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			//$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
@@ -173,8 +172,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-map";
-		$scope.id = "station-list";
-		$scope.animate = "scale";		
+		$scope.id = "station-list";	
 		$scope.saddr = encodeURI($rootScope.address);
     }
 ]);
@@ -225,7 +223,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.tagStation = function(id, status) {
 			$scope.toggleModal();			
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+			//$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 			
 			if ($scope.status == "open") {
 				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
@@ -276,7 +274,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-list";
 		$scope.id = "station-map";
-		$scope.animate = "scale";
     }
 ]);
 
@@ -314,7 +311,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.navtarget = "outage-map";
 		$scope.id = "outage-list";
-		$scope.animate = "scale"
     }
 ]);
 
@@ -330,7 +326,6 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
 		$rootScope.navclass = "camera";
 		$rootScope.navtarget = "downed-powerlines";
 		$scope.id = "downed-powerlines";
-		$scope.animate = "scale"
 		$scope.progressShown = false;
     }
 ]);
