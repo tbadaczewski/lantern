@@ -17,7 +17,7 @@
 .scale.ng-enter {
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
-
+/*
 .scale.ng-enter.ng-enter-active {
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
@@ -25,7 +25,7 @@
 .scale.ng-leave.ng-leave-active {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
-
+*/
 .scale.ng-leave {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
