@@ -13,26 +13,17 @@
 }
 
 /* Scale */
-.scale.ng-enter, .scale.ng-leave {
-	-webkit-transition: .4s linear all;
+.scale.ng-enter {
+	-webkit-animation: enter_sequence 1s linear;
+	animation: enter_sequence 1s linear;
 }
 
-.scale.ng-enter {
-  	-webkit-transform: scale(.7);
-  	opacity: 0;
-} /* starting animations for enter */
+@-webkit-keyframes enter_sequence {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
 
-.scale.ng-enter-active {
-  	-webkit-transform: scale(1);
-  	opacity: 1;
-} /* terminal animations for enter */
-
-.scale.ng-leave {
-  	-webkit-transform: scale(1);
-  	opacity: 1;
-} /* starting animations for leave */
-
-.scale.ng-leave-active {
-  	-webkit-transform: scale(.7);
-  	opacity: 0;
-} /* terminal animations for leave */
+@keyframes enter_sequence {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
