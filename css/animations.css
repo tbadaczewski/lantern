@@ -20,7 +20,7 @@
 }
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence .3s linear;
+  -webkit-animation: leave_sequence .3s ease-in;
 }
 
 @-webkit-keyframes enter_sequence {
