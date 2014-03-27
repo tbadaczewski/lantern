@@ -9,13 +9,14 @@
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
-	-webkit-perspective: 1000;
-	-webkit-transform-style: flat;
-	-webkit-transition: all .4s ease-in-out;
 	overflow: auto;
 }
 
 /* Scale */
+.scale.ng-enter, .scale.ng-leave {
+	-webkit-transition: .4s linear all;
+}
+
 .scale.ng-enter {
   	-webkit-transform: scale(.7);
   	opacity: 0;
