@@ -283,11 +283,10 @@ lanternApp.directive('googlemap', function($rootScope) {
             }
 
             scope.$watch('markers', function(newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    alert("watch");
+                //if (newValue !== oldValue) {
                     scope.init();
-                }
-            });
+                //}
+            }, true);
         }
     };
 });
