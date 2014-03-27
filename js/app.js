@@ -220,7 +220,6 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
-                intialized = true;
             }
 
             scope.addMarkers = function (markers) {
@@ -284,6 +283,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 });
 
                 map.fitBounds(bounds);
+                intialized = true;
             }
 
             scope.$watch('markers', function(newValue, oldValue) {
