@@ -280,16 +280,19 @@ lanternApp.directive('googlemap', function($rootScope) {
                 });
 
                 map.fitBounds(bounds);
+
+                /*
+                scope.$watch('markers', function(newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        scope.init();
+                        alert("Watch");
+                    }
+                });
+                */
             }
 
-            scope.$watch('markers', function(newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    scope.init();
-                    alert("Watch");
-                }
-            });
-
             scope.init();
+            alert("Loaded");
         }
     };
 });
