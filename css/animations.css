@@ -1,12 +1,11 @@
 /* Transitions */
-.scale {
+.scale, .slide, .overlay {
 	display: block;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
-	-webkit-transition: all 0.4s ease-in-out;
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
@@ -14,19 +13,18 @@
 }
 
 /* Scale */
-.scale.ng-enter {	
-	-webkit-transform: scale(.7);
-	opacity: 0;
+.scale.ng-enter, .scale.ng-enter-active {	
+	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
-.scale.ng-enter.ng-enter-active {	
-	-webkit-transform: scale(1);
-	opacity: 1;
+.scale.ng-leave, .scale.ng-leave-active {
+	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
 
-
-.scale.ng-leave.ng-leave-active {	
-	-webkit-transform: scale(.7);
-	opacity: 0;
+@-webkit-keyframes scaleDownCenter {
+	to { opacity: 0; -webkit-transform: scale(.7); }
 }
 
+@-webkit-keyframes scaleUpCenter {
+	from { opacity: 0; -webkit-transform: scale(.7); }
+}
