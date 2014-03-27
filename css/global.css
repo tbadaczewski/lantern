@@ -378,7 +378,7 @@ nav > span[class^='icon-'] {
 }
 
 .item.list {
-	background: #fff;
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
 	cursor: pointer;
 	padding: 1em;
 	clear: both;
@@ -397,7 +397,6 @@ nav > span[class^='icon-'] {
 	position: relative;
 	display: block;
 	background: #fff;
-	border-top: solid 1px #c7c7c7;
 	font-size: 75%;
 	clear: both;
 }
@@ -407,8 +406,7 @@ nav > span[class^='icon-'] {
 }
 
 .item-options a {
-	padding: 1em 0;	
-	border-left: none;
+	padding: 1em 0;
 	display: inline-block;
 	color: #434a4f;
 }
@@ -419,14 +417,13 @@ nav > span[class^='icon-'] {
 	width: 38%;
 	margin-left: 0;
 	margin-right: -100em;
-	border-left: none;
 	display: block;
 }
 
 .item-options > div + div {
 	width: 24%;
 	margin-left: 38%;
-	border-left: solid 1px #c7c7c7;	
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-y left top;
 }
 
 .item-options > div + div + div {
