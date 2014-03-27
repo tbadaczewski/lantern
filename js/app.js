@@ -309,10 +309,11 @@ lanternApp.directive('modaldialog', function($rootScope) {
             }
 
             scope.toggleModal = function() {
-                if(scope.show === false) {                    
-                    document.body.appendChild(element[0]);
+                if(scope.show === false) {
+                    document.body.insertBefore(element[0], document.body.firstChild);
                     scope.show = true;
                 } else {
+                    element[0].remove();
                     scope.show = false;
                 }
             }
