@@ -23,10 +23,12 @@
 
 @-webkit-keyframes enter_sequence {
   from { -webkit-transform: scale(.7); opacity: 0; }
-  to { -webkit-transform: scale(1); opacity: 1; }
+  99% { -webkit-transform: scale(1); opacity: 1; }
+  to {}
 }
 
 @-webkit-keyframes leave_sequence {
   from { -webkit-transform: scale(1); opacity: 1; }
-  to { -webkit-transform: scale(.7); opacity: 0; }
+  99% { -webkit-transform: scale(.7); opacity: 0; }
+  to {}
 }

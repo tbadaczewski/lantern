@@ -282,11 +282,9 @@ lanternApp.directive('googlemap', function($rootScope) {
                 map.fitBounds(bounds);
             }
 
-            /*
             scope.$watch('markers', function() {                
                 scope.init();
             });
-            */
         }
     };
 });
