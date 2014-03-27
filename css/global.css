@@ -609,6 +609,7 @@ iframe[id*="twitter-widget-"] {
 }
 
 .ng-modal-dialog-content .description {
+	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
 	padding: 1em 1em 0 1em;
 }
 
