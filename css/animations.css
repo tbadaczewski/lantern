@@ -6,35 +6,19 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	/*
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
-	*/
 	overflow: auto;
 }
 
 /* Scale */
-/*
-.scale.ng-enter, {	
-	-webkit-transform: scale(.5);
-}
-
-.scale.ng-enter.ng-enter-active {	
-	-webkit-transform: scale(.5);
-}
-
-.scale.ng-leave.ng-leave-active {	
-	-webkit-transform: scale(.5);
-}
-*/
-
 .scale.ng-enter {
-  -webkit-animation: enter_sequence 0.5s linear; /* Safari/Chrome */
+  -webkit-animation: enter_sequence 0.5s linear;
 }
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence 0.5s linear; /* Safari/Chrome */
+  -webkit-animation: leave_sequence 0.5s linear;
 }
 
 @-webkit-keyframes enter_sequence {
