@@ -16,11 +16,11 @@
 
 /* Scale */
 .scale.ng-enter {	
-	-webkit-animation: scaleUpCenter .4s ease-out both;
+	-webkit-animation: .4s scaleUpCenter;
 }
 
 .scale.ng-leave {
-	-webkit-animation: scaleDownCenter .4s ease-in both;
+	-webkit-animation: .4s scaleDownCenter;
 }
 
 @-webkit-keyframes scaleDownCenter {
