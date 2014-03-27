@@ -9,18 +9,16 @@
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-overflow-scrolling: touch;
-	-webkit-perspective: 1000;
-	-webkit-transform-style: flat;
 	overflow: auto;
 }
 
 /* Scale */
 .scale.ng-enter {
-  -webkit-animation: enter_sequence 500ms ease-in-out;
+  -webkit-animation: enter_sequence 500ms linear;
 }
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence 500ms ease-in-out;
+  -webkit-animation: leave_sequence 400ms linear;
 }
 
 @-webkit-keyframes enter_sequence {
