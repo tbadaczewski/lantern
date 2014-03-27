@@ -14,18 +14,10 @@
 
 /* Scale */
 .scale.ng-enter {	
-	-webkit-animation: scaleDownCenter .4s ease-out both;
-}
-
-.scale.ng-enter-active {	
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
 .scale.ng-leave {
-	-webkit-animation: scaleUpCenter .4s ease-in both;
-}
-
-.scale.ng-leave-active {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
 
