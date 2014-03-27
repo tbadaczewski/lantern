@@ -19,11 +19,9 @@
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
 
-/*
-.scale.ng-leave {
+.scale.ng-leave, .scale.ng-leave-active {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
-*/
 
 @-webkit-keyframes scaleDownCenter {
 	to { opacity: 0; -webkit-transform: scale(.7); }
