@@ -16,11 +16,11 @@
 
 /* Scale */
 .scale.ng-enter {
-  -webkit-animation: enter_sequence .4s linear;
+  -webkit-animation: enter_sequence .4s ease-in;
 }
 
 .scale.ng-leave {
-  -webkit-animation: leave_sequence .4s linear;
+  -webkit-animation: leave_sequence .3s linear;
 }
 
 @-webkit-keyframes enter_sequence {
