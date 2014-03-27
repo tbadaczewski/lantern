@@ -581,7 +581,7 @@ iframe[id*="twitter-widget-"] {
 }
 
 .ng-modal {
-	position: fixed;
+	position: absolute;
 	z-index: 100;
 	top: 0;
 	left: 0;
