@@ -6,6 +6,7 @@
 	text-decoration: none;
 	-webkit-box-sizing: border-box;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
 }
 
 input, textarea, button {
