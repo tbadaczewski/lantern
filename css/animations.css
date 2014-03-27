@@ -1,5 +1,5 @@
-/* Transitions */
-.scale {
+/* Scale */
+.scale.ng-enter, .scale.ng-leave {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -13,8 +13,21 @@
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
 }
+ 
+.scale.ng-enter {
+	-webkit-animation: scaleUpCenter .4s ease-out both;
+}
 
-/* Scale */
+.scale.ng-enter.ng-enter-active {
+	-webkit-animation: scaleUpCenter .4s ease-out both;
+}
+
+.scale.ng-leave.ng-leave-active {
+	-webkit-animation: scaleDownCenter .4s ease-in both;
+}
+
+
+/*
 .scale.ng-enter {	
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
@@ -22,6 +35,7 @@
 .scale.ng-leave, .scale.ng-leave-active {
 	-webkit-animation: scaleDownCenter .4s ease-in both;
 }
+*/
 
 @-webkit-keyframes scaleDownCenter {
 	to { opacity: 0; -webkit-transform: scale(.7); }
