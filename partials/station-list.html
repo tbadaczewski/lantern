@@ -21,7 +21,7 @@
 		<p>Mark this station as currently {{status == "closed" ? "open or operational" : "closed or unoperational"}}.</p>
 	</div>
     <div class="item-options clearfix">
-		<div><a href="" ng-click="tagCancel()">Cancel</a></div>
+		<div><a href="" ng-click="tagCancel($event)">Cancel</a></div>
     	<div><a href="" ng-click="tagStation(stationid, status)"><span class="icon-tag" aria-hidden="true"></span> Tag {{status == "closed" ? "Open" : "Closed" }}</a></div>
     </div>	
 </modaldialog>
