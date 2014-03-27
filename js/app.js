@@ -207,6 +207,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 });
 
                 scope.init();
+                alert(sc;ope.markers);
             });
 
             scope.init = function () {
@@ -283,10 +284,10 @@ lanternApp.directive('googlemap', function($rootScope) {
             }
 
             scope.$watch('markers', function(newValue, oldValue) {
-                //if (newValue !== oldValue) {
+                if (newValue !== oldValue) {
                     scope.init();
                     alert("Watch");
-                //}
+                }
             }, true);
         }
     };
