@@ -13,6 +13,7 @@
 }
 
 /* Scale */
+/*
 .scale.ng-enter, .scale.ng-enter-active {	
 	-webkit-animation: scaleUpCenter .4s ease-out both;
 }
@@ -28,3 +29,4 @@
 @-webkit-keyframes scaleUpCenter {
 	from { opacity: 0; -webkit-transform: scale(.7); }
 }
+*/
