@@ -484,12 +484,11 @@ nav > span[class^='icon-'] {
 #station-details {
 	position: fixed;
 	z-index: 15;
-	bottom: -100%;
+	top: 100%;
 	left: 0;
 	background: #fff;
 	width: 100%;
-	-webkit-transform: translate3d(0,0,0);
-	-webkit-transition: bottom 500ms ease-in-out;
+	-webkit-transition: -webkit-transform 500ms ease-in-out;
 }
 
 #station-details .item {
@@ -497,7 +496,7 @@ nav > span[class^='icon-'] {
 }
 
 #station-details.show {
-	bottom: 40px;
+	-webkit-transform: translate3d(0,-170px,0);
 }
 
 iframe[id*="twitter-widget-"] { 
