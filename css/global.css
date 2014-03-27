@@ -115,6 +115,7 @@ button.inline, .button.inline {
 }
 
 #station-list, #outage-list {
+	background: red;
 	padding: 125px 1em 50px 1em;
 }
 
