@@ -210,8 +210,6 @@ lanternApp.directive('googlemap', function($rootScope) {
             });
 
             scope.init = function () {
-                alert(mapmarkers.length);
-                
                 for (var i = 0; i < mapmarkers.length; i++) {
                     mapmarkers[i].setMap(null);
                 }
@@ -284,9 +282,11 @@ lanternApp.directive('googlemap', function($rootScope) {
                 map.fitBounds(bounds);
             }
 
+            /*
             scope.$watch('markers', function() {                
                 scope.init();
             });
+            */
         }
     };
 });
