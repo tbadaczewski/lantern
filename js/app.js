@@ -216,7 +216,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                 mapmarkers = [];
 
-                //scope.addMarkers(scope.markers);
+                scope.addMarkers(scope.markers);
             }
 
             scope.addMarkers = function (markers) {
