@@ -190,6 +190,8 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
+            alert("I'm Here");
+
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
