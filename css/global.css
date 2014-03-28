@@ -114,15 +114,13 @@ button.inline, .button.inline {
 	display: block;
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: relative;
 	top: 0;
 	left: 0;
 	overflow: auto;	
 	padding: 145px 1em 50px 1em;
 	background-color: #c7c7c7;
-	-webkit-transform: translate3d(0,0,0);
-	-webkit-backface-visibility: hidden;
-	/*-webkit-overflow-scrolling: touch;*/
+	-webkit-overflow-scrolling: touch;
 }
 
 #station-list, #outage-list {
