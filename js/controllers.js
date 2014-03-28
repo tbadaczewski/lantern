@@ -125,7 +125,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
         	$scope.stations = $rootScope.stations;
     	});
 
-   		$scope.tagCancel = function() {
+   		$scope.tagCancel = function($event) {
+   			$event.preventDefault();
+   			$event.stopPropagation();
 			$scope.toggleModal();
 		};
 
