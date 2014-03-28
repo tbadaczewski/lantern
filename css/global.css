@@ -594,6 +594,11 @@ iframe[id*="twitter-widget-"] {
 	-webkit-transform: translateZ(0);
 }
 
+.ng-modal + #station-list {
+	overflow: hidden;
+	-webkit-overflow-scrolling: default;
+}
+
 .ng-modal-dialog {
 	position: absolute;
 	z-index: 101;
