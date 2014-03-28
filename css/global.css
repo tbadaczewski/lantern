@@ -119,10 +119,8 @@ button.inline, .button.inline {
 	left: 0;
 	padding: 145px 1em 50px 1em;
 	background-color: #c7c7c7;
-	/*
 	overflow: auto;	
 	-webkit-overflow-scrolling: touch;
-	*/
 }
 
 #station-list, #outage-list {
