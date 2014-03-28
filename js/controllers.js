@@ -162,7 +162,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$scope.getDirections = function(url) {
-			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
+			//window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
 		
 		$rootScope.typestate = true;
