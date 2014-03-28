@@ -13,10 +13,12 @@
     <div ng-repeat="station in stations">
     	<div class="item list">
 	        <h4><span class="circle {{station.operatingStatus}}"></span> {{station.station}}</h4>
-	        <div class="small clearfix">
+	        <!--
+	        <div class="small">
 	        	{{station.address}}<br />
 	        	{{station.city}}, {{station.region}} {{station.zip}}
 	    	</div>
+	    -->
     	</div>
 	    <div class="item-options clearfix">
     		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
