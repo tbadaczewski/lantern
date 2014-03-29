@@ -329,3 +329,11 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
 		$scope.progressShown = false;
     }
 ]);
+
+lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = "false";
+		$scope.id = "tips-guides";
+    }
+]);
