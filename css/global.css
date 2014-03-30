@@ -633,8 +633,8 @@ img#text-logo {
 }
 
 .tips iframe {
-	overflow: auto;	
-	-webkit-overflow-scrolling: touch;
+	overflow: auto !important;	
+	-webkit-overflow-scrolling: touch!important;
 }
 
 .tips button {
@@ -654,6 +654,7 @@ button#forward {
 
 .slide {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
+	bottom: 0;
 	display: block !important;
 }
  
