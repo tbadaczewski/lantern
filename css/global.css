@@ -129,9 +129,7 @@ button.inline, .button.inline {
 
 #tips-guides {
 	position: fixed;
-	/*top: 100%;*/
-	-webkit-transform-origin: 0 100% 0;
-	-webkit-transform: translate3d(0,100%,0);
+	top: 100%;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
@@ -654,7 +652,7 @@ button#forward {
 .slide {
 	/*top: 0 !important;*/
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	-webkit-transform: translate3d(0,0,0) !important;	
+	-webkit-transform: translate3d(0,-100%,0) !important;	
 	-webkit-background-visibility: hidden;
 }
  
@@ -670,7 +668,7 @@ button#forward {
 
 .slide.ng-leave.ng-leave-active {
 	/*top: 100% !important;*/
-	-webkit-transform: translate3d(0,100%,0) !important;
+	-webkit-transform: translate3d(0,0,0) !important;
 }
 
 
