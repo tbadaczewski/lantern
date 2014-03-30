@@ -651,7 +651,7 @@ button#forward {
 	right: 0;
 }
 
-.slide.ng-enter, .slide.ng-leave {
+.slide {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,0,0);
 }
