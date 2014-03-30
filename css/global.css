@@ -629,6 +629,8 @@ img#text-logo {
 	width: 100%;
 	height: 100%;
 	background: red;
+	overflow: auto;	
+	-webkit-overflow-scrolling: touch;
 }
 
 .tips iframe {
@@ -653,19 +655,21 @@ button#forward {
 
 .slide {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	display: none;
 }
  
 .slide.ng-enter {
 	-webkit-transform: translate3d(0,100%,0);
-	display: block;
 }
 
-.slide.ng-enter.ng-enter-active {
+.slide.ng-enter-active {
 	-webkit-transform: translate3d(0,0,0);
 }
 
-.slide.ng-leave.ng-leave-active {
+.slide.ng-leave {
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.slide.ng-leave-active {
 	-webkit-transform: translate3d(0,100%,0);
 }
 
