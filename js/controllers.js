@@ -101,6 +101,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 
 		$rootScope.backstate = "";
 		$rootScope.navstate = "hidden";
+		$rootScope.animate = "fixed";
 		$scope.id = "main";
 		$scope.show = false;
 		$scope.progressShown = false;
@@ -172,6 +173,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-map";
+		$rootScope.animate = "fixed";
 		$scope.id = "station-list";	
 		$scope.saddr = encodeURI($rootScope.address);
     }
@@ -273,25 +275,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtext = "OPEN GAS STATIONS";
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-list";
+		$rootScope.animate = "fixed";
 		$scope.id = "station-map";
     }
 ]);
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages',
     function ($scope, $rootScope, $http, loadoutages) {
-    	$scope.progressShown = true;
-
-		if($rootScope.outages == null) {
-	        $scope.init();
-		} else {
-			$scope.outages = $rootScope.outages;
-			$scope.progressShown = false;
-		}
-
-        $rootScope.$on('outagesUpdated', function() {
-        	$scope.init();
-    	});
-
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
 			window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
@@ -304,12 +294,28 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 	        });
 		}
 
+    	$scope.progressShown = true;
+
+    	console.log($rootScope.outages);
+
+		if($rootScope.outages == null) {
+	        $scope.init();
+		} else {
+			$scope.outages = $rootScope.outages;
+			$scope.progressShown = false;
+		}
+
+        $rootScope.$on('outagesUpdated', function() {
+        	$scope.init();
+    	});
+
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
 		$rootScope.navtext = "POWER OUTAGES";
 		$rootScope.navclass = "lightning";
 		$rootScope.navtarget = "outage-map";
+		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
     }
 ]);
@@ -325,6 +331,7 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
 		$rootScope.navtext = "DOWNED POWERLINES";
 		$rootScope.navclass = "camera";
 		$rootScope.navtarget = "downed-powerlines";
+		$rootScope.animate = "fixed";
 		$scope.id = "downed-powerlines";
 		$scope.progressShown = false;
     }
@@ -332,8 +339,9 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-		$rootScope.backstate = "visible";
+		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
 		$scope.id = "tips-guides";
     }
 ]);

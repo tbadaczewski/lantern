@@ -297,7 +297,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
 lanternApp.directive('modaldialog', function($rootScope) {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         replace: true,
         transclude: true,
         template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
@@ -314,6 +314,46 @@ lanternApp.directive('modaldialog', function($rootScope) {
                     scope.show = true;
                 } else {
                     scope.show = false;
+                }
+            }
+        }
+    };
+});
+
+lanternApp.directive('contentframe', function() {
+    return {
+        restrict: 'AE',
+        replace: true,
+        transclude: true,
+        scope: {
+            id: '@',
+            src: '@',
+            class: '@'
+        },
+        template: "<div id='{{id}}'><a href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe src='{{src}}' class='{{class}}'></iframe></div>",
+        link: function (scope, element, attrs) {
+            scope.index = 0;
+            scope.frame = element[0].childNodes[3];
+            scope.history = [scope.frame.contentWindow.location.pathname];
+
+            scope.frame.onload = function() {
+                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
+                    scope.history.push(this.contentWindow.location.pathname);
+                    scope.index++;
+                }
+            }
+
+            scope.back = function() {
+                if(scope.index > 1) {
+                    scope.index--;
+                    scope.frame.src = scope.history[scope.index];
+                }
+            }
+
+            scope.forward = function() {
+                if(scope.index < scope.history.length - 1) {
+                    scope.index++;
+                    scope.frame.src = scope.history[scope.index];
                 }
             }
         }

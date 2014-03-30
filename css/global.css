@@ -110,21 +110,29 @@ button.inline, .button.inline {
 	left: -1000em;
 }
 
-#main, #station-list, #station-map, #outage-list, #tips-guides {
+#main, #station-list, #station-map, #outage-list {
 	display: block;
 	width: 100%;
 	height: 100%;
-	position: relative;
+	position: absolute;
 	top: 0;
 	left: 0;
 	padding: 145px 1em 50px 1em;
-	background-color: #c7c7c7;
+	background: #c7c7c7;
 	overflow: auto;	
 	-webkit-overflow-scrolling: touch;
 }
 
-#station-list, #outage-list, #tips-guides {
+#station-list, #outage-list {
 	padding: 125px 1em 50px 1em;
+}
+
+#tips-guides {
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
 }
 
 #main {
@@ -208,14 +216,9 @@ nav > span[class^='icon-'] {
 	-webkit-overflow-scrolling: touch;
 }
 
-.no-transition {
+.no-animation {
 	-webkit-transition: none !important;
-	transition: none !important;
-}
-
-.no-transform {
 	-webkit-transform: none !important;
-	transform: none !important;
 }
 
 #search-bar {
@@ -626,4 +629,46 @@ img#text-logo {
 	width: 100%;
 	height: 100%;
 	background: red;
+}
+
+.tips iframe {
+	overflow: auto;	
+	-webkit-overflow-scrolling: touch;
+}
+
+.tips button {
+	position: absolute;
+	top: 70px;
+	width: 32px;
+	height: 32px;
+}
+
+button#back {
+	left: 0;
+}
+
+button#forward {
+	right: 0;
+}
+
+.slide.ng-enter, .slide.ng-leave {
+	-webkit-transition: -webkit-transform 500ms ease-in-out;
+	-webkit-transform: translate3d(0,0,0);
+}
+ 
+.slide.ng-enter {
+	-webkit-transform: translate3d(0,100%,0);
+}
+
+.slide.ng-enter.ng-enter-active {
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.slide.ng-leave.ng-leave-active {
+	-webkit-transform: translate3d(0,100%,0);
+}
+
+.fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
+	-webkit-transition: -webkit-transform 1s ease-in-out 1s;
+	-webkit-transform: translate3d(0,0,0);
 }
