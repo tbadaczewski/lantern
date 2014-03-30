@@ -133,12 +133,13 @@ button.inline, .button.inline {
 
 #tips-guides {
 	position: fixed;
-	/*top: 100%;*/
-	background: blue;
+	top: 100%;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
 	display: block;
+	background: blue;
+	-webkit-overflow-scrolling: touch;
 }
 
 nav, nav#nav-hidden {
@@ -644,12 +645,13 @@ button#back {
 button#forward {
 	right: 0;
 }
-/*
-.slide {
-	-webkit-transition: -webkit-transform: 500ms ease-in-out;
-	-webkit-transform: translate3d(0,-100%,0);
-}
 
+.slide {
+	-webkit-transition: -webkit-transform 500ms ease-in-out;
+	-webkit-transform: translate3d(0,-100%,0);	
+	-webkit-background-visibility: hidden;
+}
+ 
 .slide.ng-enter {
 	-webkit-transform: translate3d(0,100%,0);
 }
@@ -661,7 +663,7 @@ button#forward {
 .slide.ng-leave.ng-leave-active {
 	-webkit-transform: translate3d(0,0,0);
 }
-*/
+
 
 
 
