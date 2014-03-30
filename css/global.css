@@ -653,11 +653,12 @@ button#forward {
 
 .slide {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	-webkit-transform: translate3d(0,0,0);
+	display: none;
 }
  
 .slide.ng-enter {
 	-webkit-transform: translate3d(0,100%,0);
+	display: block;
 }
 
 .slide.ng-enter.ng-enter-active {
