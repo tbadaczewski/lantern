@@ -628,7 +628,7 @@ img#text-logo {
 	background: red;
 }
 
-iframe {
+iframe.tips {
 	overflow: auto !important;	
 	-webkit-overflow-scrolling: touch!important;
 }
