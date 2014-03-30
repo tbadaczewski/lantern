@@ -132,9 +132,7 @@ button.inline, .button.inline {
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
-	display: none;
-	overflow: hidden;
-	-webkit-overflow-scrolling: default;
+	display: block;
 	-webkit-background-visibility: hidden;
 }
 
@@ -651,11 +649,6 @@ button#forward {
 	right: 0;
 }
 
-.slide {
-	bottom: 0;
-	display: block !important;
-}
-
 .slide.ng-enter, .slide.ng-leave {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
 }
@@ -671,8 +664,6 @@ button#forward {
 .slide.ng-leave.ng-leave-active {
 	-webkit-transform: translate3d(0,100%,0);
 }
-
-
 
 
 
