@@ -143,6 +143,11 @@ button.inline, .button.inline {
 	-webkit-overflow-scrolling: touch;
 }
 
+#tipsguideframe {
+	overflow: auto;	
+	-webkit-overflow-scrolling: touch;
+}
+
 nav, nav#nav-hidden {
 	position: absolute;
 	z-index: 2;
