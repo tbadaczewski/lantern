@@ -337,7 +337,7 @@ lanternApp.directive('contentframe', function() {
             scope.history = [scope.frame.contentWindow.location.pathname];
 
             scope.frame.onload = function() {
-                this.height = this.contentWindow.document.body.offsetHeight + "px";
+                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
 
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
