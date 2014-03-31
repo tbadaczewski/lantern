@@ -330,7 +330,7 @@ lanternApp.directive('contentframe', function() {
             name: '@',
             src: '@'
         },
-        template: "<div style='width:100%;height:100%;display:block;'><a id='return' href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{name}}' src='{{src}}' width='100%' height='100%' ng-transclude></iframe></div>",
+        template: "<div id='tips-container'><a id='return' href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{name}}' src='{{src}}' width='100%' height='100%' ng-transclude></iframe></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0].childNodes[3];
@@ -343,16 +343,6 @@ lanternApp.directive('contentframe', function() {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;
                 }
-            }
-
-            element[0].parentNode.orientationchange = function() {
-                alert("Change");
-                //scope.frame.width = "100%";
-            }
-
-            element[0].parentNode.resize = function() {
-                alert("Resize");
-                //scope.frame.width = "100%";
             }
 
             scope.back = function() {

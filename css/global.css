@@ -665,6 +665,12 @@ button#forward {
 	right: 0;
 }
 
+#tips-container {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
 .slide {
 	-webkit-transition: -webkit-transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,-100%,0);	
