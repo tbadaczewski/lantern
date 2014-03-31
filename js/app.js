@@ -345,8 +345,8 @@ lanternApp.directive('contentframe', function() {
                 }
             }
 
-            scope.frame.onresize = function() {
-                this.width = "100%";
+            scope.frame.parentNode.onresize = function() {
+                scope.frame.width = "100%";
             }
 
             scope.back = function() {
