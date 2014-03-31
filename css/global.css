@@ -630,6 +630,7 @@ img#text-logo {
 }
 
 iframe {
+	position: absolute;
 	background: orange !important;
 }
 

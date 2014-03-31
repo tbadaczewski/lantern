@@ -296,8 +296,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
     	$scope.progressShown = true;
 
-    	console.log($rootScope.outages);
-
 		if($rootScope.outages == null) {
 	        $scope.init();
 		} else {

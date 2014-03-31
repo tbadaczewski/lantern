@@ -327,9 +327,11 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         scope: {
             id: '@',
-            src: '@'
+            src: '@',
+            width: '@',
+            height: '@'
         },
-        template: "<div id='{{id}}'><a href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{id}}' src='{{src}}' width='100%' height='100%'></iframe></div>",
+        template: "<div id='{{id}}'><a href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{id}}' src='{{src}}' width='{{width}}' height='{{height}}'></iframe></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0].childNodes[3];
