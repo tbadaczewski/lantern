@@ -665,8 +665,9 @@ button#forward {
 	right: 0;
 }
 
-#tips-guides {
-
+iframe {
+	width: 100%;
+	height: 100%;
 }
 
 .slide {
@@ -686,15 +687,6 @@ button#forward {
 .slide.ng-leave.ng-leave-active {
 	-webkit-transform: translate3d(0,0,0);
 }
-
-
-
-
-
-
-
-
-
 
 .fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
 	-webkit-transition: -webkit-transform 1s ease-in-out 1s;
