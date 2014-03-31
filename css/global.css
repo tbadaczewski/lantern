@@ -138,12 +138,7 @@ button.inline, .button.inline {
 	width: 100%;
 	height: 100%;
 	display: block;
-	background: blue;
-	overflow: auto;	
-	-webkit-overflow-scrolling: touch;
-}
-
-#tipsguideframe {
+	background: #fff;
 	overflow: auto;	
 	-webkit-overflow-scrolling: touch;
 }
@@ -629,18 +624,6 @@ img#text-logo {
 	float: left;
 }
 
-.tips {
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: #fff;
-}
-
-iframe {
-	background: orange !important;
-}
-
-
 button#back, button#forward, a#return {
 	position: absolute;
 	top: 0;
@@ -669,6 +652,7 @@ button#forward {
 	width: 100%;
 	height: 100%;
 	display: block;
+	background: #fff;
 }
 
 .slide {
