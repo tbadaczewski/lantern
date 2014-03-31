@@ -327,17 +327,18 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         scope: {
             id: '@',
-            src: '@',
-            width: '@',
-            height: '@'
+            name: '@',
+            src: '@'
         },
-        template: "<div id='{{id}}'><a href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{id}}' src='{{src}}' width='{{width}}' height='{{height}}'></iframe></div>",
+        template: "<div id='{{id}}'><a id='return' href='#/'>Main</a><button id='back' type='button' ng-click='back()'>Back</button><button id='forward' type='button' ng-click='forward()'>Forward</button><iframe id='{{id}}' name='{{name}}' src='{{src}}' width='100%' height='100%'></iframe></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0].childNodes[3];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
             scope.frame.onload = function() {
+                this.height = this.contentWindow.document.body.offsetHeight + "px";
+
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;

@@ -630,16 +630,24 @@ img#text-logo {
 }
 
 iframe {
-	position: absolute;
 	background: orange !important;
 }
 
 
-.tips button {
+button#back, button#forward, a#return {
 	position: absolute;
-	top: 70px;
+	top: 0;
 	width: 32px;
-	height: 32px;
+	height: auto;
+	display: inline-block;
+	z-index: 1;
+}
+
+a#return {
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	background: yellow;
 }
 
 button#back {
