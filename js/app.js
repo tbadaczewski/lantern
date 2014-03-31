@@ -345,12 +345,12 @@ lanternApp.directive('contentframe', function() {
                 }
             }
 
-            element[0].orientationchange = function() {
+            element[0].parentNode.orientationchange = function() {
                 alert("Change");
                 //scope.frame.width = "100%";
             }
 
-            element[0].resize = function() {
+            element[0].parentNode.resize = function() {
                 alert("Resize");
                 //scope.frame.width = "100%";
             }
