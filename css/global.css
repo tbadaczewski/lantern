@@ -267,28 +267,24 @@ nav > span[class^='icon-'] {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.icon-arrow2-left, .icon-arrow2-right {
+	color: #f18525;
+}
+
+#frame-nav a:link, #frame-nav a:visited, #frame-nav:hover {
+	color: #f18525;
+	font-size: 24px;
+}
+
 .arrow-back {
 	position: absolute;
-	left: -15px;
-	top: 0px;
-	width: 30px;
+	left: -26px;
+	top: 16px;
 	height: inherit;
 	z-index: 4;
 	background: transparent;
 	display: block;
-	text-align: left;
-}
-
-.arrow-back:before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	margin-top: -15px;
-	width: 0; 
-	height: 0; 
-	border-top: 15px solid transparent;
-	border-bottom: 15px solid transparent; 
-	border-right: 15px solid #f18525;	
+	font-size: 32px;
 }
 
 #btn-target, #btn-search, #btn-clear {
@@ -625,27 +621,11 @@ img#text-logo {
 }
 
 button#back, button#forward, a#return {
-	position: absolute;
+	position: relative;
 	top: 0;
 	width: 32px;
 	height: auto;
 	display: inline-block;
-	z-index: 3;
-}
-
-a#return {
-	left: 50%;
-	width: 200px;
-	margin-left: -100px;
-	background: yellow;
-}
-
-button#back {
-	left: 0;
-}
-
-button#forward {
-	right: 0;
 }
 
 #tips-container {
@@ -653,6 +633,14 @@ button#forward {
 	height: 100%;
 	display: block;
 	background: #fff;
+}
+
+#frame-nav {
+	position: fixed;
+	background: #000;
+	top: 0;
+	height: 44px;
+	width: 100%;
 }
 
 .slide {
