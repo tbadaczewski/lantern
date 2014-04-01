@@ -634,6 +634,7 @@ button#back, button#forward, a#return {
 	display: inline-block;
 }
 
+/*
 #tips-container {
 	position: absolute;
 	height: 100%;
@@ -642,16 +643,16 @@ button#back, button#forward, a#return {
 	background: #fff;
 	overflow: hidden;
 }
+*/
 
 #frame-nav {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 5;
 	background: #000;
-	top: 0;
 	height: 44px;
 	width: 100%;
+
 }
 
 #frame-content {
