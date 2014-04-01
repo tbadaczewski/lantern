@@ -272,7 +272,7 @@ nav > span[class^='icon-'] {
 	color: #f18525;
 }
 
-#frame-nav a:link, #frame-nav a:visited, #frame-nav:hover {
+#frame-nav a:link, #frame-nav a:visited, #frame-nav a:hover {
 	color: #f18525;
 	font-size: 24px;
 }
@@ -281,7 +281,6 @@ nav > span[class^='icon-'] {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	padding-top: 44px;
 }
 
 .arrow-back {
@@ -629,11 +628,7 @@ img#text-logo {
 }
 
 button#back, button#forward, a#return {
-	position: relative;
-	top: 0;
-	width: 32px;
-	height: auto;
-	display: inline-block;
+	display: inline;
 }
 
 #tips-container {
@@ -647,13 +642,36 @@ button#back, button#forward, a#return {
 	top: 0;
 	left: 0;
 	z-index: 1;
-	background: rgba(0,0,0,0.75);
-	height: 44px;
+	background: #3f3f3f;
+	padding: 1em;
 	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+
+#frame-nav #title {
+	color: #fff;
+	line-height: 2em;
+	text-transform: uppercase;
+}
+
+#frame-nav #return {
+	float: left;
+	display: inline-block;
+}
+
+#frame-nav #arrows {
+	float: right;
+	word-spacing: 3em;
+	display: inline-block;
+}
+
+#frame-nav #arrows a:first-child {
+	padding-right: 1em;
 }
 
 #frame-content {
-	padding-top: 44px;
+	padding-top: 4em;
 	width: inherit;
 	height: inherit;
 	overflow: auto;	

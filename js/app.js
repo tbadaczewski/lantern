@@ -327,9 +327,10 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         scope: {
             id: '@',
+            title: '@',
             src: '@'
         },
-        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><a href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
+        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0].childNodes[1].childNodes[0];
@@ -337,6 +338,7 @@ lanternApp.directive('contentframe', function() {
 
             scope.frame.onload = function() {
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                this.parentNode.scrollTop = 0;
 
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
