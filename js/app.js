@@ -65,9 +65,17 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
+lanternApp.factory('focuselement', [
+    function () {
+        return function ($id) {
+            document.getElementById($id).focus();
+        };
+    }
+]);
+
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
-        return function () {
+        return function ($type) {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: false}
             var onSuccess = function(position) {
@@ -168,6 +176,22 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         };
     }
 ]);
+
+lanternApp.directive('focusme', function($timeout) {
+    return {
+        link: function(scope, element, attrs) {
+            var current = scope.address;
+
+            scope.$watch('searchfocus', function(value) {
+                if (value == true) {
+                    $timeout(function() {
+                        element[0].focus();
+                    }, 0);
+                }
+            });
+        }
+    };
+});
 
 lanternApp.directive('googlemap', function($rootScope) {
     return {

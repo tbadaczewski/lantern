@@ -667,7 +667,7 @@ button#back, button#forward, a#return {
 }
 
 #frame-nav #arrows a:first-child {
-	padding-right: 1em;
+	padding-right: .5em;
 }
 
 #frame-content {
