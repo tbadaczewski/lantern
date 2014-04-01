@@ -638,12 +638,15 @@ button#back, button#forward, a#return {
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	display: block;
 	background: #fff;
 	overflow: hidden;
 }
 
 #frame-nav {
 	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 5;
 	background: #000;
 	top: 0;
@@ -653,7 +656,6 @@ button#back, button#forward, a#return {
 
 #frame-content {
 	background: #fff;
-	padding-top: 44px;
 	width: 100%;
 	height: 100%;
 	overflow: auto;	
