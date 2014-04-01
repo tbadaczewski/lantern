@@ -329,10 +329,10 @@ lanternApp.directive('contentframe', function() {
             id: '@',
             src: '@'
         },
-        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><a href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></div><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div>",
+        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><a href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
-            scope.frame = element[0].childNodes[1];
+            scope.frame = element[0].childNodes[1].childNodes[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
             scope.frame.onload = function() {
