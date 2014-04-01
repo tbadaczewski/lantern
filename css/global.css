@@ -644,7 +644,7 @@ button#back, button#forward, a#return {
 
 #frame-nav {
 	position: fixed;
-	z-index: 113;
+	z-index: 5;
 	background: #000;
 	top: 0;
 	height: 44px;
@@ -652,7 +652,6 @@ button#back, button#forward, a#return {
 }
 
 #frame-content {
-	position: absolute;
 	background: #fff;
 	padding-top: 44px;
 	width: 100%;
