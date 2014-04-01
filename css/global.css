@@ -276,6 +276,13 @@ nav > span[class^='icon-'] {
 	font-size: 24px;
 }
 
+#tipsguidesframe  {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	padding-top: 44px;
+}
+
 .arrow-back {
 	position: absolute;
 	left: -20px;
@@ -637,10 +644,18 @@ button#back, button#forward, a#return {
 
 #frame-nav {
 	position: fixed;
+	z-index: 113;
 	background: #000;
 	top: 0;
 	height: 44px;
 	width: 100%;
+}
+
+#contentframe {
+	position: absolute;
+	padding-top: 44px;
+	width: 100%;
+	height: 100%;
 }
 
 .slide {
