@@ -646,6 +646,7 @@ button#back, button#forward, a#return {
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: 1;
 	background: #000;
 	height: 44px;
 	width: 100%;
