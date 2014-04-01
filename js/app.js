@@ -181,11 +181,13 @@ lanternApp.directive('focusme', function($timeout) {
     return {
         link: function(scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
-                if (value == true) {
-                    $timeout(function() {
+                $timeout(function() {
+                    if (value == true) {
                         element[0].focus();
-                    }, 0);
-                }
+                    } else {
+                        element[0].blur();
+                    }
+                }, 0);
             });
         }
     };
