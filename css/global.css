@@ -647,12 +647,13 @@ button#back, button#forward, a#return {
 	top: 0;
 	left: 0;
 	z-index: 1;
-	background: #000;
+	background: rgba(0,0,0,0.75);
 	height: 44px;
 	width: 100%;
 }
 
 #frame-content {
+	padding-top: 44px;
 	width: inherit;
 	height: inherit;
 	overflow: auto;	
