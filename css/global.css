@@ -278,13 +278,13 @@ nav > span[class^='icon-'] {
 
 .arrow-back {
 	position: absolute;
-	left: -21px;
+	left: -20px;
 	top: 21px;
 	height: inherit;
 	z-index: 4;
 	background: transparent;
 	display: block;
-	font-size: 25px;
+	font-size: 24px;
 }
 
 #btn-target, #btn-search, #btn-clear {
