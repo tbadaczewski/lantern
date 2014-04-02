@@ -178,8 +178,7 @@ lanternApp.directive('focusme', function($timeout) {
                         if(document.activeElement != element[0]) {
                             try {
                                 element[0].focus();
-                                var blah = new SoftKeyboard();
-                                blah.show();
+                                SoftKeyboard.how();
                             }
                             catch (e) {
                                alert(e);
