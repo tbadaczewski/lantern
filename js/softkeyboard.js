@@ -29,7 +29,7 @@
     <meta name="msapplication-TileImage" content="/windows-tile.png" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="selected-link" value="repo_source" data-pjax-transient />
-    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="C7DF1564:1BC5:227F5C:533C1510" name="octolytics-dimension-request_id" /><meta content="565328" name="octolytics-actor-id" /><meta content="tbadaczewski" name="octolytics-actor-login" /><meta content="0bf6c431814152556a1e88f26bc66dde4044aec1c17e5dc0c76566705720b6e4" name="octolytics-actor-hash" />
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="C7DF1564:0240:13ABAEC:533C1F47" name="octolytics-dimension-request_id" /><meta content="565328" name="octolytics-actor-id" /><meta content="tbadaczewski" name="octolytics-actor-login" /><meta content="0bf6c431814152556a1e88f26bc66dde4044aec1c17e5dc0c76566705720b6e4" name="octolytics-actor-hash" />
     
 
     
@@ -691,7 +691,7 @@ softkeyboard.js to convert string to boolean">revertet return value in SoftKeybo
     </a>
 
     <ul class="site-footer-links">
-      <li>&copy; 2014 <span title="0.14474s from github-fe123-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+      <li>&copy; 2014 <span title="0.05939s from github-fe137-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
         <li><a href="/site/terms">Terms</a></li>
         <li><a href="/site/privacy">Privacy</a></li>
         <li><a href="/security">Security</a></li>
