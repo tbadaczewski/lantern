@@ -176,16 +176,16 @@ lanternApp.directive('focusme', function($timeout) {
                 $timeout(function() {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
-                            try {
-                                element[0].focus();
-                                SoftKeyboard.show();
-                            }
-                            catch (e) {
-                               alert(e);
-                            }                          
+                            element[0].focus();
+                            var keyboard = new SoftKeyboard();
+                            keyboard.show();                     
                         }
                     }
                 }, 500);
+            });
+
+            element.bind("keyup", function(e) {
+                alert(e.keyCode);         
             });
         }
     };
