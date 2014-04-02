@@ -177,8 +177,7 @@ lanternApp.directive('focusme', function($timeout) {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             element[0].focus();
-
-                            window.plugins.SoftKeyBoard.show();
+                            SoftKeyBoard.show();
                         }
                     }
                 }, 500);
