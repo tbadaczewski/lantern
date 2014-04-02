@@ -69,6 +69,11 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
             return false;
 		}
+
+        $rootScope.$on('addressUpdated', function() {
+        	$scope.stations = $rootScope.stations;
+        	$scope.search();
+    	});
     }
 ]);
 

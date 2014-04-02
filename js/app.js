@@ -169,7 +169,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.directive('focusme', function($timeout) {
+lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
@@ -185,7 +185,9 @@ lanternApp.directive('focusme', function($timeout) {
             });
 
             element.bind("keyup", function(e) {
-                alert(e.keyCode);         
+                if(e.keyCode == 13) {
+                    $rootScope.$emit('addressUpdated', new Date());
+                }     
             });
         }
     };
