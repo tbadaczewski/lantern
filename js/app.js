@@ -183,7 +183,7 @@ lanternApp.directive('focusme', function($timeout) {
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
-                        element[0].click();
+                        element[0].focus();
                     } else {
                         element[0].blur();
                     }
