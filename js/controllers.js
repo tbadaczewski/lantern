@@ -84,11 +84,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 50, encodingType: Camera.EncodingType.JPEG, destinationType: Camera.DestinationType.DATA_URL }); 
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 50 }); 
 			
 			function onSuccess(imageData) {
 				$rootScope.photo = "data:image/jpeg;base64," + imageData;
-    			window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", $rootScope.photo, null);
+    			window.plugins.socialsharing.share("Downed Powerline", "Hello World", imageData, null);
 			}
 
 			function onFail(message) {
