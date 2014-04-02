@@ -88,6 +88,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			
 			function onSuccess(imageData) {
 				$rootScope.photo = "data:image/jpeg;base64," + imageData;
+    			window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", $rootScope.photo, null);
 			}
 
 			function onFail(message) {
@@ -327,8 +328,6 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope', '
     function ($scope, $rootScope, $window) {
     	$scope.progressShown = true;
     	//document.getElementById("photo").attr("src", $rootScope.photo);
-    	alert($rootScope.photo);
-    	$window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", $rootScope.photo, null);
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
