@@ -70,14 +70,17 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
         return function ($type) {
             var deferred = $q.defer();
             var options = {maximumAge: 30000, timeout: 30000, enableHighAccuracy: false}
-            var onSuccess = function(position) {
+            
+            function onSuccess(position) {
                 $rootScope.$apply(function () {
+                    alert(position);
                     deferred.resolve(position);
                 });
-            };
+            }
 
             function onError(error) {
                 $rootScope.$apply(function () {
+                    alert(error.message);
                     deferred.resolve($rootScope.position);
                 });
             }

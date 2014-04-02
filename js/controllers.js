@@ -42,8 +42,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
 
-	            alert(position);
-
 	            geoencoder('latLng').then(function(address) {
 	                $rootScope.address = $scope.address = address[0];
 	                $rootScope.county = address[1];
