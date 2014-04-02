@@ -327,6 +327,7 @@ lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope', '
     function ($scope, $rootScope, $window) {
     	$scope.progressShown = true;
     	//document.getElementById("photo").attr("src", $rootScope.photo);
+    	alert($rootScope.photo);
     	$window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", $rootScope.photo, null);
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
