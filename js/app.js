@@ -180,12 +180,12 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
 lanternApp.directive('focusme', function($timeout) {
     return {
         link: function(scope, element, attrs) {
-            scope.$watch('searchfocus', function(value) {
+            scope.$watch('searchfocus', function(newValue, oldValue) {
                 $timeout(function() {
-                    if (value == true) {
-                        element[0].focus();
-                    } else {
-                        element[0].blur();
+                    if ( newValue !== oldValue ) {
+                        if (value == true) {
+                            element[0].focus();
+                        }
                     }
                 }, 0);
             });
