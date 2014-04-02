@@ -183,12 +183,9 @@ lanternApp.directive('focusme', function($timeout) {
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
-                        var event = new Event('touchstart');
-                        element[0].addEventListener('touchstart', function (e) { alert('hello'); }, false);
-                        element[0].dispatchEvent(event);
-                        //element[0].focus();
+                        element[0].click();
                     } else {
-                        //element[0].blur();
+                        element[0].blur();
                     }
                 }, 0);
             });

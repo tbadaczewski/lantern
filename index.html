@@ -32,7 +32,7 @@
     <div id="search-bar" ng-controller="SearchCtrl"> 
         <div id="search-area" class="{{backstate}}">
             <a href="#/" class="arrow-back" title="Back"><span class="icon-arrow2-left"></span></a>
-            <input id="search-text" ng-model="address" focusme="searchfocus" ng-focus="showClear()" ng-blur="hideClear()" type="text" placeholder="Enter a Location" />
+            <input id="search-text" onclick="this.focus();" ng-model="address" focusme="searchfocus" ng-focus="showClear()" ng-blur="hideClear()" type="text" placeholder="Enter a Location" />
         </div>
         <div id="search-options">            
             <button id="btn-clear" ng-click="clear()" ng-focus="showClear()" type="button"><span class="icon-close" aria-hidden="true"></span></button>
