@@ -185,6 +185,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
+                    element[0].blur();
                     keyboard.hide();
                 }     
             });
