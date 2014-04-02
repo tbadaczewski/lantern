@@ -177,12 +177,13 @@ lanternApp.directive('focusme', function($timeout) {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             try {
-                               SoftKeyBoard.show();
+                                var softkeyboard = window.cordova.plugins.SoftKeyBoard;
+                               softkeyboard.show();
                             }
                             catch (e) {
                                alert(e);
                             }
-                            
+
                             element[0].focus();                            
                         }
                     }
