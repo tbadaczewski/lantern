@@ -88,7 +88,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			
 			function onSuccess(imageData) {
 				$rootScope.photo = "data:image/jpeg;base64," + imageData;
-    			window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", $rootScope.photo, null);
+    			window.plugins.socialsharing.shareViaTwitter("Downed Powerline", "Hello World", imageData, null);
 			}
 
 			function onFail(message) {
