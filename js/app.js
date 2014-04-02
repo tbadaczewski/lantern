@@ -175,9 +175,14 @@ lanternApp.directive('focusme', function($timeout) {
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
-                        SoftKeyBoard.show();
-                        
                         if(document.activeElement != element[0]) {
+                            try {
+                               SoftKeyBoard.show();
+                            }
+                            catch (e) {
+                               alert(e);
+                            }
+                            
                             element[0].focus();                            
                         }
                     }
