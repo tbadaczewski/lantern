@@ -187,7 +187,7 @@ lanternApp.directive('focusme', function($timeout) {
                             element[0].focus();
                         }
                     }
-                }, 0);
+                }, 500);
             });
         }
     };
