@@ -84,16 +84,28 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
+			var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
 			
-			function onSuccess(imageData) {
-				$rootScope.photo = "data:image/jpeg;base64," + imageData;
-    			window.plugins.socialsharing.shareViaTwitter("Downed Powerline", null, $rootScope.photo, null);
-			}
+			auth0.login({ 
+			    connection: "twitter", 
+			    username:   "DOEPics", 
+			    password:   "p!Xrep0$" 
+			},
+			function (err, result) {
+			    if (err) return err;
+			    alert(result);
+			});
 
-			function onFail(message) {
-				alert(message);
-			}
+			//navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
+			
+			//function onSuccess(imageData) {
+				//$rootScope.photo = "data:image/jpeg;base64," + imageData;
+    			//window.plugins.socialsharing.shareViaTwitter("Downed Powerline", null, $rootScope.photo, null);
+			//}
+
+			//function onFail(message) {
+				//alert(message);
+			//}
 		}
 
 		$scope.openTwitter = function($event) {
