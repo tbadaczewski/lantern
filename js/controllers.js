@@ -92,6 +92,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			}
 
 			function onFail(message) {
+				alert(message);
 			}
 		}
 
