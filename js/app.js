@@ -68,21 +68,15 @@ lanternApp.config(['$routeProvider',
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
-            alert("hello");
-
             var deferred = $q.defer();
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
             
             function onSuccess(position) {
-                //$rootScope.$apply(function () {
-                    deferred.resolve(position);
-                //});
+                deferred.resolve(position);
             }
 
             function onError(error) {
-                //$rootScope.$apply(function () {
-                    deferred.resolve($rootScope.position);
-                //});
+                deferred.resolve($rootScope.position);
             }
 
             $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
