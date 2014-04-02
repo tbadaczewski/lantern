@@ -323,11 +323,11 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope', '$window',
+    function ($scope, $rootScope, $window) {
     	$scope.progressShown = true;
-    	document.getElementById("photo").attr("src", $rootScope.photo);
-
+    	//document.getElementById("photo").attr("src", $rootScope.photo);
+    	$window.plugins.socialsharing.share("Downed Powerline", "Hello World", '$rootScope.photo', null);
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
