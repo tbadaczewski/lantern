@@ -169,7 +169,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.directive('focusme', function($timeout) {
+lanternApp.directive('focusme', function($timeout, $window) {
     return {
         link: function(scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
@@ -177,8 +177,7 @@ lanternApp.directive('focusme', function($timeout) {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             try {
-                                var softkeyboard = window.cordova.plugins.SoftKeyBoard;
-                               softkeyboard.show();
+                                $window.cordova.plugins.SoftKeyBoard.show();
                             }
                             catch (e) {
                                alert(e);
