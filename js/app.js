@@ -169,7 +169,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.directive('focusme', function($timeout, $window) {
+lanternApp.directive('focusme', function($timeout) {
     return {
         link: function(scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
@@ -177,13 +177,12 @@ lanternApp.directive('focusme', function($timeout, $window) {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             try {
+                                element[0].focus();
                                 SoftKeyBoard.show();
                             }
                             catch (e) {
                                alert(e);
-                            }
-
-                            element[0].focus();                            
+                            }                          
                         }
                     }
                 }, 500);
