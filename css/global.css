@@ -137,11 +137,6 @@ button.inline, .button.inline {
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
-	/*	
-	display: block;
-	background: #fff;
-	overflow: hidden;
-	*/
 }
 
 nav, nav#nav-hidden {
@@ -265,6 +260,7 @@ nav > span[class^='icon-'] {
 	color: #353c41;
 	background: transparent;
 	-webkit-user-modify: read-write-plaintext-only;
+	-webkit-user-select: text;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
