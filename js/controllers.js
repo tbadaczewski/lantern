@@ -39,8 +39,10 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		}
 
     	$scope.locate = function() {
-	        //geolocation().then(function(position) {
-	            //$rootScope.position = position;
+	        geolocation().then(function(position) {
+	            $rootScope.position = position;
+
+	            alert(position);
 
 	            geoencoder('latLng').then(function(address) {
 	                $rootScope.address = $scope.address = address[0];
@@ -57,7 +59,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
 	            });
-	        //});
+	        });
 		}
 
 		$scope.toggleMenu = function() {
