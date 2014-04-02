@@ -169,12 +169,13 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
+            var keyboard = new SoftKeyboard();
+
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             element[0].focus();
-                            var keyboard = new SoftKeyboard();
                             keyboard.show();                     
                         }
                     }
@@ -184,6 +185,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
+                    keyboard.hide();
                 }     
             });
         }
