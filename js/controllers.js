@@ -2,8 +2,8 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'focuselement', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
-    function ($scope, $rootScope, $http, focuselement, geolocation, geoencoder, loadstations, loadoutages) {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
+    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     	$scope.search = function() {
     		$scope.searchfocus = false;
     		$rootScope.address = $scope.address;

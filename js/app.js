@@ -65,14 +65,6 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('focuselement', [
-    function () {
-        return function ($id) {
-            document.getElementById($id).focus();
-        };
-    }
-]);
-
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function ($type) {
@@ -185,6 +177,8 @@ lanternApp.directive('focusme', function($timeout) {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
                             element[0].focus();
+
+                            window.plugins.SoftKeyBoard.show();
                         }
                     }
                 }, 500);
