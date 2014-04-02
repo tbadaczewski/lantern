@@ -39,20 +39,27 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		}
 
     	$scope.locate = function() {
+    		alert("locate");
+
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
+	            alert(position);
 
 	            geoencoder('latLng').then(function(address) {
 	                $rootScope.address = $scope.address = address[0];
 	                $rootScope.county = address[1];
 	                $rootScope.state = address[2];
 
+	                alert(address[0]);
+
 	                loadstations().then(function(data) {
+	                	alert("stations");
 	                    $rootScope.stations = data;
 	                    $rootScope.$emit('stationsUpdated', new Date());
 	                }); 
 
 	                loadoutages().then(function(data) {
+	                	alert("outages");
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
