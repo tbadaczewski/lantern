@@ -175,13 +175,9 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                         if(document.activeElement != element[0]) {
                             element[0].focus();
 
-                            try {
-                                if (typeof SoftKeyboard !== 'undefined') {
-                                    SoftKeyboard.show();
-                                }            
-                            } catch(e) {
-                                alert(e.message);
-                            }                        
+                            if (typeof SoftKeyboard !== 'undefined') {
+                                SoftKeyboard.show();
+                            }                      
                         }
                     }
                 }, 500);
@@ -192,13 +188,9 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                     $rootScope.$emit('addressUpdated', new Date());
                     element[0].blur();
 
-                    try {
-                        if (typeof SoftKeyboard !== 'undefined') {
-                            SoftKeyboard.hide();
-                        }            
-                    } catch(e) {
-                        alert(e.message);
-                    } 
+                    if (typeof SoftKeyboard !== 'undefined') {
+                        SoftKeyboard.hide();
+                    }
                 }     
             });
         }
