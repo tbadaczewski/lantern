@@ -84,7 +84,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 50 }); 
 			
 			function onSuccess(imageData) {
 				$rootScope.photo = "data:image/jpeg;base64," + imageData;
