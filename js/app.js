@@ -173,12 +173,13 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 $timeout(function() {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
-                            element[0].focus();
-                            var keyboard = new SoftKeyboard();
-                            keyboard.show();                     
+                            element[0].focus();                   
                         }
                     }
                 }, 500);
+
+                var keyboard = new SoftKeyboard();
+                keyboard.show();
             });
 
             element.bind("keyup", function(e) {
