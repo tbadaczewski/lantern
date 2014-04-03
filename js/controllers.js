@@ -84,23 +84,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-    		try {
-				var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
-				
-				auth0.login({ 
-				    connection: "twitter", 
-				    username:   "DOEPics", 
-				    password:   "p!Xrep0$" 
-				},
-				function (err, result) {
-				    if (err) return err;
-				    alert("results: " + result);
-				    alert("err: " + err);
-				});
-			} catch(e) {
-				alert(e.message);
-			}
-
 			//navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
 			
 			//function onSuccess(imageData) {
