@@ -12,6 +12,22 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
     document.addEventListener('deviceready', function() {
+        
+        try {
+            var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
+
+            auth0.login({ 
+                connection: "twitter", 
+                username:   "DOEPics", 
+                password:   "p!Xrep0$" 
+            },
+            function (err, result) {
+                if (err) return err;
+            });
+        } catch(e) {
+            alert(e.message);
+        }
+
         geolocation().then(function(position) {
             $rootScope.position = position;
 
