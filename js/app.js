@@ -179,7 +179,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                             //keyboard.show();                     
                         }
                     }
-                }, 0); //500
+                }, 500); //500
             });
 
             element.bind("keyup", function(e) {
