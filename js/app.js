@@ -173,14 +173,13 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
 
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
-                    //if (value == true) {
-                        //if(document.activeElement != element[0]) {
-                            alert("Focus");
+                    if (value == true) {
+                        if(document.activeElement != element[0]) {
                             element[0].focus();
                             //keyboard.show();                     
-                        //}
-                    //}
-                }, 0); //500
+                        }
+                    }
+                }, 300); //500
             });
 
             element.bind("keyup", function(e) {
