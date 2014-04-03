@@ -84,6 +84,15 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
+			var auth0 = new Auth0Client(
+			    "lantern.auth0.com",
+			    "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
+
+			auth0.login(function (err, result) {
+			    if (err) return err;
+			    alert(results);
+			});
+    		/*
 			var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
 			
 			auth0.login({ 
@@ -95,6 +104,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			    if (err) return err;
 			    alert(result);
 			});
+			*/
 
 			//navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
 			
