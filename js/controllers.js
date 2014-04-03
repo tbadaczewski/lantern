@@ -88,8 +88,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 			
 			auth0.login({ 
 			    connection: "twitter", 
-			    username:   "timothy.badaczewski@icfi.com", 
-			    password:   "1=lantern" 
+			    username:   "DOEPics", 
+			    password:   "p!Xrep0$" 
 			},
 			function (err, result) {
 			    if (err) return err;
