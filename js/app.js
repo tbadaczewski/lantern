@@ -13,9 +13,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
     $http.defaults.useXDomain = true;
+    $http.defaults.withCredentials = true;
+    delete $http.defaults.headers.common['X-Requested-With'];
 
     $http({
-        method: 'POST',
+        method: 'GET',
         url: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
         withCredentials: true,
         params: {'screen_name' : 'twitterapi', 'count' : 2},
@@ -99,12 +101,6 @@ lanternApp.config(['$routeProvider',
         otherwise({
             redirectTo: '/'
         });
-    }
-]).config(['$httpProvider',
-    function($httpProvider) {
-        $httpProvider.defaults.withCredentials = true;
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 ]);
 
