@@ -84,16 +84,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			//navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
 			
-			//function onSuccess(imageData) {
-				//$rootScope.photo = "data:image/jpeg;base64," + imageData;
-    			//window.plugins.socialsharing.shareViaTwitter("Downed Powerline", null, $rootScope.photo, null);
-			//}
+			function onSuccess(imageData) {
+				$rootScope.photo = "data:image/jpeg;base64," + imageData;
+			}
 
-			//function onFail(message) {
-				//alert(message);
-			//}
+			function onFail(message) {
+			}
 		}
 
 		$scope.openTwitter = function($event) {

@@ -175,6 +175,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 $timeout(function() {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
+                            alert("focus");
                             element[0].focus();
                             keyboard.show();                     
                         }
