@@ -176,7 +176,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                             element[0].focus();
 
                             try {
-                                if(SoftKeyboard) {
+                                if (typeof SoftKeyboard !== 'undefined') {
                                     SoftKeyboard.show();
                                 }            
                             } catch(e) {
@@ -193,7 +193,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                     element[0].blur();
 
                     try {
-                        if(SoftKeyboard) {
+                        if (typeof SoftKeyboard !== 'undefined') {
                             SoftKeyboard.hide();
                         }            
                     } catch(e) {
