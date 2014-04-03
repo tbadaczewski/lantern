@@ -176,8 +176,8 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                             element[0].focus();
 
                             try {
-                                var keyboard = new SoftKeyboard();   
-                                keyboard.show();
+                                //var keyboard = new SoftKeyboard();   
+                                SoftKeyboard.show();
                             } catch(e) {
                                 alert(e.message);
                             }                                      
@@ -190,7 +190,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
                     element[0].blur();
-                    keyboard.hide();
+                    SoftKeyboard.hide();
                 }     
             });
         }
