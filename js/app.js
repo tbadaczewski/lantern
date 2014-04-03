@@ -168,25 +168,28 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
 
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
-        link: function(scope, element, attrs) {          
+        link: function(scope, element, attrs) {  
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
                         if(document.activeElement != element[0]) {
-                            element[0].focus();                   
+                            element[0].focus();
+
+                            try {
+                                var keyboard = new SoftKeyboard();   
+                                keyboard.show();
+                            } catch(e) {
+                                alert(e.message);
+                            }                                      
                         }
                     }
                 }, 500);
-
-                var keyboard = new SoftKeyboard();
-                keyboard.show();
             });
 
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
                     element[0].blur();
-                    var keyboard = new SoftKeyboard();
                     keyboard.hide();
                 }     
             });
