@@ -27,7 +27,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
     var message = { 
         method: "GET",
-        action: "https://api.twitter.com/1/statuses/home_timeline.jsone",
+        action: "https://api.twitter.com/1/statuses/home_timeline.json",
         parameters: OAuth.decodeForm('include_entities=true')
     };
 
@@ -38,8 +38,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }
 
     $http({
-        method: 'GET',
-        url: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+        method: message.method,
+        url: message.action,
         withCredentials: true,
         params: {'include_entities' : 'true'},
         headers: {'Authorization' : OAuth.getAuthorizationHeader("", message.parameters)}
