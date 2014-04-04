@@ -313,7 +313,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();
 
-                _.each(markers, function (marker) {                    
+                angular.forEach(markers, function (marker) {                    
                     var size = new google.maps.Size(25,40);
                     var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
                     var point = new google.maps.Marker({
