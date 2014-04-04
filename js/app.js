@@ -10,68 +10,8 @@ var lanternApp = angular.module('lanternApp', [
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
-
-    /*
-    $http.defaults.useXDomain = true;
-    $http.defaults.withCredentials = true;
-    delete $http.defaults.headers.common['X-Requested-With'];
-
-    var oauth = {
-        oauth_consumer_key : "m7nsVF0NSPBpipUybhJAXw",
-        oauth_nonce : OAuth.nonce(11),
-        oauth_signature_method : "HMAC-SHA1",
-        oauth_timestamp : OAuth.timestamp(),
-        oauth_token : "2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A",
-        oauth_version : "1.0",
-    };
-
-    var message = { 
-        method: "GET",
-        action: "https://api.twitter.com/1/statuses/home_timeline.json",
-        parameters: OAuth.decodeForm('include_entities=true')
-    };
-
-    var obj = eval(oauth);
-
-    for (var prop in oauth) {
-        message.parameters.push([prop, obj[prop]]);
-    }
-
-    $http({
-        method: 'GET',
-        url: 'https://api.twitter.com/1/statuses/home_timeline.json',
-        withCredentials: true,
-        params: {'include_entities' : 'true'},
-        headers: {'Authorization' : OAuth.getAuthorizationHeader("", message.parameters)}
-    }).
-    success(function(data, status, headers, config) {
-        alert(data);
-    }).
-    error(function(data, status, headers, config) {
-        alert(status);
-    });
-    */
-
     
     document.addEventListener('deviceready', function() {
-        /*
-        try {
-            var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
-
-            auth0.login({ 
-                connection: "twitter", 
-                username:   "DOEPics", 
-                password:   "p!Xrep0$" 
-            },
-            function (err, result) {
-                alert(result);
-                if (err) return err;
-            });
-        } catch(e) {
-            alert(e.message);
-        }
-        */
-
         geolocation().then(function(position) {
             $rootScope.position = position;
 
