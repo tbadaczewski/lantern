@@ -16,12 +16,33 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $http.defaults.withCredentials = true;
     delete $http.defaults.headers.common['X-Requested-With'];
 
+    var oauth = {
+        oauth_consumer_key : "m7nsVF0NSPBpipUybhJAXw",
+        oauth_nonce : OAuth.nonce(11),
+        oauth_signature_method : "HMAC-SHA1",
+        oauth_timestamp : OAuth.timestamp(),
+        oauth_token : "2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A",
+        oauth_version : "1.0",
+    };
+
+    var message = { 
+        method: "GET",
+        action: "https://api.twitter.com/1/statuses/home_timeline.jsone",
+        parameters: OAuth.decodeForm('include_entities=true')
+    };
+
+    var obj = eval(oauth);
+
+    for (var prop in oauth) {
+        message.parameters.push([prop, obj[prop]]);
+    }
+
     $http({
         method: 'GET',
         url: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
         withCredentials: true,
-        params: {'screen_name' : 'twitterapi', 'count' : 2},
-        headers: {'Authorization' : 'OAuth oauth_consumer_key="m7nsVF0NSPBpipUybhJAXw", oauth_nonce="189413600572c4316280bb638f5530f8", oauth_signature="4vzFGO%2BTzXCzjOMVYwp6z%2BNhcAc%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1396559941", oauth_token="2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A", oauth_version="1.0"'}
+        params: {'include_entities' : 'true'},
+        headers: {'Authorization' : OAuth.getAuthorizationHeader("", message.parameters)}
     }).
     success(function(data, status, headers, config) {
         alert(data);
