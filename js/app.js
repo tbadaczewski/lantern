@@ -356,9 +356,10 @@ lanternApp.directive('contentframe', function() {
         scope: {
             id: '@',
             title: '@',
+            icon: '@',
             src: '@'
         },
-        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
+        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'><span class='{{icon}}'></span>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0].childNodes[1].childNodes[0];

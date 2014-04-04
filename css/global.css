@@ -157,7 +157,7 @@ nav#nav-visible {
 	-webkit-transform: translate3d(0,70px,0) !important;
 }
 
-nav > span[class^='icon-'] {
+nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	margin-right: 0.5em;
 }
 
@@ -187,7 +187,7 @@ nav > span[class^='icon-'] {
 }
 
 #handle {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 4;
@@ -637,7 +637,7 @@ button#back, button#forward, a#return {
 	left: 0;
 	z-index: 1;
 	background: #3f3f3f;
-	padding: 1em;
+	padding: 0.5em 1em;
 	width: 100%;
 	text-align: center;
 	color: #fff;
@@ -665,7 +665,7 @@ button#back, button#forward, a#return {
 }
 
 #frame-content {
-	padding-top: 4em;
+	padding-top: 3em;
 	width: inherit;
 	height: inherit;
 	overflow: auto;	
