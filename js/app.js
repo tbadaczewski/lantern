@@ -4,7 +4,6 @@ var lanternApp = angular.module('lanternApp', [
 	'ngAnimate',
     'ngRoute',
 	'ngTouch',
-    'ngResource',
     'lanternControllers'
 ]);
 
@@ -12,6 +11,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
+    /*
     $http.defaults.useXDomain = true;
     $http.defaults.withCredentials = true;
     delete $http.defaults.headers.common['X-Requested-With'];
@@ -50,7 +50,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     error(function(data, status, headers, config) {
         alert(status);
     });
-
+    */
 
     
     document.addEventListener('deviceready', function() {
