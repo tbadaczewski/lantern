@@ -221,7 +221,6 @@ nav > span[class^='icon-'] {
 	left: 0;
 	top: 0;
 	z-index: 5;
-	border-top: solid 1px #e0e0e0;
 	background: #fff;
 	height: 70px;
 	width: 100%;
@@ -298,7 +297,6 @@ nav > span[class^='icon-'] {
 	height: inherit;
 	margin: 0;
 	padding: 0;
-	border-top: solid 1px #e0e0e0;
 	background: #fff;
 	text-align: center;
 }
