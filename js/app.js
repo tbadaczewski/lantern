@@ -75,9 +75,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     var oauth_access_token_secret = 'JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a';
     var time = (new Date).getTime();
     var composite_key = rawurlencode(consumer_secret) + '&' + rawurlencode(oauth_access_token_secret);
-    var oauth_signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(base_info, composite_key));
-    var oauth = { oauth_consumer_key: 'm7nsVF0NSPBpipUybhJAXw', oauth_nonce: time, oauth_signature: oauth_signature, oauth_signature_method: 'HMAC-SHA1', oauth_timestamp: time, oauth_token: '2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A', oauth_version: '1.0' };
+    var oauth = { oauth_consumer_key: 'm7nsVF0NSPBpipUybhJAXw', oauth_nonce: time, oauth_signature: '', oauth_signature_method: 'HMAC-SHA1', oauth_timestamp: time, oauth_token: '2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A', oauth_version: '1.0' };
     var base_info = buildBaseString('https://api.twitter.com/1.1/statuses/user_timeline.json', 'GET', oauth);
+    var oauth_signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(base_info, composite_key));
+
+    oauth['oauth_signature'] = oauth_signature;
 
     $http.defaults.useXDomain = true;
 
