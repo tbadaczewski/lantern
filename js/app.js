@@ -79,6 +79,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     var composite_key = rawurlencode(consumer_secret) + '&' + rawurlencode(oauth_access_token_secret);
     var oauth_signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(base_info, composite_key));
 
+    $http.defaults.useXDomain = true;
+
     $http({
         method: 'GET',
         url: 'https://api.twitter.com/1/statuses/home_timeline.json',
@@ -174,11 +176,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     });
 });
 
-lanternApp.config(['$routeProvider', '$httpProvider',
+lanternApp.config(['$routeProvider',
     function ($routeProvider, $httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
         $routeProvider.
         when('/', {
             templateUrl: 'partials/main.html',
@@ -207,6 +206,13 @@ lanternApp.config(['$routeProvider', '$httpProvider',
         otherwise({
             redirectTo: '/'
         });
+    }
+]);
+
+lanternApp.config(['$httpProvider',
+    function ($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 ]);
 
