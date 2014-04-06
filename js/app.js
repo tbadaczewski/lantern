@@ -92,7 +92,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $http({
         method: 'GET',
         url: baseurl,
-        withCredentials: true,
         params: {'include_entities' : 'true'},
         headers: {'Authorization' : buildAuthHeader(oauth)}
     }).
