@@ -71,7 +71,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
-    var baseurl = 'https://api.twitter.com/1/statuses/home_timeline.json';
+    var baseurl = 'https://api.twitter.com/1.1/statuses/home_timeline.json';
     var consumer_secret = '4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g';
     var consumer_key = 'm7nsVF0NSPBpipUybhJAXw';
     var oauth_access_token_secret = 'JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a';
@@ -92,7 +92,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $http({
         method: 'GET',
         url: baseurl,
-        params: {'include_entities' : 'true'},
         headers: {'Authorization' : buildAuthHeader(oauth)}
     }).
     success(function(data, status, headers, config) {
