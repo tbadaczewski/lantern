@@ -83,7 +83,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
     $http.defaults.useXDomain = true;
 
-    console.log(buildAuthHeader(oauth));
+    console.log(base_info);
 
     $http({
         method: 'GET',
