@@ -379,7 +379,6 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
 	padding: 1em;
 	clear: both;
-	pointer-events: none;
 }
 
 .item.list a:link, .item.list a:visited, .item.list a:hover {

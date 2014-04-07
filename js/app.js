@@ -1,65 +1,5 @@
 "use strict";
 
-function buildBaseString(baseURI, method, params) {
-    var r = new Array();
-
-    ksort(params);
-
-    for (var k in params) {
-        if (params.hasOwnProperty(k)) {
-            r.push(k + "=" + rawurlencode(params[k]));
-        }
-    }
-
-    return method + "&" + rawurlencode(baseURI) + '&' + rawurlencode(r.join('&'));
-}
-
-function buildAuthHeader(oauth) {
-    var r = 'OAuth '; //' Authorization: OAuth ';
-    var values = new Array();
-
-    for (var k in oauth) {
-        if (oauth.hasOwnProperty(k)) {
-            values.push(k + "=\"" + rawurlencode(oauth[k]) + "\"");
-        }
-    }
-
-    r += values.join(', ');
-
-    return r;
-}
-
-function ksort(w) { 
-    var sArr = []; 
-    var tArr = []; 
-    var n = 0;
-
-    for (i in w) { 
-        tArr[n++] = i; 
-    } 
-
-    tArr = tArr.sort(); 
-    n = tArr.length;
-
-    for (var i=0; i<n; i++) { 
-        sArr[tArr[i]] = w[tArr[i]]; 
-    }
-
-    return sArr; 
-} 
-
-function rawurlencode(str) {
-    str = (str+'').toString();        
-    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A');
-}
-
-/*
-console.log(buildAuthHeader(oauth));
-console.log(base_info);
-console.log(oauth_signature);
-console.log(composite_key);
-*/
-
 var lanternApp = angular.module('lanternApp', [
 	'ngAnimate',
     'ngRoute',
@@ -70,98 +10,8 @@ var lanternApp = angular.module('lanternApp', [
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
-
-    var baseurl = 'https://api.twitter.com/1.1/statuses/home_timeline.json';
-    var consumer_secret = '4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g';
-    var consumer_key = 'm7nsVF0NSPBpipUybhJAXw';
-    var oauth_access_token_secret = 'JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a';
-    var time = (new Date).getTime();
-    var composite_key = rawurlencode(consumer_secret) + '&' + rawurlencode(oauth_access_token_secret);
-    var oauth = { oauth_consumer_key : consumer_key, oauth_nonce: time, oauth_signature_method: 'HMAC-SHA1', oauth_timestamp: time, oauth_token: '2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A', oauth_version: '1.0' };
-    var base_info = buildBaseString(baseurl, 'GET', oauth);
-    var oauth_signature = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(base_info, composite_key));
-
-    oauth['oauth_signature'] = oauth_signature;
-
-    $http.defaults.useXDomain = true;
-
-    console.log(base_info);
-
-    console.log(buildAuthHeader(oauth));
-
-    $http({
-        method: 'GET',
-        url: baseurl,
-        headers: {'Authorization' : buildAuthHeader(oauth)}
-    }).
-    success(function(data, status, headers, config) {
-        alert(data);
-    }).
-    error(function(data, status, headers, config) {
-        alert(status);
-    });
-
-    /*
-    $http.defaults.useXDomain = true;
-    $http.defaults.withCredentials = true;
-    delete $http.defaults.headers.common['X-Requested-With'];
-
-    var oauth = {
-        oauth_consumer_key : "m7nsVF0NSPBpipUybhJAXw",
-        oauth_nonce : OAuth.nonce(11),
-        oauth_signature_method : "HMAC-SHA1",
-        oauth_timestamp : OAuth.timestamp(),
-        oauth_token : "2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A",
-        oauth_version : "1.0",
-    };
-
-    var message = { 
-        method: "GET",
-        action: "https://api.twitter.com/1/statuses/home_timeline.json",
-        parameters: OAuth.decodeForm('include_entities=true')
-    };
-
-    var obj = eval(oauth);
-
-    for (var prop in oauth) {
-        message.parameters.push([prop, obj[prop]]);
-    }
-
-    $http({
-        method: 'GET',
-        url: 'https://api.twitter.com/1/statuses/home_timeline.json',
-        withCredentials: true,
-        params: {'include_entities' : 'true'},
-        headers: {'Authorization' : OAuth.getAuthorizationHeader("", message.parameters)}
-    }).
-    success(function(data, status, headers, config) {
-        alert(data);
-    }).
-    error(function(data, status, headers, config) {
-        alert(status);
-    });
-    */
-
     
     document.addEventListener('deviceready', function() {
-        /*
-        try {
-            var auth0 = new Auth0Client("lantern.auth0.com", "KeUakwnWRh5NKGtFuZfJOE8TnetNwGDN");
-
-            auth0.login({ 
-                connection: "twitter", 
-                username:   "DOEPics", 
-                password:   "p!Xrep0$" 
-            },
-            function (err, result) {
-                alert(result);
-                if (err) return err;
-            });
-        } catch(e) {
-            alert(e.message);
-        }
-        */
-
         geolocation().then(function(position) {
             $rootScope.position = position;
 
@@ -183,7 +33,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 });
 
 lanternApp.config(['$routeProvider',
-    function ($routeProvider, $httpProvider) {
+    function ($routeProvider) {
         $routeProvider.
         when('/', {
             templateUrl: 'partials/main.html',
@@ -212,13 +62,6 @@ lanternApp.config(['$routeProvider',
         otherwise({
             redirectTo: '/'
         });
-    }
-]);
-
-lanternApp.config(['$httpProvider',
-    function ($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 ]);
 
