@@ -279,16 +279,6 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                     google.maps.event.addListener(point, 'click', function() {
                         scope.$apply(function () {
-                            scope.id = point.id,
-                            scope.operatingStatus = point.operatingStatus,
-                            scope.station = point.station;
-                            scope.latitude = point.latitude;
-                            scope.longitude = point.longitude;
-                            scope.address = point.address;
-                            scope.city = point.city;
-                            scope.region = point.region;
-                            scope.zip = point.zip;
-
                             if(scope.prev != null) {
                                 var normal = { 
                                     url: scope.prev.icon.url,
@@ -304,6 +294,16 @@ lanternApp.directive('googlemap', function($rootScope) {
                             };
 
                             point.setIcon(large);
+
+                            scope.stationid = point.id;
+                            scope.operatingStatus = point.operatingStatus;
+                            scope.station = point.station;
+                            scope.latitude = point.latitude;
+                            scope.longitude = point.longitude;
+                            scope.address = point.address;
+                            scope.city = point.city;
+                            scope.region = point.region;
+                            scope.zip = point.zip;
                             scope.showdetails = "show";
                             scope.prev = point;
                         });
