@@ -369,14 +369,6 @@ lanternApp.directive('contentframe', function() {
                 var fonts = document.createElement("link");
                 var css = document.createElement("link");
 
-                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                this.parentNode.scrollTop = 0;
-
-                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
-                    scope.history.push(this.contentWindow.location.pathname);
-                    scope.index++;
-                }
-
                 fonts.href = "../css/fonts.css"; 
                 fonts.rel = "stylesheet"; 
                 fonts.type = "text/css"; 
@@ -386,6 +378,14 @@ lanternApp.directive('contentframe', function() {
                 css.rel = "stylesheet"; 
                 css.type = "text/css";                 
                 this.contentWindow.document.body.appendChild(css);
+
+                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                this.parentNode.scrollTop = 0;
+
+                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
+                    scope.history.push(this.contentWindow.location.pathname);
+                    scope.index++;
+                }
             }
 
             scope.back = function() {
