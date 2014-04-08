@@ -366,6 +366,9 @@ lanternApp.directive('contentframe', function() {
             scope.history = [scope.frame.contentWindow.location.pathname];
 
             scope.frame.onload = function() {
+                var fonts = document.createElement("link");
+                var css = document.createElement("link");
+
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
 
@@ -373,6 +376,16 @@ lanternApp.directive('contentframe', function() {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;
                 }
+
+                fonts.href = "../css/fonts.css"; 
+                fonts.rel = "stylesheet"; 
+                fonts.type = "text/css"; 
+                this.contentWindow.document.body.appendChild(fonts);
+
+                css.href = "../css/tips.css"; 
+                css.rel = "stylesheet"; 
+                css.type = "text/css";                 
+                this.contentWindow.document.body.appendChild(css);
             }
 
             scope.back = function() {

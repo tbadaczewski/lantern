@@ -632,19 +632,21 @@ button#back, button#forward, a#return {
 	color: #434a4f;
 }
 
-#tips-container a{
-	color:#f18425;
+#tips-container a {
+	color: #f18425;
 }
 
-#tips-container li{
+#tips-container li {
 	padding-left: 1.5em;
 	text-decoration: none;
 	line-height: 1.4em;
 }
-#tips-container h4{
+
+#tips-container h4 {
 	margin:5px;
 }
-#tips-container ul{
+
+#tips-container ul {
 	margin-bottom: 10px;
 }
 
