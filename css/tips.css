@@ -10,15 +10,20 @@ a {
 }
 
 li {
-	padding-left: 1.5em;
 	text-decoration: none;
 	line-height: 1.4em;
 }
 
-h4 {
-	margin:5px;
+h2{
+	text-transform: uppercase;
+}
+
+h4{
+	text-transform: uppercase;
+	 border-bottom: 1px solid #EDEDED;
 }
 
 ul {
-	margin-bottom: 10px;
+	text-decoration: none;
+	list-style: none;
 }
