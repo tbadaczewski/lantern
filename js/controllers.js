@@ -153,7 +153,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				});			
 			}
 
-			$scope.showdetails = ""; 
+			$scope.showdetails = null; 
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
