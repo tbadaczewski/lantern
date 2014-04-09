@@ -222,7 +222,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
-                        scope.showdetails = "";
+                        scope.showdetails = null;
                     });
 
                     if(scope.prev != null) {
@@ -304,7 +304,11 @@ lanternApp.directive('googlemap', function($rootScope) {
                             scope.city = point.city;
                             scope.region = point.region;
                             scope.zip = point.zip;
-                            scope.showdetails = "show";
+                            
+                            if(!scope.showdetails) {
+                                scope.showdetails = "show";
+                            }
+
                             scope.prev = point;
                         });
                     });
@@ -315,7 +319,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             }
 
             scope.$watch('markers', function(newValue, oldValue) {
-                if (newValue !== oldValue) {               
+                if (newValue !== oldValue) {        
                     scope.init();
                 }
             });

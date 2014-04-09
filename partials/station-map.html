@@ -20,7 +20,7 @@
     <div class="item-options">
     	<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + address + ' ' + city + ', ' + region + ' ' + zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
     	<div><a><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
-    	<div><a href="" ng-click="tagOpenWindow(id, operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
+    	<div><a href="" ng-click="tagOpenWindow(stationid, operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
     </div>
 </div>
 <googlemap id="map_canvas"></googlemap>
