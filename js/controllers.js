@@ -89,15 +89,17 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
             cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
             cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
-            cb.__call(
-                "statuses_update",
-                {"status": "Test " + d.getTime()},
-                function (reply) {
-                    // ...
-                }
-            );
-
-            alert("Clicked");
+            try {
+	            cb.__call(
+	                "statuses_update",
+	                {"status": "Test " + d.getTime()},
+	                function (reply) {
+	                    // ...
+	                }
+	            );
+        	} catch(err) {
+        		alert(err);
+        	}
 
 			//navigator.camera.getPicture(onSuccess, onFail, { quality: 25 });
 			
