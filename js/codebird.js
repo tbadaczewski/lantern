@@ -1215,7 +1215,9 @@ var Codebird = function () {
      * @return object The XMLHttpRequest object instance
      */
     var _getXmlRequestObject = function () {
-        var xml = new XMLHttpRequest();
+        var xml = null;
+
+        alert(typeof window + " - " + typeof window.XMLHttpRequest + " - " + typeof require);
 
         if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function") {
             xml = new window.XMLHttpRequest();            
