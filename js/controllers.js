@@ -84,10 +84,23 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 50 }); 
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 25 });
 			
 			function onSuccess(imageData) {
-				$rootScope.photo = "data:image/jpeg;base64," + imageData;
+	    		var cb = new Codebird;
+	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
+	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+
+				var params = {
+				    "status": "This is a test. #downedpowerline",
+				    "media[]": imageData
+				);
+
+				cb.__call(
+					"statuses_updateWithMedia",
+					params,
+					function (reply) {}
+				);
 			}
 
 			function onFail(message) {
