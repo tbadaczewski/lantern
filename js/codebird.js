@@ -96,7 +96,7 @@ var Codebird = function () {
     /**
      * API proxy endpoint
      */
-    var _endpoint_proxy = "http://api.jublo.net/codebird/";
+    var _endpoint_proxy = "https://api.jublo.net/codebird/";
 
     /**
      * The API endpoint to use for old requests
