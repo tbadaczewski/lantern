@@ -1217,7 +1217,7 @@ var Codebird = function () {
     var _getXmlRequestObject = function () {
         var xml = null;
 
-        alert(typeof window + " - " + typeof window.XMLHttpRequest + " - " + typeof require);
+        alert(typeof window + " - " + typeof window.XMLHttpRequest + " - " + typeof require + " - " + typeof XMLHttpRequest);
 
         if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function") {
             xml = new window.XMLHttpRequest();            
@@ -1239,6 +1239,11 @@ var Codebird = function () {
                 }
             }
         }
+
+        xml = new XMLHttpRequest();
+
+        alert(xml);
+
         return xml;
     };
 
