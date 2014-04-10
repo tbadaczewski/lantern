@@ -1215,15 +1215,11 @@ var Codebird = function () {
      * @return object The XMLHttpRequest object instance
      */
     var _getXmlRequestObject = function () {
-        var xml = null;
-
-        //alert(typeof window + " - " + window + " - " + window.XMLHttpRequest);
+        var xml = new XMLHttpRequest();
 
         if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function") {
-            alert("1");
             xml = new window.XMLHttpRequest();            
         } else if (typeof require === "function" && require) {
-            alert("2");
             try {
                 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 xml = new XMLHttpRequest();
