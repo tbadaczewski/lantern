@@ -84,7 +84,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 20 });
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 20, destinationType : Camera.DestinationType.DATA_URL, encodingType: Camera.EncodingType.JPEG });
 			
 			function onSuccess(imageData) {
 	    		var cb = new Codebird;
