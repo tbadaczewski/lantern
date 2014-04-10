@@ -677,7 +677,7 @@ button#back, button#forward, a#return {
 }
 
 .slide {
-	-webkit-transition: -webkit-transform 500ms ease-in-out;
+	-webkit-transition: -webkit-transform 500ms linear;
 	-webkit-transform: translate3d(0,-100%,0);	
 	-webkit-background-visibility: hidden;
 }
@@ -695,6 +695,6 @@ button#back, button#forward, a#return {
 }
 
 .fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
-	-webkit-transition: -webkit-transform 1s ease-in-out;
+	-webkit-transition: -webkit-transform 500ms linear;
 	-webkit-transform: translate3d(0,0,0);
 }
