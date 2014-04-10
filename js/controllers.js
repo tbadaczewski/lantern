@@ -99,14 +99,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 				cb.__call(
 					"statuses_updateWithMedia",
 					params,
-					function (reply) {
-						$window.navigator.notification.alert('Outage Reported 1', null, 'Outage Reported 2', 'Close');
-					}
+					function (reply) {}
 				);
-			}
 
-			function onFail(message) {
-				$window.navigator.notification.alert('Outage Reported 1', null, message, 'Close');
+				$window.navigator.notification.alert('Outage Reported 1', null, 'Outage Reported 2', 'Close');
 			}
 		}
 
