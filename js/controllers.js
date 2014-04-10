@@ -94,7 +94,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 				var params = {
 				    "status": "This is a test. #downedpowerline",
 				    "media[]": imageData
-				);
+				};
 
 				cb.__call(
 					"statuses_updateWithMedia",
