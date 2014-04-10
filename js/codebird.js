@@ -1232,15 +1232,18 @@ var Codebird = function () {
                     var XMLHttpRequest = require("xhr2");
                     xml = new XMLHttpRequest();
                 } catch (e2) {
-                    alert("xhr2 object not defined, trying ActiveXObject.");
+                    console.log("xhr2 object not defined, trying ActiveXObject.");
                     try {
                         xml = new ActiveXObject("Microsoft.XMLHTTP");
                     } catch (e3) {
-                        alert("ActiveXObject object not defined, cancelling.");
+                        console.log("ActiveXObject object not defined, cancelling.");
                     }
                 }
             }
         }
+
+        alert(xml);
+
         return xml;
     };
 
