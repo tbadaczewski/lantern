@@ -520,7 +520,7 @@ var Codebird = function () {
             }
         };
         xml.send(post_fields);
-
+        alert("Sent");
     };
 
     /**
