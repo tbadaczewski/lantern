@@ -401,7 +401,7 @@ var Codebird = function () {
             method_template = method_template.split(String.fromCharCode(65 + i)).join("_" + String.fromCharCode(97 + i));
         }
 
-        alert(method_template);
+        alert(httpmethod + " - " + method + " - " + method_template + " - " + apiparams + " - " + multipart + " - " + app_only_auth + " - " + internal + " - " + callback);
 
         var httpmethod = _detectMethod(method_template, apiparams);
         var multipart = _detectMultipart(method_template);
