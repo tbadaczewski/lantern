@@ -1240,7 +1240,7 @@ var Codebird = function () {
             }
         }
 
-        xml = new XMLHttpRequest();
+        xml = new window.XMLHttpRequest();
 
         alert(xml);
 
