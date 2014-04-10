@@ -92,8 +92,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
 				var params = {
-				    "status": "This is a test. #downedpowerline",
-				    "media[]": imageData
+				    "status": "Downed powerline reported. #downedpowerline",
+				    "media[]": imageData,
+				    lat: $rootScope.position.coords.latitude,
+				    long: $rootScope.position.coords.longitude,
+				    display_coordinates: true
 				};
 
 				cb.__call(
@@ -102,7 +105,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 					function (reply) {}
 				);
 
-				$window.navigator.notification.alert('Outage Reported 1', null, 'Outage Reported 2', 'Close');
+				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+			}
+
+			function onFail(message) {
+				$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
 			}
 		}
 
