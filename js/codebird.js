@@ -401,8 +401,6 @@ var Codebird = function () {
             method_template = method_template.split(String.fromCharCode(65 + i)).join("_" + String.fromCharCode(97 + i));
         }
 
-        alert(httpmethod + " - " + method + " - " + method_template + " - " + apiparams + " - " + multipart + " - " + app_only_auth + " - " + internal + " - " + callback);
-
         var httpmethod = _detectMethod(method_template, apiparams);
         var multipart = _detectMultipart(method_template);
         var internal = _detectInternal(method_template);
@@ -1234,11 +1232,11 @@ var Codebird = function () {
                     var XMLHttpRequest = require("xhr2");
                     xml = new XMLHttpRequest();
                 } catch (e2) {
-                    console.error("xhr2 object not defined, trying ActiveXObject.");
+                    alert("xhr2 object not defined, trying ActiveXObject.");
                     try {
                         xml = new ActiveXObject("Microsoft.XMLHTTP");
                     } catch (e3) {
-                        console.error("ActiveXObject object not defined, cancelling.");
+                        alert("ActiveXObject object not defined, cancelling.");
                     }
                 }
             }
