@@ -1217,17 +1217,13 @@ var Codebird = function () {
     var _getXmlRequestObject = function () {
         var xml = null;
 
-        alert(typeof window + " - " + window + " - " + window.XMLHttpRequest);
+        //alert(typeof window + " - " + window + " - " + window.XMLHttpRequest);
 
-        if (typeof window === "object"
-            && window
-            && typeof window.XMLHttpRequest === "function"
-        ) {
-            xml = new XMLHttpRequest();
-            alert(xml);
-        } else if (typeof require === "function"
-            && require
-        ) {
+        if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function") {
+            alert("1");
+            xml = new window.XMLHttpRequest();            
+        } else if (typeof require === "function" && require) {
+            alert("2");
             try {
                 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 xml = new XMLHttpRequest();
