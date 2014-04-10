@@ -84,10 +84,25 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
+    		var d = new Date();
+            var cb = new Codebird;
+            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
+            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+
+            cb.__call(
+                "statuses_update",
+                {"status": "Test " + d.getTime()},
+                function (reply) {
+                    // ...
+                }
+            );
+
+            alert("Clicked");
+
 			//navigator.camera.getPicture(onSuccess, onFail, { quality: 25 });
 			
 			//function onSuccess(imageData) {
-			try {
+				/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
 	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
@@ -104,9 +119,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 						$window.navigator.notification.alert('Outage Reported 1', null, 'Outage Reported 2', 'Close');
 					}
 				);
-			} catch (err) {
-				alert(err.message);
-			}
+				*/
 			//}
 
 			//function onFail(message) {
