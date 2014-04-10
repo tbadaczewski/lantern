@@ -1223,7 +1223,12 @@ var Codebird = function () {
             && window
             && typeof window.XMLHttpRequest === "function"
         ) {
+            try {
             xml = new window.XMLHttpRequest();
+            } catch(e) {
+                alert(e.message);
+            }            
+            alert(xml);
         } else if (typeof require === "function"
             && require
         ) {
