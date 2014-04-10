@@ -1216,6 +1216,9 @@ var Codebird = function () {
      */
     var _getXmlRequestObject = function () {
         var xml = null;
+
+        alert(typeof window);
+
         if (typeof window === "object"
             && window
             && typeof window.XMLHttpRequest === "function"
@@ -1232,18 +1235,15 @@ var Codebird = function () {
                     var XMLHttpRequest = require("xhr2");
                     xml = new XMLHttpRequest();
                 } catch (e2) {
-                    console.log("xhr2 object not defined, trying ActiveXObject.");
+                    console.error("xhr2 object not defined, trying ActiveXObject.");
                     try {
                         xml = new ActiveXObject("Microsoft.XMLHTTP");
                     } catch (e3) {
-                        console.log("ActiveXObject object not defined, cancelling.");
+                        console.error("ActiveXObject object not defined, cancelling.");
                     }
                 }
             }
         }
-
-        alert(xml);
-
         return xml;
     };
 
