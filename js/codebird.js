@@ -38,8 +38,6 @@
           require */
 "use strict";
 
-alert("Codebird");
-
 /**
  * Array.indexOf polyfill
  */
@@ -402,6 +400,8 @@ var Codebird = function () {
             method = method.split(String.fromCharCode(65 + i)).join("_" + String.fromCharCode(97 + i));
             method_template = method_template.split(String.fromCharCode(65 + i)).join("_" + String.fromCharCode(97 + i));
         }
+
+        alert(method_template);
 
         var httpmethod = _detectMethod(method_template, apiparams);
         var multipart = _detectMultipart(method_template);

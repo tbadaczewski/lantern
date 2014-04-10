@@ -7,7 +7,6 @@
 <body>
     <script>
         window.onload = function() {
-            alert("OnLoad");
             var d = new Date();
             var cb = new Codebird;
             cb.setProxy("http://api.jublo.net/codebird/");
@@ -17,9 +16,7 @@
             cb.__call(
                 "statuses_update",
                 {"status": "Home " + d.getTime()},
-                function (reply) {
-                    alert(reply);
-                }
+                function (reply) { }
             );
         };
     </script>
