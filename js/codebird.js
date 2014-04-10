@@ -1216,10 +1216,8 @@ var Codebird = function () {
      */
     var _getXmlRequestObject = function () {
         var xml = null;
-
-        alert(typeof window + " - " + typeof window.XMLHttpRequest + " - " + typeof require + " - " + typeof XMLHttpRequest);
-
-        if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function") {
+        
+        if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function" || typeof window.XMLHttpRequest === "object") {
             xml = new window.XMLHttpRequest();            
         } else if (typeof require === "function" && require) {
             try {
@@ -1239,10 +1237,6 @@ var Codebird = function () {
                 }
             }
         }
-
-        xml = new window.XMLHttpRequest();
-
-        alert(xml);
 
         return xml;
     };
