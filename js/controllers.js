@@ -102,10 +102,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				cb.__call(
 					"statuses_updateWithMedia",
 					params,
-					function (reply) {
-						$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-					}
+					function (reply) { }
 				);
+
+				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 			}
 
 			function onFail(message) {
