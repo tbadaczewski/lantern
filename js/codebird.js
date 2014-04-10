@@ -1217,7 +1217,7 @@ var Codebird = function () {
     var _getXmlRequestObject = function () {
         var xml = null;
 
-        alert(typeof window);
+        alert(typeof window + " - " + window + " - " + window.XMLHttpRequest);
 
         if (typeof window === "object"
             && window
