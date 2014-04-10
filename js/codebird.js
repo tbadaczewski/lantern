@@ -38,6 +38,8 @@
           require */
 "use strict";
 
+alert("Codebird");
+
 /**
  * Array.indexOf polyfill
  */
@@ -520,7 +522,6 @@ var Codebird = function () {
             }
         };
         xml.send(post_fields);
-        alert("Sent");
     };
 
     /**
