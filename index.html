@@ -1,77 +1,23 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" ng-app="lanternApp">
 <head>
     <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="format-detection" content="address=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script type="text/javascript" src="js/codebird.js"></script>
 </head>
 <body>
-    <div id="branding-bar">
-        <img id="text-logo" src="img/text-logo.png" alt="Lantern" />
-        <a id="energy-logo"><img src="img/energy-logo.png" /></a>
-    </div>
-    <div id="handle" class="{{menu}}">
-        <div class="inner">
-            <br />
-            <h4>Terms of Use for the DOE App</h4>
-            <p>By downloading the DOE App, the user agrees to the following terms:</p>
-            <ul class="arrow-list">
-                <li>DOE will make all reasonable attempts to keep this App bug free and up-to-date. However, this App and all information, content, and materials included on or otherwise made available to you through this App are provided by DOE on an "as is" and "as available" basis. DOE makes no representations or warranties of any kind express or implied, as to the operation of this site or the information, content, or materials included on or otherwise made available to you through this App. You expressly agree that your use of this site is at your own risk. To the full extent permissible, by applicable Federal law, DOE disclaim all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose. DOE does not warrant that this App, information, content, or materials included on or otherwise made available to you through this App are free of viruses or other harmful components. DOE will not be liable for any damages of any kind arising from the use of this App from any information, content, or materials, included on or otherwise made available to you through this App, including, but not limited to direct, indirect, incidental, punitive, and consequential damages.</li>
-                <li>DOE does not see, collect, or store any personal data you enter into the App. Any and all information you enter into the App is stored on your device and not on DOE’s website or server. As such, DOE is not responsible for any damages resulting from the loss or theft of that information.</li>
-                <li>The App only transmits photos/texts uploaded by the user, along with geospatial coordinates; the App does not transmit any personal information (i.e., phone number, user’s name) associated with your device.</li>
-                <li>DOE does use Google Maps (DOE does not endorse any non-Federal government entities or products) on this App. While Google has advised DOE that they do not collect any personal information, they do collect the number of times a map is accessed via the mapping feature on the DOE App, This information is not shared with DOE. DOE is not responsible for any information collected by Google.</li>
-                <li>While DOE does not charge for the use of this App normal carrier data fees may apply. Please consult your carrier to discuss any charges related to the use of this App.</li>
-                <li>DOE is a Federal Government entity and as such does not endorse any non-Federal US Government entities. You may not use this App or any of the information in this App to imply that DOE endorse you or your organization.</li>
-                <li>This App should not be used to contact DOE during an emergency. If you are in need of emergency assistance please contact 9-1-1.</li>
-            </ul>            
-        </div>        
-    </div>
-    <div id="search-bar" ng-controller="SearchCtrl"> 
-        <div id="search-area" class="{{backstate}}">
-            <a href="#/" class="arrow-back" title="Back"><span class="icon-arrow2-left"></span></a>
-            <input id="search-text" ng-model="address" focusme ng-focus="showClear()" ng-blur="hideClear()" type="text" placeholder="Enter a Location" />
-        </div>
-        <div id="search-options">            
-            <button id="btn-clear" ng-click="clear()" type="button"><span class="icon-close" aria-hidden="true"></span></button>
-            <button id="btn-search" ng-click="search()" ng-show="searchfocus" type="button"><span class="icon-search" aria-hidden="true"></span></button>
-            <button id="btn-target" ng-click="locate()" ng-hide="searchfocus" type="button"><span class="icon-target" aria-hidden="true"></span></button>
-            <button id="btn-lantern" ng-click="toggleMenu()" type="button"><div class="icon-lantern size-32" aria-hidden="true"></div><div class="icon-list size-22" aria-hidden="true"></div></button>
-        </div>    
-    </div>
-    <nav id="nav-{{navstate}}">        
-        <span class="icon-{{navclass}}" aria-hidden="true"></span>
-        <span>{{navtext}}</span>
-        <a id="btn-type=" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
-    </nav> 
-    <div id="{{id}}" ng-view class="{{animate}}"></div>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
-    <script type="text/javascript" src="lib/angular/angular-animate.min.js"></script>
-    <script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
-    <script type="text/javascript" src="lib/angular/angular-touch.min.js"></script>
-    <script type="text/javascript" src="lib/angular/angular-resource.min.js"></script>
-    <script type="text/javascript" src="js/codebird.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/controllers.js"></script>
     <script type="text/javascript">app.initialize();</script>
-    <script type="text/javascript">
+    <script>
         var d = new Date();
         var cb = new Codebird;
-        cb.setProxy("http://api.jublo.net/codebird/");
         cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
         cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
         cb.__call(
             "statuses_update",
-            {"status": "Home " + d.getTime()},
-            function (reply) {
-                alert(reply);
-            }
+            {"status": "Test " + d.getTime()},
+            function (reply) { }
         );
     </script>
 </body>
