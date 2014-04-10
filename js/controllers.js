@@ -77,8 +77,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
     }
 ]);
 
-lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder',
-    function ($scope, $rootScope, $http, geolocation, geoencoder) {
+lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
     	$scope.progressShown = true;
     	
     	$scope.camera = function($event) {
@@ -102,10 +102,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', 'geo
 				cb.__call(
 					"statuses_updateWithMedia",
 					params,
-					function (reply) {}
+					function (reply) {
+						$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+					}
 				);
-
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 			}
 
 			function onFail(message) {
