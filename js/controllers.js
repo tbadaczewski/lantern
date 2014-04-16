@@ -111,7 +111,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
 				var params = {
-				    "status": "Downed powerline reported. #downedpowerline",
+				    "status": "#downedpowerline",
 				    "media[]": imageData,
 				    lat: $rootScope.position.coords.latitude,
 				    long: $rootScope.position.coords.longitude,

@@ -81,7 +81,7 @@ var Codebird = function () {
     /**
      * The API endpoint base to use
      */
-    var _endpoint_base = "https://api.twitter.com/";
+    var _endpoint_base = "https://upload.twitter.com/";
 
     /**
      * The API endpoint to use
