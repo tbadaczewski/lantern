@@ -166,13 +166,13 @@ button.inline, .button.inline {
 	border-radius: 5px;
 	max-width: 100%;
 }
-*/
 
 #twitter .message {
-	/*margin-left: 50px;*/
+	margin-left: 50px;
 	padding-left: 1em;
 	width: 100%;
 }
+*/
 
 #twitter .message a {
 	color: #f18525;
