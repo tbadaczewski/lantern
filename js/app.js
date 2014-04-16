@@ -4,6 +4,7 @@ var lanternApp = angular.module('lanternApp', [
 	'ngAnimate',
     'ngRoute',
 	'ngTouch',
+    'ngSanitize',
     'lanternControllers'
 ]);
 
@@ -58,6 +59,10 @@ lanternApp.config(['$routeProvider',
         when('/tips', {
             templateUrl: 'partials/tips.html',
             controller: 'TipsCtrl'
+        }).
+        when('/twitter', {
+            templateUrl: 'partials/twitter.html',
+            controller: 'TwitterCtrl'
         }).
         otherwise({
             redirectTo: '/'

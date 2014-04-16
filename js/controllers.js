@@ -385,3 +385,73 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 		$scope.id = "tips-guides";
     }
 ]);
+
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
+    function ($scope, $rootScope, $sce) {
+    	$scope.progressShown = true;
+		var cb = new Codebird;
+		cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
+		cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+
+		var params = {
+		    "screen_name": "energy",
+		    "count": "25"
+		};
+
+		cb.__call(
+			"statuses_userTimeline",
+			params,
+			function (reply) {
+				var formatted = "";
+
+				for(var i = 0; i < reply.length; i++) {
+					formatted += "<div class='entry clearfix'><div class='logo'><a href=\"https://twitter.com/energy\" target=\"_blank\"><img src=\"" + reply[i].user.profile_image_url_https + "\" /></a></div>" + "<div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
+				}
+				
+				$scope.$apply(function() {
+					if(!$rootScope.tweets) {						
+						$rootScope.tweets = $scope.tweets = formatted;
+						$scope.progressShown = false;
+					} else {
+						$scope.tweets = $rootScope.tweets;
+						$scope.progressShown = false;
+					}
+				});
+			}
+		);
+
+		function autoHyperlinkUrls(text) {
+			text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_blank\">$1$2</a>");
+			text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_blank\">#$1</a>');
+			text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_blank\">@$1</a>');
+			
+			return text;
+		}
+
+		function parseTwitterDate(tdate) {
+		    var system_date = new Date(Date.parse(tdate));
+		    var user_date = new Date();
+
+		    var diff = Math.floor((user_date - system_date) / 1000);
+		    
+		    if (diff <= 1) {return "just now";}
+		    if (diff < 20) {return diff + " seconds ago";}
+		    if (diff < 40) {return "half a minute ago";}
+		    if (diff < 60) {return "less than a minute ago";}
+		    if (diff <= 90) {return "one minute ago";}
+		    if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
+		    if (diff <= 5400) {return "1 hour ago";}
+		    if (diff <= 86400) {return Math.round(diff / 3600) + " hours ago";}
+		    if (diff <= 129600) {return "1 day ago";}
+		    if (diff < 604800) {return Math.round(diff / 86400) + " days ago";}
+		    if (diff <= 777600) {return "1 week ago";}
+		    
+		    return "on " + system_date;
+		}
+
+		$rootScope.backstate = "";
+		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
+		$scope.id = "twitter";
+    }
+]);
