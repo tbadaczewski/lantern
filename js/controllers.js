@@ -84,32 +84,49 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit : true, sourceType : Camera.PictureSourceType.CAMERA, destinationType : Camera.DestinationType.DATA_URL });
-			
-			function onSuccess(imageData) {
-	    		var cb = new Codebird;
-	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
-	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+			navigator.notification.confirm(
+			    'DOE will make all reasonable attempts to keep this App bug free and up-to-date.',
+			     onConfirm,
+			    'Disclaimer',
+			    ['Cancel','Ok']
+			);
 
-				var params = {
-				    "status": "Downed powerline reported. #downedpowerline",
-				    "media[]": imageData,
-				    lat: $rootScope.position.coords.latitude,
-				    long: $rootScope.position.coords.longitude,
-				    display_coordinates: true
-				};
-
-				cb.__call(
-					"statuses_updateWithMedia",
-					params,
-					function (reply) { }
+			function onConfirm(buttonIndex) {
+				navigator.camera.getPicture(
+					onSuccess,
+					onFail, {
+						quality: 20,
+						allowEdit : true,
+						sourceType : Camera.PictureSourceType.CAMERA,
+						destinationType : Camera.DestinationType.DATA_URL
+					}
 				);
+				
+				function onSuccess(imageData) {
+		    		var cb = new Codebird;
+		            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
+		            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-			}
+					var params = {
+					    "status": "Downed powerline reported. #downedpowerline",
+					    "media[]": imageData,
+					    lat: $rootScope.position.coords.latitude,
+					    long: $rootScope.position.coords.longitude,
+					    display_coordinates: true
+					};
 
-			function onFail(message) {
-				$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+					cb.__call(
+						"statuses_updateWithMedia",
+						params,
+						function (reply) { }
+					);
+
+					$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+				}
+
+				function onFail(message) {
+					$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+				}
 			}
 		}
 
