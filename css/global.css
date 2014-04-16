@@ -151,10 +151,13 @@ button.inline, .button.inline {
 }
 
 #twitter .logo, #twitter .message {
+	/*
 	float: left;
 	margin-right: -100em;
+	*/
 }
 
+/*
 #twitter .logo {	
 	width: 50px;
 }
@@ -163,14 +166,16 @@ button.inline, .button.inline {
 	border-radius: 5px;
 	max-width: 100%;
 }
+*/
 
 #twitter .message {
-	margin-left: 50px;
+	/*margin-left: 50px;*/
 	padding-left: 1em;
+	width: 100%;
 }
 
 #twitter .message a {
-	color: #f18425;
+	color: #f18525;
 }
 
 #twitter a.title, #twitter .time {
