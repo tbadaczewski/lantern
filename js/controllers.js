@@ -176,7 +176,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			//alert(Math.abs(diffMins) + " - " + count);
     		
     		if(Math.abs(diffMins) <= 15 && count >= 2) {
-    			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
+    			$window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
     			return false;
     		} else if(Math.abs(diffMins) > 15 && count >= 2) {
     			localStorage.setItem("tagcount", 0);
@@ -217,14 +217,16 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if(status != "red") {
-				$scope.status = "open";
-			} else {
-				$scope.status = "closed";
-			}
+			if($scope.validateTag() == true) {
+				if(status != "red") {
+					$scope.status = "open";
+				} else {
+					$scope.status = "closed";
+				}
 
-			$scope.stationid = id;
-			$scope.show = true;
+				$scope.stationid = id;
+				$scope.show = true;
+			}
 		};
 
 		$scope.getDirections = function(url) {
@@ -303,7 +305,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
     		
     		if(Math.abs(diffMins) <= 15 && count >= 2) {
-    			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
+    			$window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
     			return false;
     		} else if(Math.abs(diffMins) > 15 && count >= 2) {
     			localStorage.setItem("tagcount", 0);
@@ -342,14 +344,16 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if(status != "red") {
-				$scope.status = "open";
-			} else {
-				$scope.status = "closed";
-			}
+			if($scope.validateTag() == true) {
+				if(status != "red") {
+					$scope.status = "open";
+				} else {
+					$scope.status = "closed";
+				}
 
-			$scope.stationid = id
-			$scope.show = false;
+				$scope.stationid = id
+				$scope.show = false;
+			}
 		};
 
 		if($rootScope.stations == null) {
