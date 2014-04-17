@@ -454,28 +454,28 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 		    "count": "25"
 		};
 
-		cb.__call(
-			"statuses_userTimeline",
-			params,
-			function (reply) {
-				var formatted = "";
+		if($rootScope.tweets) {
+			$scope.tweets = $rootScope.tweets;
+			$scope.progressShown = false;
+		} else {
+			cb.__call(
+				"statuses_userTimeline",
+				params,
+				function (reply) {
+					var formatted = "";
 
-				for(var i = 0; i < reply.length; i++) {
-					formatted += "<div class='entry clearfix'><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
-					//formatted += "<div class='entry clearfix'><div class='logo'><a href=\"https://twitter.com/energy\" target=\"_blank\"><img src=\"" + reply[i].user.profile_image_url_https + "\" /></a></div>" + "<div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
-				}
-				
-				$scope.$apply(function() {
-					if(!$rootScope.tweets) {					
+					for(var i = 0; i < reply.length; i++) {
+						formatted += "<div class='entry clearfix'><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
+						//formatted += "<div class='entry clearfix'><div class='logo'><a href=\"https://twitter.com/energy\" target=\"_blank\"><img src=\"" + reply[i].user.profile_image_url_https + "\" /></a></div>" + "<div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
+					}
+					
+					$scope.$apply(function() {				
 						$rootScope.tweets = $scope.tweets = formatted;
 						$scope.progressShown = false;
-					} else {
-						$scope.tweets = $rootScope.tweets;
-						$scope.progressShown = false;
-					}
-				});
-			}
-		);
+					});
+				}
+			);
+		}
 
 		function autoHyperlinkUrls(text) {
 			text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_blank\">$1$2</a>");
