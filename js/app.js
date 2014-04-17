@@ -337,7 +337,7 @@ lanternApp.directive('modaldialog', function($rootScope) {
         restrict: 'EA',
         replace: true,
         transclude: true,
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
+        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-dialog' ng-transclude></div></div>",
         link: function (scope, element, attrs) {
             scope.$watch('show', function(newValue, oldValue) {
                 if (newValue !== oldValue) {        

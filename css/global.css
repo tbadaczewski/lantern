@@ -110,7 +110,7 @@ button.inline, .button.inline {
 }
 
 .text-left {
-	text-align: left;
+	text-align: left !important;
 }
 
 .element-invisible {
@@ -639,15 +639,12 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	-webkit-transform: translate(-50%, -50%);
 }
 
-.ng-modal-dialog-content {
-	text-align: center;
-}
-
-.ng-modal-dialog-content .description {
+.ng-modal-dialog .description {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
 	padding: 1em 1em 0 1em;
 	max-height: 300px;
 	overflow: auto;	
+	text-align: center;
 	-webkit-overflow-scrolling: touch;
 }
 
