@@ -161,18 +161,27 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
     	$scope.validateTag = function() {
     		var now = new Date();
-    		var last = localStorage.getItem("tagtime");
-    		var count = localStorage.getItem("tagcount");
+    		var last = new Date();
+
+    		if(localStorage.getItem("tagtime") != null) {
+    			last = new Date(localStorage.getItem("tagtime"));
+    		}
+
+    		var count = Number(localStorage.getItem("tagcount"));
 			var diffMs = (last - now);
 			var diffDays = Math.round(diffMs / 86400000); // days
 			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
 			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+
+			//alert(Math.abs(diffMins) + " - " + count);
     		
-    		if(diffMins <= 15 && count >= 2) {
+    		if(Math.abs(diffMins) <= 15 && count >= 2) {
     			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
     			return false;
-    		} else if(diffMins > 15) {
+    		} else if(Math.abs(diffMins) > 15 && count >= 2) {
     			localStorage.setItem("tagcount", 0);
+    			return true;
+    		} else {
     			return true;
     		}
     	}
@@ -182,7 +191,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$scope.tagStation = function(id, status) {
-			if(validateTag() == true) {
+			if($scope.validateTag() == true) {
 				localStorage.setItem("tagtime", new Date());
 				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
 				
@@ -202,9 +211,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				        });
 					});			
 				}
-
-				$scope.showdetails = null; 
 			}
+
+			$scope.showdetails = null; 
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
@@ -281,24 +290,31 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
     	$scope.validateTag = function() {
     		var now = new Date();
-    		var last = localStorage.getItem("tagtime");
-    		var count = localStorage.getItem("tagcount");
+    		var last = new Date();
+
+    		if(localStorage.getItem("tagtime") != null) {
+    			last = localStorage.getItem("tagtime");
+    		}
+
+    		var count = Number(localStorage.getItem("tagcount"));
 			var diffMs = (last - now);
 			var diffDays = Math.round(diffMs / 86400000); // days
 			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
 			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
     		
-    		if(diffMins <= 15 && count >= 2) {
+    		if(Math.abs(diffMins) <= 15 && count >= 2) {
     			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
     			return false;
-    		} else if(diffMins > 15) {
+    		} else if(Math.abs(diffMins) > 15 && count >= 2) {
     			localStorage.setItem("tagcount", 0);
+    			return true;
+    		} else {
     			return true;
     		}
     	}
 
 		$scope.tagStation = function(id, status) {
-			if(validateTag() == true) {
+			if($scope.validateTag() == true) {
 				localStorage.setItem("tagtime", new Date());
 				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
 
