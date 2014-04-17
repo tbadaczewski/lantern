@@ -92,6 +92,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
+    		$scope.show = false;
+
 			navigator.camera.getPicture(
 				onSuccess,
 				onFail, {
