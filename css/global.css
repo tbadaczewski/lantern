@@ -740,6 +740,6 @@ button#back, button#forward, a#return {
 }
 
 .fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
-	-webkit-transition: -webkit-transform 500ms linear 500ms;
+	-webkit-transition: -webkit-transform 500ms ease-in-out;
 	-webkit-transform: translate3d(0,0,0);
 }
