@@ -92,19 +92,15 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     	$scope.camera = function($event) {
     		$event.preventDefault();
 
-			function onConfirm(buttonIndex) {
-				if(buttonIndex > 1) {
-					navigator.camera.getPicture(
-						onSuccess,
-						onFail, {
-							quality: 30,
-							allowEdit : true,
-							sourceType : Camera.PictureSourceType.CAMERA,
-							destinationType : Camera.DestinationType.DATA_URL
-						}
-					);
+			navigator.camera.getPicture(
+				onSuccess,
+				onFail, {
+					quality: 30,
+					allowEdit : true,
+					sourceType : Camera.PictureSourceType.CAMERA,
+					destinationType : Camera.DestinationType.DATA_URL
 				}
-			}
+			);
 
 			function onSuccess(imageData) {
 	    		var cb = new Codebird;
