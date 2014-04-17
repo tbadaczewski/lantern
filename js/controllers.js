@@ -80,16 +80,17 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
     	$scope.progressShown = true;
+
+   		$scope.openDialog = function() {
+			$scope.show = true;
+		}
+
+   		$scope.closeDialog = function() {
+			$scope.show = false;
+		}
     	
     	$scope.camera = function($event) {
     		$event.preventDefault();
-
-			navigator.notification.confirm(
-			    'TERMS & CONDITIONS FOR REPORTING DOWNED POWER LINES\n\r\t• You must be 18 years of age or older to submit a photograph and/or text description.\n\t• This is not a replacement for 911 or calling local fire/EMS/police. If you are in need of emergency assistance, please contact 9-1-1.\n\t• Do not put yourself or any other person or property at risk to use this feature.\n\t• Do not use this feature to report criminal activity.\n\t• By submitting a photograph, you acknowledge that you own the copyright to the photograph and any associated text description and grant DOE a non-exclusive, royaltyfree, unconditional, world-wide license to use, display, and redistribute a copy of the photograph and any text description in any format to any entity.\n\t• DOE reserves the right to modify this policy at any time.\n\rCONTENT GUIDELINES\n\t• Only images of damaged electric poles and power lines in the United States will be accepted.\n\t• All photographs must be geo-tagged.\n\t• All content is moderated.\n\rCONTENT (PHOTOGRAPHS & TEXT DESCRIPTIONS) THAT WILL NOT BE ACCEPTED\n\rCONTENT GUIDELINES\n\t• Content that is not disaster-related and/or off-topic.\n\t• Content that includes abusive or vulgar language, hate speech, personal attacks, or similar content.\n\t• Content that includes personal information such as: social security number, identifiable addresses, and automobile license plates.\n\t• Content that promotes any commercial entities or products, or contains information on fundraising campaigns or partisan political activity.\n\t• Content that violates any person’s reasonable expectation of privacy or other privacy interest, including, but not limited to, people on private property, children, interiors of homes, deceased or injured persons, and interiors of hospitals or other medical facilities.\n',
-			     onConfirm,
-			    'Disclaimer',
-			    ['Cancel','Ok']
-			);
 
 			function onConfirm(buttonIndex) {
 				if(buttonIndex > 1) {
@@ -132,21 +133,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			}
 		}
 
-		$scope.openTwitter = function($event) {
-			$event.preventDefault();
-			window.open(encodeURI("partials/twitter.html"), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
-		}
-		
-		$scope.openTips = function($event) {
-			$event.preventDefault();
-			window.open("http://energy.gov/oe/community-guidelines-energy-emergencies", '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
-		}
-
 		$rootScope.backstate = "";
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "fixed";
 		$scope.id = "main";
-		$scope.show = false;
 		$scope.progressShown = false;
     }
 ]);
@@ -169,29 +159,52 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
         	$scope.stations = $rootScope.stations;
     	});
 
+    	$scope.validateTag = function() {
+    		var now = new Date();
+    		var last = localStorage.getItem("tagtime");
+    		var count = localStorage.getItem("tagcount");
+			var diffMs = (last - now);
+			var diffDays = Math.round(diffMs / 86400000); // days
+			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
+			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    		
+    		if(diffMins <= 15 && count >= 2) {
+    			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
+    			return false;
+    		} else if(diffMins > 15) {
+    			localStorage.setItem("tagcount", 0);
+    			return true;
+    		}
+    	}
+
    		$scope.tagCancel = function() {
-			$scope.toggleModal();
+   			$scope.show = false;
 		};
 
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
-			
-			if ($scope.status == "open") {
-				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
-			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;
-			        });						
-				});				
-			} else {
-				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
-			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;			        	
-			        });
-				});			
-			}
+			if(validateTag() == true) {
+				localStorage.setItem("tagtime", new Date());
+				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
+				
+				$scope.show = false;
+				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+				
+				if ($scope.status == "open") {
+					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
+				        loadstations().then(function(data) {
+				        	$rootScope.stations = $scope.stations = data;
+				        });						
+					});				
+				} else {
+					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
+				        loadstations().then(function(data) {
+				        	$rootScope.stations = $scope.stations = data;			        	
+				        });
+					});			
+				}
 
-			$scope.showdetails = null; 
+				$scope.showdetails = null; 
+			}
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
@@ -202,7 +215,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			}
 
 			$scope.stationid = id;
-			$scope.toggleModal();
+			$scope.show = true;
 		};
 
 		$scope.getDirections = function(url) {
@@ -263,30 +276,53 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
    		$scope.tagCancel = function() {  			
-			$scope.toggleModal();
+			$scope.show = false;
 		}
 
+    	$scope.validateTag = function() {
+    		var now = new Date();
+    		var last = localStorage.getItem("tagtime");
+    		var count = localStorage.getItem("tagcount");
+			var diffMs = (last - now);
+			var diffDays = Math.round(diffMs / 86400000); // days
+			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
+			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    		
+    		if(diffMins <= 15 && count >= 2) {
+    			$window.navigator.notification.alert('Exceeded Tag Limit', null, 'You must wait at least 15 minutes to tag another station.', 'Close');
+    			return false;
+    		} else if(diffMins > 15) {
+    			localStorage.setItem("tagcount", 0);
+    			return true;
+    		}
+    	}
+
 		$scope.tagStation = function(id, status) {
-			$scope.toggleModal();			
-			$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
-			
-			if ($scope.status == "open") {
-				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/closed').success(function (data) {
-			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
-			        	$scope.showdetails = null;
-			        	$scope.loadMarkers();
-			        });	
-				});				
-			} else {
-				$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/open').success(function (data) {
-			        loadstations().then(function(data) {
-			        	$rootScope.stations = data;
-			        	$scope.showdetails = null;
-			        	$scope.loadMarkers();
-			        });
-				});			
-			} 
+			if(validateTag() == true) {
+				localStorage.setItem("tagtime", new Date());
+				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
+
+				$scope.show = false;		
+				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
+				
+				if ($scope.status == "open") {
+					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/closed').success(function (data) {
+				        loadstations().then(function(data) {
+				        	$rootScope.stations = data;
+				        	$scope.showdetails = null;
+				        	$scope.loadMarkers();
+				        });	
+					});				
+				} else {
+					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/open').success(function (data) {
+				        loadstations().then(function(data) {
+				        	$rootScope.stations = data;
+				        	$scope.showdetails = null;
+				        	$scope.loadMarkers();
+				        });
+					});			
+				}
+			}
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
@@ -297,7 +333,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 
 			$scope.stationid = id
-			$scope.toggleModal();
+			$scope.show = false;
 		};
 
 		if($rootScope.stations == null) {

@@ -339,18 +339,17 @@ lanternApp.directive('modaldialog', function($rootScope) {
         transclude: true,
         template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-dialog'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>",
         link: function (scope, element, attrs) {
-            scope.show = false;
-
-            if (attrs.status) {
-                scope.status = attrs.status;
-            }
+            scope.$watch('show', function(newValue, oldValue) {
+                if (newValue !== oldValue) {        
+                    scope.toggleModal();
+                }
+            });
 
             scope.toggleModal = function() {
-                if(scope.show === false) {
+                if(scope.show === true) {
                     document.body.insertBefore(element[0], document.body.firstChild);
-                    scope.show = true;
                 } else {
-                    scope.show = false;
+                    element[0].remove();
                 }
             }
         }
