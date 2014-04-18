@@ -113,6 +113,11 @@ button.inline, .button.inline {
 	text-align: left !important;
 }
 
+.text-right {
+	text-align: right !important;
+}
+
+
 .element-invisible {
 	position: absolute;
 	left: -1000em;
@@ -160,7 +165,6 @@ button.inline, .button.inline {
 
 /*
 #twitter .logo, #twitter .message {
-
 	float: left;
 	margin-right: -100em;
 }
@@ -641,8 +645,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 
 .ng-modal-dialog .description {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
-	padding: 1em 1em 0 1em;
-	max-height: 300px;
+	padding: 1em;
 	overflow: auto;	
 	text-align: center;
 	-webkit-overflow-scrolling: touch;

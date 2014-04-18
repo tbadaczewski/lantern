@@ -139,8 +139,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations',
-    function ($scope, $rootScope, $http, $window, loadstations) {
+lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag',
+    function ($scope, $rootScope, $http, $window, loadstations, validatetag) {
     	$scope.progressShown = true;
 
 		if($rootScope.stations == null) {
@@ -157,42 +157,34 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
         	$scope.stations = $rootScope.stations;
     	});
 
-    	$scope.validateTag = function() {
-    		var now = new Date();
-    		var last = new Date();
-
-    		if(localStorage.getItem("tagtime") != null) {
-    			last = new Date(localStorage.getItem("tagtime"));
-    		}
-
-    		var count = Number(localStorage.getItem("tagcount"));
-			var diffMs = (last - now);
-			var diffDays = Math.round(diffMs / 86400000); // days
-			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
-			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-
-			//alert(Math.abs(diffMins) + " - " + count);
-    		
-    		if(Math.abs(diffMins) <= 15 && count >= 2) {
-    			$window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
-    			return false;
-    		} else if(Math.abs(diffMins) > 15 && count >= 2) {
-    			localStorage.setItem("tagcount", 0);
-    			return true;
-    		} else {
-    			return true;
-    		}
-    	}
-
    		$scope.tagCancel = function() {
    			$scope.show = false;
 		};
 
 		$scope.tagStation = function(id, status) {
-			if($scope.validateTag() == true) {
-				localStorage.setItem("tagtime", new Date());
-				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
-				
+			if(validatetag(id) == true) {
+				var tags = eval(localStorage.getItem("tags"));
+				var updated = false;
+
+	    		if(tags != null) {
+					for(var i = 0; i < tags.length; i++) {
+						if(tags[i].station.id == id) {
+					    	tags[i].station.lastupdated = new Date();
+					    	tags[i].station.count++;
+					    	updated = true;
+					    	break;
+						}
+					}
+
+					if(!updated) {
+						tags.push({"station" : { "id" : id, "lastupdated" : new Date(), "count" : 1 }});
+					}
+	    		} else {
+	    			tags = [{"station" : { "id" : id, "lastupdated" : new Date(), "count" : 1 }}];
+	    		}
+
+	    		localStorage.setItem("tags", JSON.stringify(tags));
+
 				$scope.show = false;
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
@@ -215,7 +207,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if($scope.validateTag() == true) {
+			if(validatetag(id) == true) {
 				if(status != "red") {
 					$scope.status = "open";
 				} else {
@@ -244,8 +236,8 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag) {	
     	$scope.progressShown = true;
 		var station_markers = null;
 
@@ -288,35 +280,29 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			$scope.show = false;
 		}
 
-    	$scope.validateTag = function() {
-    		var now = new Date();
-    		var last = new Date();
-
-    		if(localStorage.getItem("tagtime") != null) {
-    			last = localStorage.getItem("tagtime");
-    		}
-
-    		var count = Number(localStorage.getItem("tagcount"));
-			var diffMs = (last - now);
-			var diffDays = Math.round(diffMs / 86400000); // days
-			var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
-			var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-    		
-    		if(Math.abs(diffMins) <= 15 && count >= 2) {
-    			$window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
-    			return false;
-    		} else if(Math.abs(diffMins) > 15 && count >= 2) {
-    			localStorage.setItem("tagcount", 0);
-    			return true;
-    		} else {
-    			return true;
-    		}
-    	}
-
 		$scope.tagStation = function(id, status) {
-			if($scope.validateTag() == true) {
-				localStorage.setItem("tagtime", new Date());
-				localStorage.setItem("tagcount", (Number(localStorage.getItem("tagcount")) + 1));
+			if(validatetag(id) == true) {
+				var tags = eval(localStorage.getItem("tags"));
+				var updated = false;
+
+	    		if(tags != null) {
+					for(var i = 0; i < tags.length; i++) {
+						if(tags[i].station.id == id) {
+					    	tags[i].station.lastupdated = new Date();
+					    	tags[i].station.count++;
+					    	updated = true;
+					    	break;
+						}
+					}
+
+					if(!updated) {
+						tags.push({"station" : { "id" : id, "lastupdated" : new Date(), "count" : 1 }});
+					}
+	    		} else {
+	    			tags = [{"station" : { "id" : id, "lastupdated" : new Date(), "count" : 1 }}];
+	    		}
+
+	    		localStorage.setItem("tags", JSON.stringify(tags));
 
 				$scope.show = false;		
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
@@ -342,7 +328,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			if($scope.validateTag() == true) {
+			if(validatetag(id) == true) {
 				if(status != "red") {
 					$scope.status = "open";
 				} else {
@@ -418,7 +404,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
     	$scope.progressShown = true;
-    	//document.getElementById("photo").attr("src", $rootScope.photo);
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
@@ -463,8 +448,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 					var formatted = "";
 
 					for(var i = 0; i < reply.length; i++) {
-						formatted += "<div class='entry clearfix'><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
-						//formatted += "<div class='entry clearfix'><div class='logo'><a href=\"https://twitter.com/energy\" target=\"_blank\"><img src=\"" + reply[i].user.profile_image_url_https + "\" /></a></div>" + "<div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small></div></div>";
+						formatted += "<div class='entry clearfix'><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br />" + autoHyperlinkUrls(reply[i].text) + "<small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small><div class='text-right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
 					}
 					
 					$scope.$apply(function() {				

@@ -91,6 +91,40 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     }
 ]);
 
+lanternApp.factory('validatetag', ['$window',
+    function ($window) {
+        return function ($id) {
+            var now = new Date();
+            var last = new Date();
+            var count = 0;
+            var tags = eval(localStorage.getItem("tags"));
+            var diffMs = (last - now);
+            var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+
+            if(tags != null) {
+                for(var i = 0; i < tags.length; i++) {
+                    if(tags[i].station.id == $id) {
+                        last = tags[i].station.lastupdated;
+                        count = tags[i].station.count;
+                        diffMs = (last - now);
+
+                        if(Math.abs(diffMins) <= 15 && count >= 2) {
+                            $window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
+                            
+                            return false;
+                        } else if(Math.abs(diffMins) > 15 && count >= 2) {
+                            tags[i].station.count = 0;
+                            localStorage.setItem("tags", JSON.stringify(tags));
+                        }
+                    }
+                }
+            }
+
+            return true;
+        };
+    }
+]);
+
 lanternApp.factory('geoencoder', ['$q', '$rootScope',
     function ($q, $rootScope) {
         return function ($type) {
@@ -345,11 +379,23 @@ lanternApp.directive('modaldialog', function($rootScope) {
                 }
             });
 
+            window.onresize = function() {
+                scope.fitHeight();
+            };
+
             scope.toggleModal = function() {
+                scope.fitHeight();
+
                 if(scope.show === true) {
                     document.body.insertBefore(element[0], document.body.firstChild);
                 } else {
                     element[0].remove();
+                }
+            }
+
+            scope.fitHeight = function() {
+                if(document.body.clientHeight <= element[0].children[0].offsetHeight) {
+                    element[0].children[0].children[0].style.height = (document.body.clientHeight - 75) + "px";
                 }
             }
         }

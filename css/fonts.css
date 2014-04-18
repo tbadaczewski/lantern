@@ -26,11 +26,26 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-favorite:before {
+	content: "\f005";
+}
+.icon-retweet:before {
+	content: "\f079";
+}
+.icon-reply:before {
+	content: "\f112";
+}
+.icon-search:before {
+	content: "\e600";
+}
+.icon-close:before {
+	content: "\e60e";
+}
 .icon-arrow2-left:before {
 	content: "\e60f";
 }
 .icon-arrow2-right:before {
-	content: "\e610";
+	content: "\e611";
 }
 .icon-list:before {
 	content: "\e601";
@@ -70,10 +85,4 @@
 }
 .icon-tag:before {
 	content: "\e60d";
-}
-.icon-search:before {
-	content: "\e600";
-}
-.icon-close:before {
-	content: "\e60e";
 }
