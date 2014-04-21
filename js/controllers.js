@@ -330,8 +330,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
-			alert(id + " - " + status);
-
 			if(validatetag(id) == true) {
 				if(status != "red") {
 					$scope.status = "open";
@@ -340,7 +338,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				}
 
 				$scope.stationid = id
-				$scope.show = false;
+				$scope.show = true;
 			}
 		};
 
