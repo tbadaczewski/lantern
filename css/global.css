@@ -109,6 +109,14 @@ button.inline, .button.inline {
 	text-transform: uppercase;
 }
 
+.left {
+	float: left !important;
+}
+
+.right {
+	float: right !important;
+}
+
 .text-left {
 	text-align: left !important;
 }
@@ -116,7 +124,6 @@ button.inline, .button.inline {
 .text-right {
 	text-align: right !important;
 }
-
 
 .element-invisible {
 	position: absolute;
@@ -153,9 +160,13 @@ button.inline, .button.inline {
 
 #twitter .entry {
 	position: relative;
-	border-bottom: solid 1px #f0f0f0;
+	border-bottom: solid 1px #e8e8e8;
 	padding: 1em;
 	display: block;
+}
+
+#twitter .message {
+	font-size: 80%;
 }
 
 #twitter .time {
@@ -184,7 +195,7 @@ button.inline, .button.inline {
 }
 */
 
-#twitter .message a {
+#twitter a {
 	color: #f18525;
 }
 
