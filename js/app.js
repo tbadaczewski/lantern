@@ -109,7 +109,7 @@ lanternApp.factory('validatetag', ['$window',
                         diffMs = (last - now);
 
                         if(Math.abs(diffMins) <= 15 && count >= 2) {
-                            $window.navigator.notification.alert('You must wait at least 15 minutes to tag another station.', null, 'Exceeded Tag Limit', 'Close');
+                            $window.navigator.notification.alert('You must wait at least 15 minutes to tag THIS station again.', null, 'Exceeded Tag Limit', 'Close');
                             
                             return false;
                         } else if(Math.abs(diffMins) > 15 && count >= 2) {

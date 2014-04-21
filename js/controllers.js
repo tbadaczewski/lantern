@@ -110,7 +110,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
 				var params = {
-				    "status": "#downedpowerline",
+				    "status": "#powerlinedown",
 				    "media[]": imageData,
 				    lat: $rootScope.position.coords.latitude,
 				    long: $rootScope.position.coords.longitude,
@@ -127,6 +127,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			}
 
 			function onFail(message) {
+				alert(message);
 				$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
 			}
 		}
