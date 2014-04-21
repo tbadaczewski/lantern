@@ -146,14 +146,6 @@ button.inline, .button.inline {
 
 #tips-guides, #twitter {
 	position: fixed;
-	top: 100%;
-	z-index: 1000;
-	width: 100%;
-	height: 100%;
-}
-
-#twitter {
-	position: fixed;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
@@ -730,7 +722,7 @@ button#back, button#forward, a#return {
 
 .slide {
 	-webkit-transition: -webkit-transform 300ms ease-in-out;
-	-webkit-transform: translate3d(0,-100%,0);
+	-webkit-transform: translate3d(0,0%,0);
 }
  
 .slide.ng-enter {
@@ -738,11 +730,11 @@ button#back, button#forward, a#return {
 }
 
 .slide.ng-enter.ng-enter-active {
-	-webkit-transform: translate3d(0,0,0);
+	-webkit-transform: translate3d(0,0%,0);
 }
 
 .slide.ng-leave.ng-leave-active {
-	-webkit-transform: translate3d(0,0,0);
+	-webkit-transform: translate3d(0,100%,0);
 }
 
 .fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
