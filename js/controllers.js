@@ -127,8 +127,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			}
 
 			function onFail(message) {
-				alert(message);
-				$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+				if(message != "no image selected") {
+					$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+				}
 			}
 		}
 
@@ -329,6 +330,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.tagOpenWindow = function(id, status) {
+			alert(id + " - " status);
+			
 			if(validatetag(id) == true) {
 				if(status != "red") {
 					$scope.status = "open";
