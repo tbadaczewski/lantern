@@ -12,7 +12,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
-    //document.addEventListener('deviceready', function() {
+    document.addEventListener('deviceready', function() {
         geolocation().then(function(position) {
             $rootScope.position = position;
 
@@ -30,7 +30,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                 });
             });
         });
-    //});
+    }, false);
 });
 
 lanternApp.config(['$routeProvider',
