@@ -12,7 +12,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
     
-    document.addEventListener('deviceready', function() {
+    //document.addEventListener('deviceready', function() {
         geolocation().then(function(position) {
             $rootScope.position = position;
 
@@ -30,7 +30,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                 });
             });
         });
-    });
+    //});
 });
 
 lanternApp.config(['$routeProvider',
@@ -70,49 +70,29 @@ lanternApp.config(['$routeProvider',
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
-    function ($q, $rootScope, $window) {
-        return function () {
-            var deferred = $q.defer();
-            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
-            
-            function onSuccess(position) {
-                deferred.resolve(position);
-            }
-
-            function onError(error) {
-                deferred.resolve($rootScope.position);
-            }
-
-            $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-
-            return deferred.promise;
-        };
-    }
-]);
-
 lanternApp.factory('validatetag', ['$window',
     function ($window) {
         return function ($id) {
-            var now = new Date();
+            var now = new Date(), last = new Date();
             var last = new Date();
-            var count = 0;
+            var count = 0, diffMs = 0, diffMins = 0;;
             var tags = eval(localStorage.getItem("tags"));
-            var diffMs = (last - now);
-            var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+            var limit = 15;
 
             if(tags != null) {
                 for(var i = 0; i < tags.length; i++) {
                     if(tags[i].station.id == $id) {
-                        last = tags[i].station.lastupdated;
+                        last = new Date(tags[i].station.lastupdated);
+                        now = new Date();
                         count = tags[i].station.count;
-                        diffMs = (last - now);
+                        diffMs = last - now;
+                        diffMins = Math.abs(Math.round(((diffMs % 86400000) % 3600000) / 60000)); // minutes
 
-                        if(Math.abs(diffMins) <= 15 && count >= 2) {
+                        if(diffMins <= limit && count >= 2) {
                             $window.navigator.notification.alert('You must wait at least 15 minutes to tag THIS station again.', null, 'Exceeded Tag Limit', 'Close');
                             
                             return false;
-                        } else if(Math.abs(diffMins) > 15 && count >= 2) {
+                        } else if(diffMins > limit && count >= 2) {
                             tags[i].station.count = 0;
                             localStorage.setItem("tags", JSON.stringify(tags));
                         }
@@ -121,6 +101,31 @@ lanternApp.factory('validatetag', ['$window',
             }
 
             return true;
+        };
+    }
+]);
+
+lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
+    function ($q, $rootScope, $window) {
+        return function () {
+            var deferred = $q.defer();
+            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
+
+            console.log("Locating");
+            
+            function onSuccess(position) {
+                console.log(position);
+                deferred.resolve(position);
+            }
+
+            function onError(error) {
+                console.log(error);
+                deferred.resolve($rootScope.position);
+            }
+
+            $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+            return deferred.promise;
         };
     }
 ]);
