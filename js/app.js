@@ -110,16 +110,12 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
         return function () {
             var deferred = $q.defer();
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
-
-            console.log("Locating");
             
             function onSuccess(position) {
-                console.log(position);
                 deferred.resolve(position);
             }
 
             function onError(error) {
-                console.log(error);
                 deferred.resolve($rootScope.position);
             }
 
