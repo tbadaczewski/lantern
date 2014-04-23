@@ -473,6 +473,12 @@ lanternApp.directive('progress', function() {
             scope.hideModal = function() {
                 scope.show = false;
             };
+
+            scope.$watch('progressShown', function(newValue, oldValue) {
+                if (newValue !== oldValue) {        
+                    scope.show = newValue;
+                }
+            });
         },
     };
 });
