@@ -337,6 +337,12 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	font-size: 24px;
 }
 
+#frame-nav a.disabled {
+	pointer-events: disabled;
+	opacity: 0.5;
+	cursor: default;
+}
+
 #tipsguidesframe  {
 	position: absolute;
 	height: 100%;
