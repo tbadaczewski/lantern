@@ -424,7 +424,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	background: rgba(0, 0, 0, 0.5);
 }
 
-*[id^='btn-'].small:hover {
+*[id^='btn-'].small:active {
 	background: rgba(255, 255, 255, 0.25);
 }
 
