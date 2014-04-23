@@ -735,23 +735,27 @@ button#back, button#forward, a#return {
 }
 
 .slide {
-	-webkit-transition: -webkit-transform 300ms ease-in-out;
-	-webkit-transform: translate3d(0,0%,0);
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-transition: top 300ms ease-in-out;
+	top: 0%;
+	/*-webkit-transform: translate3d(0,0%,0);*/
 }
  
 .slide.ng-enter {
-	-webkit-transform: translate3d(0,100%,0);
+	/*-webkit-transform: translate3d(0,100%,0);*/
+	top: 100%;
 }
 
 .slide.ng-enter.ng-enter-active {
-	-webkit-transform: translate3d(0,0%,0);
+	/*-webkit-transform: translate3d(0,0%,0);*/
+	top: 0%;
 }
 
 .slide.ng-leave.ng-leave-active {
-	-webkit-transform: translate3d(0,100%,0);
+	/*-webkit-transform: translate3d(0,100%,0);*/
+	top: 100%;
 }
 
-.fixed.ng-enter, .fixed.ng-leave, .fixed.ng-leave-active, .fixed.ng-enter-active {
-	-webkit-transition: -webkit-transform 500ms ease-in-out;
-	-webkit-transform: translate3d(0,0,0);
+.fixes, .fixed.ng-enter, .fixed.ng-enter.ng-enter-active, .fixed.ng-leave.ng-leave-active {
+	-webkit-transition: -webkit-transform 300ms linear;
 }
