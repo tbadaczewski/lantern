@@ -21,10 +21,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }, false);
 
     function intializeMe() {
-        twitter().then(function(timeline) {
-            $rootScope.tweets = timeline;
-        });
-
         geolocation().then(function(position) {            
             $rootScope.position = position;
 
@@ -41,7 +37,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     $rootScope.outages = data;
                 });
             });
-        });  
+        }); 
+
+        twitter().then(function(timeline) {
+            $rootScope.tweets = timeline;
+        });
     }
 });
 
