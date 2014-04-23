@@ -1,10 +1,10 @@
-<progress show="progressShown"><div>LOADING...</div></progress>
+<loading><div>LOADING...</div></loading>
 <div class="outages">
     <div ng-repeat="outage in outages">
     	<div class="item list">
 	        <h4>{{isExists(outage.commericial_company_name) ? outage.commericial_company_name : outage.utility_company_name}}</h4>
 	        {{outage.county}} County, {{outage.state}}<br />
-	        <a href="#company-url" ng-click="getMap($event, outage.outage_map_url)">Open Outage Map</a>
+	        <a href="" ng-click="getMap($event, outage.outage_map_url)">Open Outage Map</a>
     	</div>
     </div>
 </div>

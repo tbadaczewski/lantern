@@ -79,8 +79,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
-    	$scope.progressShown = true;
-
    		$scope.openDialog = function() {
 			$scope.show = true;
 		}
@@ -137,22 +135,19 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "fixed";
 		$scope.id = "main";
-		$scope.progressShown = false;
     }
 ]);
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag',
     function ($scope, $rootScope, $http, $window, loadstations, validatetag) {
-    	$scope.progressShown = true;
-
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = $scope.stations = data;
-	        	$scope.progressShown = false;
+	        	$scope.hideloading = true;
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			$scope.progressShown = false;
+			$scope.hideloading = true;
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -240,7 +235,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag) {	
-    	$scope.progressShown = true;
 		var station_markers = null;
 
 		$scope.loadMarkers = function() {
@@ -268,6 +262,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
+        	$scope.hideloading = true;
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -346,11 +341,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
-	        	$scope.progressShown = false;
+	        	$scope.hideloading = true;
 	        });
 		} else {
         	$scope.loadMarkers();
-        	$scope.progressShown = false;
+        	$scope.hideloading = true;
 		}
 		
 		$rootScope.typestate = true;		
@@ -375,17 +370,15 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {
 	        loadoutages().then(function(data) {
 	        	$rootScope.outages = $scope.outages = data;
-	        	$scope.progressShown = false;
+	        	$scope.hideloading = true;
 	        });
 		}
-
-    	$scope.progressShown = true;
 
 		if($rootScope.outages == null) {
 	        $scope.init();
 		} else {
 			$scope.outages = $rootScope.outages;
-			$scope.progressShown = false;
+			$scope.hideloading = true;
 		}
 
         $rootScope.$on('outagesUpdated', function() {
@@ -403,21 +396,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('DownedPowerLinesCtrl', ['$scope', '$rootScope', '$window',
-    function ($scope, $rootScope, $window) {
-    	$scope.progressShown = true;
-		$rootScope.backstate = "visible";
-		$rootScope.navstate = "visible";
-		$rootScope.typestate = false;
-		$rootScope.navtext = "DOWNED POWERLINES";
-		$rootScope.navclass = "camera";
-		$rootScope.navtarget = "downed-powerlines";
-		$rootScope.animate = "fixed";
-		$scope.id = "downed-powerlines";
-		$scope.progressShown = false;
-    }
-]);
-
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
 		$rootScope.backstate = "";
@@ -429,7 +407,6 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
     function ($scope, $rootScope, $sce) {
-    	$scope.progressShown = true;
 		var cb = new Codebird;
 		cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
 		cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
@@ -441,7 +418,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 
 		if($rootScope.tweets) {
 			$scope.tweets = $rootScope.tweets;
-			$scope.progressShown = false;
+			$scope.hideloading = true;
 		} else {
 			cb.__call(
 				"statuses_userTimeline",
@@ -455,7 +432,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 					
 					$scope.$apply(function() {				
 						$rootScope.tweets = $scope.tweets = formatted;
-						$scope.progressShown = false;
+						$scope.hideloading = true;
 					});
 				}
 			);

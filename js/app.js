@@ -52,10 +52,6 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/outage-list.html',
             controller: 'OutageListCtrl'
         }).
-        when('/downed-powerlines', {
-            templateUrl: 'partials/owned-powerlines.html',
-            controller: 'DownedPowerLinesCtrl'
-        }).
         when('/tips', {
             templateUrl: 'partials/tips.html',
             controller: 'TipsCtrl'
@@ -460,22 +456,15 @@ lanternApp.directive('contentframe', function() {
     };
 });
 
-lanternApp.directive('progress', function() {
+lanternApp.directive('loading', function() {
     return {
         restrict: 'E',
-        scope: {
-            show: '='
-        },
         replace: true,
         transclude: true,
-        template: '<div class="progress" ng-show="show"><div ng-transclude>Loading</div></div>',
+        template: '<div class="progress" ng-hide="hideloading"><div ng-transclude>Loading</div></div>',
         link: function (scope, element, attrs) {
-            scope.hideModal = function() {
-                scope.show = false;
-            };
-
-            scope.$watch('progressShown', function(newValue, oldValue) {
-                scope.show = newValue;
+            scope.$watch('hideloading', function(newValue, oldValue) {
+                scope.hideloading = newValue;
             });
         },
     };
