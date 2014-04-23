@@ -475,9 +475,9 @@ lanternApp.directive('progress', function() {
             };
 
             scope.$watch('progressShown', function(newValue, oldValue) {
-                if (newValue !== oldValue) {        
+                //if (newValue !== oldValue) {        
                     scope.show = newValue;
-                }
+                //}
             });
         },
     };
