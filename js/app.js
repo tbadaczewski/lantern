@@ -17,11 +17,13 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }, false);
 
     document.addEventListener('resume', function() {
-        intializeMe();
+        if(!$rootScope.position) {
+            intializeMe();
+        }
     }, false);
 
     function intializeMe() {
-        geolocation().then(function(position) {
+        geolocation().then(function(position) {            
             $rootScope.position = position;
 
             geoencoder('latLng').then(function(address) {
