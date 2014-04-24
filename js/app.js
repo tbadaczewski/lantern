@@ -64,6 +64,10 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/outage-list.html',
             controller: 'OutageListCtrl'
         }).
+        when('/outage-map', {
+            templateUrl: 'partials/outage-map.html',
+            controller: 'OutageMapCtrl'
+        }).
         when('/tips', {
             templateUrl: 'partials/tips.html',
             controller: 'TipsCtrl'

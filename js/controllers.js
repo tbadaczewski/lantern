@@ -360,11 +360,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages',
-    function ($scope, $rootScope, $http, loadoutages) {
+lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages', '$location',
+    function ($scope, $rootScope, $http, loadoutages, $location) {
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
-			window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
+			$rootScope.outagemap = url;
+			$location.path("/outage-map");
+			//window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
 		}
 
 		$scope.init = function() {
@@ -393,6 +395,16 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtarget = "outage-map";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
+    }
+]);
+
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+    	$scope.url = $rootScope.outagemap; 	
+		$rootScope.backstate = "";
+		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
+		$scope.id = "outage-map";
     }
 ]);
 
