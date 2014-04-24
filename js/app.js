@@ -489,11 +489,19 @@ lanternApp.directive('contentframe', function() {
         },
         template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'><span class='{{icon}}'></span>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()' class='disabled'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()' class='disabled'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
         link: function (scope, element, attrs) {
+            alert(scope.src);
+            /*
             scope.index = 0;
             scope.frame = element[0].childNodes[1].childNodes[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
-            scope.frame.onload = function() {
+            scope.trustUrl = function(url) {
+                return $sce.trustAsResourceUrl(url);
+            }
+            */
+
+            //scope.frame.onload = function() {
+                /*
                 var fonts = document.createElement("link");
                 var css = document.createElement("link");
                 var back = document.getElementById("back");
@@ -528,7 +536,8 @@ lanternApp.directive('contentframe', function() {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;
                 }
-            }
+                */
+            //}
 
             scope.back = function() {
                 if(scope.index > 1) {

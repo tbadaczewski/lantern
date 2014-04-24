@@ -366,7 +366,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$event.preventDefault();
 			$rootScope.outagemap = url;
 			$location.path("/outage-map");
-			//window.open(encodeURI(url), '_blank', 'location=no,enableViewportScale=yes','closebuttoncaption=back');
 		}
 
 		$scope.init = function() {
@@ -398,13 +397,19 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
-    	$scope.url = $rootScope.outagemap; 	
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
+    function ($scope, $rootScope, $sce) {
+    	$scope.src = $sce.trustAsResourceUrl($rootScope.outagemap); 	
+    	$scope.$apply();
+    	alert($scope.src);
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
+
+		$scope.trustUrl = function(url) {
+		    return $sce.trustAsResourceUrl(url);
+		}
     }
 ]);
 
