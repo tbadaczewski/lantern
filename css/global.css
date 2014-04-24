@@ -151,7 +151,7 @@ button.inline, .button.inline {
 	padding: 75px 1em 50px 1em;
 }
 
-#tips-guides, #twitter {
+#tips-guides, #twitter, #outage-map {
 	position: fixed;
 	z-index: 1000;
 	width: 100%;
@@ -166,40 +166,36 @@ button.inline, .button.inline {
 }
 
 #twitter .message {
+	position: relative;
 	font-size: 80%;
+	min-height: 48px;
+	padding-left: 53px;
+	margin: 0.25em 0;
 }
 
 #twitter .time {
-	display: block;
+	position: absolute;
+	top: 1em;
+	right: 1em;
 }
 
-/*
-#twitter .logo, #twitter .message {
-	float: left;
-	margin-right: -100em;
+#twitter .logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 48px;
+	width: 48px;
 }
 
-#twitter .logo {	
-	width: 50px;
-}
-
-#twitter img {
+#twitter .logo img {
 	border-radius: 5px;
-	max-width: 100%;
 }
-
-#twitter .message {
-	margin-left: 50px;
-	padding-left: 1em;
-	width: 100%;
-}
-*/
 
 #twitter a {
 	color: #f18525;
 }
 
-#twitter a.title, #twitter .time {
+#twitter a.title {
 	font-weight: bold;
 	color: inherit;
 }
@@ -482,7 +478,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 .item-options > div {
 	float: left;	
 	text-align: center;	
-	width: 38%;
+	width: 50%;
 	height: 40px;
 	margin-left: 0;
 	margin-right: -100em;
@@ -490,15 +486,19 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 .item-options > div + div {
-	width: 24%;
-	margin-left: 38%;
+	width: 50%;
+	margin-left: 50%;
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-y left top;
 }
+
+/*
+
 
 .item-options > div + div + div {
 	margin-left: 62%;
 	width: 38%;
 }
+*/
 
 .ng-modal-dialog .item-options > div {
 	width: 50%;
@@ -685,7 +685,7 @@ button#back, button#forward, a#return {
 	display: inline;
 }
 
-#tips-container, #twitter-container {
+#tips-container, #twitter-container, #outage-map-container {
 	height: inherit;
 	width: inherit;
 	background: #fff;

@@ -20,7 +20,6 @@
     	</div>
 	    <div class="item-options clearfix">
     		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
-	    	<div><a><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
 	    	<div><a href="" ng-click="tagOpenWindow(station.id, station.operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{station.operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
 	    </div>
     </div>

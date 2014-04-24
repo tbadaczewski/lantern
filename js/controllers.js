@@ -398,14 +398,13 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 ]);
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
-    	$scope.src = $sce.trustAsResourceUrl($rootScope.outagemap); 	
-    	$scope.$apply();
-    	alert($scope.src);
-		$rootScope.backstate = "";
-		$rootScope.navstate = "false";
+    function ($scope, $rootScope, $sce) {    	
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
+
+		$scope.src = $rootScope.outagemap;
 
 		$scope.trustUrl = function(url) {
 		    return $sce.trustAsResourceUrl(url);
@@ -422,8 +421,8 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
     	$scope.tweets = $rootScope.tweets;
     	$scope.hideloading = true;
 		$rootScope.backstate = "";

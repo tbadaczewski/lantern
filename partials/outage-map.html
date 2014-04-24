@@ -1,1 +1,11 @@
-<contentframe id="tips-container" icon="icon-lightning" title='Outage Map' src="kjk"></contentframe>
+<div id="outage-map-container">
+	<div id='frame-nav'>
+		<a id='return' href='#/outage-list'><span class='icon-close'></span></a>
+		<span id='title'>
+			<span class='icon-lightning'></span>Outage Map
+		</span>
+	</div>
+	<div id='frame-content'>
+		<iframe id='contentframe' src='{{trustUrl(src)}}' height='100%' width="100%" name='contentframe'></iframe>
+	</div>
+</div>

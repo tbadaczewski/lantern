@@ -37,7 +37,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     $rootScope.outages = data;
                 });
             });
-        }); 
+        });
 
         twitter().then(function(timeline) {
             $rootScope.tweets = timeline;
@@ -122,7 +122,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window',
         return function () {
             var deferred = $q.defer();
             var cb = new Codebird;
-            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
+            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw","4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
             cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
             var params = {
@@ -137,10 +137,10 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window',
                     var formatted = "";
 
                     for(var i = 0; i < reply.length; i++) {
-                        formatted += "<div class='entry clearfix'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><br /><div class='message'>" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><small class='time left'>" + parseTwitterDate(reply[i].created_at) + "</small><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
+                        formatted += "<div class='entry clearfix'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small><br /><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a>" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
                     }
 
-                    deferred.resolve(formatted);                    
+                    deferred.resolve(formatted);                 
                 }
             );
 
@@ -163,19 +163,13 @@ function parseTwitterDate(tdate) {
 
     var diff = Math.floor((user_date - system_date) / 1000);
     
-    if (diff <= 1) {return "just now";}
-    if (diff < 20) {return diff + " seconds ago";}
-    if (diff < 40) {return "half a minute ago";}
-    if (diff < 60) {return "less than a minute ago";}
-    if (diff <= 90) {return "one minute ago";}
-    if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
-    if (diff <= 5400) {return "1 hour ago";}
-    if (diff <= 86400) {return Math.round(diff / 3600) + " hours ago";}
-    if (diff <= 129600) {return "1 day ago";}
-    if (diff < 604800) {return Math.round(diff / 86400) + " days ago";}
-    if (diff <= 777600) {return "1 week ago";}
+    if (diff <= 1) {return "now";}
+    if (diff < 60) {return diff + " s";}
+    if (diff <= 3540) {return Math.round(diff / 60) + "m";}
+    if (diff <= 86400) {return Math.round(diff / 3600) + "h";}
+    if (diff < 604800) {return Math.round(diff / 86400) + "d";}
     
-    return "on " + system_date;
+    return system_date;
 }
 
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
@@ -489,19 +483,11 @@ lanternApp.directive('contentframe', function() {
         },
         template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'><span class='{{icon}}'></span>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()' class='disabled'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()' class='disabled'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
         link: function (scope, element, attrs) {
-            alert(scope.src);
-            /*
             scope.index = 0;
             scope.frame = element[0].childNodes[1].childNodes[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
-            scope.trustUrl = function(url) {
-                return $sce.trustAsResourceUrl(url);
-            }
-            */
-
-            //scope.frame.onload = function() {
-                /*
+            scope.frame.onload = function() {
                 var fonts = document.createElement("link");
                 var css = document.createElement("link");
                 var back = document.getElementById("back");
@@ -536,8 +522,7 @@ lanternApp.directive('contentframe', function() {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;
                 }
-                */
-            //}
+            }
 
             scope.back = function() {
                 if(scope.index > 1) {
