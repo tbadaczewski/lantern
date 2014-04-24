@@ -491,15 +491,6 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-y left top;
 }
 
-/*
-
-
-.item-options > div + div + div {
-	margin-left: 62%;
-	width: 38%;
-}
-*/
-
 .ng-modal-dialog .item-options > div {
 	width: 50%;
 }

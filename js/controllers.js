@@ -398,13 +398,14 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 ]);
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {    	
+    function ($scope, $rootScope, $sce) {
+    	$scope.hideloading = false;  	
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
-
 		$scope.src = $rootScope.outagemap;
+		$scope.hideloading = true;
 
 		$scope.trustUrl = function(url) {
 		    return $sce.trustAsResourceUrl(url);
@@ -414,20 +415,23 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.hideloading = false;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "tips-guides";
+		$scope.hideloading = true;
     }
 ]);
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-    	$scope.tweets = $rootScope.tweets;
-    	$scope.hideloading = true;
+    	$scope.hideloading = false;
+    	$scope.tweets = $rootScope.tweets;    	
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
+		$scope.hideloading = true;
     }
 ]);
