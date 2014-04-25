@@ -119,8 +119,8 @@ lanternApp.factory('validatetag', ['$window',
     }
 ]);
 
-lanternApp.factory('twitter', ['$q', '$rootScope','$window',
-    function ($q, $rootScope, $window) {
+lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$sce',
+    function ($q, $rootScope, $window, $sce) {
         return function () {
             var deferred = $q.defer();
             var cb = new Codebird;
@@ -142,7 +142,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window',
                         formatted += "<div class='entry clearfix'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small><br /><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a>" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
                     }
 
-                    deferred.resolve(formatted);                 
+                    deferred.resolve($sce.trustAsHtml(formatted));                 
                 }
             );
 
