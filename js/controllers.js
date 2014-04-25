@@ -424,11 +424,17 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', 'twitter',
+    function ($scope, $rootScope, twitter) {
+    	$scope.hideloading = false;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
+
+        twitter().then(function(timeline) {
+            $scope.tweets = timeline;
+            $scope.hideloading = true;
+        });
     }
 ]);

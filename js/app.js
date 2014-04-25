@@ -20,8 +20,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    //intializeMe();
-
     function intializeMe() {
         geolocation().then(function(position) {            
             $rootScope.position = position;
@@ -39,10 +37,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     $rootScope.outages = data;
                 });
             });
-        });
-
-        twitter().then(function(timeline) {
-            $rootScope.tweets = timeline;
         });
     }
 });
@@ -132,19 +126,24 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$sce',
                 "count": "25"
             };
 
-            cb.__call(
-                "statuses_userTimeline",
-                params,
-                function (reply) {
-                    var formatted = "";
+            if(!$rootScope.timeline) {
+                cb.__call(
+                    "statuses_userTimeline",
+                    params,
+                    function (reply) {
+                        var formatted = "";
 
-                    for(var i = 0; i < reply.length; i++) {
-                        formatted += "<div class='entry clearfix'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small><br /><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a>" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
+                        for(var i = 0; i < reply.length; i++) {
+                            formatted += "<div class='entry clearfix'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + "</a><small class='time'>" + parseTwitterDate(reply[i].created_at) + "</small><br /><div class='message'><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a>" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + reply[i].id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + reply[i].id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
+                        }
+
+                        $rootScope.timeline = $sce.trustAsHtml(formatted);
+                        deferred.resolve($rootScope.timeline);                 
                     }
-
-                    deferred.resolve($sce.trustAsHtml(formatted));                 
-                }
-            );
+                );
+            } else {
+                deferred.resolve($rootScope.timeline);
+            }
 
             return deferred.promise;
         };
