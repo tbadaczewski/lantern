@@ -20,6 +20,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
+    intializeMe();
+
     function intializeMe() {
         geolocation().then(function(position) {            
             $rootScope.position = position;
