@@ -427,15 +427,19 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
     	try {
-    		alert(twttr);
-    		alert(twttr.init);
-    		alert(twttr.loaded);
+    		//alert(twttr);
+    		//alert(twttr.init);    		
 
     		twttr.widgets.load();
-    		
-			var style = document.createElement("style");
-			style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";    	
-			document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
+
+    		window.setTimeout(function(){    		
+	    		var frame = document.getElementById("twitter-widget-0");
+				var style = document.createElement("style");
+				style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";
+				frame.style.width = "100%";
+				frame.style.height = "100%"; 	
+				frame.contentWindow.document.body.appendChild(style);
+			}, 3000);
 	    } catch (err) {
 	    	alert(err.message);
 	    }
