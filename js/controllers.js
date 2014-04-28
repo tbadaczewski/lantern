@@ -426,18 +426,16 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-    	//var style = document.createElement("style");
-
     	try {
+    		alert("Load Twitter");
     		twttr.widgets.load();
+			var style = document.createElement("style");
+			style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";    	
+			document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
 	    } catch (err) {
 	    	alert(err.message);
 	    }
 
-    	//style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";    	
-
-    	//document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
-		
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
