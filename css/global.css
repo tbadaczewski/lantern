@@ -161,13 +161,13 @@ button.inline, .button.inline {
 #twitter {
 	background: #fff;
 }
-/*
-iframe[id*='twitter-widget-'] {
+
+#twitter-widget-0 {
 	width: 100% !important;
 	height: 100%;
 }
 
-
+/*
 #twitter .entry {
 	position: relative;
 	border-bottom: solid 1px #e8e8e8;
