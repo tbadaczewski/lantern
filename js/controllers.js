@@ -428,7 +428,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {    		
 		var loaded = window.setTimeout(function(){
 			if(twttr.widgets.loaded) {
-				console.log("Loaded");
+				alert("Loaded");
 				var style = document.createElement("style");
 				style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";   	
 				document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
