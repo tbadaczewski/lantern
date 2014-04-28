@@ -424,22 +424,19 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$interval',
-    function ($scope, $rootScope, $interval) {
-    		
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {    		
+		var loaded = window.setTimeout(function(){
+			if(twttr.widgets.loaded) {
+				console.log("Loaded");
+				var style = document.createElement("style");
+				style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";   	
+				document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
+				window.clearInterval(loaded);
+			}
+		}, 500)
 
-    		var loaded = window.setTimeout(function(){
-    			if(twttr.widgets.loaded) {
-    				console.log("Loaded");
-					var style = document.createElement("style");
-					style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";   	
-					document.getElementById("twitter-widget-0").contentWindow.document.body.appendChild(style);
-    				window.clearInterval(loaded);
-    			}
-    		}, 500)
-    
-    		twttr.widgets.load();
-    		
+		twttr.widgets.load();    		
 
 
 		$rootScope.backstate = "";
