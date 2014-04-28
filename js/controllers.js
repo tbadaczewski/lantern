@@ -430,14 +430,10 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 
 		var loaded = window.setTimeout(function(){
 			if(twttr.widgets.loaded) {				
-				//var style = document.createElement("style");
-				//style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";
-				//document.getElementsByTagName('iframe')[0].contentWindow.document.body.appendChild(style);
+				var style = document.createElement("style");
+				style.innerHTML = "position:fixed;z-index:1001;ol li{border-bottom:solid 1px #c7c7c7!important;}";
+				document.getElementsByTagName('iframe')[0].contentWindow.document.body.appendChild(style);
 				window.clearInterval(loaded);
-
-				window.setTimeout(function(){
-					alert(document.getElementsByTagName('iframe')[0].contentWindow.document.body.innerHTML);
-				},5000);
 			}
 		}, 500);		
 
