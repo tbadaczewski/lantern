@@ -428,7 +428,11 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
     	var style = document.createElement("style");
 
-    	twttr.widgets.load();
+    	try {
+    		twttr.widgets.load();
+	    } catch (e) {
+	    	alert(e.message());
+	    }
 
     	style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";    	
 
