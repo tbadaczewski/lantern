@@ -162,12 +162,12 @@ button.inline, .button.inline {
 	background: #fff;
 }
 
-#twitter-widget-0 {
+iframe[id*='twitter-widget-'] {
 	width: 100% !important;
 	height: 100%;
 }
 
-/*
+
 #twitter .entry {
 	position: relative;
 	border-bottom: solid 1px #e8e8e8;
