@@ -425,13 +425,17 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 ]);
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {  
-    	twttr.widgets.load();
+    function ($scope, $rootScope, $sce) {
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+
+    	//twttr.widgets.load();
 
 		var loaded = window.setTimeout(function(){
 			if(twttr.widgets.loaded) {				
 				var style = document.createElement("style");
-				style.innerHTML = "position:fixed;z-index:1001;ol li{border-bottom:solid 1px #c7c7c7!important;}";
+				style.innerHTML = "ol li{border-bottom:solid 1px #c7c7c7!important;}";
 				document.getElementsByTagName('iframe')[0].contentWindow.document.body.appendChild(style);
 				window.clearInterval(loaded);
 			}
