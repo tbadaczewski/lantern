@@ -20,6 +20,10 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
+    twitter().then(function(timeline) {
+        $rootScope.tweets = timeline;
+    });
+
     function intializeMe() {
         geolocation().then(function(position) {            
             $rootScope.position = position;
@@ -38,17 +42,15 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                 });
             });
         });
-
-        twitter().then(function(timeline) {
-            $rootScope.tweets = timeline;
-        });
     }
 });
 
-lanternApp.config(['$routeProvider', '$sceProvider',
-    function ($routeProvider, $sceProvider) {
-        $sceProvider.enabled(false);
-        
+lanternApp.config(function($sceProvider) {
+    $sceProvider.enabled(false);
+});
+
+lanternApp.config(['$routeProvider',
+    function ($routeProvider) {
         $routeProvider.
         when('/', {
             templateUrl: 'partials/main.html',
