@@ -46,11 +46,9 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }
 });
 
-/*
 lanternApp.config(function($sceProvider) {
     $sceProvider.enabled(false);
 });
-*/
 
 lanternApp.config(['$routeProvider',
     function ($routeProvider) {
