@@ -473,64 +473,50 @@ lanternApp.directive('contentframe', function() {
         scope: {
             id: '@',
             title: '@',
-            icon: '@',
             src: '@'
         },
-        template: "<div><div id='frame-nav'><a id='return' href='#/'><span class='icon-close'></span></a><span id='title'><span class='{{icon}}'></span>{{title}}</span><span id='arrows'><a id='back' href='' ng-click='back()' class='disabled'><span class='icon-arrow2-left'></span></a><a id='forward' href='' ng-click='forward()' class='disabled'><span class='icon-arrow2-right'></span></a></span></div><div id='frame-content'><iframe id='contentframe' src='{{src}}' name='contentframe' ng-transclude></iframe></div></div>",
+        template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             scope.index = 0;
-            scope.frame = element[0].childNodes[1].childNodes[0];
+            scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
-            scope.frame.onload = function() {
-                var fonts = document.createElement("link");
-                var css = document.createElement("link");
-                var back = document.getElementById("back");
-                var forward = document.getElementById("forward");
-
-                fonts.href = "../css/fonts.css"; 
-                fonts.rel = "stylesheet"; 
-                fonts.type = "text/css"; 
-                this.contentWindow.document.body.appendChild(fonts);
-
-                css.href = "../css/tips.css"; 
-                css.rel = "stylesheet"; 
-                css.type = "text/css";                 
-                this.contentWindow.document.body.appendChild(css);
-
-                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                this.parentNode.scrollTop = 0;
-
-                if(scope.index > 0) {
-                    back.className = "";
-                } else {
-                    back.className = "disabled";
-                }
-
-                if(scope.index < (scope.history.length - 1)) {
-                    forward.className = "";
-                } else {
-                    forward.className = "disabled";
-                }
-
-                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
-                    scope.history.push(this.contentWindow.location.pathname);
-                    scope.index++;
-                }
-            }
-
-            scope.back = function() {
+            scope.$on('goback', function() {
                 if(scope.index > 1) {
                     scope.index--;
                     scope.frame.src = scope.history[scope.index];
                 }
-            }
+            });
 
-            scope.forward = function() {
+            scope.$on('goforward', function() {
                 if(scope.index < scope.history.length - 1) {
                     scope.index++;
                     scope.frame.src = scope.history[scope.index];
                 }
+            });
+
+            scope.frame.onload = function() {
+                var fonts = document.createElement("link");
+                var css = document.createElement("link");
+
+                fonts.href = "../css/fonts.css"; 
+                fonts.rel = "stylesheet"; 
+                fonts.type = "text/css";                
+                css.href = "../css/tips.css"; 
+                css.rel = "stylesheet"; 
+                css.type = "text/css";
+
+                this.contentWindow.document.body.appendChild(fonts);    
+                this.contentWindow.document.body.appendChild(css);
+                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                this.parentNode.scrollTop = 0;
+
+                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
+                    scope.history.push(this.contentWindow.location.pathname);
+                    scope.index++;                    
+                }
+
+                scope.$emit('onload', [scope.index, scope.history.length]);
             }
         }
     };

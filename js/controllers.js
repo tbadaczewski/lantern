@@ -415,6 +415,36 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+        $scope.index = 0, $scope.history = 0;
+        $scope.disabledback = "disabled", $scope.disabledforward = "disabled";
+
+        $scope.$on('onload', function(event, values) {
+        	$scope.$apply(function(){
+	        	$scope.index = values[0];
+	        	$scope.history = values[1];
+
+		        if($scope.index > 1) {
+		        	$scope.disabledback = "";
+		        } else {
+		            $scope.disabledback = "disabled";
+		        }
+
+		        if($scope.index < ($scope.history - 1)) {
+		            $scope.disabledforward = "";
+		        } else {
+		            $scope.disabledforward = "disabled";
+		        }	        
+	        });
+        });
+
+        $scope.back = function() {
+        	$scope.$broadcast('goback');            
+        }
+
+        $scope.forward = function() {
+        	$scope.$broadcast('goforward');
+        }
+
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
@@ -422,8 +452,8 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', 'twitter',
-    function ($scope, $rootScope, twitter) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
