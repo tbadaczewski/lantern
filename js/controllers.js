@@ -415,12 +415,10 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-    	$scope.hideloading = false;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "tips-guides";
-		$scope.hideloading = true;
     }
 ]);
 

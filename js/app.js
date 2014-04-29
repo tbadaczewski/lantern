@@ -45,8 +45,10 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }
 });
 
-lanternApp.config(['$routeProvider',
-    function ($routeProvider) {
+lanternApp.config(['$routeProvider', '$sceProvider',
+    function ($routeProvider, $sceProvider) {
+        $sceProvider.enabled(false);
+        
         $routeProvider.
         when('/', {
             templateUrl: 'partials/main.html',
