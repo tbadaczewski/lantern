@@ -39,7 +39,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             });
         });
 
-
         twitter().then(function(timeline) {
             $rootScope.tweets = timeline;
         });
