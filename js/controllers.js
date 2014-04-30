@@ -88,7 +88,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		}
 
 		$scope.shareIt = function(data) {
-			$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, uri, null, function(e){alert(e);}, function(e){alert(e);});
+			
 		}
     	
     	$scope.camera = function($event) {
@@ -107,7 +107,19 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				shareIt(data);
+				var uri = data;
+
+				$window.plugins.socialsharing.share(
+					$rootScope.address + " #powerlinedown",
+					null,
+					uri,
+					null,
+					function(e) {
+						alert("Success: " + e);
+					},
+					function(e) {
+						alert("Error: " + e);
+					});
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
