@@ -103,14 +103,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				$window.setTimeout(function(data) {
-					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, shareSucces, shareError);
+				$window.setTimeout(function() {
+					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, shareSucces(), shareError());
 
-					function shareSucces(e) {
+					function shareSucces() {
 						$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 					}
 
-					function shareError(e) {
+					function shareError() {
 						$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
 					}
 				}, 1000, data);
