@@ -103,9 +103,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				setTimeout(function(data) {
-					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, function(e) { alert("Success: " + e); }, function(e) { alert("Error: " + e); });
-				}, 500);
+				$window.setTimeout(function() {
+					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null,
+					function(e) {
+						$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+					}, function(e) {
+						$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+					});
+				}, 1000, data);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
