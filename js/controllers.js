@@ -86,6 +86,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    		$scope.closeDialog = function() {
 			$scope.show = false;
 		}
+
+		$scope.shareIt = function(data) {
+			$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, uri, null, function(e){alert(e);}, function(e){alert(e);});
+		}
     	
     	$scope.camera = function($event) {
     		$event.preventDefault();
@@ -102,9 +106,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				}
 			);
 
-			function onSuccess(imageData) {
-				alert(imageData);
-				$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData, null, function(e){alert(e);}, function(e){alert(e);});
+			function onSuccess(data) {
+				shareIt(data);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
