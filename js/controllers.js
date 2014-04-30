@@ -98,11 +98,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType : Camera.DestinationType.DATA_URL
+					destinationType :  Camera.DestinationType.FILE_URI //Camera.DestinationType.DATA_URL
 				}
 			);
 
 			function onSuccess(imageData) {
+
+				$window.plugins.socialsharing.share("Subject", "Message", imageData);
+	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
 	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
@@ -122,6 +125,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				);
 
 				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+				*/
 			}
 
 			function onFail(message) {
