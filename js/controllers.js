@@ -98,17 +98,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType :  Camera.DestinationType.DATA_URL
+					destinationType : Camera.DestinationType.FILE_URI
 				}
 			);
 
-			//Camera.DestinationType.FILE_URI
-
 			function onSuccess(data) {
-				$scope.$apply(function(data){
-					console.log(data);
+				$window.setTimeout(function() {
 					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, function(e) { alert("Success: " + e); }, function(e) { alert("Error: " + e); });
-				});
+				}, 0);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
