@@ -105,7 +105,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			 //Camera.DestinationType.DATA_URL
 
 			function onSuccess(imageData) {
-				$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData, null);
+				$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData);
 
 				/*
 				cb.__call(
