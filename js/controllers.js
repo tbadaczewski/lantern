@@ -105,11 +105,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			function onSuccess(data) {
 				$window.setTimeout(function() {
 					$window.plugins.socialsharing.shareViaTwitter($rootScope.address + " #powerlinedown", null, data, null, function(e){
-						$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+						$window.navigator.notification.alert(e + ' Your photo and location has been submitted.', null, 'Success', 'Close');
 					}, function(e){
-						$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
+						$window.navigator.notification.alert(e + ' Your photo has failed to upload please try again.', null, 'Error', 'Close');
 					});
-				}, 500, data);
+				}, 0, data);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
