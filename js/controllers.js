@@ -88,10 +88,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		}
 
 		$scope.$watch("uri", function(newValue, oldValue) {
-			if($scope.uri != "") {
+			if (newValue !== oldValue) {
 				$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, $scope.uri, null, function(e) { alert("Success: " + e); }, function(e) { alert("Error: " + e); });
 			}
-		},true);
+		}, true);
     	
     	$scope.camera = function($event) {
     		$event.preventDefault();
