@@ -98,9 +98,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType :  Camera.DestinationType.FILE_URI //Camera.DestinationType.DATA_URL
+					destinationType :  Camera.DestinationType.DATA_URL
 				}
 			);
+
+			//Camera.DestinationType.FILE_URI
 
 			function onSuccess(data) {
 				$scope.$apply(function(data){
