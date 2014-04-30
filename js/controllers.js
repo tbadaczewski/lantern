@@ -105,8 +105,27 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			 //Camera.DestinationType.DATA_URL
 
 			function onSuccess(imageData) {
-				alert(imageData);
-				$window.plugins.socialsharing.share("Message", null, imageData, null);
+				$window.plugins.socialsharing.shareViaTwitter("Message", null, imageData, null);
+
+				/*
+				cb.__call(
+				    "oauth_requestToken",
+				    {oauth_callback: "oob"},
+				    function (reply) {
+				        // stores it
+				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+
+				        // gets the authorize screen URL
+				        cb.__call(
+				            "oauth_authorize",
+				            {},
+				            function (auth_url) {
+				                window.codebird_auth = window.open(auth_url);
+				            }
+				        );
+				    }
+				);
+				*/
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
@@ -125,9 +144,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					params,
 					function (reply) { }
 				);
-
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 				*/
+				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+
 			}
 
 			function onFail(message) {
