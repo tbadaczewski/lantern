@@ -105,7 +105,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			 //Camera.DestinationType.DATA_URL
 
 			function onSuccess(imageData) {
-				$window.plugins.socialsharing.shareViaTwitter("Message", null, imageData, null);
+				$window.plugins.socialsharing.share("#powerlinedown", "Downed Powerline", imageData, null);
 
 				/*
 				cb.__call(
@@ -144,9 +144,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					params,
 					function (reply) { }
 				);
-				*/
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 
+				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+				*/
 			}
 
 			function onFail(message) {
