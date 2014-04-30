@@ -103,7 +103,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				$window.setTimeout(function() {
+				setTimeout(function(data) {
 					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, shareSucces(e), shareError(e));
 
 					function shareSucces(e) {
