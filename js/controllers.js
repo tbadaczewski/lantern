@@ -103,9 +103,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				$window.setTimeout(function() {
+				setTimeout(function(data) {
 					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, function(e) { alert("Success: " + e); }, function(e) { alert("Error: " + e); });
-				}, 0);
+				}, 500);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
