@@ -98,15 +98,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType :  Camera.DestinationType.DATA_URL
+					destinationType :  Camera.DestinationType.FILE_URI
 				}
 			);
 
 			 //Camera.DestinationType.DATA_URL
 
 			function onSuccess(imageData) {
-				$window.plugins.socialsharing.share(null, null, imageData, null);
-				//$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData);
+				$window.plugins.socialsharing.share("Message", null, imageData, null);
 
 				/*
 				cb.__call(
@@ -145,7 +144,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					params,
 					function (reply) { }
 				);
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');				
+
+				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 				*/
 			}
 
