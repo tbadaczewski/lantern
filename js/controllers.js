@@ -98,14 +98,15 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType :  Camera.DestinationType.FILE_URI
+					destinationType :  Camera.DestinationType.DATA_URL
 				}
 			);
 
 			 //Camera.DestinationType.DATA_URL
 
 			function onSuccess(imageData) {
-				$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData);
+				$window.plugins.socialsharing.share(null, null, imageData, null);
+				//$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, imageData);
 
 				/*
 				cb.__call(
