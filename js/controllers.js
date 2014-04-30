@@ -103,8 +103,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(imageData) {
-
-				$window.plugins.socialsharing.share("Subject", "Message", imageData);
+				alert(imageData);
+				$window.plugins.socialsharing.share("Subject", "Message", imageData, null);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
