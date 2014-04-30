@@ -104,8 +104,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 			 //Camera.DestinationType.DATA_URL
 
-			function onSuccess(imageData) {
-				$window.plugins.socialsharing.share("Message", null, imageData, null);
+			function onSuccess(fileURI) {
+				alert(fileURI);
+				window.plugins.socialsharing.share("Message", null, fileURI, null);
 
 				/*
 				cb.__call(
@@ -150,9 +151,12 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			}
 
 			function onFail(message) {
+				$window.navigator.notification.alert(message);
+				/*
 				if(message != "no image selected") {
 					$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
 				}
+				*/
 			}
 		}
 
