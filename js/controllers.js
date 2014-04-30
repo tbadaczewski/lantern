@@ -98,35 +98,13 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType :  Camera.DestinationType.FILE_URI
+					destinationType :  Camera.DestinationType.FILE_URI //Camera.DestinationType.DATA_URL
 				}
 			);
 
-			 //Camera.DestinationType.DATA_URL
-
-			function onSuccess(fileURI) {
-				alert(fileURI);
-				window.plugins.socialsharing.share("Message", null, fileURI, null);
-
-				/*
-				cb.__call(
-				    "oauth_requestToken",
-				    {oauth_callback: "oob"},
-				    function (reply) {
-				        // stores it
-				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-
-				        // gets the authorize screen URL
-				        cb.__call(
-				            "oauth_authorize",
-				            {},
-				            function (auth_url) {
-				                window.codebird_auth = window.open(auth_url);
-				            }
-				        );
-				    }
-				);
-				*/
+			function onSuccess(imageData) {
+				alert(imageData);
+				$window.plugins.socialsharing.share("Message", null, imageData, null);
 	    		/*
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
@@ -151,12 +129,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			}
 
 			function onFail(message) {
-				$window.navigator.notification.alert(message);
-				/*
 				if(message != "no image selected") {
 					$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
 				}
-				*/
 			}
 		}
 
