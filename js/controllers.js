@@ -130,13 +130,13 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 						localStorage.oauth_token_secret = reply.oauth_token_secret;
 
 				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-				        
+
 				        // gets the authorize screen URL
 				        cb.__call(
 				            "oauth_authorize",
 				            {},
 				            function (auth_url) {
-				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authorize?oauth_token=' + localStorage.oauth_token);
+				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authorize?oauth_token=' + localStorage.oauth_token + '&=force_login=true');
 				            }
 				        );
 				    }
