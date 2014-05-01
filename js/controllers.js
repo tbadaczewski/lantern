@@ -136,7 +136,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				            "oauth_authorize",
 				            {},
 				            function (auth_url) {
-				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authorize?oauth_token=' + localStorage.oauth_token + '&=force_login=true');
+				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authorize?oauth_token=' + localStorage.oauth_token + '&force_login=true');
 				            }
 				        );
 				    }
