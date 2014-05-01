@@ -125,6 +125,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				    {oauth_callback: "oob"},
 				    function (reply) {
 				        // stores it
+				        alert(reply.oauth_token + " - " + reply.oauth_token_secret);
 				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
 
 				        // gets the authorize screen URL
