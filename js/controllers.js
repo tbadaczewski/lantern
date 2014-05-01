@@ -103,6 +103,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
+				/*
 				$window.setTimeout(function() {
 					$window.plugins.socialsharing.share("@DOEPics " + $rootScope.address + " #powerlinedown", null, data, null, function(e){
 						if(e) {
@@ -114,11 +115,32 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 						}
 					});
 				}, 500, data);
-	    		/*
+	    		*/
 	    		var cb = new Codebird;
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
-	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+	            //cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
+				cb.__call(
+				    "oauth_requestToken",
+				    {oauth_callback: "oob"},
+				    function (reply) {
+				        // stores it
+				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+
+				        // gets the authorize screen URL
+				        cb.__call(
+				            "oauth_authorize",
+				            {},
+				            function (auth_url) {
+				                window.codebird_auth = window.open(auth_url);
+				            }
+				        );
+				    }
+				);
+
+
+
+	            /*
 				var params = {
 				    "status": "#powerlinedown",
 				    "media[]": imageData,
