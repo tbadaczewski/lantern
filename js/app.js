@@ -103,7 +103,6 @@ lanternApp.config(['$routeProvider',
 lanternApp.factory('validatetag', ['$window',
     function ($window) {
         return function ($id) {
-            /*
             var now = new Date(), last = new Date();
             var last = new Date();
             var count = 0, diffMs = 0, diffMins = 0;;
@@ -130,7 +129,7 @@ lanternApp.factory('validatetag', ['$window',
                     }
                 }
             }
-            */
+
             return true;
         };
     }
