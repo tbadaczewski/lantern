@@ -117,27 +117,49 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				}, 500, data);
 	    		*/
 	    		var cb = new Codebird;
+				var current_url = location.toString();
+				var query = current_url.match(/\?(.+)$/).split("&amp;");
+				var parameters = {};
+				var parameter;
+
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
 	            //cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
-				cb.__call(
-				    "oauth_requestToken",
-				    {oauth_callback: "oob"},
-				    function (reply) {
-				        // stores it
-				        alert(reply.oauth_token + " - " + reply.oauth_token_secret);
-				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-
-				        // gets the authorize screen URL
-				        cb.__call(
-				            "oauth_authorize",
-				            {},
-				            function (auth_url) {
-				                window.codebird_auth = window.open(auth_url);
-				            }
-				        );
+				for (var i = 0; i < query.length; i++) {
+				    parameter = query[i].split("=");
+				    if (parameter.length === 1) {
+				        parameter[1] = "";
 				    }
-				);
+				    parameters[decodeURIComponent(parameter[0])] = decodeURIComponent(parameter[1]);
+				}
+
+				// check if oauth_verifier is set
+				if (typeof parameters.oauth_verifier !== "undefined") {
+				    // assign stored request token parameters to codebird here
+				    // ...
+				    alert(localStorage.oauth_token + " - " + localStorage.oauth_token_secret);
+				    cb.setToken(localStorage.oauth_token, localStorage.oauth_token_secret);
+
+				    cb.__call(
+				        "oauth_accessToken",
+				        {
+				            oauth_verifier: parameters.oauth_verifier
+				        },
+				        function (reply) {
+				        	localStorage.oauth_token =  reply.oauth_token;
+				        	localStorage.oauth_token_secret = reply.oauth_token_secret;
+				        	
+				            cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+
+				            // if you need to persist the login after page reload,
+				            // consider storing the token in a cookie or HTML5 local storage
+				        }
+				    );
+				}
+
+
+
+
 
 
 
