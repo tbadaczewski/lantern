@@ -98,7 +98,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType : Camera.DestinationType.FILE_URI
+					destinationType : Camera.DestinationType.DATA_URL
 				}
 			);
 
@@ -110,7 +110,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 				var params = {
 				    "status": "#powerlinedown",
-				    "media[]": imageData,
+				    "media[]": data,
 				    lat: $rootScope.position.coords.latitude,
 				    long: $rootScope.position.coords.longitude,
 				    display_coordinates: true
