@@ -104,7 +104,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 			function onSuccess(data) {
 				$window.setTimeout(function() {
-					$window.plugins.socialsharing.share($rootScope.address + " #powerlinedown", null, data, null, function(e){
+					$window.plugins.socialsharing.share("@DOEPics " + $rootScope.address + " #powerlinedown", null, data, null, function(e){
 						if(e) {
 							$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
 						}
