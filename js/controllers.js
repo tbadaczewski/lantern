@@ -103,46 +103,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			);
 
 			function onSuccess(data) {
-				/*
-				$window.setTimeout(function() {
-					$window.plugins.socialsharing.share("@DOEPics " + $rootScope.address + " #powerlinedown", null, data, null, function(e){
-						if(e) {
-							$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-						}
-					}, function(e){
-						if(e) {
-							$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
-						}
-					});
-				}, 500, data);
-	    		*/
 	    		var cb = new Codebird;
 
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
-	            //cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
+	            cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
 
-				cb.__call(
-				    "oauth_requestToken",
-				    {oauth_callback: "oob"},
-				    function (reply) {
-				        // stores it
-						localStorage.oauth_token = reply.oauth_token;
-						localStorage.oauth_token_secret = reply.oauth_token_secret;
-
-				        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-
-				        // gets the authorize screen URL
-				        cb.__call(
-				            "oauth_authorize",
-				            {},
-				            function (auth_url) {
-				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authorize?oauth_token=' + localStorage.oauth_token + '&force_login=true');
-				            }
-				        );
-				    }
-				);
-
-	            /*
 				var params = {
 				    "status": "#powerlinedown",
 				    "media[]": imageData,
@@ -158,7 +123,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				);
 
 				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-				*/
 			}
 
 			function onFail(message) {
@@ -223,13 +187,13 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
 				if ($scope.status == "open") {
-					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed').success(function (data) {
+					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
 				        loadstations().then(function(data) {
 				        	$rootScope.stations = $scope.stations = data;
 				        });						
 					});				
 				} else {
-					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open').success(function (data) {
+					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
 				        loadstations().then(function(data) {
 				        	$rootScope.stations = $scope.stations = data;			        	
 				        });
@@ -242,10 +206,21 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
 		$scope.tagOpenWindow = function(id, status) {
 			if(validatetag(id) == true) {
-				if(status != "red") {
-					$scope.status = "open";
-				} else {
-					$scope.status = "closed";
+				$scope.status = status;
+
+				switch(status) {
+					case "green":
+						$scope.state = "open";
+						$scope.message = "closed or unoperational";
+						break;
+					case "yellow":
+						$scope.state = "open";
+						$scope.message = "open/operational or closed/unoperational";
+						break;
+					case "red":
+						$scope.state = "closed";
+						$scope.message = "open/operational";
+						break;
 				}
 
 				$scope.stationid = id;
@@ -342,15 +317,15 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
 				if ($scope.status == "open") {
-					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/closed').success(function (data) {
+					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/closed', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
 				        loadstations().then(function(data) {
 				        	$rootScope.stations = data;
 				        	$scope.showdetails = null;
 				        	$scope.loadMarkers();
-				        });	
-					});				
+				        });
+					});
 				} else {
-					$http.get('http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/open').success(function (data) {
+					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/open', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
 				        loadstations().then(function(data) {
 				        	$rootScope.stations = data;
 				        	$scope.showdetails = null;
@@ -363,10 +338,21 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.tagOpenWindow = function(id, status) {
 			if(validatetag(id) == true) {
-				if(status != "red") {
-					$scope.status = "open";
-				} else {
-					$scope.status = "closed";
+				$scope.status = status;
+
+				switch(status) {
+					case "green":
+						$scope.state = "open";
+						$scope.message = "closed or unoperational";
+						break;
+					case "yellow":
+						$scope.state = "open";
+						$scope.message = "open/operational or closed/unoperational";
+						break;
+					case "red":
+						$scope.state = "closed";
+						$scope.message = "open/operational";
+						break;
 				}
 
 				$scope.stationid = id

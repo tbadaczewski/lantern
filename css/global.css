@@ -452,7 +452,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 .item.list {
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
+	background: #fff; /*url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;*/
 	padding: 1em;
 	clear: both;
 }
@@ -466,9 +466,15 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	cursor: text;
 }
 
+.station {
+	display: table;
+	width: 100%;
+}
+
 .item-options {
 	position: relative;
-	display: block;
+	display: table;
+	width: 100%;
 	background: #fff;
 	font-size: 75%;
 	clear: both;
@@ -485,18 +491,17 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 .item-options > div {
-	float: left;	
-	text-align: center;	
-	width: 50%;
-	height: 40px;
-	margin-left: 0;
-	margin-right: -100em;
-	display: inline-block;
+	display: table-row;
 }
 
-.item-options > div + div {
-	width: 50%;
-	margin-left: 50%;
+.item-options > div > div {
+	text-align: center;
+	border-top: solid 1px #c7c7c7;
+	height: 40px;
+	display: table-cell;
+}
+
+.item-options > div > div + div {
 	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-y left top;
 }
 
@@ -660,7 +665,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 .ng-modal-dialog .description {
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;
+	background: #fff;/* url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;*/
 	padding: 1em;
 	overflow: auto;	
 	text-align: center;

@@ -1,25 +1,30 @@
 <modaldialog>
 	<div class="description">
-		<h3>This Station is {{status == "closed" ? "Closed" : "Open"}}</h3>
-		<p>Mark this station as currently {{status == "closed" ? "open or operational" : "closed or unoperational"}}.</p>
+		<h3>This Station is {{state == "closed" ? "Closed" : "Open"}}</h3>
+		<p>Mark this station as currently {{message}}.</p>
 	</div>
-    <div class="item-options clearfix">
-		<div><a href="" ng-click="tagCancel()">Cancel</a></div>
-    	<div><a href="" ng-click="tagStation(stationid, status)"><span class="icon-tag" aria-hidden="true"></span> Tag {{status == "closed" ? "Open" : "Closed" }}</a></div>
+    <div class="item-options">
+    	<div>			
+			<div ng-show="status == 'red' || status == 'yellow'"><a href="" ng-click="tagStation(stationid, 'open')"><span class="icon-tag" aria-hidden="true"></span> Tag Open</a></div>
+    		<div ng-show="status == 'green' || status == 'yellow'"><a href="" ng-click="tagStation(stationid, 'closed')"><span class="icon-tag" aria-hidden="true"></span> Tag Closed</a></div>
+    		<div><a href="" ng-click="tagCancel()"><span class="icon-close" aria-hidden="true"></span> Cancel</a></div>
+    	</div>
     </div>	
 </modaldialog>
 <div class="stations">
-    <div ng-repeat="station in stations">
+    <div class="station" ng-repeat="station in stations">
     	<div class="item list">
 	        <h4><span class="circle {{station.operatingStatus}}"></span> {{station.station}}</h4>
 	        <div class="small">
-	        	{{station.address}}<br />
-	        	{{station.city}}, {{station.region}} {{station.zip}}
+	        	{{station.address}}<br />{{station.city}}, {{station.region}} {{station.zip}}
 	    	</div>
     	</div>
-	    <div class="item-options clearfix">
-    		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
-	    	<div><a href="" ng-click="tagOpenWindow(station.id, station.operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag {{station.operatingStatus == "red" ? "Open" : "Closed"}}</a></div>
+	    <div class="item-options">
+	    	<div>
+	    		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
+		    	<div><a href=""><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
+		    	<div><a href="" ng-click="tagOpenWindow(station.id, station.operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag Status</a></div>
+	    	</div>
 	    </div>
     </div>
 </div>
