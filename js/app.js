@@ -13,6 +13,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
     document.addEventListener('deviceready', function() {
+        $rootScope.sessionid = guid();
         intializeMe();
     }, false);
 
@@ -20,7 +21,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    function intializeMe() {
+    function intializeMe() {     
         geolocation().then(function(position) {            
             $rootScope.position = position;
 
@@ -42,6 +43,16 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         twitter().then(function(timeline) {
             $rootScope.tweets = timeline;
         });
+    }
+
+    function guid() {
+        var sGuid="";
+
+        for (var i=0; i<32; i++) {
+            sGuid += Math.floor(Math.random()*0xF).toString(0xF);
+        }
+
+        return sGuid;
     }
 });
 
@@ -241,7 +252,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
 
-            $http.get('http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude).success(function (data) {
+            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': $rootScope.sessionid}}).success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
@@ -257,7 +268,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
 
-            $http.get('http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county).success(function (data) {
+            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': $rootScope.sessionid}}).success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
