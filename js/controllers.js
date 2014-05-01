@@ -117,10 +117,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				}, 500, data);
 	    		*/
 	    		var cb = new Codebird;
-				var current_url = location.toString();
-				var query = current_url.match(/\?(.+)$/).split("&amp;");
-				var parameters = {};
-				var parameter;
 
 	            cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
 	            //cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
@@ -140,6 +136,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				            "oauth_authorize",
 				            {},
 				            function (auth_url) {
+				            	alert('https://api.twitter.com/oauth/authenticate?oauth_token=' + localStorage.oauth_token);
 				                window.codebird_auth = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + localStorage.oauth_token);
 				            }
 				        );
