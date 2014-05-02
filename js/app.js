@@ -282,6 +282,22 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     }
 ]);
 
+lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
+    function ($q, $rootScope, $http) {
+        return function (id, status) {
+            var deferred = $q.defer();
+
+            alert(status);
+
+            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                deferred.resolve(eval(data));     
+            }); 
+
+            return deferred.promise;
+        };
+    }
+]);
+
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {  

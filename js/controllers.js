@@ -139,16 +139,18 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag',
-    function ($scope, $rootScope, $http, $window, loadstations, validatetag) {
+lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
+    function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
+    	$window.plugins.spinnerDialog.show();
+
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = $scope.stations = data;
-	        	$scope.hideloading = true;
+	        	$window.plugins.spinnerDialog.hide();
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			$scope.hideloading = true;
+			$window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -186,19 +188,11 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				$scope.show = false;
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
-				if ($scope.status == "open") {
-					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/closed', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-				        loadstations().then(function(data) {
-				        	$rootScope.stations = $scope.stations = data;
-				        });						
-					});				
-				} else {
-					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + $scope.stationid + '/open', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-				        loadstations().then(function(data) {
-				        	$rootScope.stations = $scope.stations = data;			        	
-				        });
-					});			
-				}
+				tagstatus($scope.stationid, status).then(function(data) {
+			        loadstations().then(function(data) {
+			        	$rootScope.stations = $scope.stations = data;
+			        });						
+				});
 			}
 
 			$scope.showdetails = null; 
@@ -245,9 +239,10 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
+		$window.plugins.spinnerDialog.show();
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -274,7 +269,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
-        	$scope.hideloading = true;
+        	$window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -316,23 +311,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				$scope.show = false;		
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
-				if ($scope.status == "open") {
-					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/closed', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-				        loadstations().then(function(data) {
-				        	$rootScope.stations = data;
-				        	$scope.showdetails = null;
-				        	$scope.loadMarkers();
-				        });
-					});
-				} else {
-					$http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/open', headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-				        loadstations().then(function(data) {
-				        	$rootScope.stations = data;
-				        	$scope.showdetails = null;
-				        	$scope.loadMarkers();
-				        });
-					});			
-				}
+				tagstatus($scope.stationid, status).then(function(data) {
+			        loadstations().then(function(data) {
+			        	$rootScope.stations = $scope.stations = data;
+			        });						
+				});
 			}
 		};
 
@@ -364,11 +347,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
-	        	$scope.hideloading = true;
+	        	$window.plugins.spinnerDialog.hide();
 	        });
 		} else {
         	$scope.loadMarkers();
-        	$scope.hideloading = true;
+        	$window.plugins.spinnerDialog.hide();
 		}
 		
 		$rootScope.typestate = true;		
@@ -385,6 +368,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages', '$location',
     function ($scope, $rootScope, $http, loadoutages, $location) {
+    	$window.plugins.spinnerDialog.show();
+
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
 			$rootScope.outagemap = url;
@@ -394,7 +379,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {
 	        loadoutages().then(function(data) {
 	        	$rootScope.outages = $scope.outages = data;
-	        	$scope.hideloading = true;
+	        	$window.plugins.spinnerDialog.hide();
 	        });
 		}
 

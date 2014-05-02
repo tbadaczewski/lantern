@@ -485,7 +485,8 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 .item-options a {
-	padding: 1em 0;
+	font-weight: bold;
+	padding: 1em 0.75em;
 	display: block;
 	color: #434a4f;
 }
@@ -577,7 +578,6 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 .circle.green { background: #64af00;}
 .circle.yellow { background: #fff200;}
 .circle.red { background: #ed1c24;}
-
 
 #map_canvas{
 	position: absolute;
