@@ -366,8 +366,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages', '$location',
-    function ($scope, $rootScope, $http, loadoutages, $location) {
+lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', '$loadoutages', '$location',
+    function ($scope, $rootScope, $http, $window, loadoutages, $location) {
     	window.plugins.spinnerDialog.show();
 
 		$scope.getMap = function($event, url) {
@@ -387,7 +387,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 	        $scope.init();
 		} else {
 			$scope.outages = $rootScope.outages;
-			$scope.hideloading = true;
+			window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('outagesUpdated', function() {
@@ -413,7 +413,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
-		$scope.hideloading = true;
+		window.plugins.spinnerDialog.hide();
 
 		$scope.trustUrl = function(url) {
 		    return $sce.trustAsResourceUrl(url);
