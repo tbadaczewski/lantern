@@ -141,16 +141,16 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
-    	$window.plugins.spinnerDialog.show();
+    	window.plugins.spinnerDialog.show();
 
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = $scope.stations = data;
-	        	$window.plugins.spinnerDialog.hide();
+	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			$window.plugins.spinnerDialog.hide();
+			window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -242,7 +242,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
-		$window.plugins.spinnerDialog.show();
+		window.plugins.spinnerDialog.show();
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -269,7 +269,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
-        	$window.plugins.spinnerDialog.hide();
+        	window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -347,11 +347,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
-	        	$window.plugins.spinnerDialog.hide();
+	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
         	$scope.loadMarkers();
-        	$window.plugins.spinnerDialog.hide();
+        	window.plugins.spinnerDialog.hide();
 		}
 		
 		$rootScope.typestate = true;		
@@ -368,7 +368,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', 'loadoutages', '$location',
     function ($scope, $rootScope, $http, loadoutages, $location) {
-    	$window.plugins.spinnerDialog.show();
+    	window.plugins.spinnerDialog.show();
 
 		$scope.getMap = function($event, url) {
 			$event.preventDefault();
@@ -379,7 +379,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {
 	        loadoutages().then(function(data) {
 	        	$rootScope.outages = $scope.outages = data;
-	        	$window.plugins.spinnerDialog.hide();
+	        	window.plugins.spinnerDialog.hide();
 	        });
 		}
 
