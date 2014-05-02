@@ -188,7 +188,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				$scope.show = false;
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
-				tagstatus($scope.stationid, status).then(function(data) {
+				tagstatus(id, status).then(function(data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = $scope.stations = data;
 			        });						
@@ -311,7 +311,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				$scope.show = false;		
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
 				
-				tagstatus($scope.stationid, status).then(function(data) {
+				tagstatus(id, status).then(function(data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = $scope.stations = data;
 			        });						
