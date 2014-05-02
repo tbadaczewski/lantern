@@ -146,7 +146,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = $scope.stations = data;
-	        	$rootScope.$emit('stationsUpdated', new Date());
 	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
@@ -314,7 +313,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				
 				tagstatus(id, status).then(function(data) {
 			        loadstations().then(function(data) {
-			        	$rootScope.stations = $scope.stations = data;
+			        	$rootScope.stations = data;
 			        	$rootScope.$emit('stationsUpdated', new Date());
 			        	$scope.showdetails = null; 
 			        });						
@@ -349,7 +348,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
-	        	$rootScope.$emit('stationsUpdated', new Date());
 	        	$scope.loadMarkers();
 	        	window.plugins.spinnerDialog.hide();
 	        });
@@ -383,7 +381,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {
 	        loadoutages().then(function(data) {
 	        	$rootScope.outages = $scope.outages = data;
-	        	$rootScope.$emit('outagesUpdated', new Date());
 	        	window.plugins.spinnerDialog.hide();
 	        });
 		}
