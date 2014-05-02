@@ -145,7 +145,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
 
                 for(var i = 0; i < reply.length; i++) {
                     var id = reply[i].id_str;
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='https://twitter.com/energy/status/" + id + "' class='time' target='_blank'>" + parseTwitterDate(reply[i].created_at) + "</a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + " <span class='nickname'>@energy</span></a><br />" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + id + "' target='_blank'><span class='icon-reply' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + id + "' target='_blank'><span class='icon-retweet' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + id + "' target='_blank'><span class='icon-favorite' aria-hidden='true'></span></a></div></div></div>";
+                    formatted += "<div class='entry clearfix'><div class='message'><a href='https://twitter.com/energy/status/" + id + "' class='time' target='_blank'>" + parseTwitterDate(reply[i].created_at) + "</a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + " <span class='nickname'>@energy</span></a><br />" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + id + "' target='_blank'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + id + "' target='_blank'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + id + "' target='_blank'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
                 }
 
                 deferred.resolve(formatted);
@@ -286,8 +286,6 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function (id, status) {
             var deferred = $q.defer();
-
-            alert(status);
 
             $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));     
@@ -549,19 +547,5 @@ lanternApp.directive('contentframe', function() {
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
         }
-    };
-});
-
-lanternApp.directive('loading', function() {
-    return {
-        restrict: 'E',
-        replace: true,
-        transclude: true,
-        template: '<div class="progress" ng-hide="hideloading"><div ng-transclude>Loading</div></div>',
-        link: function (scope, element, attrs) {
-            scope.$watch('hideloading', function(newValue, oldValue) {
-                scope.hideloading = newValue;
-            });
-        },
     };
 });
