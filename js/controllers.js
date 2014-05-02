@@ -191,6 +191,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				tagstatus(id, status).then(function(data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = $scope.stations = data;
+			        	$scope.showdetails = null;
 			        });						
 				});
 			}
@@ -314,6 +315,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				tagstatus(id, status).then(function(data) {
 			        loadstations().then(function(data) {
 			        	$rootScope.stations = $scope.stations = data;
+			        	$scope.showdetails = null; 
 			        });						
 				});
 			}
