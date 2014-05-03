@@ -273,6 +273,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
         $rootScope.$on('stationsUpdated', function() {
+        	window.plugins.spinnerDialog.show();
         	$scope.loadMarkers();
     	});
 
@@ -349,11 +350,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
-	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
         	$scope.loadMarkers();
-        	window.plugins.spinnerDialog.hide();
 		}
 		
 		$rootScope.typestate = true;		
