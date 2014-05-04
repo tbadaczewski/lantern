@@ -352,8 +352,6 @@ lanternApp.directive('googlemap', function($rootScope) {
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
-                window.plugins.spinnerDialog.hide();
-
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = null;
@@ -372,6 +370,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                 if(!intialized) {
                     scope.init();
                 }
+
+                window.plugins.spinnerDialog.hide();
             });
 
             scope.init = function () {
@@ -533,8 +533,6 @@ lanternApp.directive('contentframe', function() {
                 var fonts = document.createElement("link");
                 var css = document.createElement("link");
 
-                window.plugins.spinnerDialog.hide();
-
                 fonts.href = "../css/fonts.css"; 
                 fonts.rel = "stylesheet"; 
                 fonts.type = "text/css";                
@@ -553,6 +551,8 @@ lanternApp.directive('contentframe', function() {
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
+
+                window.plugins.spinnerDialog.hide();
             }
         }
     };
