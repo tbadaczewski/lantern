@@ -30,6 +30,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 			$scope.searchfocus = true;
 		}
 
+		/*
 		$scope.showClear = function() {
 			$scope.searchfocus = true;
 		}
@@ -37,7 +38,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		$scope.hideClear = function() {
 			$scope.searchfocus = false;
 		}
-
+		*/
+		
     	$scope.locate = function() {
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
@@ -155,6 +157,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
         $rootScope.$on('stationsUpdated', function() {
         	$scope.stations = $rootScope.stations;
+        	window.plugins.spinnerDialog.hide();
     	});
 
    		$scope.tagCancel = function() {

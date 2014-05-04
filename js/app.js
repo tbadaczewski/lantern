@@ -298,7 +298,8 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
 
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
-        link: function(scope, element, attrs) {  
+        link: function(scope, element, attrs) {
+            /*
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if (value == true) {
@@ -312,17 +313,53 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                     }
                 }, 500);
             });
+            */
+            scope.$watch('searchfocus', function(newValue, oldValue) {
+                if (newValue !== oldValue) {        
+                    $timeout(function() {
+                        if(document.activeElement != element[0]) {
+                            scope.focus();                 
+                        } else {
+                            scope.blur();
+                        }
+                    }, 500);
+                }
+            });
+
+            element.bind("focus", function(e) {
+                scope.focus();
+            });
+
+            element.bind("blur", function(e) {
+                scope.blur();
+            });
 
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
-                    element[0].blur();
-
-                    if (typeof SoftKeyboard !== 'undefined') {
-                        SoftKeyboard.hide();
-                    }
+                    scope.blur();
                 }     
             });
+
+            scope.focus = function() {
+                element[0].focus();
+
+                if (typeof SoftKeyboard !== 'undefined') {
+                    SoftKeyboard.show();
+                }
+
+                scope.$emit('searchfocus', true);
+            }
+
+            scope.blur = function() {
+                element[0].blur();
+
+                if (typeof SoftKeyboard !== 'undefined') {
+                    SoftKeyboard.hide();
+                }
+
+                scope.$emit('searchfocus', false);
+            }
         }
     };
 });
