@@ -324,6 +324,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
+                    scope.$emit('searchfocus', false);
                 }     
             });
 
