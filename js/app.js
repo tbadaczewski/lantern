@@ -301,16 +301,14 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
-            scope.$watch('searchfocus', function(newValue, oldValue) {
-                if (newValue !== oldValue) {        
-                    $timeout(function() {
-                        if(newValue == true) {
-                            scope.focus();                 
-                        } else {
-                            scope.blur();
-                        }
-                    }, 500);
-                }
+            scope.$watch('searchfocus', function(value) {      
+                $timeout(function() {
+                    if(value == true) {
+                        scope.focus();                 
+                    } else {
+                        scope.blur();
+                    }
+                }, 500);
             });
 
             element.bind("focus", function(e) {
