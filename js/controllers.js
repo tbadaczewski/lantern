@@ -28,7 +28,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		$scope.clear = function() {
 			$scope.address = "";
 
-			if(!$scope.searchfocus) {
+			if($scope.searchfocus == false) {
 				$scope.searchfocus = true;
 			}
 		}
