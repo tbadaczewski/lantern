@@ -202,8 +202,8 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope',
-    function ($q, $rootScope) {
+lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window'
+    function ($q, $rootScope, $window) {
         return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
@@ -242,6 +242,8 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                     }
 
                     deferred.resolve(location);
+                } else {
+                    $window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', null, 'Success', 'Close');
                 }
             });
 
@@ -299,21 +301,6 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
-            /*
-            scope.$watch('searchfocus', function(value) {
-                $timeout(function() {
-                    if (value == true) {
-                        if(document.activeElement != element[0]) {
-                            element[0].focus();
-
-                            if (typeof SoftKeyboard !== 'undefined') {
-                                SoftKeyboard.show();
-                            }                      
-                        }
-                    }
-                }, 500);
-            });
-            */
             scope.$watch('searchfocus', function(newValue, oldValue) {
                 if (newValue !== oldValue) {        
                     $timeout(function() {
