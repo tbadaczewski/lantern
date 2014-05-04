@@ -327,11 +327,11 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
             });
 
             element.bind("focus", function(e) {
-                scope.focus();
+                scope.$emit('searchfocus', true);
             });
 
             element.bind("blur", function(e) {
-                scope.blur();
+                scope.$emit('searchfocus', false);
             });
 
             element.bind("keyup", function(e) {
@@ -347,8 +347,6 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 if (typeof SoftKeyboard !== 'undefined') {
                     SoftKeyboard.show();
                 }
-
-                scope.$emit('searchfocus', true);
             }
 
             scope.blur = function() {
@@ -357,8 +355,6 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 if (typeof SoftKeyboard !== 'undefined') {
                     SoftKeyboard.hide();
                 }
-
-                scope.$emit('searchfocus', false);
             }
         }
     };
