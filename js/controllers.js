@@ -27,21 +27,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
 		$scope.clear = function() {
 			$scope.address = "";
-
-			if($scope.searchfocus !== true) {
-				$scope.searchfocus = true;
-			}
-		}
-
-		/*
-		$scope.showClear = function() {
 			$scope.searchfocus = true;
 		}
-
-		$scope.hideClear = function() {
-			$scope.searchfocus = false;
-		}
-		*/
 
     	$scope.locate = function() {
 	        geolocation().then(function(position) {
