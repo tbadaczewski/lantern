@@ -304,7 +304,7 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
             scope.$watch('searchfocus', function(newValue, oldValue) {
                 if (newValue !== oldValue) {        
                     $timeout(function() {
-                        if(document.activeElement != element[0]) {
+                        if(newValue == true) {
                             scope.focus();                 
                         } else {
                             scope.blur();
