@@ -2,26 +2,31 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
-    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
+    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, loadoutages) {
     	$scope.search = function() {
     		$scope.searchfocus = false;
     		$rootScope.address = $scope.address;
 
 			geoencoder('address').then(function(address) {
-				$rootScope.address = $scope.address = address[0];
-				$rootScope.county = address[1];
-				$rootScope.state = address[2];
+				if(address == null) {
+					$window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', null, 'Invalid Address', 'Close');
+				} else {
+					$scope.searchfocus = false;
+					$rootScope.address = $scope.address = address[0];
+					$rootScope.county = address[1];
+					$rootScope.state = address[2];
 
-                loadstations().then(function(data) {
-                    $rootScope.stations = data;
-                    $rootScope.$emit('stationsUpdated', new Date());
-                }); 
+	                loadstations().then(function(data) {
+	                    $rootScope.stations = data;
+	                    $rootScope.$emit('stationsUpdated', new Date());
+	                }); 
 
-                loadoutages().then(function(data) {
-                    $rootScope.outages = data;
-                    $rootScope.$emit('outagesUpdated', new Date());
-                });
+	                loadoutages().then(function(data) {
+	                    $rootScope.outages = data;
+	                    $rootScope.$emit('outagesUpdated', new Date());
+	                });
+            	}
 			});
 		}
 
@@ -31,6 +36,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		}
 
     	$scope.locate = function() {
+    		$scope.searchfocus = false;
+
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
 

@@ -202,8 +202,8 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
-    function ($q, $rootScope, $window) {
+lanternApp.factory('geoencoder', ['$q', '$rootScope',
+    function ($q, $rootScope) {
         return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
@@ -243,7 +243,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
 
                     deferred.resolve(location);
                 } else {
-                    $window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', null, 'Success', 'Close');
+                    deferred.resolve(null);
                 }
             });
 
@@ -302,8 +302,6 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
-                alert(value);
-                
                 $timeout(function() {
                     if(value == true) {
                         scope.focus();                 
