@@ -346,10 +346,14 @@ lanternApp.directive('googlemap', function($rootScope) {
                 zoomControl: false,
                 streetViewControl: false
             };
+
+            window.plugins.spinnerDialog.show();
             
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
+                window.plugins.spinnerDialog.hide();
+                
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = null;
