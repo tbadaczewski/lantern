@@ -27,7 +27,10 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
 		$scope.clear = function() {
 			$scope.address = "";
-			$scope.searchfocus = true;
+
+			if(!$scope.searchfocus) {
+				$scope.searchfocus = true;
+			}
 		}
 
 		/*
@@ -39,7 +42,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 			$scope.searchfocus = false;
 		}
 		*/
-		
+
     	$scope.locate = function() {
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
