@@ -10,7 +10,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 			geoencoder('address').then(function(address) {
 				if(address == null) {
-					$window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', null, 'Invalid Address', 'Close');
+					$window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', $scope.clear(), 'Invalid Address', 'Close');
 				} else {
 					$scope.searchfocus = false;
 					$rootScope.address = $scope.address = address[0];
