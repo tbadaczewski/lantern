@@ -301,7 +301,9 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
 lanternApp.directive('focusme', function($timeout, $rootScope) {
     return {
         link: function(scope, element, attrs) {
-            scope.$watch('searchfocus', function(value) {      
+            scope.$watch('searchfocus', function(value) {
+                alert(value);
+                
                 $timeout(function() {
                     if(value == true) {
                         scope.focus();                 
