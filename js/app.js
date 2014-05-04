@@ -202,7 +202,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window'
+lanternApp.factory('geoencoder', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function ($type) {
             var deferred = $q.defer();
