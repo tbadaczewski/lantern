@@ -146,11 +146,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = $scope.stations = data;
-	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
@@ -406,19 +404,19 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
     	$scope.hideloading = false;  	
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
-		window.plugins.spinnerDialog.hide();
-
+		/*
 		$scope.trustUrl = function(url) {
 		    return $sce.trustAsResourceUrl(url);
 		}
+		*/
     }
 ]);
 

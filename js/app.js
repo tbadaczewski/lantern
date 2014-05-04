@@ -353,7 +353,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
             google.maps.event.addListener(map, 'tilesloaded', function(e) {
                 window.plugins.spinnerDialog.hide();
-                
+
                 google.maps.event.addListener(map, 'click', function(e) {
                     scope.$apply(function() {
                         scope.showdetails = null;
@@ -513,6 +513,8 @@ lanternApp.directive('contentframe', function() {
             scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
+            window.plugins.spinnerDialog.show();
+
             scope.$on('goback', function() {
                 if(scope.index > 1) {
                     scope.index--;
@@ -530,6 +532,8 @@ lanternApp.directive('contentframe', function() {
             scope.frame.onload = function() {
                 var fonts = document.createElement("link");
                 var css = document.createElement("link");
+
+                window.plugins.spinnerDialog.hide();
 
                 fonts.href = "../css/fonts.css"; 
                 fonts.rel = "stylesheet"; 
