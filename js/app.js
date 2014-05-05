@@ -496,7 +496,7 @@ lanternApp.directive('contentframe', function() {
             title: '@',
             src: '@'
         },
-        template: "<iframe ng-transclude></iframe>",
+        template: "<iframe sandbox='allow-same-origin allow-top-navigation' ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0];
