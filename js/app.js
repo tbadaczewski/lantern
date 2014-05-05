@@ -498,11 +498,11 @@ lanternApp.directive('contentframe', function() {
         },
         template: "<iframe sandbox='allow-same-origin allow-top-navigation' ng-transclude></iframe>",
         link: function (scope, element, attrs) {
+            spinnerplugin.show({ overlay: true, fullscreen: true });
+            
             scope.index = 0;
             scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
-
-            spinnerplugin.show({ overlay: false, fullscreen: true });
 
             scope.$on('goback', function() {
                 if(scope.index > 1) {
