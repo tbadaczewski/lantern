@@ -477,6 +477,9 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$window',
 
 		$scope.openwindow = function($event, $url) {
 			$event.preventDefault($event);
+
+			alert($url);
+
 			$window.open($url, "_system");
 		}
     }
