@@ -503,7 +503,7 @@ lanternApp.directive('contentframe', function() {
             scope.history = [scope.frame.contentWindow.location.pathname];
 
             spinnerplugin.show({ overlay: false, fullscreen: true });
-            
+
             scope.$on('goback', function() {
                 if(scope.index > 1) {
                     scope.index--;
@@ -519,7 +519,7 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                if(this.contentWindow.document) {
+                try {
                     this.contentWindow.document.body.id = this.id;
 
                     if(this.getAttribute("data-css")) {
@@ -540,7 +540,9 @@ lanternApp.directive('contentframe', function() {
                     if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                         scope.history.push(this.contentWindow.location.pathname);
                         scope.index++;                    
-                    }
+                    }                    
+                } catch(error) {
+
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);

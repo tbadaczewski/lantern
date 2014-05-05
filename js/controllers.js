@@ -374,13 +374,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location',
-    function ($scope, $rootScope, $http, $window, loadoutages, $location) {
+lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$sce',
+    function ($scope, $rootScope, $http, $window, loadoutages, $location, $sce) {
     	spinnerplugin.show({ overlay: false, fullscreen: true });
 
-		$scope.getMap = function($event, url) {
+		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
-			$rootScope.outagemap = url;
+			$rootScope.outagemap = $sce.trustAsResourceUrl($url);
 			$location.path("/outage-map");
 		}
 
