@@ -336,7 +336,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 streetViewControl: false
             };
 
-            window.plugins.spinnerDialog.show();
+            spinnerplugin.show({ overlay: false, fullscreen: true });
             
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
@@ -360,7 +360,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     scope.init();
                 }
 
-                window.plugins.spinnerDialog.hide();
+                spinnerplugin.hide();
             });
 
             scope.init = function () {
@@ -502,8 +502,8 @@ lanternApp.directive('contentframe', function() {
             scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
 
-            window.plugins.spinnerDialog.show();
-
+            spinnerplugin.show({ overlay: false, fullscreen: true });
+            
             scope.$on('goback', function() {
                 if(scope.index > 1) {
                     scope.index--;
@@ -545,7 +545,7 @@ lanternApp.directive('contentframe', function() {
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
 
-                window.plugins.spinnerDialog.hide();
+                spinnerplugin.hide();
             }
         }
     };
