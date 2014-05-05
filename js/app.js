@@ -496,10 +496,10 @@ lanternApp.directive('contentframe', function() {
             title: '@',
             src: '@'
         },
-        template: "<iframe sandbox='allow-same-origin allow-top-navigation' ng-transclude></iframe>",
+        template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
-            spinnerplugin.show({ overlay: true, fullscreen: true });
-            
+            spinnerplugin.show({ overlay: false, fullscreen: true });
+
             scope.index = 0;
             scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
