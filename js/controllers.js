@@ -472,10 +472,12 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 		$scope.id = "twitter";
 
 		$scope.autoHyperlinkUrls = function(text) {
-		    text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_blank\">$1$2</a>");
-		    text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_blank\">#$1</a>');
-		    text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_blank\">@$1</a>');
-		    
+			if(text) {
+		    	text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_system\">$1$2</a>");
+		    	text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_system\">#$1</a>');
+		    	text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_system\">@$1</a>');
+		    }
+
 		    return $sce.trustAsResourceUrl(text);
 		}
 
