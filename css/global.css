@@ -402,22 +402,20 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	padding: 0;
 	background: #fff;
 	text-align: center;
-	padding-right: 17px;
-}
-
-#btn-clear {
-	width: 35px;
-	padding-right: 15px;
-}
-
-#btn-target, #btn-search {
-	width: 38px;
 	padding-right: 15px;
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
 	margin-top: 6px;
 	margin-right: 0;
+}
+
+#btn-clear {
+	width: 35px;
+}
+
+#btn-target, #btn-search {
+	width: 38px;
 }
 
 #btn-lantern {
