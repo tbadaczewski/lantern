@@ -12,6 +12,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
+    intializeMe();
+
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
@@ -143,27 +145,31 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
                 var formatted = "";
 
                 for(var i = 0; i < reply.length; i++) {
-                    var id = reply[i].id_str;
-                    var id = "", screen_name = "", profile_image_url = "", text = "", name = "";
+                    var id = "", screen_name = "", profile_image_url = "", text = "", name = "", created_at = "";
 
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='' ng-click='openwindow($event, \"https://twitter.com/energy/status/" + id + "\")' class='time'>" + parseTwitterDate(reply[i].created_at) + "</a>";
-                    
                     if(reply[i].retweeted_status) {
                         id = reply[i].retweeted_status.id_str;
                         screen_name = reply[i].retweeted_status.user.screen_name;
                         profile_image_url = reply[i].retweeted_status.user.profile_image_url;
                         text = reply[i].retweeted_status.text;
                         name = reply[i].retweeted_status.user.name;
-                        formatted += "<a href='' ng-click='openwindow($event, \"https://twitter.com/" + reply[i].user.screen_name + "\")' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + reply[i].user.name + " retweeted</a>";
+                        created_at = reply[i].retweeted_status.created_at;                     
                     } else {
                         id = reply[i].id_str;
                         screen_name = reply[i].user.screen_name;
                         profile_image_url = reply[i].user.profile_image_url;
                         text = reply[i].text;
                         name = reply[i].user.name;
+                        created_at = reply[i].created_at;
                     }
 
-                    formatted += "<a href='' ng-click='openwindow($event, \"https://twitter.com/" + screen_name + "\")' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ng-click='openwindow($event, \"https://twitter.com/" + screen_name + "\")' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ng-click='openwindow($event, \"https://twitter.com/intent/tweet?in_reply_to=" + id + "\")'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow($event, \"https://twitter.com/intent/retweet?tweet_id=" + id + "\")'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow($event, \"https://twitter.com/intent/favorite?tweet_id=" + id + "\")'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
+                    formatted += "<div class='entry clearfix'><div class='message'><a href='' onclick='window.open(\"https://twitter.com/energy/status/" + id + "\");return false;' class='time'>" + parseTwitterDate(created_at) + "</a>";
+                    
+                    if(reply[i].retweeted_status) {
+                        formatted += "<a href='' onclick='window.open(\"https://twitter.com/" + screen_name + "\");return false;' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + name + " retweeted</a>";
+                    }
+
+                    formatted += "<a href='' onclick='window.open(\"https://twitter.com/" + screen_name + "\");return false;' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ng-click='openwindow($event, https://twitter.com/" + screen_name + ")' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ng-click='openwindow($event, https://twitter.com/intent/tweet?in_reply_to=" + id + ")'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow($event, \"https://twitter.com/intent/retweet?tweet_id=" + id + "\")'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow($event, \"https://twitter.com/intent/favorite?tweet_id=" + id + "\")'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
                 }
 
                 deferred.resolve(formatted);
