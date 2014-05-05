@@ -468,7 +468,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$window'
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
