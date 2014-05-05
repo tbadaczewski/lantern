@@ -378,21 +378,46 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	font-size: 24px;
 }
 
+*[id^='btn-'] span[class^='icon-']  {
+	display: inline-block;
+	margin-right: 1.5em;
+	width: 25px;
+	text-align: center;
+}
+
+*[id^='btn-']:hover {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+*[id^='btn-'].small:active {
+	background: rgba(255, 255, 255, 0.25);
+}
+
 #btn-target, #btn-search, #btn-clear {
 	font-size: 23px;
 	color: #c7c7c7;
-	overflow: hidden;
-	width: 38px;
+	overflow: hidden;	
 	height: inherit;
 	margin: 0;
 	padding: 0;
 	background: #fff;
 	text-align: center;
+	padding-right: 17px;
+}
+
+#btn-clear {
+	width: 35px;
+	padding-right: 15px;
+}
+
+#btn-target, #btn-search {
+	width: 38px;
 	padding-right: 15px;
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
 	margin-top: 6px;
+	margin-right: 0;
 }
 
 #btn-lantern {
@@ -435,21 +460,6 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	height: 100%;
 	width: 0;
 	border-right: inherit;
-}
-
-*[id^='btn-'] span[class^='icon-']  {
-	display: inline-block;
-	margin-right: 1.5em;
-	width: 25px;
-	text-align: center;
-}
-
-*[id^='btn-']:hover {
-	background: rgba(0, 0, 0, 0.5);
-}
-
-*[id^='btn-'].small:active {
-	background: rgba(255, 255, 255, 0.25);
 }
 
 .divider {
