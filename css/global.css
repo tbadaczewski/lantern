@@ -391,7 +391,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
-	margin-right: 0;
+	margin-right: 15px;
 	margin-top: 6px;
 }
 

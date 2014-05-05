@@ -141,40 +141,8 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
         return function () {
             var deferred = $q.defer();
 
-            $http.get('https://baddie.parseapp.com/timeline').success(function (reply) {
-                var formatted = "";
-
-                for(var i = 0; i < reply.length; i++) {
-                    var id = "", screen_name = "", profile_image_url = "", text = "", name = "", created_at = "";
-
-                    if(reply[i].retweeted_status) {
-                        id = reply[i].retweeted_status.id_str;
-                        screen_name = reply[i].retweeted_status.user.screen_name;
-                        profile_image_url = reply[i].retweeted_status.user.profile_image_url;
-                        text = reply[i].retweeted_status.text;
-                        name = reply[i].retweeted_status.user.name;
-                        created_at = reply[i].retweeted_status.created_at;                     
-                    } else {
-                        id = reply[i].id_str;
-                        screen_name = reply[i].user.screen_name;
-                        profile_image_url = reply[i].user.profile_image_url;
-                        text = reply[i].text;
-                        name = reply[i].user.name;
-                        created_at = reply[i].created_at;
-                    }
-
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='' ng-click='window.open(\"https://twitter.com/energy/status/" + id + "\",\"_system\");return false;' class='time'>" + parseTwitterDate(created_at) + "</a>";
-                    
-                    if(reply[i].retweeted_status) {
-                        formatted += "<a href='' ng-click='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + name + " retweeted</a>";
-                    }
-
-                    formatted += "<a href='' ng-click='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ontouchstart='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ontouchstart='window.open(\"https://twitter.com/intent/tweet?in_reply_to=" + id + "\",\"_system\");return false;><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/retweet?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/favorite?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
-                }
-
-                formatted = $sce.trustAsHtml(formatted);
-
-                deferred.resolve(formatted);
+            $http.get('https://baddie.parseapp.com/timeline').success(function (data) {
+                deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
             })
@@ -183,29 +151,6 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
         };
     }
 ]);
-
-function autoHyperlinkUrls(text) {
-    text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_blank\">$1$2</a>");
-    text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_blank\">#$1</a>');
-    text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_blank\">@$1</a>');
-    
-    return text;
-}
-
-function parseTwitterDate(tdate) {
-    var system_date = new Date(Date.parse(tdate));
-    var user_date = new Date();
-
-    var diff = Math.floor((user_date - system_date) / 1000);
-    
-    if (diff <= 1) {return "now";}
-    if (diff < 60) {return diff + " s";}
-    if (diff <= 3540) {return Math.round(diff / 60) + "m";}
-    if (diff <= 86400) {return Math.round(diff / 3600) + "h";}
-    if (diff < 604800) {return Math.round(diff / 86400) + "d";}
-    
-    return system_date;
-}
 
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {

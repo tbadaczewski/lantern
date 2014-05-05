@@ -413,8 +413,8 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
     	$scope.hideloading = false;  	
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -422,10 +422,6 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
 		window.plugins.spinnerDialog.hide();
-
-		$scope.trustUrl = function(url) {
-		    return $sce.trustAsResourceUrl(url);
-		}
     }
 ]);
 
@@ -468,19 +464,39 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$window',
-    function ($scope, $rootScope, $window) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
+    function ($scope, $rootScope, $sce) {
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
 
-		$scope.openwindow = function() {
-			//$event.preventDefault($event);
+		$scope.autoHyperlinkUrls = function(text) {
+		    text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_blank\">$1$2</a>");
+		    text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_blank\">#$1</a>');
+		    text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_blank\">@$1</a>');
+		    
+		    return $sce.trustAsResourceUrl(text);
+		}
 
-			alert("Fsdfsf");
+		$scope.parseTwitterDate = function(tdate) {
+		    var system_date = new Date(Date.parse(tdate));
+		    var user_date = new Date();
 
-			//$window.open($url, "_system");
+		    var diff = Math.floor((user_date - system_date) / 1000);
+		    
+		    if (diff <= 1) {return "now";}
+		    if (diff < 60) {return diff + " s";}
+		    if (diff <= 3540) {return Math.round(diff / 60) + "m";}
+		    if (diff <= 86400) {return Math.round(diff / 3600) + "h";}
+		    if (diff < 604800) {return Math.round(diff / 86400) + "d";}
+		    
+		    return system_date;
+		}
+
+		$scope.openWindow = function($event, $url) {
+			$event.preventDefault();
+			window.open($url, "_system");
 		}
     }
 ]);
