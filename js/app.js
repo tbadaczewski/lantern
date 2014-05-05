@@ -146,7 +146,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
                     var id = reply[i].id_str;
                     var id = "", screen_name = "", profile_image_url = "", text = "", name = "";
 
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='https://twitter.com/energy/status/" + id + "' class='time' target='_system'>" + parseTwitterDate(reply[i].created_at) + "</a>";
+                    formatted += "<div class='entry clearfix'><div class='message'><a href='' ng-click='openwindow(https://twitter.com/energy/status/" + id + ")' class='time'>" + parseTwitterDate(reply[i].created_at) + "</a>";
                     
                     if(reply[i].retweeted_status) {
                         id = reply[i].retweeted_status.id_str;
@@ -154,7 +154,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
                         profile_image_url = reply[i].retweeted_status.user.profile_image_url;
                         text = reply[i].retweeted_status.text;
                         name = reply[i].retweeted_status.user.name;
-                        formatted += "<a href=\"https://twitter.com/" + reply[i].user.screen_name + "\" target=\"_system\" class=\"retweeted small\"><span class=\"icon-retweet\" aria-hidden=\"true\"></span>" + reply[i].user.name + " retweeted</a>";
+                        formatted += "<a href='' ng-click='openwindow(https://twitter.com/" + reply[i].user.screen_name + ")' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + reply[i].user.name + " retweeted</a>";
                     } else {
                         id = reply[i].id_str;
                         screen_name = reply[i].user.screen_name;
@@ -163,7 +163,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
                         name = reply[i].user.name;
                     }
 
-                    formatted += "<a href=\"https://twitter.com/" + screen_name + "\" target=\"_system\" class=\"logo\"><img src='" + profile_image_url + "' /></a><a href=\"https://twitter.com/" + screen_name + "\" target=\"_blank\" class=\"title\">" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + id + "' target='_blank'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + id + "' target='_blank'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + id + "' target='_blank'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
+                    formatted += "<a href='' ng-click='openwindow(https://twitter.com/" + screen_name + ")' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ng-click='openwindow(https://twitter.com/" + screen_name + ")' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ng-click='openwindow(https://twitter.com/intent/tweet?in_reply_to=" + id + ")'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow(https://twitter.com/intent/retweet?tweet_id=" + id + ")'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ng-click='openwindow(https://twitter.com/intent/favorite?tweet_id=" + id + ")'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
                 }
 
                 deferred.resolve(formatted);
@@ -275,7 +275,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
@@ -291,7 +291,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
             
-            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
@@ -307,7 +307,7 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
         return function (id, status) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'http://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));     
             }); 
 

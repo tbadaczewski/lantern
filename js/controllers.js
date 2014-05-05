@@ -474,5 +474,10 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
+
+		$scope.openwindow = function($event, $url) {
+			$event.preventDefault($event);
+			window.open($url, "_system");
+		}
     }
 ]);
