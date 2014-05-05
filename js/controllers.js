@@ -2,31 +2,26 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, loadoutages) {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
+    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     	$scope.search = function() {
     		$scope.searchfocus = false;
     		$rootScope.address = $scope.address;
 
 			geoencoder('address').then(function(address) {
-				if(address == null) {
-					$window.navigator.notification.alert('Please enter a valid location such as a city and state or zipcode.', $scope.clear(), 'Invalid Address', 'Close');
-				} else {
-					$scope.searchfocus = false;
-					$rootScope.address = $scope.address = address[0];
-					$rootScope.county = address[1];
-					$rootScope.state = address[2];
+				$rootScope.address = $scope.address = address[0];
+				$rootScope.county = address[1];
+				$rootScope.state = address[2];
 
-	                loadstations().then(function(data) {
-	                    $rootScope.stations = data;
-	                    $rootScope.$emit('stationsUpdated', new Date());
-	                }); 
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                    $rootScope.$emit('stationsUpdated', new Date());
+                }); 
 
-	                loadoutages().then(function(data) {
-	                    $rootScope.outages = data;
-	                    $rootScope.$emit('outagesUpdated', new Date());
-	                });
-            	}
+                loadoutages().then(function(data) {
+                    $rootScope.outages = data;
+                    $rootScope.$emit('outagesUpdated', new Date());
+                });
 			});
 		}
 
@@ -35,9 +30,15 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 			$scope.searchfocus = true;
 		}
 
-    	$scope.locate = function() {
-    		$scope.searchfocus = false;
+		$scope.showClear = function() {
+			$scope.searchfocus = true;
+		}
 
+		$scope.hideClear = function() {
+			$scope.searchfocus = false;
+		}
+
+    	$scope.locate = function() {
 	        geolocation().then(function(position) {
 	            $rootScope.position = position;
 
@@ -154,7 +155,6 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 
         $rootScope.$on('stationsUpdated', function() {
         	$scope.stations = $rootScope.stations;
-        	window.plugins.spinnerDialog.hide();
     	});
 
    		$scope.tagCancel = function() {
@@ -205,15 +205,18 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 				switch(status) {
 					case "green":
 						$scope.state = "open";
-						$scope.message = "closed or unoperational";
+						$scope.title = "Gas Pumps are Open";
+						$scope.message = "currently closed";
 						break;
 					case "yellow":
-						$scope.state = "open";
-						$scope.message = "open/operational or closed/unoperational";
+						$scope.state = "uncertain";
+						$scope.title = "Gas Pump Status Uncertain";
+						$scope.message = "currently open or currently closed";
 						break;
 					case "red":
 						$scope.state = "closed";
-						$scope.message = "open/operational";
+						$scope.title = "Gas Pumps are Closed";
+						$scope.message = "currently open";
 						break;
 				}
 
@@ -230,7 +233,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "Map";
-		$rootScope.navtext = "OPEN GAS STATIONS";
+		$rootScope.navtext = "OPEN GAS PUMPS";
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-map";
 		$rootScope.animate = "fixed";
@@ -242,6 +245,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
+		window.plugins.spinnerDialog.show();
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -268,10 +272,10 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
+        	window.plugins.spinnerDialog.hide();
 		}
 
         $rootScope.$on('stationsUpdated', function() {
-        	window.plugins.spinnerDialog.show();
         	$scope.loadMarkers();
     	});
 
@@ -327,15 +331,18 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				switch(status) {
 					case "green":
 						$scope.state = "open";
-						$scope.message = "closed or unoperational";
+						$scope.title = "Gas Pumps are Open";
+						$scope.message = "currently closed";
 						break;
 					case "yellow":
-						$scope.state = "open";
-						$scope.message = "open/operational or closed/unoperational";
+						$scope.state = "uncertain";
+						$scope.title = "Gas Pump Status Uncertain";
+						$scope.message = "currently open or currently closed";
 						break;
 					case "red":
 						$scope.state = "closed";
-						$scope.message = "open/operational";
+						$scope.title = "Gas Pumps are Closed";
+						$scope.message = "currently open";
 						break;
 				}
 
@@ -348,16 +355,18 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 	        loadstations().then(function(data) {
 	        	$rootScope.stations = data;
 	        	$scope.loadMarkers();
+	        	window.plugins.spinnerDialog.hide();
 	        });
 		} else {
         	$scope.loadMarkers();
+        	window.plugins.spinnerDialog.hide();
 		}
 		
 		$rootScope.typestate = true;		
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "List";
-		$rootScope.navtext = "OPEN GAS STATIONS";
+		$rootScope.navtext = "OPEN GAS PUMPS";
 		$rootScope.navclass = "gas";
 		$rootScope.navtarget = "station-list";
 		$rootScope.animate = "fixed";
@@ -404,14 +413,19 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$sce',
+    function ($scope, $rootScope, $sce) {
     	$scope.hideloading = false;  	
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
+		window.plugins.spinnerDialog.hide();
+
+		$scope.trustUrl = function(url) {
+		    return $sce.trustAsResourceUrl(url);
+		}
     }
 ]);
 

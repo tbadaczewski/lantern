@@ -156,6 +156,7 @@ button.inline, .button.inline {
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
+	background: #fff;
 }
 
 #twitter .nickname {
@@ -166,9 +167,13 @@ button.inline, .button.inline {
 
 #twitter .entry {
 	position: relative;
-	border-bottom: solid 1px #e8e8e8;
+	border-top: solid 1px #e8e8e8;
 	padding: 1em;
 	display: block;
+}
+
+#twitter .entry:first-child {
+	border-top: none;
 }
 
 #twitter .message {
@@ -202,6 +207,14 @@ button.inline, .button.inline {
 
 #twitter a {
 	color: #f18525;
+}
+
+#twitter .nickname {
+	text-transform: lowercase;
+}
+
+#twitter .retweeted {
+	display: block;
 }
 
 #twitter a.title {
@@ -737,12 +750,14 @@ button#back, button#forward, a#return {
 	width: inherit;
 	height: inherit;
 	overflow: auto;	
+	background: #fff;
 	-webkit-overflow-scrolling: touch;
 }
 
-#contentframe {
+.contentframe {
 	position: relative;
 	width: 100%;
+	background: #fff;
 }
 
 .slide {

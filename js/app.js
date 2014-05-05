@@ -104,8 +104,7 @@ lanternApp.factory('validatetag', ['$window',
     function ($window) {
         return function ($id) {
             var now = new Date(), last = new Date();
-            var last = new Date();
-            var count = 0, diffMs = 0, diffMins = 0;;
+            var count = 0, diffMs = 0, diffMins = 0;
             var tags = eval(localStorage.getItem("tags"));
             var limit = 15;
 
@@ -116,7 +115,7 @@ lanternApp.factory('validatetag', ['$window',
                         now = new Date();
                         count = tags[i].station.count;
                         diffMs = last - now;
-                        diffMins = Math.abs(Math.round(((diffMs % 86400000) % 3600000) / 60000)); // minutes
+                        diffMins = Math.abs(Math.round(diffMs / 60000)); // minutes
 
                         if(diffMins <= limit && count >= 2) {
                             $window.navigator.notification.alert('You must wait at least 15 minutes to tag THIS station again.', null, 'Exceeded Tag Limit', 'Close');
@@ -145,7 +144,26 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
 
                 for(var i = 0; i < reply.length; i++) {
                     var id = reply[i].id_str;
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='https://twitter.com/energy/status/" + id + "' class='time' target='_blank'>" + parseTwitterDate(reply[i].created_at) + "</a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"logo\"><img src='" + reply[i].user.profile_image_url + "' /></a><a href=\"https://twitter.com/energy\" target=\"_blank\" class=\"title\">" + reply[i].user.name + " <span class='nickname'>@energy</span></a><br />" + autoHyperlinkUrls(reply[i].text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + id + "' target='_blank'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + id + "' target='_blank'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + id + "' target='_blank'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
+                    var id = "", screen_name = "", profile_image_url = "", text = "", name = "";
+
+                    formatted += "<div class='entry clearfix'><div class='message'><a href='https://twitter.com/energy/status/" + id + "' class='time' target='_blank'>" + parseTwitterDate(reply[i].created_at) + "</a>";
+                    
+                    if(reply[i].retweeted_status) {
+                        id = reply[i].retweeted_status.id_str;
+                        screen_name = reply[i].retweeted_status.user.screen_name;
+                        profile_image_url = reply[i].retweeted_status.user.profile_image_url;
+                        text = reply[i].retweeted_status.text;
+                        name = reply[i].retweeted_status.user.name;
+                        formatted += "<a href=\"https://twitter.com/" + reply[i].user.screen_name + "\" target=\"_blank\" class=\"retweeted small\"><span class=\"icon-retweet\" aria-hidden=\"true\"></span>" + reply[i].user.name + " retweeted</a>";
+                    } else {
+                        id = reply[i].id_str;
+                        screen_name = reply[i].user.screen_name;
+                        profile_image_url = reply[i].user.profile_image_url;
+                        text = reply[i].text;
+                        name = reply[i].user.name;
+                    }
+
+                    formatted += "<a href=\"https://twitter.com/" + screen_name + "\" target=\"_blank\" class=\"logo\"><img src='" + profile_image_url + "' /></a><a href=\"https://twitter.com/" + screen_name + "\" target=\"_blank\" class=\"title\">" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='https://twitter.com/intent/tweet?in_reply_to=" + id + "' target='_blank'><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/retweet?tweet_id=" + id + "' target='_blank'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='https://twitter.com/intent/favorite?tweet_id=" + id + "' target='_blank'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
                 }
 
                 deferred.resolve(formatted);
@@ -548,24 +566,28 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                var fonts = document.createElement("link");
-                var css = document.createElement("link");
+                if(this.contentWindow.document) {
+                    this.contentWindow.document.body.id = this.id;
 
-                fonts.href = "../css/fonts.css"; 
-                fonts.rel = "stylesheet"; 
-                fonts.type = "text/css";                
-                css.href = "../css/tips.css"; 
-                css.rel = "stylesheet"; 
-                css.type = "text/css";
+                    if(this.getAttribute("data-css")) {
+                        var css = eval(this.getAttribute("data-css"));
 
-                this.contentWindow.document.body.appendChild(fonts);    
-                this.contentWindow.document.body.appendChild(css);
-                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                this.parentNode.scrollTop = 0;
+                        for(var i = 0; i < css.length; i++) {
+                            var stylesheet = document.createElement("link");
+                            stylesheet.rel = "stylesheet"; 
+                            stylesheet.type = "text/css";
+                            stylesheet.href = css[i]; 
+                            this.contentWindow.document.body.appendChild(stylesheet);
+                        }
+                    }
 
-                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
-                    scope.history.push(this.contentWindow.location.pathname);
-                    scope.index++;                    
+                    this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                    this.parentNode.scrollTop = 0;
+
+                    if(this.contentWindow.location.pathname != scope.history[scope.index]) {
+                        scope.history.push(this.contentWindow.location.pathname);
+                        scope.index++;                    
+                    }
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
