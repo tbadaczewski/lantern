@@ -468,8 +468,8 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$window'
+    function ($scope, $rootScope, $window) {
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
@@ -477,7 +477,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 
 		$scope.openwindow = function($event, $url) {
 			$event.preventDefault($event);
-			window.open($url, "_system");
+			$window.open($url, "_system");
 		}
     }
 ]);
