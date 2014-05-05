@@ -1,4 +1,5 @@
 <div class="outages">
+	<div id="legend"><strong>Note:</strong> Not all electricity providers have publicily avaliable outage maps. The list shown are providers in the given location above with available outage maps known to DOE. Please contact <a href="mailto:LanternApp@Doe.gov">LanternApp@Doe.gov</a> for any corrections and/or additions.</div>
     <div ng-repeat="outage in outages">
     	<div class="item list">
 	        <h4>{{isExists(outage.commericial_company_name) ? outage.commericial_company_name : outage.utility_company_name}}</h4>

@@ -12,6 +12,10 @@
     </div>	
 </modaldialog>
 <div class="stations">
+	<div id="legend">
+		<div class="left">Results found are in 2.5 mi. radius.</div>
+		<div class="right"><span class="circle green"></span> = Yes, <span class="circle yellow"></span> = Uncertain, <span class="circle red"></span> = Red</div>
+	</div>
     <div class="station" ng-repeat="station in stations">
     	<div class="item list">
 	        <h4><span class="circle {{station.operatingStatus}}"></span> {{station.station}}</h4>

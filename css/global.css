@@ -470,7 +470,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	clear: both;
 }
 
-.item.list a:link, .item.list a:visited, .item.list a:hover {
+.item.list a:link, .item.list a:visited, .item.list a:hover, #legend a {
 	color: #f18425;
 }
 
@@ -758,6 +758,11 @@ button#back, button#forward, a#return {
 	position: relative;
 	width: 100%;
 	background: #fff;
+}
+
+#legend {
+	display: block;
+	font-size: 50%;
 }
 
 .slide {
