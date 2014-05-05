@@ -382,16 +382,16 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	font-size: 23px;
 	color: #c7c7c7;
 	overflow: hidden;
-	width: 35px;
+	width: 38px;
 	height: inherit;
 	margin: 0;
 	padding: 0;
 	background: #fff;
 	text-align: center;
+	padding-right: 15px;
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
-	margin-right: 15px;
 	margin-top: 6px;
 }
 
