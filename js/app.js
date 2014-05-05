@@ -136,8 +136,8 @@ lanternApp.factory('validatetag', ['$window',
     }
 ]);
 
-lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
-    function ($q, $rootScope, $window, $http) {
+lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
+    function ($q, $rootScope, $window, $http, $sce) {
         return function () {
             var deferred = $q.defer();
 
@@ -163,14 +163,16 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http',
                         created_at = reply[i].created_at;
                     }
 
-                    formatted += "<div class='entry clearfix'><div class='message'><a href='' ontouchstart='window.open(\"https://twitter.com/energy/status/" + id + "\",\"_system\");return false;' class='time'>" + parseTwitterDate(created_at) + "</a>";
+                    formatted += "<div class='entry clearfix'><div class='message'><a href='' ng-click='window.open(\"https://twitter.com/energy/status/" + id + "\",\"_system\");return false;' class='time'>" + parseTwitterDate(created_at) + "</a>";
                     
                     if(reply[i].retweeted_status) {
-                        formatted += "<a href='' ontouchstart='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + name + " retweeted</a>";
+                        formatted += "<a href='' ng-click='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='retweeted small'><span class='icon-retweet' aria-hidden='true'></span>" + name + " retweeted</a>";
                     }
 
-                    formatted += "<a href='' ontouchstart='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ontouchstart='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ontouchstart='window.open(\"https://twitter.com/intent/tweet?in_reply_to=" + id + "\",\"_system\");return false;><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/retweet?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/favorite?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
+                    formatted += "<a href='' ng-click='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='logo'><img src='" + profile_image_url + "' /></a><a href='' ontouchstart='window.open(\"https://twitter.com/" + screen_name + "\",\"_system\");return false;' class='title'>" + name + " <span class='nickname'>@" + screen_name + "</span></a><br />" + autoHyperlinkUrls(text) + "</div><div class='block'><div class='right'><a href='' ontouchstart='window.open(\"https://twitter.com/intent/tweet?in_reply_to=" + id + "\",\"_system\");return false;><span class='icon-reply size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/retweet?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-retweet size-22' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;<a href='' ontouchstart='window.open(\"https://twitter.com/intent/favorite?tweet_id=" + id + "\",\"_system\");return false;'><span class='icon-favorite size-22' aria-hidden='true'></span></a></div></div></div>";
                 }
+
+                formatted = $sce.trustAsHtml(formatted);
 
                 deferred.resolve(formatted);
             }).error(function(data) {
