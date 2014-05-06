@@ -378,6 +378,10 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	font-size: 24px;
 }
 
+*[id^='btn-'] {
+	color: #fff !important;
+}
+
 *[id^='btn-'] span[class^='icon-']  {
 	display: inline-block;
 	margin-right: 1.5em;
@@ -403,6 +407,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	background: #fff;
 	text-align: center;
 	padding-right: 15px;
+	color: #c7c7c7 !important;
 }
 
 #btn-target .icon-target, #btn-search .icon-search, #btn-clear .icon-close {
@@ -478,7 +483,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	clear: both;
 }
 
-.item.list a:link, .item.list a:visited, .item.list a:hover, #legend a {
+a:link, a:visited, a:hover {
 	color: #f18425;
 }
 

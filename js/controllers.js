@@ -378,18 +378,28 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $sce) {
     	spinnerplugin.show({ overlay: false, fullscreen: true });
 
+   		$scope.openDialog = function() {
+			$scope.show = true;
+		}
+
+   		$scope.closeDialog = function() {
+			$scope.show = false;
+		}
+
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
 			$rootScope.outagemap = $sce.trustAsResourceUrl($url);
 			$location.path("/outage-map");
 		}
 
-		$scope.init = function() {
-	        loadoutages().then(function(data) {
+		$scope.init = function() {			
+	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
-	        	spinnerplugin.hide();
+	        	spinnerplugin.hide();	        	
 	        });
 		}
+
+		$scope.openDialog();
 
 		if($rootScope.outages == null) {
 	        $scope.init();
