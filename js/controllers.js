@@ -83,9 +83,9 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
     	if(!$rootScope.disclaimer) {
     		$scope.show = true;
-    	} else {
-			$scope.openDialog();
+    	} else {			
 			$rootScope.disclaimer = true;
+			camera($event);
     	}
 
    		$scope.closeDialog = function() {
