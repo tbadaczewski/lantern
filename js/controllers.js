@@ -97,7 +97,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 			navigator.camera.getPicture(
 				onSuccess,
-				onFail, {
+				null, {
 					quality: 30,
 					allowEdit : true,
 					sourceType : Camera.PictureSourceType.CAMERA,
@@ -126,12 +126,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				);
 
 				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-			}
-
-			function onFail(message) {
-				if(message != "no image selected") {
-					$window.navigator.notification.alert('Your photo has failed to upload please try again.', null, 'Error', 'Close');
-				}
 			}
 		}
 
