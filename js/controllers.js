@@ -80,16 +80,16 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
    		$scope.openDialog = function() {
-
-    	if(!$rootScope.disclaimer) {
-    		$scope.show = true;
-    	} else {			
-			$rootScope.disclaimer = true;
-			camera($event);
+	    	if(!$rootScope.disclaimer) {
+	    		$scope.show = true;
+	    	} else {				
+				$scope.camera($event);
+	    	}
     	}
 
    		$scope.closeDialog = function() {
 			$scope.show = false;
+			$rootScope.disclaimer = true;
 		}
     	
     	$scope.camera = function($event) {
