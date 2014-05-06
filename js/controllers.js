@@ -389,6 +389,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
    		$scope.closeDialog = function() {
 			$scope.show = false;
+			$rootScope.note = true;
 		}
 
 		$scope.getMap = function($event, $url) {
@@ -400,7 +401,11 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {			
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
-	        	spinnerplugin.hide();       	       	
+	        	spinnerplugin.hide(); 
+
+		    	if(!$rootScope.note) {
+					$scope.openDialog();
+		    	}    	       	
 	        });
 		}
 
@@ -409,16 +414,15 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		} else {
 			$scope.outages = $rootScope.outages;
 			spinnerplugin.hide();
+			
+	    	if(!$rootScope.note) {
+				$scope.openDialog();
+	    	}
 		}
 
         $rootScope.$on('outagesUpdated', function() {
         	$scope.init();
     	});
-
-    	if(!$rootScope.note) {
-			$scope.openDialog();
-			$rootScope.note = true;
-    	}
 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
