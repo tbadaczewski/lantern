@@ -84,7 +84,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 	    		$scope.show = true;
 	    		$rootScope.disclaimer = true;
 	    	} else {				
-				$scope.camera($event);
+				$scope.camera();
 	    	}
     	}
 
@@ -92,9 +92,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			$scope.show = false;
 		}
     	
-    	$scope.camera = function($event) {
-    		$event.preventDefault();
-
+    	$scope.camera = function() {
     		$scope.show = false;
 
 			navigator.camera.getPicture(
@@ -398,16 +396,19 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$location.path("/outage-map");
 		}
 
+		$scope.checkDialog = function() {
+	    	if(!$rootScope.note) {
+	    		$timeout(function(){
+					$scope.openDialog();
+				}, 0, true);
+	    	}  
+		}
+
 		$scope.init = function() {			
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
 	        	spinnerplugin.hide(); 
-
-		    	if(!$rootScope.note) {
-		    		$timeout(function(){
-						$scope.openDialog();
-					}, 0, true);
-		    	}   	       	
+	        	$scope.checkDialog(); 	       	
 	        });
 		}
 
@@ -416,14 +417,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		} else {
 			$scope.outages = $rootScope.outages;
 			spinnerplugin.hide();
-
-			alert($rootScope.note);
-
-	    	if(!$rootScope.note) {
-	    		$timeout(function(){
-					$scope.openDialog();
-				}, 0, true);
-	    	}
+			$scope.checkDialog();
 		}
 
         $rootScope.$on('outagesUpdated', function() {
