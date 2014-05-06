@@ -80,8 +80,13 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
    		$scope.openDialog = function() {
-			$scope.show = true;
-		}
+
+    	if(!$rootScope.disclaimer) {
+    		$scope.show = true;
+    	} else {
+			$scope.openDialog();
+			$rootScope.disclaimer = true;
+    	}
 
    		$scope.closeDialog = function() {
 			$scope.show = false;
@@ -400,17 +405,20 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		if($rootScope.outages == null) {
-	        $scope.init();
-	    	$timeout(function(){ $scope.openDialog(); },500,true); 
+	        $scope.init();	    	
 		} else {
 			$scope.outages = $rootScope.outages;
 			spinnerplugin.hide();
-	    	$timeout(function(){ $scope.openDialog(); },500,true); 
 		}
 
         $rootScope.$on('outagesUpdated', function() {
         	$scope.init();
     	});
+
+    	if(!$rootScope.note) {
+			$scope.openDialog();
+			$rootScope.note = true;
+    	}
 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
