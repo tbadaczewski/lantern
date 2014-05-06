@@ -395,11 +395,10 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {			
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
-	        	spinnerplugin.hide();	        	
+	        	spinnerplugin.hide();	
+	        	$scope.openDialog();        	
 	        });
 		}
-
-		$scope.openDialog();
 
 		if($rootScope.outages == null) {
 	        $scope.init();
