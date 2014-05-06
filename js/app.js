@@ -12,8 +12,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
     $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
 
-    intializeMe();
-
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
