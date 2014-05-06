@@ -6,7 +6,7 @@ html,body {
 }
 
 a {
-	color: #f18425;
+	color: #f18425 !important;
 }
 
 li {

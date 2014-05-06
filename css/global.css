@@ -770,7 +770,7 @@ button#back, button#forward, a#return {
 
 #legend {
 	display: block;
-	font-size: 50%;
+	font-size: 80%;
 }
 
 .slide {
@@ -794,4 +794,11 @@ button#back, button#forward, a#return {
 .fixed, .fixed.ng-enter, .fixed.ng-enter.ng-enter-active, .fixed.ng-leave.ng-leave-active {
 	-webkit-transition: -webkit-transform 300ms linear;
 	-webkit-transform: translate3d(0,0,0);
+}
+
+@media screen and (max-width: 500px) {
+	#legend .left, #legend .right {
+		float: none !important;
+		text-align: center !important;
+	}
 }

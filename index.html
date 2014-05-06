@@ -31,14 +31,14 @@
     </div>
     <div id="search-bar" ng-controller="SearchCtrl"> 
         <div id="search-area" class="{{backstate}}">
-            <a href="#/" class="arrow-back" title="Back"><span class="icon-arrow2-left"></span></a>
+            <a href="#/" class="arrow-back" title="Back"><span class="icon-arrow2-left"><span class="element-invisible">Back</span></span></a>
             <input focusme id="search-text" ng-model="address" type="text" placeholder="Enter a Location" />
         </div>
         <div id="search-options">            
-            <button id="btn-clear" ng-click="clear()" type="button"><span class="icon-close" aria-hidden="true"><span class="element-invisible">Clear</span></span></button>
-            <button id="btn-search" ng-click="search()" ng-show="searchfocus" type="button"><span class="icon-search" aria-hidden="true"><span class="element-invisible">Search</span></span></button>
-            <button id="btn-target" ng-click="locate()" ng-hide="searchfocus" type="button"><span class="icon-target" aria-hidden="true"><span class="element-invisible">Locate</span></span></button>
-            <button id="btn-lantern" ng-click="toggleMenu()" type="button"><div class="icon-lantern size-32" aria-hidden="true"></div><div class="icon-list size-22" aria-hidden="true"><span class="element-invisible">Disclaimer</span></div></button>
+            <button id="btn-clear" ng-click="clear()" type="button" title="Clear"><span class="icon-close" aria-hidden="true"><span class="element-invisible">Clear</span></span></button>
+            <button id="btn-search" ng-click="search()" ng-show="searchfocus" type="button" title="Search"><span class="icon-search" aria-hidden="true"><span class="element-invisible">Search</span></span></button>
+            <button id="btn-target" ng-click="locate()" ng-hide="searchfocus" type="button" title="Locate"><span class="icon-target" aria-hidden="true"><span class="element-invisible">Locate</span></span></button>
+            <button id="btn-lantern" ng-click="toggleMenu()" type="button" title="About Lantern"><div class="icon-lantern size-32" aria-hidden="true"></div><div class="icon-list size-22" aria-hidden="true"><span class="element-invisible">Disclaimer</span></div></button>
         </div>    
     </div>
     <nav id="nav-{{navstate}}">        
