@@ -374,8 +374,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$sce',
-    function ($scope, $rootScope, $http, $window, loadoutages, $location, $sce) {
+lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
+    function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
     	spinnerplugin.show({ overlay: false, fullscreen: true });
 
    		$scope.openDialog = function() {
@@ -395,16 +395,17 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$scope.init = function() {			
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
-	        	spinnerplugin.hide();	
-	        	$scope.openDialog();        	
+	        	spinnerplugin.hide();       	       	
 	        });
 		}
 
 		if($rootScope.outages == null) {
 	        $scope.init();
+	    	$timeout(function(){ $scope.openDialog(); },500,true); 
 		} else {
 			$scope.outages = $rootScope.outages;
 			spinnerplugin.hide();
+	    	$timeout(function(){ $scope.openDialog(); },500,true); 
 		}
 
         $rootScope.$on('outagesUpdated', function() {
