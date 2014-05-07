@@ -7,7 +7,7 @@
 	</div>
     <div class="item-options">
     	<div>
-			<div><a href="#/outage-list" ng-click="closeDialog()changePath('/outage-list')">Continue</a></div>
+			<div><a href="" ng-click="closeDialog('note',true)">Continue</a></div>
     	</div>
     </div>	
 </modaldialog>
@@ -47,14 +47,14 @@
 	</div>
     <div class="item-options">
     	<div>
-    		<div class="span-50"><a href="" ng-click="closeDialog()camera()">Ok</a></div>
-			<div class="span-50"><a href="" ng-click="closeDialog()">Cancel</a></div>
+    		<div class="span-50"><a href="" ng-click="closeDialog('disclaimer',true)">Ok</a></div>
+			<div class="span-50"><a href="" ng-click="closeDialog('disclaimer',false)">Cancel</a></div>
     	</div>
     </div>	
 </modaldialog>
 <a id="btn-find-stations" href="#/station-list" class="button rounded icon orange"><span class="icon-gas" aria-hidden="true"></span>Find Open Gas Pumps</a>
-<a id="btn-outages-maps" href="" ng-click="openNoteDialog()" class="button rounded icon orange"><span class="icon-lightning" aria-hidden="true"></span>See Power Outage Maps</a>
-<a id="btn-report" href="" ng-click="openDisclaimerDialog()" class="button rounded icon orange"><span class="icon-camera" aria-hidden="true"></span>Report Downed Powerlines</a>
+<a id="btn-outages-maps" href="" ng-click="openDialog('note',null)" class="button rounded icon orange"><span class="icon-lightning" aria-hidden="true"></span>See Power Outage Maps</a>
+<a id="btn-report" href="" ng-click="openDialog('disclaimer',null)" class="button rounded icon orange"><span class="icon-camera" aria-hidden="true"></span>Report Downed Powerlines</a>
 <div class="divider" aria-hidden="true"></div>
 <a id="btn-tips-guides" href="#/tips" class="button rounded icon blue"><span class="icon-guide" aria-hidden="true"></span>Read Tips &amp; Guides</a>
 <a id="btn-twitter" href="#/twitter" class="button rounded icon blue"><span class="icon-twitter" aria-hidden="true"></span>Twitter Feed</a>

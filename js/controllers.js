@@ -79,31 +79,46 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', '$location', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, $location, geolocation, geoencoder) {
-   		$scope.openDisclaimerDialog = function() {
-	    	if(!$rootScope.disclaimer) {
-	    		$scope.disclaimerdialog = true;
-	    		$rootScope.disclaimer = true;
-	    	} else {				
-				$scope.camera();
-	    	}
+    	$scope.openDialog = function($target, $value) {
+   			switch($target) {
+   				case "disclaimer":
+			    	if(!$rootScope.disclaimer) {
+			    		$scope.disclaimerdialog = true;
+			    		$rootScope.disclaimer = true;
+			    	} else {				
+						$scope.camera();
+			    	}
+   					
+   					break;
+   				case "note":
+			    	if(!$rootScope.note) {
+			    		$scope.notedialog = true;
+			    		$rootScope.note = true;
+			    	} else {				
+						$location.path("#/outage-list");
+			    	}
+
+   					break;
+   			}	
     	}
 
-   		$scope.openNoteDialog = function() {
-	    	if(!$rootScope.note) {
-	    		$scope.notedialog = true;
-	    		$rootScope.note = true;
-	    	} else {				
-				$location.path("#/outage-list");
-	    	}
-    	}
+   		$scope.closeDialog = function($target, $value) {
+   			switch($target) {
+   				case "disclaimer":
+   					$scope.disclaimerdialog = false;
+   					if($value) {
+   						$scope.camera();
+   					}
+   					
+   					break;
+   				case "note":
+   					$scope.notedialog = false;
 
-   		$scope.closeDialog = function() {
-			$scope.disclaimerdialog = false;
-			$scope.notedialog = false;
-		}
-
-   		$scope.changePath = function(path) {
-			$location.path("#" + path);
+   					if($value) {
+   						$location.path("#/outage-list");	
+   					}
+   					break;
+   			}	
 		}
     	
     	$scope.camera = function() {
