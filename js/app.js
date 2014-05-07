@@ -515,6 +515,7 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
+                /*
                 if(this.getAttribute("data-css")) {
                     var css = eval(this.getAttribute("data-css"));
 
@@ -528,7 +529,8 @@ lanternApp.directive('contentframe', function() {
                         this.contentWindow.document.body.appendChild(stylesheet);
                     }
                 }  
-
+                */
+                
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
 
