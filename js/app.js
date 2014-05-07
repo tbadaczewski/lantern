@@ -514,26 +514,22 @@ lanternApp.directive('contentframe', function() {
                 }
             });
 
-            try {
-                this.contentWindow.document.body.id = this.id;
-
-                if(this.getAttribute("data-css")) {
-                    var css = eval(this.getAttribute("data-css"));
-
-                    for(var i = 0; i < css.length; i++) {
-                        var stylesheet = document.createElement("link");
-                        stylesheet.rel = "stylesheet"; 
-                        stylesheet.type = "text/css";
-                        stylesheet.href = css[i]; 
-                        this.contentWindow.document.body.appendChild(stylesheet);
-                    }
-                }                  
-            } catch(error) {
-                alert(error.message);
-            }
-
             scope.frame.onload = function() {
                 try {
+                    if(this.getAttribute("data-css")) {
+                        var css = eval(this.getAttribute("data-css"));
+
+                        this.contentWindow.document.body.id = this.id;
+
+                        for(var i = 0; i < css.length; i++) {
+                            var stylesheet = document.createElement("link");
+                            stylesheet.rel = "stylesheet"; 
+                            stylesheet.type = "text/css";
+                            stylesheet.href = css[i]; 
+                            this.contentWindow.document.body.appendChild(stylesheet);
+                        }
+                    }  
+
                     this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                     this.parentNode.scrollTop = 0;
 
