@@ -528,6 +528,12 @@ lanternApp.directive('contentframe', function() {
                             stylesheet.href = css[i]; 
                             this.contentWindow.document.body.appendChild(stylesheet);
                         }
+
+                        var tips = document.createElement("link");
+                        tips.rel = "stylesheet"; 
+                        tips.type = "text/css";
+                        tips.href = "../css/tips.css"; 
+                        this.contentWindow.document.body.appendChild(tips);
                     }  
 
                     this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
