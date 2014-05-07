@@ -95,7 +95,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			    		$scope.notedialog = true;
 			    		$rootScope.note = true;
 			    	} else {				
-						$location.path("#/outage-list");
+						$location.path("/outage-list");
 			    	}
 
    					break;
@@ -106,7 +106,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    			switch($target) {
    				case "disclaimer":
    					$scope.disclaimerdialog = false;
-   					
+
    					if($value) {
    						$scope.camera();
    					}
@@ -116,7 +116,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    					$scope.notedialog = false;
 
    					if($value) {
-   						$location.path("#/outage-list");	
+   						$location.path("/outage-list");	
    					}
    					break;
    			}	
