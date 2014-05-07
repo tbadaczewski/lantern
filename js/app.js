@@ -515,37 +515,27 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                try {
-                    if(this.getAttribute("data-css")) {
-                        var css = eval(this.getAttribute("data-css"));
+                if(this.getAttribute("data-css")) {
+                    var css = eval(this.getAttribute("data-css"));
 
-                        this.contentWindow.document.body.id = this.id;
+                    this.contentWindow.document.body.id = this.id;
 
-                        for(var i = 0; i < css.length; i++) {
-                            var stylesheet = document.createElement("link");
-                            stylesheet.rel = "stylesheet"; 
-                            stylesheet.type = "text/css";
-                            stylesheet.href = css[i]; 
-                            this.contentWindow.document.body.appendChild(stylesheet);
-                        }
+                    for(var i = 0; i < css.length; i++) {
+                        var stylesheet = document.createElement("link");
+                        stylesheet.rel = "stylesheet"; 
+                        stylesheet.type = "text/css";
+                        stylesheet.href = css[i]; 
+                        this.contentWindow.document.body.appendChild(stylesheet);
+                    }
+                }  
 
-                        var tips = document.createElement("link");
-                        tips.rel = "stylesheet"; 
-                        tips.type = "text/css";
-                        tips.href = "css/tips.css"; 
-                        this.contentWindow.document.body.appendChild(tips);
-                    }  
+                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                this.parentNode.scrollTop = 0;
 
-                    this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                    this.parentNode.scrollTop = 0;
-
-                    if(this.contentWindow.location.pathname != scope.history[scope.index]) {
-                        scope.history.push(this.contentWindow.location.pathname);
-                        scope.index++;                    
-                    }                    
-                } catch(error) {
-                    alert(error.message);
-                }
+                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
+                    scope.history.push(this.contentWindow.location.pathname);
+                    scope.index++;                    
+                }                    
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
 

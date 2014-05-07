@@ -5,15 +5,6 @@ html,body {
 	-webkit-text-size-adjust: none;
 }
 
-a {
-	color: #f18425 !important;
-}
-
-li {
-	text-decoration: none;
-	margin-left: -1em;
-}
-
 h2{
 	text-transform: uppercase;
 }
@@ -27,3 +18,11 @@ ul {
 	text-decoration: none;
 }
 
+li {
+	text-decoration: none;
+	margin-left: -1em;
+}
+
+a, a:link, a:active, a:visited, a:hover {
+	color: #f18425 !important;
+}
