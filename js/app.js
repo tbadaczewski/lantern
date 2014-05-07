@@ -492,7 +492,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe ng-transclude></iframe>",
+        template: "<iframe sandbox='allow-same-origin allow-scripts' ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             spinnerplugin.show({ overlay: false, fullscreen: true });
 
@@ -515,7 +515,6 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                /*
                 if(this.getAttribute("data-css")) {
                     var css = eval(this.getAttribute("data-css"));
 
@@ -528,9 +527,8 @@ lanternApp.directive('contentframe', function() {
                         stylesheet.href = css[i]; 
                         this.contentWindow.document.body.appendChild(stylesheet);
                     }
-                }  
-                */
-                
+                }
+
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
 

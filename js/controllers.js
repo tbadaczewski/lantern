@@ -407,7 +407,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
-			$rootScope.outagemap = $sce.trustAsResourceUrl($url);
+			$rootScope.outagemap = $url;
 			$location.path("/outage-map");
 		}
 
