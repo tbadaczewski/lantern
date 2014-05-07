@@ -448,14 +448,16 @@ lanternApp.directive('googlemap', function($rootScope) {
     };
 });
 
-lanternApp.directive('modaldialog', function($rootScope) {
+lanternApp.directive('modaldialog', function() {
     return {
         restrict: 'EA',
         replace: true,
         transclude: true,
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-dialog' ng-transclude></div></div>",
+        template: "<div class='ng-modal'><div class='ng-modal-dialog' ng-transclude></div></div>",
         link: function (scope, element, attrs) {
-            scope.$watch('show', function(newValue, oldValue) {
+            var showclass = element[0].getAttribute("ng-show");
+
+            scope.$watch(showclass, function(newValue, oldValue) {
                 if (newValue !== oldValue) {        
                     scope.toggleModal();
                 }
@@ -468,7 +470,7 @@ lanternApp.directive('modaldialog', function($rootScope) {
             scope.toggleModal = function() {
                 scope.fitHeight();
 
-                if(scope.show === true) {
+                if(scope[showclass] === true) {
                     document.body.insertBefore(element[0], document.body.firstChild);
                 } else {
                     element[0].remove();
@@ -489,11 +491,6 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        scope: {
-            id: '@',
-            title: '@',
-            src: '@'
-        },
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             spinnerplugin.show({ overlay: false, fullscreen: true });

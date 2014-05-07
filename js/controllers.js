@@ -77,19 +77,29 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
     }
 ]);
 
-lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder) {
-   		$scope.openDialog = function() {
+lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', '$location', 'geolocation', 'geoencoder',
+    function ($scope, $rootScope, $http, $window, $location, geolocation, geoencoder) {
+   		$scope.openDisclaimerDialog = function() {
 	    	if(!$rootScope.disclaimer) {
-	    		$scope.show = true;
+	    		$scope.disclaimerdialog = true;
 	    		$rootScope.disclaimer = true;
 	    	} else {				
 				$scope.camera();
 	    	}
     	}
 
+   		$scope.openNoteDialog = function() {
+	    	if(!$rootScope.note) {
+	    		$scope.notedialog = true;
+	    		$rootScope.note = true;
+	    	} else {				
+				$location.path("#/outage-list");
+	    	}
+    	}
+
    		$scope.closeDialog = function() {
-			$scope.show = false;
+			$scope.disclaimerdialog = false;
+			$scope.notedialog = false;
 		}
     	
     	$scope.camera = function() {
@@ -375,34 +385,16 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
     	spinnerplugin.show({ overlay: false, fullscreen: true });
 
-   		$scope.openDialog = function() {
-			$scope.show = true;
-			$rootScope.note = true;
-		}
-
-   		$scope.closeDialog = function() {
-			$scope.show = false;
-		}
-
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
 			$rootScope.outagemap = $sce.trustAsResourceUrl($url);
 			$location.path("/outage-map");
 		}
 
-		$scope.checkDialog = function() {
-	    	if(!$rootScope.note) {
-	    		$timeout(function(){
-					$scope.openDialog();
-				}, 0, true);
-	    	}  
-		}
-
 		$scope.init = function() {			
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;
-	        	spinnerplugin.hide(); 
-	        	$scope.checkDialog(); 	       	
+	        	spinnerplugin.hide(); 	       	
 	        });
 		}
 
@@ -411,7 +403,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		} else {
 			$scope.outages = $rootScope.outages;
 			spinnerplugin.hide();
-			$scope.checkDialog();
 		}
 
         $rootScope.$on('outagesUpdated', function() {
