@@ -489,8 +489,8 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
+lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
@@ -503,7 +503,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope', '$sce',
 		    	text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_system\">@$1</a>');
 		    }
 
-		    return $sce.trustAsResourceUrl(text);
+		    return text;
 		}
 
 		$scope.parseTwitterDate = function(tdate) {

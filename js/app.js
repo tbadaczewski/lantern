@@ -17,7 +17,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             localStorage.SessionID = guid();
         }
 
-        intializeMe();
+        
     }, false);
 
     document.addEventListener('resume', function() {
@@ -492,7 +492,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe sandbox='allow-same-origin allow-scripts' ng-transclude></iframe>",
+        template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             spinnerplugin.show({ overlay: false, fullscreen: true });
 
@@ -531,6 +531,7 @@ lanternApp.directive('contentframe', function() {
 
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
+                this.style.visibility = "visible"
 
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
