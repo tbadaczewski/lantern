@@ -106,6 +106,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    			switch($target) {
    				case "disclaimer":
    					$scope.disclaimerdialog = false;
+   					
    					if($value) {
    						$scope.camera();
    					}
