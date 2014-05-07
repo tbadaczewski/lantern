@@ -7,7 +7,7 @@
 	</div>
     <div class="item-options">
     	<div>
-			<div><a href="#/outage-list">Continue</a></div>
+			<div><a href="#/outage-list" ng-click="closeDialog()changePath('/outage-list')">Continue</a></div>
     	</div>
     </div>	
 </modaldialog>
@@ -47,7 +47,7 @@
 	</div>
     <div class="item-options">
     	<div>
-    		<div class="span-50"><a href="" ng-click="camera()">Ok</a></div>
+    		<div class="span-50"><a href="" ng-click="closeDialog()camera()">Ok</a></div>
 			<div class="span-50"><a href="" ng-click="closeDialog()">Cancel</a></div>
     	</div>
     </div>	

@@ -101,6 +101,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			$scope.disclaimerdialog = false;
 			$scope.notedialog = false;
 		}
+
+   		$scope.changePath = function(path) {
+			$location.path("#" + path);
+		}
     	
     	$scope.camera = function() {
     		$scope.show = false;
