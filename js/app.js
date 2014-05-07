@@ -450,16 +450,17 @@ lanternApp.directive('googlemap', function($rootScope) {
 
 lanternApp.directive('modaldialog', function() {
     return {
-        restrict: 'EA',
+        restrict: 'AE',
         replace: true,
         transclude: true,
+        scope: true,
         template: "<div class='ng-modal'><div class='ng-modal-dialog' ng-transclude></div></div>",
         link: function (scope, element, attrs) {
             var showclass = element[0].getAttribute("ng-show");
 
             scope.$watch(showclass, function(newValue, oldValue) {
                 if (newValue !== oldValue) {        
-                    scope.toggleModal();
+                    scope.toggleModal(newValue);
                 }
             });
 
@@ -467,10 +468,10 @@ lanternApp.directive('modaldialog', function() {
                 scope.fitHeight();
             };
 
-            scope.toggleModal = function() {
+            scope.toggleModal = function(value) {
                 scope.fitHeight();
 
-                if(scope[showclass] === true) {
+                if(value === true) {
                     document.body.insertBefore(element[0], document.body.firstChild);
                 } else {
                     element[0].remove();
@@ -513,22 +514,26 @@ lanternApp.directive('contentframe', function() {
                 }
             });
 
+            try {
+                this.contentWindow.document.body.id = this.id;
+
+                if(this.getAttribute("data-css")) {
+                    var css = eval(this.getAttribute("data-css"));
+
+                    for(var i = 0; i < css.length; i++) {
+                        var stylesheet = document.createElement("link");
+                        stylesheet.rel = "stylesheet"; 
+                        stylesheet.type = "text/css";
+                        stylesheet.href = css[i]; 
+                        this.contentWindow.document.body.appendChild(stylesheet);
+                    }
+                }                  
+            } catch(error) {
+                alert(error.message);
+            }
+
             scope.frame.onload = function() {
                 try {
-                    this.contentWindow.document.body.id = this.id;
-
-                    if(this.getAttribute("data-css")) {
-                        var css = eval(this.getAttribute("data-css"));
-
-                        for(var i = 0; i < css.length; i++) {
-                            var stylesheet = document.createElement("link");
-                            stylesheet.rel = "stylesheet"; 
-                            stylesheet.type = "text/css";
-                            stylesheet.href = css[i]; 
-                            this.contentWindow.document.body.appendChild(stylesheet);
-                        }
-                    }
-
                     this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                     this.parentNode.scrollTop = 0;
 
@@ -537,7 +542,7 @@ lanternApp.directive('contentframe', function() {
                         scope.index++;                    
                     }                    
                 } catch(error) {
-
+                    alert(error.message);
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);

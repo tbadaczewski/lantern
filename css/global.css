@@ -691,7 +691,7 @@ a:link, a:visited, a:hover {
 }
 
 .ng-modal-dialog .description {
-	background: #fff;/* url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2M8fvz4fwAICANWsSb9pwAAAABJRU5ErkJggg==) repeat-x left bottom;*/
+	background: #fff;
 	padding: 1em;
 	overflow: auto;	
 	text-align: center;
@@ -776,6 +776,10 @@ button#back, button#forward, a#return {
 #legend {
 	display: block;
 	font-size: 80%;
+}
+
+.span-50 {
+	width: 50%;
 }
 
 .slide {
