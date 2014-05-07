@@ -532,7 +532,7 @@ lanternApp.directive('contentframe', function() {
                         var tips = document.createElement("link");
                         tips.rel = "stylesheet"; 
                         tips.type = "text/css";
-                        tips.href = "../css/tips.css"; 
+                        tips.href = "css/tips.css"; 
                         this.contentWindow.document.body.appendChild(tips);
                     }  
 
