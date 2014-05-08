@@ -15,9 +15,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
-        }
-
-        
+        }        
     }, false);
 
     document.addEventListener('resume', function() {
@@ -28,18 +26,20 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         geolocation().then(function(position) {            
             $rootScope.position = position;
 
-            geoencoder('latLng').then(function(address) {
-                $rootScope.address = address[0];
-                $rootScope.county = address[1];
-                $rootScope.state = address[2];
+            geoencoder('latLng').then(function(data) {
+                if(data) {
+                    $rootScope.address = data[0];
+                    $rootScope.county = data[1];
+                    $rootScope.state = data[2];
 
-                loadstations().then(function(data) {
-                    $rootScope.stations = data;
-                }); 
+                    loadstations().then(function(data) {
+                        $rootScope.stations = data;
+                    }); 
 
-                loadoutages().then(function(data) {
-                    $rootScope.outages = data;
-                });
+                    loadoutages().then(function(data) {
+                        $rootScope.outages = data;
+                    });
+                }
             });
         });
 
@@ -161,7 +161,8 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             }
 
             function onError(error) {
-                deferred.resolve($rootScope.position);
+                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
+                deferred.resolve(null);
             }
 
             $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);

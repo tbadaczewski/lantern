@@ -108,6 +108,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    					if($value) {
    						$location.path("/outage-list");	
    					}
+   					
    					break;
    			}	
 		}
