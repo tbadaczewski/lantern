@@ -495,7 +495,7 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
-            $window.plugins.spinnerDialog.show();
+            //$window.plugins.spinnerDialog.show();
 
             scope.index = 0;
             scope.frame = element[0];
@@ -528,7 +528,7 @@ lanternApp.directive('contentframe', function() {
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
 
-                $window.plugins.spinnerDialog.hide();
+                //$window.plugins.spinnerDialog.hide();
             }
         }
     };
