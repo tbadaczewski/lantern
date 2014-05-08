@@ -27,21 +27,19 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         geolocation().then(function(position) {  
             $rootScope.position = position;
 
-            if($rootScope.position) {
-                geoencoder('latLng').then(function(data) {
-                    $rootScope.address = data[0];
-                    $rootScope.county = data[1];
-                    $rootScope.state = data[2];
+            geoencoder('latLng').then(function(data) {
+                $rootScope.address = data[0];
+                $rootScope.county = data[1];
+                $rootScope.state = data[2];
 
-                    loadstations().then(function(data) {
-                        $rootScope.stations = data;
-                    }); 
+                loadstations().then(function(data) {
+                    $rootScope.stations = data;
+                }); 
 
-                    loadoutages().then(function(data) {
-                        $rootScope.outages = data;
-                    });
+                loadoutages().then(function(data) {
+                    $rootScope.outages = data;
                 });
-            }
+            });
         });
 
         twitter().then(function(timeline) {
