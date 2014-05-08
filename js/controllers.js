@@ -161,11 +161,9 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
     function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
     	spinnerplugin.show({ overlay: false, fullscreen: false });
 
-    	alert($rootScope.stations);
-
 		if($rootScope.stations == null) {
-	        loadstations().then(function(data) {
-	        	$rootScope.stations = $scope.stations = data;
+	        loadstations().then(function(stations) {
+	        	$rootScope.stations = $scope.stations = stations;
 	        	spinnerplugin.hide();
 	        });
 		} else {
