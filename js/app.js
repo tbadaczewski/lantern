@@ -139,7 +139,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
         return function () {
             var deferred = $q.defer();
 
-            $http.get('https://baddie.parseapp.com/timeline').success(function (data) {
+            $http.get('http://doelanternapi.parseapp.com/twitter/doe/timeline').success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
@@ -531,7 +531,6 @@ lanternApp.directive('contentframe', function() {
 
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
-                this.style.visibility = "visible"
 
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);

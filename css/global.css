@@ -771,7 +771,6 @@ button#back, button#forward, a#return {
 	position: relative;
 	width: 100%;
 	background: #fff;
-	visibility: hidden;
 }
 
 #legend {

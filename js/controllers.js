@@ -82,21 +82,11 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     	$scope.openDialog = function($target, $value) {
    			switch($target) {
    				case "disclaimer":
-			    	if(!$rootScope.disclaimer) {
-			    		$scope.disclaimerdialog = true;
-			    		$rootScope.disclaimer = true;
-			    	} else {				
-						$scope.camera();
-			    	}
+			    	$scope.disclaimerdialog = true;
    					
    					break;
    				case "note":
-			    	if(!$rootScope.note) {
-			    		$scope.notedialog = true;
-			    		$rootScope.note = true;
-			    	} else {				
-						$location.path("/outage-list");
-			    	}
+			    	$scope.notedialog = true;
 
    					break;
    			}	
