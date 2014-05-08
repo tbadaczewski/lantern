@@ -493,7 +493,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe sandbox='allow-same-origin allow-top-navigation allow-scripts' ng-transclude></iframe>",
+        template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             $window.plugins.spinnerDialog.show();
 
@@ -524,7 +524,7 @@ lanternApp.directive('contentframe', function() {
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;                    
-                }                    
+                }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
 

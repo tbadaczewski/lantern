@@ -441,23 +441,19 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
-        $scope.index = 0, $scope.history = 0;
+lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$sce',
+    function ($scope, $rootScope, $sce) {
         $scope.disabledback = "disabled", $scope.disabledforward = "disabled";
 
         $scope.$on('onload', function(event, values) {
         	$scope.$apply(function(){
-	        	$scope.index = values[0];
-	        	$scope.history = values[1];
-
-		        if($scope.index > 1) {
+		        if(values[0] > 1) {
 		        	$scope.disabledback = "";
 		        } else {
 		            $scope.disabledback = "disabled";
 		        }
 
-		        if($scope.index < ($scope.history - 1)) {
+		        if($scope.index < (values[1] - 1)) {
 		            $scope.disabledforward = "";
 		        } else {
 		            $scope.disabledforward = "disabled";
