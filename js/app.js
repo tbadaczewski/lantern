@@ -493,7 +493,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe ng-transclude></iframe>",
+        template: "<iframe sandbox='allow-same-origin allow-top-navigation allow-scripts' ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             $window.plugins.spinnerDialog.show();
 
