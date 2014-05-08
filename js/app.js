@@ -26,17 +26,20 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     function intializeMe() {     
         geolocation().then(function(position) {  
             $rootScope.position = position;
+            alert("Position Loaded");
 
-            geoencoder('latLng').then(function(data) {
-                $rootScope.address = data[0];
-                $rootScope.county = data[1];
-                $rootScope.state = data[2];
+            geoencoder('latLng').then(function(address) {
+                $rootScope.address = address[0];
+                $rootScope.county = address[1];
+                $rootScope.state = address[2];
 
                 loadstations().then(function(data) {
+                    alert("Stations Loaded");
                     $rootScope.stations = data;
                 }); 
 
                 loadoutages().then(function(data) {
+                    alert("Outages Loaded");
                     $rootScope.outages = data;
                 });
             });
@@ -334,7 +337,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 streetViewControl: false
             };
 
-            spinnerplugin.show({ overlay: false, fullscreen: true });
+            $window.plugins.spinnerDialog.show();
             
             map = new google.maps.Map(document.getElementById(attrs.id), mapOptions);
 
@@ -494,7 +497,7 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
-            spinnerplugin.show({ overlay: false, fullscreen: true });
+            $window.plugins.spinnerDialog.show();
 
             scope.index = 0;
             scope.frame = element[0];
