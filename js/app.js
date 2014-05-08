@@ -359,7 +359,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     scope.init();
                 }
 
-                spinnerplugin.hide();
+                $window.plugins.spinnerDialog.hide();
             });
 
             scope.init = function () {
@@ -528,7 +528,7 @@ lanternApp.directive('contentframe', function() {
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
 
-                spinnerplugin.hide();
+                $window.plugins.spinnerDialog.hide();
             }
         }
     };
