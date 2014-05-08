@@ -437,6 +437,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	border: solid 1px #f18525;
 	color: #fff;
 	-webkit-border-radius: 5px;
+	-webkit-background-clip: padding-box; //Smoothes backgrounds on Android.
 }
 
 .rounded.orange {
