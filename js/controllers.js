@@ -108,7 +108,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
    					if($value) {
    						$location.path("/outage-list");	
    					}
-   					
+
    					break;
    			}	
 		}
@@ -159,7 +159,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
-    	spinnerplugin.show({ overlay: false, fullscreen: true });
+    	spinnerplugin.show({ overlay: false, fullscreen: false });
 
 		if($rootScope.stations == null) {
 	        loadstations().then(function(data) {
@@ -263,7 +263,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
-		spinnerplugin.show({ overlay: false, fullscreen: true });
+		spinnerplugin.show({ overlay: false, fullscreen: false });
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -394,7 +394,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-    	spinnerplugin.show({ overlay: false, fullscreen: true });
+    	spinnerplugin.show({ overlay: false, fullscreen: false });
 
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
