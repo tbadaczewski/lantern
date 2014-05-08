@@ -516,8 +516,6 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                //this.contentWindow.document.body.id = this.id;
-
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;                    
