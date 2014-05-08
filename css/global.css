@@ -436,7 +436,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	background: none;
 	border: solid 1px #f18525;
 	color: #fff;
-	-webkit-border-radius: 6px 6px 6px 6px;
+	-webkit-border-radius: 4px;
 }
 
 .rounded.orange {
