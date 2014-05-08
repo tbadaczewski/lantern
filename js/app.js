@@ -10,41 +10,36 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
     $rootScope.menu = "close";
+    $rootScope.intialized = false;
 
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
         }
 
-        alert("deviceready");
-
         intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
-        alert("resume");
-        
         intializeMe();
     }, false);
 
-    function intializeMe() {     
+    function intializeMe() {   
         geolocation().then(function(position) {  
             $rootScope.position = position;
 
-            alert($rootScope.position.coords.latitude);
+            loadstations().then(function(stations) {
+                $rootScope.stations = stations;
+            }); 
+
+            loadoutages().then(function(outages) {
+                $rootScope.outages = outages;
+            });
 
             geoencoder('latLng').then(function(address) {
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
-
-                loadstations().then(function(stations) {
-                    $rootScope.stations = stations;
-                }); 
-
-                loadoutages().then(function(outages) {
-                    $rootScope.outages = outages;
-                });
             });
         });
 
