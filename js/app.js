@@ -16,10 +16,14 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             localStorage.SessionID = guid();
         }
 
+        alert("deviceready");
+
         intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
+        alert("resume");
+        
         intializeMe();
     }, false);
 
