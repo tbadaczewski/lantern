@@ -10,7 +10,6 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
     $rootScope.menu = "close";
-    //$rootScope.position = {"coords" : {"latitude" : "", "longitude" : ""}};
 
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
@@ -25,11 +24,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }, false);
 
     function intializeMe() {     
-        geolocation().then(function(position) {            
+        geolocation().then(function(position) {  
             $rootScope.position = position;
 
-            geoencoder('latLng').then(function(data) {
-                if(data) {
+            if($rootScope.position) {
+                geoencoder('latLng').then(function(data) {
                     $rootScope.address = data[0];
                     $rootScope.county = data[1];
                     $rootScope.state = data[2];
@@ -41,8 +40,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     loadoutages().then(function(data) {
                         $rootScope.outages = data;
                     });
-                }
-            });
+                });
+            }
         });
 
         twitter().then(function(timeline) {
@@ -159,20 +158,12 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
             
             function onSuccess(position) {
-                if(!position.latitude) {
-                    message();
-                }
-
                 deferred.resolve(position);
             }
 
             function onError(error) {
-                message();              
+                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');            
                 deferred.resolve(null);
-            }
-
-            function message() {
-                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
             }
 
             $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
