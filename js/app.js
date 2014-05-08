@@ -159,7 +159,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
             
             function onSuccess(position) {
-                alert(position);
+                alert(position.latitude);
                 deferred.resolve(position);
             }
 
