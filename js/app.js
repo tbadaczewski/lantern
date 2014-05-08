@@ -10,7 +10,7 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
     $rootScope.menu = "close";
-    $rootScope.position = {"coords" : {"latitude" : "38.8951", "longitude" : "-77.0367"}};
+    //$rootScope.position = {"coords" : {"latitude" : "", "longitude" : ""}};
 
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
@@ -159,13 +159,20 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
             
             function onSuccess(position) {
-                alert(position.latitude);
+                if(!position.latitude) {
+                    message();
+                }
+
                 deferred.resolve(position);
             }
 
             function onError(error) {
-                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
+                message();              
                 deferred.resolve(null);
+            }
+
+            function message() {
+                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
             }
 
             $window.navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
