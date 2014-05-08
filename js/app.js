@@ -516,6 +516,21 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
+                var fonts = document.createElement("link");
+                fonts.rel = "stylesheet"; 
+                fonts.type = "text/css";
+                fonts.href = "../css/fonts.css"; 
+                this.contentWindow.document.body.appendChild(fonts);
+
+                var tips = document.createElement("link");
+                tips.rel = "stylesheet"; 
+                tips.type = "text/css";
+                tips.href = "../css/tips.css"; 
+                this.contentWindow.document.body.appendChild(tips);
+
+                this.contentWindow.document.body.id = this.id;
+
+                /*
                 if(this.getAttribute("data-css")) {
                     var css = eval(this.getAttribute("data-css"));
 
@@ -529,6 +544,7 @@ lanternApp.directive('contentframe', function() {
                         this.contentWindow.document.body.appendChild(stylesheet);
                     }
                 }
+                */
 
                 this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
                 this.parentNode.scrollTop = 0;
