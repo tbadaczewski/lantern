@@ -26,21 +26,18 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     function intializeMe() {     
         geolocation().then(function(position) {  
             $rootScope.position = position;
-            alert("Position Loaded");
 
-            geoencoder('latLng').then(function(address) {
-                $rootScope.address = address[0];
-                $rootScope.county = address[1];
-                $rootScope.state = address[2];
+            geoencoder('latLng').then(function(data) {
+                $rootScope.address = data[0];
+                $rootScope.county = data[1];
+                $rootScope.state = data[2];
 
-                loadstations().then(function(data) {
-                    alert("Stations Loaded");
-                    $rootScope.stations = data;
+                loadstations().then(function(stations) {
+                    $rootScope.stations = stations;
                 }); 
 
-                loadoutages().then(function(data) {
-                    alert("Outages Loaded");
-                    $rootScope.outages = data;
+                loadoutages().then(function(outages) {
+                    $rootScope.outages = outages;
                 });
             });
         });
