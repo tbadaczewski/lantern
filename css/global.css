@@ -434,7 +434,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 
 .rounded {
 	background: none;
-	border: solid 2.5px #f18525;
+	border: solid 1px #f18525;
 	color: #fff;
 	-webkit-border-radius: 5px;
 }
