@@ -495,7 +495,7 @@ lanternApp.directive('contentframe', function() {
         transclude: true,
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
-            //$window.plugins.spinnerDialog.show();
+            window.plugins.spinnerDialog.show();
 
             scope.index = 0;
             scope.frame = element[0];
@@ -516,19 +516,19 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
-                this.contentWindow.document.body.id = this.id;
-
-                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                this.parentNode.scrollTop = 0;
+                //this.contentWindow.document.body.id = this.id;
 
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;                    
                 }
 
+                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
+                this.scrollTop = 0;
+
                 scope.$emit('onload', [scope.index, scope.history.length]);
 
-                //$window.plugins.spinnerDialog.hide();
+                window.plugins.spinnerDialog.hide();
             }
         }
     };
