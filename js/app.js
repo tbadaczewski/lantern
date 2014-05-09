@@ -28,19 +28,18 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.position = position;
 
             loadstations().then(function(stations) {
-                alert("Stations Loaded");
                 $rootScope.stations = stations;
-            }); 
-
-            loadoutages().then(function(outages) {
-                alert("Outages Loaded");
-                $rootScope.outages = outages;
             });
 
             geoencoder('latLng').then(function(address) {
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
+
+                //Outages need address data.
+                loadoutages().then(function(outages) {
+                    $rootScope.outages = outages;
+                });
             });
         });
 
