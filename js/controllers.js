@@ -393,8 +393,10 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		}
 
 		if($rootScope.outages == null) {
-	        loadoutages().then(function(data) {	        	
-	        	$rootScope.outages = $scope.outages = data;      	
+			alert("No Outages");
+			
+	        loadoutages().then(function(outages) {	        	
+	        	$rootScope.outages = $scope.outages = outages;      	
 	        });	    	
 		} else {
 			$scope.outages = $rootScope.outages;
