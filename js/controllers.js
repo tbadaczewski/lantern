@@ -392,20 +392,16 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$location.path("/outage-map");
 		}
 
-		$scope.init = function() {			
+		if($rootScope.outages == null) {
 	        loadoutages().then(function(data) {	        	
 	        	$rootScope.outages = $scope.outages = data;      	
-	        });
-		}
-
-		if($rootScope.outages == null) {
-	        $scope.init();	    	
+	        });	    	
 		} else {
 			$scope.outages = $rootScope.outages;
 		}
 
         $rootScope.$on('outagesUpdated', function() {
-        	$scope.init();
+        	$scope.outages = $rootScope.outages
     	});
 
 		$rootScope.backstate = "visible";
