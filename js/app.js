@@ -510,13 +510,18 @@ lanternApp.directive('contentframe', function() {
             });
 
             scope.frame.onload = function() {
+                var iframeWin = this.contentWindow || this.contentDocument.parentWindow;
+
                 if(this.contentWindow.location.pathname != scope.history[scope.index]) {
                     scope.history.push(this.contentWindow.location.pathname);
                     scope.index++;                    
                 }
 
-                this.height = (this.contentWindow.document.body.offsetHeight + 30) + "px";
-                this.scrollTop = 0;
+                if (iframeWin.document.body) {
+                    this.contentWindow.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+
+                iframeWin.document.body.scrollTop = 0;
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
