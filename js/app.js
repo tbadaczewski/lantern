@@ -521,7 +521,7 @@ lanternApp.directive('contentframe', function() {
                     iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
                     iframeWin.document.body.scrollTop = 0;
 
-                    angular.element(iframeWin.document.getElementsByTagName("a")).bind("touchstart", function(e) {
+                    angular.element(iframeWin.document.getElementsByTagName("a")).bind("click", function(e) {
                         e.preventDefault();
                         alert(this);
                     });
