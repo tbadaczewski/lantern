@@ -518,10 +518,14 @@ lanternApp.directive('contentframe', function() {
                 }
 
                 if (iframeWin.document.body) {
-                    //iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-                }
+                    iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    iframeWin.document.body.scrollTop = 0;
 
-                iframeWin.document.body.scrollTop = 0;
+                    angular.element(iframeWin.document.getElementsByTagName("a")).bind("touchstart", function(e) {
+                        e.preventDefault();
+                        alert(this);
+                    });
+                }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
