@@ -518,7 +518,7 @@ lanternApp.directive('contentframe', function() {
                 }
 
                 if (iframeWin.document.body) {
-                    this.contentWindow.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
                 }
 
                 iframeWin.document.body.scrollTop = 0;
