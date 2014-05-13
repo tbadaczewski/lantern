@@ -139,7 +139,7 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
         return function () {
             var deferred = $q.defer();
 
-            $http.get('http://doelanternapi.parseapp.com/twitter/doe/timeline').success(function (data) {
+            $http.get('https://doelanternapi.parseapp.com/twitter/doe/timeline').success(function (data) {
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
