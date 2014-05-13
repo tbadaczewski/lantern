@@ -1,8 +1,10 @@
-html,body {
+body {
+	/*
 	background: #fff;
 	font-family: 'open_sansregular';
 	color: #434a4f;
 	-webkit-text-size-adjust: none;
+	*/
 }
 
 a, a:link, a:active, a:visited, a:hover {
