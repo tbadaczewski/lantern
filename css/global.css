@@ -762,7 +762,7 @@ button#back, button#forward, a#return {
 	padding-top: 3em;
 	width: inherit;
 	height: inherit;
-	overflow: hidden;	
+	overflow: auto;	
 	background: #fff;
 	-webkit-overflow-scrolling: touch;
 }
@@ -771,6 +771,7 @@ button#back, button#forward, a#return {
 	position: relative;
 	width: 100%;
 	background: #fff;
+	overflow: visible;
 	-webkit-transform: translate3d(0,0,0);
 }
 
