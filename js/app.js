@@ -489,7 +489,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe ng-transclude></iframe>",
+        template: "<embed ng-transclude></embed>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0];
