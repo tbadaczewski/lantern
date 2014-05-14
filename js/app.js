@@ -517,10 +517,7 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
-                alert("Loaded");
-
                 if (iframeWin.document.body) {
-                    alert("Body");
                     /*
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
@@ -537,8 +534,8 @@ lanternApp.directive('contentframe', function() {
                     head.appendChild(fonts);
                     head.appendChild(tips);
                     */
-                    angular.element(this).contents().find("head").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
-                    angular.element(this).contents().find("body").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
+                    //angular.element(this).contents().find("head").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
+                    //angular.element(this).contents().find("body").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
 
 
 
