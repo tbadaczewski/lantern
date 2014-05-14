@@ -509,6 +509,7 @@ lanternApp.directive('contentframe', function() {
                 }
             });
 
+            /*
             scope.frame.onload = function() {
                 var iframeWin = this.contentWindow || this.contentDocument.parentWindow;
 
@@ -517,13 +518,7 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
-                angular.element(iframeWin.document.getElementsByTagName("a")).on("click", function(e) {
-                    e.preventDefault();
-                    alert("Clicked");
-                });
-
                 if (iframeWin.document.body) {
-                    /*
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
                     var head = iframeWin.document.getElementsByTagName('head')[0];
@@ -538,7 +533,6 @@ lanternApp.directive('contentframe', function() {
 
                     head.appendChild(fonts);
                     head.appendChild(tips);
-                    */
 
                     iframeWin.height = (iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight) + "px";
                     iframeWin.document.body.scrollTop = 0;
@@ -546,6 +540,7 @@ lanternApp.directive('contentframe', function() {
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
+            */
         }
     };
 });
