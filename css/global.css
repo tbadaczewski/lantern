@@ -721,7 +721,7 @@ button#back, button#forward, a#return {
 	width: inherit;
 	background: #fff;
 }
-/*
+
 #frame-nav {
 	position: absolute;
 	top: 0;
@@ -764,7 +764,6 @@ button#back, button#forward, a#return {
 	height: inherit;
 	overflow: hidden;
 	background: #fff;
-	-webkit-transform: translate3d(0,0,0);
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -774,7 +773,6 @@ iframe {
 	height: 100%;
 	background: #fff;
 }
-*/
 
 #legend {
 	display: block;
