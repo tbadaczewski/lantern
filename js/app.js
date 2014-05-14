@@ -539,8 +539,8 @@ lanternApp.directive('contentframe', function() {
 
 
 
-                    //iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-                    iframeWin.document.body.scrollTop = 0;
+                    iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    //iframeWin.document.body.scrollTop = 0;
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
