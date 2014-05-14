@@ -1,8 +1,8 @@
 body {
-	background: red;
+	background: #fff;
 	font-family: 'open_sansregular';
 	color: #434a4f;
-	-webkit-text-size-adjust: none;
+	-webkit-overflow-scrolling: touch;
 }
 
 a, a:link, a:active, a:visited, a:hover {
