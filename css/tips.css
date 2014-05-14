@@ -5,13 +5,8 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
-p {
-	display: block;
-}
-
 a, a:link, a:active, a:visited, a:hover {
 	color: #f18425 !important;
-	display: block;
 }
 
 li {
