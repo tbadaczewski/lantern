@@ -10,13 +10,13 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
     $rootScope.menu = "close";
-
+intializeMe();
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
         }
 
-        intializeMe();
+        
     }, false);
 
     document.addEventListener('resume', function() {
@@ -484,13 +484,37 @@ lanternApp.directive('modaldialog', function() {
     };
 });
 
-lanternApp.directive('contentframe', function() {
+lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
     return {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<iframe ng-transclude></iframe>",
-        link: function (scope, element, attrs) {
+        scope: {
+            src: '@',
+            content: '='
+        },
+        template: "<div ng-transclude></div>",
+        link: function (scope, element, attrs) {          
+            scope.changePath = function(path) {
+                $http.get('../tips/' + path).success(function(response) {
+                    element.html(response);
+
+                    angular.element(document.getElementsByTagName("a")).on("click", function(e) {
+                        e.preventDefault();
+
+                        if(this.getAttribute("target") == "_self") {
+                            scope.changePath(this.getAttribute("href"));
+                        } else {
+                            window.open(this.getAttribute("href"), "_system");
+                        }
+                    });
+                });
+            };
+
+            scope.changePath(scope.src);
+
+
+            /*
             scope.index = 0;
             scope.frame = element[0];
             scope.history = [scope.frame.contentWindow.location.pathname];
@@ -508,6 +532,7 @@ lanternApp.directive('contentframe', function() {
                     scope.frame.src = scope.history[scope.index];
                 }
             });
+            */
 
             /*
             scope.frame.onload = function() {
@@ -518,7 +543,10 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
-                if (iframeWin.document.body) {
+
+
+                if (iframeWin.document.body) {*/
+                    /*
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
                     var head = iframeWin.document.getElementsByTagName('head')[0];
@@ -533,14 +561,14 @@ lanternApp.directive('contentframe', function() {
 
                     head.appendChild(fonts);
                     head.appendChild(tips);
-
+                    */
+                    /*
                     iframeWin.height = (iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight) + "px";
                     iframeWin.document.body.scrollTop = 0;
                 }
 
-                scope.$emit('onload', [scope.index, scope.history.length]);
-            }
-            */
+                scope.$emit('onload', [scope.index, scope.history.length]);*/
+            //}
         }
     };
 });

@@ -425,8 +425,9 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$sce',
-    function ($scope, $rootScope, $sce) {
+lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$sce', '$http',
+    function ($scope, $rootScope, $sce, $http) {
+    	/*
         $scope.disabledback = "disabled", $scope.disabledforward = "disabled";
 
         $scope.$on('onload', function(event, values) {
@@ -452,6 +453,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope', '$sce',
         $scope.forward = function() {
         	$scope.$broadcast('goforward');
         }
+        */
 
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
