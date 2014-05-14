@@ -495,8 +495,8 @@ lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
         template: "<div ng-transclude></div>",
         link: function (scope, element, attrs) {          
             scope.changePath = function(path) {
-                $http.get('../tips/' + path).success(function(response) {
-                    element.html(response);
+                $http.get('tips/' + path).success(function(response) {
+                    element.html($sce.trustAsHtml(response));
 
                     angular.element(document.getElementsByTagName("a")).on("click", function(e) {
                         e.preventDefault();
