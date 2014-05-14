@@ -531,7 +531,7 @@ lanternApp.directive('contentframe', function() {
                     tips.href = "../css/tips.css";
 
                     head.appendChild(fonts);
-                    head.appendChild(fonts);
+                    head.appendChild(tips);
 
                     iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
                     iframeWin.document.body.scrollTop = 0;
