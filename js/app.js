@@ -537,13 +537,10 @@ lanternApp.directive('contentframe', function() {
                     //angular.element(this).contents().find("head").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
                     //angular.element(this).contents().find("body").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
 
-                    var bodyheight = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight
-
-                    //document.getElementById("tips").style.height = bodyheight + "px";
-                    document.getElementById("tips").style.height = bodyheight + "px";
+                    //var bodyheight = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight
 
                     //iframeWin.document.body.height = bodyheight + "px";
-                    iframeWin.document.body.scrollTop = 0;
+                    //iframeWin.document.body.scrollTop = 0;
                 }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
