@@ -517,7 +517,10 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
+                alert("Loaded");
+
                 if (iframeWin.document.body) {
+                    alert("Body");
                     /*
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
