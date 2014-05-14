@@ -490,8 +490,7 @@ lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
         replace: true,
         transclude: true,
         scope: {
-            src: '@',
-            content: '='
+            src: '@'
         },
         template: "<div ng-transclude></div>",
         link: function (scope, element, attrs) {          
@@ -512,63 +511,6 @@ lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
             };
 
             scope.changePath(scope.src);
-
-
-            /*
-            scope.index = 0;
-            scope.frame = element[0];
-            scope.history = [scope.frame.contentWindow.location.pathname];
-
-            scope.$on('goback', function() {
-                if(scope.index > 1) {
-                    scope.index--;
-                    scope.frame.src = scope.history[scope.index];
-                }
-            });
-
-            scope.$on('goforward', function() {
-                if(scope.index < scope.history.length - 1) {
-                    scope.index++;
-                    scope.frame.src = scope.history[scope.index];
-                }
-            });
-            */
-
-            /*
-            scope.frame.onload = function() {
-                var iframeWin = this.contentWindow || this.contentDocument.parentWindow;
-
-                if(this.contentWindow.location.pathname != scope.history[scope.index]) {
-                    scope.history.push(this.contentWindow.location.pathname);
-                    scope.index++;                    
-                }
-
-
-
-                if (iframeWin.document.body) {*/
-                    /*
-                    var fonts = document.createElement('link'); 
-                    var tips = document.createElement('link');
-                    var head = iframeWin.document.getElementsByTagName('head')[0];
-
-                    fonts.rel = 'stylesheet'; 
-                    fonts.type = 'text/css'; 
-                    fonts.href = "../css/fonts.css";
-
-                    tips.rel = 'stylesheet'; 
-                    tips.type = 'text/css'; 
-                    tips.href = "../css/tips.css";
-
-                    head.appendChild(fonts);
-                    head.appendChild(tips);
-                    */
-                    /*
-                    iframeWin.height = (iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight) + "px";
-                    iframeWin.document.body.scrollTop = 0;
-                }
-
-                scope.$emit('onload', [scope.index, scope.history.length]);*/
-            //}
         }
     };
 });
