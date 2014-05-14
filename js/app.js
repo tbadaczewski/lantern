@@ -517,13 +517,7 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
-                angular.element(iframeWin.document.getElementsByTagName("a")).bind("click", function(e) {
-                    e.preventDefault();
-                    alert("Clicked");
-                });
-
-                //if (iframeWin.document.body) {
-                    /*
+                if (iframeWin.document.body) {
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
                     var head = iframeWin.document.getElementsByTagName('head')[0];
@@ -538,15 +532,10 @@ lanternApp.directive('contentframe', function() {
 
                     head.appendChild(fonts);
                     head.appendChild(tips);
-                    */
-                    //angular.element(this).contents().find("head").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
-                    //angular.element(this).contents().find("body").append("<link rel='stylesheet' type='text/css' href='../css/fonts.css'/><link rel='stylesheet' type='text/css' href='../css/tips.css'/>")
 
-                    //var bodyheight = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight
-
-                    //iframeWin.document.body.height = bodyheight + "px";
-                    //iframeWin.document.body.scrollTop = 0;
-                //}
+                    iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    iframeWin.document.body.scrollTop = 0;
+                }
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
