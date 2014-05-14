@@ -489,7 +489,7 @@ lanternApp.directive('contentframe', function() {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: "<embed ng-transclude></embed>",
+        template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             scope.index = 0;
             scope.frame = element[0];
@@ -539,7 +539,7 @@ lanternApp.directive('contentframe', function() {
 
 
 
-                    iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                    //iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
                     iframeWin.document.body.scrollTop = 0;
                 }
 
