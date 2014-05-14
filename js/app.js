@@ -517,6 +517,10 @@ lanternApp.directive('contentframe', function() {
                     scope.index++;                    
                 }
 
+                angular.element(iframeWin.document.getElementsByTagName("a")).bind("click", function(e) {
+                    alert("Clicked");
+                });
+
                 if (iframeWin.document.body) {
                     /*
                     var fonts = document.createElement('link'); 
