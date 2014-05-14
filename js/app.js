@@ -518,6 +518,21 @@ lanternApp.directive('contentframe', function() {
                 }
 
                 if (iframeWin.document.body) {
+                    var fonts = document.createElement('link'); 
+                    var tips = document.createElement('link');
+                    var head = iframeWin.document.getElementsByTagName('head')[0];
+
+                    fonts.rel = 'stylesheet'; 
+                    fonts.type = 'text/css'; 
+                    fonts.href = "../css/fonts.css";
+
+                    tips.rel = 'stylesheet'; 
+                    tips.type = 'text/css'; 
+                    tips.href = "../css/tips.css";
+
+                    head.appendChild(fonts);
+                    head.appendChild(fonts);
+
                     iframeWin.document.body.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
                     iframeWin.document.body.scrollTop = 0;
                 }
