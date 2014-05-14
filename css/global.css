@@ -762,14 +762,16 @@ button#back, button#forward, a#return {
 	padding-top: 3em;
 	width: inherit;
 	height: inherit;
-	overflow: auto;	
+	overflow: hidden;
 	background: #fff;
-	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translate3d(0,0,0);
+	/*-webkit-overflow-scrolling: touch;*/
 }
 
 iframe {
 	position: relative;
 	width: 100%;
+	height: 100%;
 	background: #fff;
 }
 
