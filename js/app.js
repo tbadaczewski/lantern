@@ -10,13 +10,13 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
     $rootScope.menu = "close";
-intializeMe();
+
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
             localStorage.SessionID = guid();
         }
 
-        
+        intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
