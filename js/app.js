@@ -498,7 +498,7 @@ lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
                 $http.get('tips/' + path).success(function(response) {
                     element.html($sce.trustAsHtml(response));
 
-                    angular.element(document.getElementsByTagName("a")).on("click", function(e) {
+                    angular.element(element[0].getElementsByTagName("a")).on("click", function(e) {
                         e.preventDefault();
 
                         if(this.getAttribute("target") == "_self") {
