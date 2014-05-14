@@ -518,10 +518,11 @@ lanternApp.directive('contentframe', function() {
                 }
 
                 angular.element(iframeWin.document.getElementsByTagName("a")).bind("click", function(e) {
+                    e.preventDefault();
                     alert("Clicked");
                 });
 
-                if (iframeWin.document.body) {
+                //if (iframeWin.document.body) {
                     /*
                     var fonts = document.createElement('link'); 
                     var tips = document.createElement('link');
@@ -545,7 +546,7 @@ lanternApp.directive('contentframe', function() {
 
                     //iframeWin.document.body.height = bodyheight + "px";
                     //iframeWin.document.body.scrollTop = 0;
-                }
+                //}
 
                 scope.$emit('onload', [scope.index, scope.history.length]);
             }
