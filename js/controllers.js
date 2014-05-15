@@ -391,13 +391,13 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
+    	$scope.loading = true;
+
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
 			$rootScope.outagemap = $url;
 			$location.path("/outage-map");
-		}
-
-		$scope.loading = true;
+		}		
 
 		if($rootScope.outages == null) {
 	        loadoutages().then(function(outages) {
@@ -427,11 +427,13 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.loading = true; 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
+		$scope.loading = false;
     }
 ]);
 
