@@ -159,16 +159,21 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
+    	$scope.loading = true;
+
 		if($rootScope.stations == null) {
 	        loadstations().then(function(stations) {
 	        	$rootScope.stations = $scope.stations = stations;
+	        	$scope.loading = false;
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
+			$scope.loading = false;
 		}
 
         $rootScope.$on('stationsUpdated', function() {
         	$scope.stations = $rootScope.stations;
+        	$scope.loading = false;
     	});
 
    		$scope.tagCancel = function() {
@@ -392,16 +397,21 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$location.path("/outage-map");
 		}
 
+		$scope.loading = true;
+
 		if($rootScope.outages == null) {
-	        loadoutages().then(function(outages) {	        	
-	        	$rootScope.outages = $scope.outages = outages;      	
+	        loadoutages().then(function(outages) {
+	        	$rootScope.outages = $scope.outages = outages;
+	        	$scope.loading = false;
 	        });	    	
 		} else {
 			$scope.outages = $rootScope.outages;
+			$scope.loading = false;
 		}
 
         $rootScope.$on('outagesUpdated', function() {
         	$scope.outages = $rootScope.outages;
+        	$scope.loading = false;
     	});
 
 		$rootScope.backstate = "visible";
@@ -427,6 +437,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.loading = true; 
         $scope.disabledback = "disabled", $scope.disabledforward = "disabled";
 
         $scope.$on('onload', function(event, values) {
@@ -440,7 +451,9 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 	            $scope.disabledforward = "";
 	        } else {
 	            $scope.disabledforward = "disabled";
-	        }	        
+	        }
+
+	        $scope.loading = false;       
         });
 
         $scope.back = function() {

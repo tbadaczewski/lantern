@@ -23,8 +23,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    intializeMe();
-
     function intializeMe() {   
         geolocation().then(function(position) {  
             $rootScope.position = position;
@@ -229,11 +227,17 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                deferred.resolve(eval(data));
-            }).error(function(data) {
+            if($rootScope.position) {
+                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                    deferred.resolve(eval(data));
+                }).error(function(data) {
+                    deferred.resolve(null);
+                });
+            } else  {
                 deferred.resolve(null);
-            });
+            }
+
+            $rootScope.$emit('stationsUpdated', new Date());
 
             return deferred.promise;
         };
@@ -250,6 +254,8 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
             }).error(function(data) {
                 deferred.resolve(null);
             });
+
+            $rootScope.$emit('outagesUpdated', new Date());
 
             return deferred.promise;
         };

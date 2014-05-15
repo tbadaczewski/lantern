@@ -613,61 +613,6 @@ a:link, a:visited, a:hover {
     height: 100%;
 }
 
-@-webkit-keyframes spin {
-	to { -webkit-transform: rotate(1turn); }
-}
-
-.progress {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	z-index: 1100;
-	display: block;
-	width: 5em;
-	height: 5em;
-	margin: 0.5em;
-	margin-left: -2.5em;
-	font-size: 6px;
-	text-indent: 999em;
-	overflow: hidden;
-	-webkit-animation: spin 1s infinite steps(8);
-}
-
-.progress:before,
-.progress:after,
-.progress > div:before,
-.progress > div:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 2.25em;
-	width: .5em;
-	height: 1.5em;
-	border-radius: .2em;
-	background: #eee;
-	box-shadow: 0 3.5em #eee;
-	-webkit-transform-origin: 50% 2.5em;
-}
-
-.progress:before {
-	background: #555;
-}
-
-.progress:after {
-	-webkit-transform: rotate(-45deg);
-	background: #777;
-}
-
-.progress > div:before {
-	-webkit-transform: rotate(-90deg);
-	background: #999;
-}
-
-.progress > div:after {
-	-webkit-transform: rotate(-135deg);
-	background: #bbb;
-}
-
 .ng-modal {
 	position: absolute;
 	z-index: 1000;
@@ -830,4 +775,63 @@ iframe {
 		float: none !important;
 		text-align: center !important;
 	}
+}
+
+
+
+/**
+ * (C)Leanest CSS spinner ever
+ */
+
+@-webkit-keyframes spin {
+	to { -webkit-transform: rotate(1turn); }
+}
+
+.progress {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	display: inline-block;
+	width: 5em;
+	height: 5em;
+	margin: 0 -2.5em 0 -2.5em;
+	font-size: 12px;
+	text-indent: 999em;
+	overflow: hidden;
+	-webkit-animation: spin 1s infinite steps(8);
+}
+
+.progress:before,
+.progress:after,
+.progress > div:before,
+.progress > div:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 2.25em; /* (container width - part width)/2  */
+	width: .5em;
+	height: 1.5em;
+	border-radius: .2em;
+	background: #eee;
+	box-shadow: 0 3.5em #eee; /* container height - part height */
+	-webkit-transform-origin: 50% 2.5em; /* container height / 2 */
+}
+
+.progress:before {
+	background: #555;
+}
+
+.progress:after {
+	-webkit-transform: rotate(-45deg);
+	background: #777;
+}
+
+.progress > div:before {
+	-webkit-transform: rotate(-90deg);
+	background: #999;
+}
+
+.progress > div:after {
+	-webkit-transform: rotate(-135deg);
+	background: #bbb;
 }
