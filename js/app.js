@@ -23,6 +23,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
+    intializeMe();
+
     function intializeMe() {   
         geolocation().then(function(position) {  
             $rootScope.position = position;
@@ -484,7 +486,7 @@ lanternApp.directive('modaldialog', function() {
     };
 });
 
-lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
+lanternApp.directive('contentframe', function($http, $sce) {
     return {
         restrict: 'E',
         replace: true,
@@ -493,24 +495,48 @@ lanternApp.directive('contentframe', function($http, $rootScope, $sce) {
             src: '@'
         },
         template: "<div ng-transclude></div>",
-        link: function (scope, element, attrs) {          
+        link: function (scope, element, attrs) {
+            scope.history = [scope.src];
+            scope.index = 0;
+
             scope.changePath = function(path) {
                 $http.get('tips/' + path).success(function(response) {
-                    element.html($sce.trustAsHtml(response));
+                    element.html($sce.trustAsHtml(response));                                          
+                    element[0].scrollTop = 0;
+
+                    scope.$emit('onload', [scope.index, scope.history.length]);
 
                     angular.element(element[0].getElementsByTagName("a")).on("click", function(e) {
                         e.preventDefault();
 
+                        var href = this.getAttribute("href");
+
                         if(this.getAttribute("target") == "_self") {
-                            scope.changePath(this.getAttribute("href"));
+                            scope.history.push(href);  
+                            scope.index++;
+                            scope.changePath(href);                
                         } else {
-                            window.open(this.getAttribute("href"), "_system");
+                            window.open(href, "_system");
                         }
                     });
                 });
             };
 
-            scope.changePath(scope.src);
+            scope.$on('goback', function() {
+                if(scope.index > 0) {
+                    scope.index--;
+                    scope.changePath(scope.history[scope.index]);
+                }
+            });
+
+            scope.$on('goforward', function() {
+                if(scope.index < scope.history.length - 1) {
+                    scope.index++;
+                    scope.changePath(scope.history[scope.index]);
+                }
+            });
+
+            scope.changePath(scope.history[scope.index]);
         }
     };
 });
