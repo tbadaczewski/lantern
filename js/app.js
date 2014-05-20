@@ -157,6 +157,7 @@ lanternApp.factory('geolocation', ['$q',
             var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
             
             function onSuccess(position) {
+                navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close'); 
                 deferred.resolve(position);
             }
 
