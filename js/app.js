@@ -492,6 +492,23 @@ lanternApp.directive('modaldialog', function() {
     };
 });
 
+lanternApp.directive('outageframe', function($http, $sce) {
+    return {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        scope: {
+            src: '@'
+        },
+        template: "<iframe ng-transclude></iframe>",
+        link: function (scope, element, attrs) {
+            scope.onload = function() {
+
+            }
+        }
+    };
+});
+
 lanternApp.directive('contentframe', function($http, $sce) {
     return {
         restrict: 'E',

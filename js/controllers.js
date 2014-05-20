@@ -475,6 +475,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.tweets = $rootScope.tweets;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
