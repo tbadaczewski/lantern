@@ -135,7 +135,7 @@ lanternApp.factory('validatetag', ['$window',
 ]);
 
 lanternApp.factory('twitter', ['$q', '$http',
-    function ($q, $http,) {
+    function ($q, $http) {
         return function () {
             var deferred = $q.defer();
 
