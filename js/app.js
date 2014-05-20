@@ -150,6 +150,29 @@ lanternApp.factory('twitter', ['$q', '$rootScope','$window', '$http', '$sce',
     }
 ]);
 
+lanternApp.factory('geolocation', ['$q',
+    function ($q) {
+        return function () {
+            var deferred = $q.defer();
+            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
+            
+            function onSuccess(position) {
+                deferred.resolve(position);
+            }
+
+            function onError(error) {
+                navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');            
+                deferred.resolve(null);
+            }
+
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+            return deferred.promise;
+        };
+    }
+]);
+
+/*
 lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
     function ($q, $rootScope, $window) {
         return function () {
@@ -171,6 +194,7 @@ lanternApp.factory('geolocation', ['$q', '$rootScope', '$window',
         };
     }
 ]);
+*/
 
 lanternApp.factory('geoencoder', ['$q', '$rootScope',
     function ($q, $rootScope) {
