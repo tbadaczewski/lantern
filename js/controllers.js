@@ -277,6 +277,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
+		$scope.loading = true;
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -303,6 +304,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
+			$scope.loading = false;
 		}
 
         $rootScope.$on('stationsUpdated', function() {

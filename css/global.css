@@ -813,10 +813,11 @@ iframe {
 	width: 5em;
 	height: 5em;
 	margin: 0 .5em;
-	font-size: 4px;
+	font-size: 5px;
 	text-indent: 999em;
 	overflow: hidden;
 	-webkit-animation: spin 1s infinite steps(8);
+	z-index: 100;
 }
 
 .progress:before,
@@ -826,13 +827,13 @@ iframe {
 	content: '';
 	position: absolute;
 	top: 0;
-	left: 2.25em; /* (container width - part width)/2  */
+	left: 2.25em;
 	width: .5em;
 	height: 1.5em;
 	border-radius: .2em;
 	background: #ddd;
-	box-shadow: 0 3.5em #ddd; /* container height - part height */
-	-webkit-transform-origin: 50% 2.5em; /* container height / 2 */
+	box-shadow: 0 3.5em #ddd;
+	-webkit-transform-origin: 50% 2.5em;
 }
 
 .progress:before {
