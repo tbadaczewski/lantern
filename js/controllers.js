@@ -252,7 +252,10 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			var deferred = $q.defer();
 
 			setTimeout(function() {
-		        deferred.resolve(true);				
+		        loadstations().then(function(stations) {
+		        	$rootScope.stations = $scope.stations = stations;
+		        	deferred.resolve(true);
+		        });		        		
 			}, 1000);
 			
 			return deferred.promise;
