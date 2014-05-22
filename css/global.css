@@ -856,6 +856,8 @@ iframe {
 
 .pull-to-refresh .progress {
 	position: relative;
+	left: auto;
+	top: auto;
 	margin: 0 auto;
-	display: block;
+	display: inline-block;
 }
