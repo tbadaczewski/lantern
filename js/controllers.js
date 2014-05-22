@@ -157,8 +157,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
-    function ($scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
+lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
+    function ($q, $scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
     	$scope.loading = true;
 
 		if($rootScope.stations == null) {
@@ -252,10 +252,7 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 			var deferred = $q.defer();
 
 			setTimeout(function() {
-		        loadstations().then(function(stations) {
-		        	$rootScope.stations = $scope.stations = stations;
-		        	deferred.resolve(true);
-		        });				
+		        deferred.resolve(true);				
 			}, 1000);
 			
 			return deferred.promise;
