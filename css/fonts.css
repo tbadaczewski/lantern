@@ -26,15 +26,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-favorite:before {
-	content: "\f005";
-}
-.icon-retweet:before {
-	content: "\f079";
-}
-.icon-reply:before {
-	content: "\f112";
-}
 .icon-search:before {
 	content: "\e600";
 }
@@ -46,6 +37,12 @@
 }
 .icon-arrow2-right:before {
 	content: "\e611";
+}
+.icon-arrow-up:before {
+	content: "\e610";
+}
+.icon-arrow-down:before {
+	content: "\e612";
 }
 .icon-list:before {
 	content: "\e601";
@@ -85,4 +82,13 @@
 }
 .icon-tag:before {
 	content: "\e60d";
+}
+.icon-retweet:before {
+	content: "\f079";
+}
+.icon-favorite:before {
+	content: "\f005";
+}
+.icon-reply:before {
+	content: "\f112";
 }

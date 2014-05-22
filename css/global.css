@@ -795,7 +795,7 @@ iframe {
 	width: 5em;
 	height: 5em;
 	margin: 0 -2.5em 0 -2.5em;
-	font-size: 6px;
+	font-size: 3px;
 	text-indent: 999em;
 	overflow: hidden;
 	-webkit-animation: spin 1s infinite steps(8);
@@ -858,4 +858,8 @@ iframe {
   -webkit-transform: translateZ(0px);
   -moz-transform: translateZ(0px);
   transform: translateZ(0px);
+}
+
+.pull-to-refresh .progress {
+	position: relative;
 }
