@@ -830,8 +830,8 @@ iframe {
 	width: .5em;
 	height: 1.5em;
 	border-radius: .2em;
-	background: #eee;
-	box-shadow: 0 3.5em #eee;
+	background: #ddd;
+	box-shadow: 0 3.5em #ddd;
 	-webkit-transform-origin: 50% 2.5em;
 }
 
@@ -855,5 +855,7 @@ iframe {
 }
 
 .pull-to-refresh .progress {
-	position: absolute;
+	position: relative;
+	margin: 0 auto;
+	display: block;
 }
