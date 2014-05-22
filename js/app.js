@@ -5,7 +5,8 @@ var lanternApp = angular.module('lanternApp', [
     'ngRoute',
 	'ngTouch',
     'ngSanitize',
-    'lanternControllers'
+    'lanternControllers',
+    'mgcrea.pullToRefresh'
 ]);
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
@@ -276,9 +277,13 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.directive('focusme', function($timeout, $rootScope) {
+lanternApp.directive('searchbar', function($timeout) {
     return {
-        link: function(scope, element, attrs) {
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        template: "<input ng-transclude />",
+        link: function (scope, element, attrs) {
             scope.$watch('searchfocus', function(value) {
                 $timeout(function() {
                     if(value == true) {
@@ -289,18 +294,9 @@ lanternApp.directive('focusme', function($timeout, $rootScope) {
                 }, 500);
             });
 
-            element.bind("focus", function(e) {
-                scope.$emit('searchfocus', true);
-            });
-
-            element.bind("blur", function(e) {
-                scope.$emit('searchfocus', false);
-            });
-
             element.bind("keyup", function(e) {
                 if(e.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
-                    scope.$emit('searchfocus', false);
                 }     
             });
 
@@ -503,7 +499,7 @@ lanternApp.directive('outageframe', function($http, $sce) {
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             scope.onload = function() {
-
+                scope.$emit('onload', true);
             }
         }
     };

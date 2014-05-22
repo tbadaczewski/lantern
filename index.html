@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-pull-to-refresh.min.css">
 </head>
 <body>
     <div id="branding-bar">
@@ -24,15 +25,16 @@
                 <li>The App only transmits photos/texts uploaded by the user, along with geospatial coordinates; the App does not transmit any personal information (i.e., phone number, user’s name) associated with your device.</li>
                 <li>DOE does use Google Maps (DOE does not endorse any non-Federal government entities or products) on this App. While Google has advised DOE that they do not collect any personal information, they do collect the number of times a map is accessed via the mapping feature on the DOE App, This information is not shared with DOE. DOE is not responsible for any information collected by Google.</li>
                 <li>While DOE does not charge for the use of this App normal carrier data fees may apply. Please consult your carrier to discuss any charges related to the use of this App.</li>
-                <li>DOE is a Federal Government entity and as such does not endorse any non-Federal US Government entities. You may not use this App or any of the information in this App to imply that DOE endorse you or your organization.</li>
+                <li>DOE is a Federal Government entity and as such does not endorse any other entities. You may not use this App or any of the information in this App (including the DOE logo or seal) to imply that DOE endorses you, your organization, or any particular entity, product, or service.  The DOE logo or seal cannot be used without appropriate DOE authorization.</li>
                 <li>This App should not be used to contact DOE during an emergency. If you are in need of emergency assistance please contact 9-1-1.</li>
-            </ul>            
+            </ul>
+            <small>Rev. June 2014</small>     
         </div>        
     </div>
     <div id="search-bar" ng-controller="SearchCtrl"> 
         <div id="search-area" class="{{backstate}}">
             <a href="#/" class="arrow-back" title="Back"><span class="icon-arrow2-left"><span class="element-invisible">Back</span></span></a>
-            <input focusme id="search-text" ng-model="address" type="text" placeholder="Enter a Location" />
+            <searchbar id="search-text" ng-model="address" type="text" ng-focus="showFocus()" ng-blur="hideFocus()" placeholder="Enter a Location" />
         </div>
         <div id="search-options">            
             <button id="btn-clear" ng-click="clear()" type="button" title="Clear"><span class="icon-close" aria-hidden="true"><span class="element-invisible">Clear</span></span></button>
@@ -56,6 +58,7 @@
     <script type="text/javascript" src="lib/angular/angular-touch.min.js"></script>
     <script type="text/javascript" src="lib/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="lib/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular-pull-to-refresh.min.js"></script>
     <script type="text/javascript" src="js/codebird.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controllers.js"></script>

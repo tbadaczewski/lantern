@@ -30,11 +30,11 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 			$scope.searchfocus = true;
 		}
 
-		$scope.showClear = function() {
+		$scope.showFocus = function() {
 			$scope.searchfocus = true;
 		}
 
-		$scope.hideClear = function() {
+		$scope.hideFocus = function() {
 			$scope.searchfocus = false;
 		}
 
@@ -89,7 +89,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 			    	$scope.notedialog = true;
 
    					break;
-   			}	
+   			}
     	}
 
    		$scope.closeDialog = function($target, $value) {
@@ -247,6 +247,16 @@ lanternControllers.controller('StationListCtrl', ['$scope', '$rootScope', '$http
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
 		}
+
+		$scope.onReload = function() {
+			var deferred = $q.defer();
+
+			setTimeout(function() {
+				deferred.resolve(true);
+			}, 1000);
+			
+			return deferred.promise;
+		};
 		
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
@@ -433,7 +443,10 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
-		$scope.loading = false;
+
+		$scope.$on('onload', function(event, values) {
+			$scope.loading = false;
+		});
     }
 ]);
 
@@ -475,11 +488,13 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+    	$scope.loading = true; 
     	$scope.tweets = $rootScope.tweets;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
+		$scope.loading = false; 
 
 		$scope.autoHyperlinkUrls = function(text) {
 			if(text) {

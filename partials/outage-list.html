@@ -1,5 +1,5 @@
 <div class="progress" ng-show="loading"><div>Loading…</div></div>
-<div class="outages">
+<div class="outages" pull-to-refresh="onReload()">
     <div ng-repeat="outage in outages">
     	<div class="item list">
 	        <h4>{{isExists(outage.commericial_company_name) ? outage.commericial_company_name : outage.utility_company_name}}</h4>
