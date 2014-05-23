@@ -440,15 +440,19 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
     }
 ]);
 
-lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window',
+    function ($scope, $rootScope, $window) {
     	$scope.loading = true; 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
-		$scope.loading = false;
+		
+
+		$window.loaded=function(){
+			$scope.loading = false;
+		}
     }
 ]);
 
