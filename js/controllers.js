@@ -448,10 +448,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope',
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
-
-		$scope.$on('onload', function(event, values) {
-			$scope.loading = false;
-		});
+		$scope.loading = false;
     }
 ]);
 
