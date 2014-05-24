@@ -781,8 +781,6 @@ iframe {
 	position: relative;
 	display: block;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 	margin: -40px auto 0;
 	padding: 0;
 	width: 100%;
@@ -791,14 +789,8 @@ iframe {
 	text-align: center;
 	line-height: 40px;
 	-webkit-transition-duration: 400ms;
-	-moz-transition-duration: 400ms;
-	transition-duration: 400ms;
 	-webkit-transition-property: margin;
-	-moz-transition-property: margin;
-	transition-property: margin;
 	-webkit-transform: translateZ(0px);
-	-moz-transform: translateZ(0px);
-	transform: translateZ(0px);
 }
 
 @-webkit-keyframes spin {
@@ -808,13 +800,11 @@ iframe {
 .progress {
 	position: fixed;
 	top: 50%;
-	left: 50%;
+	left: 45%;
 	display: inline-block;
-	margin-left: -5em;
-	margin-top: -5em;
 	width: 5em;
 	height: 5em;
-	margin: 0 .5em;
+	margin: 0;
 	font-size: 5px;
 	text-indent: 999em;
 	overflow: hidden;

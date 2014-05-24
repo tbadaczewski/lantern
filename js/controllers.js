@@ -164,16 +164,16 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		if($rootScope.stations == null) {
 	        loadstations().then(function(stations) {
 	        	$rootScope.stations = $scope.stations = stations;
-	        	$scope.loading = false;
+	        	//$scope.loading = false;
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			$scope.loading = false;
+			//$scope.loading = false;
 		}
 
         $rootScope.$on('stationsUpdated', function() {
         	$scope.stations = $rootScope.stations;
-        	$scope.loading = false;
+        	//$scope.loading = false;
     	});
 
    		$scope.tagCancel = function() {

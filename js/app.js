@@ -498,9 +498,6 @@ lanternApp.directive('outageframe', function($http, $sce) {
         },
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
-            scope.onload = function() {
-                scope.$emit('onload', true);
-            }
         }
     };
 });
