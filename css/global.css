@@ -297,6 +297,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	height: 100%;
 	max-height: 95%;
 	-webkit-overflow-scrolling: touch;
+	padding: 1em 0;
 }
 
 #search-bar {

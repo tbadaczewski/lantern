@@ -488,7 +488,7 @@ lanternApp.directive('modaldialog', function() {
     };
 });
 
-lanternApp.directive('outageframe', function($http, $sce) {
+lanternApp.directive('outageframe', function($http, $sce, $window) {
     return {
         restrict: 'E',
         replace: true,
@@ -498,6 +498,13 @@ lanternApp.directive('outageframe', function($http, $sce) {
         },
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
+            $window.onload = function() {
+                alert("Loaded 1");
+            }
+
+            element.bind("onload", function(e) {
+                alert("Loaded 2");
+            });
         }
     };
 });
