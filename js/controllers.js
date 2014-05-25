@@ -450,8 +450,9 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 		$scope.src = $rootScope.outagemap;
 
 		$scope.$on('loaded', function(event, values) {
-			$scope.loading = false; 
-			alert("Loaded");
+			$scope.$apply(function() {
+				$scope.loading = false; 
+			});
 		});
     }
 ]);
