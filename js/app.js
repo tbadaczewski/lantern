@@ -277,7 +277,7 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.directive('searchbar', function($timeout) {
+lanternApp.directive('searchbar', function($timeout, $rootScope) {
     return {
         restrict: 'E',
         replace: true,
@@ -294,10 +294,10 @@ lanternApp.directive('searchbar', function($timeout) {
                 }, 500);
             });
 
-            element.bind("keyup", function(e) {
-                if(e.keyCode == 13) {
+            element.bind("keyup", function($event) {         
+                if($event.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
-                }     
+                } 
             });
 
             scope.focus = function() {
