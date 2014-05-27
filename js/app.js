@@ -301,18 +301,24 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             });
 
             scope.focus = function() {
-                element[0].focus();
+                if(element[0].className == "") {
+                    element[0].focus();
+                    element[0].className = "focus";
 
-                if (typeof SoftKeyboard !== 'undefined') {
-                    SoftKeyboard.show();
+                    if (typeof SoftKeyboard !== 'undefined') {
+                        SoftKeyboard.show();
+                    }
                 }
             }
 
             scope.blur = function() {
-                element[0].blur();
+                if(element[0].className == "focus") {
+                    element[0].blur();
+                    element[0].className = "";
 
-                if (typeof SoftKeyboard !== 'undefined') {
-                    SoftKeyboard.hide();
+                    if (typeof SoftKeyboard !== 'undefined') {
+                        SoftKeyboard.hide();
+                    }
                 }
             }
         }

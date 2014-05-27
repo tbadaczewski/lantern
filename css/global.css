@@ -338,8 +338,8 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	z-index: 0;
 	width: 100%;
 	height: inherit;
-	font-size: 1em;
-	padding: 0 50px 0 1em;
+	font-size: 0.9em;
+	padding: 0 170px 0 1em;
 	color: #353c41;
 	background: transparent;
 	-webkit-user-modify: read-write-plaintext-only;
