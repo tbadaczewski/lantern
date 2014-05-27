@@ -3,8 +3,8 @@
  *
  * @package codebird
  * @version 2.5.0-alpha.2-dev
- * @author Jublo IT Solutions <support@jublo.net>
- * @copyright 2010-2014 Jublo IT Solutions <support@jublo.net>
+ * @author Jublo Solutions <support@jublo.net>
+ * @copyright 2010-2014 Jublo Solutions <support@jublo.net>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@
           module,
           define,
           require */
+(function (undefined) {
 "use strict";
 
 /**
@@ -52,7 +53,6 @@ if (! Array.prototype.indexOf) {
     };
 }
 
-(function (undefined) {
 /**
  * A Twitter library in JavaScript
  *
@@ -520,6 +520,7 @@ var Codebird = function () {
             }
         };
         xml.send(post_fields);
+
     };
 
     /**
@@ -1216,10 +1217,14 @@ var Codebird = function () {
      */
     var _getXmlRequestObject = function () {
         var xml = null;
-        
-        if (typeof window === "object" && window && typeof window.XMLHttpRequest === "function" || typeof window.XMLHttpRequest === "object") {
-            xml = new window.XMLHttpRequest();            
-        } else if (typeof require === "function" && require) {
+        if (typeof window === "object"
+            && window
+            && typeof window.XMLHttpRequest !== "undefined"
+        ) {
+            xml = new window.XMLHttpRequest();
+        } else if (typeof require === "function"
+            && require
+        ) {
             try {
                 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 xml = new XMLHttpRequest();
@@ -1237,7 +1242,6 @@ var Codebird = function () {
                 }
             }
         }
-
         return xml;
     };
 
