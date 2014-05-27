@@ -301,11 +301,9 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             });
 
             scope.focus = function() {
-                alert("Give Focus");
-
-                if(element[0].className == "") {
+                if(element[0].getAttribute("data-focus") == "false") {
                     element[0].focus();
-                    element[0].className = "focus";
+                    element[0].setAttribute("data-focus", "true");
 
                     if (typeof SoftKeyboard !== 'undefined') {
                         SoftKeyboard.show();
@@ -314,11 +312,9 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             }
 
             scope.blur = function() {
-                alert("Remove Focus");
-
-                if(element[0].className == "focus") {
+                if(element[0].getAttribute("data-focus") == "true") {
                     element[0].blur();
-                    element[0].className = "";
+                    element[0].setAttribute("data-focus", "false");
 
                     if (typeof SoftKeyboard !== 'undefined') {
                         SoftKeyboard.hide();
