@@ -339,12 +339,16 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	width: 100%;
 	height: inherit;
 	font-size: 0.9em;
-	padding: 0 170px 0 1em;
+	padding: 0 130px 0 1em;
 	color: #353c41;
 	background: transparent;
 	-webkit-user-modify: read-write-plaintext-only;
 	-webkit-user-select: text;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#search-area.visible #search-text {
+	padding: 0 165px 0 1em;
 }
 
 .icon-arrow2-left, .icon-arrow2-right {

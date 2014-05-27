@@ -301,6 +301,8 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             });
 
             scope.focus = function() {
+                alert("Give Focus");
+
                 if(element[0].className == "") {
                     element[0].focus();
                     element[0].className = "focus";
@@ -312,6 +314,8 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             }
 
             scope.blur = function() {
+                alert("Remove Focus");
+
                 if(element[0].className == "focus") {
                     element[0].blur();
                     element[0].className = "";
