@@ -280,8 +280,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
-    function ($scope, $rootScope, $http, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
+    function ($scope, $rootScope, $http, $timeout, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
 		$scope.loading = true;
 
@@ -310,12 +310,17 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
+			$scope.showdetails = null;
 		}
 
     	$scope.$on('markersLoaded', function() {
-    		$scope.$apply(function(){
-    			$scope.loading = false;
-    		});    		
+    		$timeout(function(){
+	    		$scope.loading = false;
+    		}, 500); 		
+    	});
+
+        $rootScope.$on('stationsUpdated', function() {
+        	$scope.loadMarkers();
     	});
 
 		$scope.getDirections = function(url) {
