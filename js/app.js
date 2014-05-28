@@ -444,6 +444,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                 map.fitBounds(bounds);
                 intialized = true;
+                scope.$emit('markersLoaded', true);
             }
 
             scope.$watch('markers', function(newValue, oldValue) {

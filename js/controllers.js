@@ -2,8 +2,8 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
-    function ($scope, $rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$timeout', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
+    function ($scope, $rootScope, $http, $timeout, geolocation, geoencoder, loadstations, loadoutages) {
     	$scope.search = function() {
     		$scope.searchfocus = false;
     		$rootScope.address = $scope.address;
@@ -26,16 +26,22 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', 'g
 		}
 
 		$scope.clear = function() {
-			$scope.address = "";
-			$scope.searchfocus = true;
+			$timeout(function(){
+				$scope.address = "";
+				$scope.searchfocus = true;
+			}, 500);
 		}
 
 		$scope.showFocus = function() {
-			$scope.searchfocus = true;
+			$timeout(function(){
+				$scope.searchfocus = true;
+			}, 500);
 		}
 
 		$scope.hideFocus = function() {
-			$scope.searchfocus = false;
+			$timeout(function(){
+				$scope.searchfocus = false;
+			}, 500);			
 		}
 
     	$scope.locate = function() {
@@ -304,11 +310,12 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 			
 			$scope.markers = station_markers;
-			$scope.loading = false;
 		}
 
-        $rootScope.$on('stationsUpdated', function() {
-        	$scope.loadMarkers();
+    	$scope.$on('markersLoaded', function() {
+    		$scope.$apply(function(){
+    			$scope.loading = false;
+    		});    		
     	});
 
 		$scope.getDirections = function(url) {

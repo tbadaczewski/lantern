@@ -258,17 +258,6 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	z-index: 300;
 }
 
-#main-menu {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	z-index: 100;
-	background: orange;
-	padding: 1em;
-	display: none;
-}
-
 #handle {
 	position: absolute;
 	top: 0;
@@ -806,7 +795,7 @@ iframe {
 .progress {
 	position: fixed;
 	top: 50%;
-	left: 45%;
+	left: 50%;
 	display: inline-block;
 	width: 5em;
 	height: 5em;
