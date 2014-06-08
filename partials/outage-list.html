@@ -2,7 +2,7 @@
 <div class="outages" pull-to-refresh="onReload()">
     <div ng-repeat="outage in outages">
     	<div class="item list">
-	        <h4>{{isExists(outage.commericial_company_name) ? outage.commericial_company_name : outage.utility_company_name}}</h4>
+	        <h4>{{isExists(outage.commercial_company_name) ? outage.commercial_company_name : outage.utility_company_name}}</h4>
 	        {{outage.county}} County, {{outage.state}}<br />
 	        <a href="" ng-click="getMap($event, outage.outage_map_url)">Open Outage Map</a>
     	</div>
