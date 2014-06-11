@@ -26,22 +26,28 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.clear = function() {
-			$timeout(function(){
-				$scope.address = "";
-				$scope.searchfocus = true;
-			}, 500);
+			if(scope.searchfocus == true) {
+				$timeout(function(){
+					$scope.address = "";
+					$scope.searchfocus = true;
+				}, 500);
+			}
 		}
 
 		$scope.showFocus = function() {
-			$timeout(function(){
-				$scope.searchfocus = true;
-			}, 500);
+			if(scope.searchfocus == false) {
+				$timeout(function(){
+					$scope.searchfocus = true;
+				}, 500);
+			}
 		}
 
 		$scope.hideFocus = function() {
-			$timeout(function(){
-				$scope.searchfocus = false;
-			}, 500);			
+			if(scope.searchfocus == true) {
+				$timeout(function(){
+					$scope.searchfocus = false;
+				}, 500);
+			}		
 		}
 
     	$scope.locate = function() {

@@ -284,14 +284,16 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
         transclude: true,
         template: "<input ng-transclude />",
         link: function (scope, element, attrs) {
-            scope.$watch('searchfocus', function(value) {
-                $timeout(function() {
-                    if(value == true) {
-                        scope.focus();                 
-                    } else {
-                        scope.blur();
-                    }
-                }, 500);
+            scope.$watch('searchfocus', function(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    $timeout(function() {
+                        if(value == true) {
+                            scope.focus();                 
+                        } else {
+                            scope.blur();
+                        }
+                    }, 500);
+                }
             });
 
             element.bind("keyup", function($event) {         
