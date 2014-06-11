@@ -287,7 +287,7 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             scope.$watch('searchfocus', function(newValue, oldValue) {
                 if (newValue !== oldValue) {
                     $timeout(function() {
-                        if(value == true) {
+                        if(newValue == true) {
                             scope.focus();                 
                         } else {
                             scope.blur();

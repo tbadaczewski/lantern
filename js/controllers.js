@@ -4,6 +4,8 @@ var lanternControllers = angular.module('lanternControllers', []);
 
 lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$timeout', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages',
     function ($scope, $rootScope, $http, $timeout, geolocation, geoencoder, loadstations, loadoutages) {
+    	$scope.searchfocus = false;
+
     	$scope.search = function() {
     		$scope.searchfocus = false;
     		$rootScope.address = $scope.address;
@@ -26,7 +28,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.clear = function() {
-			if(scope.searchfocus == true) {
+			if($scope.searchfocus == false) {
 				$timeout(function(){
 					$scope.address = "";
 					$scope.searchfocus = true;
@@ -35,7 +37,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.showFocus = function() {
-			if(scope.searchfocus == false) {
+			if($scope.searchfocus == false) {
 				$timeout(function(){
 					$scope.searchfocus = true;
 				}, 500);
@@ -43,7 +45,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.hideFocus = function() {
-			if(scope.searchfocus == true) {
+			if($scope.searchfocus == true) {
 				$timeout(function(){
 					$scope.searchfocus = false;
 				}, 500);
