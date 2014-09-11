@@ -95,6 +95,10 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/twitter.html',
             controller: 'TwitterCtrl'
         }).
+        when('/alternative', {
+            templateUrl: 'partials/alternative.html',
+            controller: 'AlternativeCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });

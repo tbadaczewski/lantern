@@ -80,6 +80,9 @@
 .icon-phone:before {
 	content: "\e60c";
 }
+.icon-plug:before {
+	content: "\e610";
+}
 .icon-tag:before {
 	content: "\e60d";
 }

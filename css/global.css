@@ -151,7 +151,7 @@ button.inline, .button.inline {
 	padding: 75px 1em 50px 1em;
 }
 
-#tips-guides, #twitter, #outage-map {
+#tips-guides, #twitter, #outage-map, #alternative {
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
@@ -657,7 +657,7 @@ button#back, button#forward, a#return {
 	display: inline;
 }
 
-#tips-container, #twitter-container, #outage-map-container {
+#tips-container, #twitter-container, #outage-map-container, #alternative-container {
 	height: inherit;
 	width: inherit;
 	background: #fff;

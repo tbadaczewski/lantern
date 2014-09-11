@@ -554,3 +554,20 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 		}
     }
 ]);
+
+lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$window',
+    function ($scope, $rootScope, $window) {
+    	$scope.loading = true; 
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
+		$rootScope.animate = "slide";
+		$scope.id = "alternative";
+		$scope.src = " http://www.afdc.energy.gov/locator/stations/";
+
+		$scope.$on('loaded', function(event, values) {
+			$scope.$apply(function() {
+				$scope.loading = false; 
+			});
+		});
+    }
+]);
