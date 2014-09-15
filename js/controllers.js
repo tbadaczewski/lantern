@@ -562,7 +562,7 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "alternative";
-		$scope.src = " http://www.afdc.energy.gov/locator/stations/";
+		$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/";
 
 		$scope.$on('loaded', function(event, values) {
 			$scope.$apply(function() {
