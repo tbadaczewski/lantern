@@ -570,14 +570,12 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 			});
 		});
 
-   		$scope.searchAgain = function($event) {
-			$event.preventDefault();
+   		$scope.searchAgain = function() {
 			$scope.loading = true;
    			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/";
 		}
 
-   		$scope.searchCurrent= function($event) {
-			$event.preventDefault();
+   		$scope.searchCurrent= function() {
 			$scope.loading = true;
    			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/";
 		}

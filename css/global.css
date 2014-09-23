@@ -107,7 +107,7 @@ button.inline, .button.inline {
 #frame-footer a {
 	color: #fff;
 	padding-top: 0.6em;
-	display: block;
+	display: inline-block;
 	text-transform: uppercase;
 }
 
