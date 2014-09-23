@@ -26,23 +26,23 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-search:before {
-	content: "\e600";
-}
-.icon-close:before {
-	content: "\e60e";
-}
-.icon-arrow2-left:before {
-	content: "\e60f";
-}
-.icon-arrow2-right:before {
-	content: "\e611";
+.icon-plug:before {
+	content: "\e810";
 }
 .icon-arrow-up:before {
 	content: "\e610";
 }
+.icon-arrow-right:before {
+	content: "\e613";
+}
 .icon-arrow-down:before {
 	content: "\e612";
+}
+.icon-arrow-left:before {
+	content: "\e615";
+}
+.icon-search:before {
+	content: "\e600";
 }
 .icon-list:before {
 	content: "\e601";
@@ -50,7 +50,7 @@
 .icon-target:before {
 	content: "\e602";
 }
-.icon-arrow-right:before {
+.icon-arrow-right2:before {
 	content: "\e603";
 }
 .icon-lightning:before {
@@ -80,11 +80,17 @@
 .icon-phone:before {
 	content: "\e60c";
 }
-.icon-plug:before {
-	content: "\e610";
-}
 .icon-tag:before {
 	content: "\e60d";
+}
+.icon-close:before {
+	content: "\e60e";
+}
+.icon-arrow2-left:before {
+	content: "\e60f";
+}
+.icon-arrow2-right:before {
+	content: "\e611";
 }
 .icon-retweet:before {
 	content: "\f079";
