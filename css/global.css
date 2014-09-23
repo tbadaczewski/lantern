@@ -100,14 +100,11 @@ button.inline, .button.inline {
 	z-index: 1010;
 }
 
-#frame-footer span[class*='icon-'] {
-	font-size: 16px;
-}
-
 #frame-footer a {
 	color: #fff;
-	padding-top: 0.6em;
-	display: inline-block;
+	line-height: 2em;
+	padding-top: 0.25em;
+	display: block;
 	text-transform: uppercase;
 }
 
@@ -584,12 +581,16 @@ a:link, a:visited, a:hover {
 	color: #fff;
 }
 
-.size-32 {
-	font-size: 32px;
+.size-16 {
+	font-size: 16px;
 }
 
 .size-22 {
 	font-size: 22px;
+}
+
+.size-32 {
+	font-size: 32px;
 }
 
 #station-details {
