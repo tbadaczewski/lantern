@@ -571,13 +571,11 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 		});
 
    		$scope.searchAgain = function() {
-			$scope.loading = true;
    			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/";
 		}
 
    		$scope.searchCurrent= function() {
-			$scope.loading = true;
-   			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/";
+   			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
 		}
     }
 ]);
