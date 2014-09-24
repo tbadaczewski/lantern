@@ -612,16 +612,26 @@ a:link, a:visited, a:hover {
 	-webkit-transform: translate3d(0,-170px,0);
 }
 
-.circle {
-	border-radius: 50%;
-	width: 0.8em;
-	height: 0.8em;
+.icon-green { color: #64af00;}
+.icon-yellow { color: #ffd500;}
+.icon-red { color: #ed1c24;}
+
+.icon-green, .icon-yellow, .icon-red {
+	position: relative;
 	display: inline-block;
 }
 
-.circle.green { background: #64af00;}
-.circle.yellow { background: #fff200;}
-.circle.red { background: #ed1c24;}
+.icon-green:after, .icon-yellow:after, .icon-red:after {
+	content: '';
+	position: absolute;
+	top: 0.2em;
+	left: 0.2em;
+	height: 0.6em;
+	width: 0.6em;
+	display: block;
+	background: #fff;
+	z-index: -1;
+}
 
 #map_canvas{
 	position: absolute;

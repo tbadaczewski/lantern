@@ -26,6 +26,15 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-green:before {
+	content: "\e614";
+}
+.icon-red:before {
+	content: "\e616";
+}
+.icon-yellow:before {
+	content: "\e617";
+}
 .icon-plug:before {
 	content: "\e810";
 }
