@@ -29,13 +29,13 @@
 .icon-email:before {
 	content: "\e618";
 }
-.icon-open:before {
+.icon-green:before {
 	content: "\e614";
 }
-.icon-closed:before {
+.icon-red:before {
 	content: "\e616";
 }
-.icon-uncertain:before {
+.icon-yellow:before {
 	content: "\e617";
 }
 .icon-plug:before {
