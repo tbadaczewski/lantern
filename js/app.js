@@ -166,7 +166,6 @@ lanternApp.factory('geolocation', ['$q',
             }
 
             function onError(error) {
-                //navigator.notification.alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
                 navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');            
                 deferred.resolve(null);
             }
