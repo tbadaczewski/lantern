@@ -10,8 +10,8 @@
 </head>
 <body>
     <div id="branding-bar">
-        <img id="text-logo" src="img/text-logo.png" alt="Lantern Live" />
-        <a id="energy-logo"><img src="img/energy-logo.png" /></a>
+        <div id="text-logo"><img src="img/text-logo.png" alt="Lantern Live" /></div>
+        <a id="energy-logo"><img src="img/energy-logo.png" alt="U.S. Department of Energy" /></a>
     </div>
     <div id="handle" class="{{menu}}">
         <div class="inner">        
@@ -44,7 +44,7 @@
     <nav id="nav-{{navstate}}">        
         <span class="icon-{{navclass}}" aria-hidden="true"></span>
         <span>{{navtext}}</span>
-        <a id="btn-type=" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
+        <a id="btn-type" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
     </nav> 
     <div id="{{id}}" ng-view class="{{animate}}"></div>
     <script type="text/javascript" src="phonegap.js"></script>

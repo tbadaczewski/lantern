@@ -671,18 +671,32 @@ a:link, a:visited, a:hover {
 	-webkit-overflow-scrolling: touch;
 }
 
-#energy-logo, img#text-logo {
+#energy-logo, #text-logo {
+	position: relative;
 	margin-top: 5px;
 	float: right;
 }
 
-#energy-logo img, img#text-logo {
+#energy-logo img {
 	height: 30px;
 	width: auto;
 }
 
-img#text-logo {
+#text-logo {
 	float: left;
+}
+
+#text-logo img {
+	height: 20px;
+}
+
+#text-logo:before {
+	position: absolute;
+	bottom: -5px;
+	left: -1px;
+	content: 'BETA v.1.0.33';
+	color: #fff;
+	font-size: 0.65em;
 }
 
 button#back, button#forward, a#return {

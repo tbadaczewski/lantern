@@ -26,13 +26,16 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-green:before {
+.icon-email:before {
+	content: "\e618";
+}
+.icon-open:before {
 	content: "\e614";
 }
-.icon-red:before {
+.icon-closed:before {
 	content: "\e616";
 }
-.icon-yellow:before {
+.icon-uncertain:before {
 	content: "\e617";
 }
 .icon-plug:before {
