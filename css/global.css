@@ -620,6 +620,7 @@ a:link, a:visited, a:hover {
 .icon-green, .icon-yellow, .icon-red {
 	position: relative;
 	display: inline-block;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAJCAYAAAAPU20uAAAAFElEQVQYV2P8DwQMeADjqAJw6AAAy2Yj5u7OmMkAAAAASUVORK5CYII=) center center no-repeat;
 }
 
 /*
