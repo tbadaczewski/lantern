@@ -35,11 +35,9 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        if (navigator.geolocation) {            
-            navigator.notification.alert("Supported");
-        } else {
-            navigator.notification.alert("Not Supported");
-        }
+        navigator.geolocation.getCurrentPosition(function(data) {
+            navigator.notification.alert("Latitude: " + position.coords.latitude + " - Longitude: " + position.coords.longitude);
+        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
