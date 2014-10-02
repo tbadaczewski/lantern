@@ -17,11 +17,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             localStorage.SessionID = guid();
         }
 
-        intializeMe();
+        //intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
-        intializeMe();
+        //intializeMe();
     }, false);
 
     function intializeMe() {   
