@@ -612,7 +612,7 @@ a:link, a:visited, a:hover {
 	-webkit-transform: translate3d(0,-170px,0);
 }
 
-/*
+
 .icon-green { color: #64af00;}
 .icon-yellow { color: #ffd500;}
 .icon-red { color: #ed1c24;}
@@ -622,6 +622,7 @@ a:link, a:visited, a:hover {
 	display: inline-block;
 }
 
+/*
 .icon-green:after, .icon-yellow:after, .icon-red:after {
 	content: '';
 	position: absolute;
