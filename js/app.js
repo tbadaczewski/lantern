@@ -24,16 +24,16 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    function intializeMe() {   
+    function intializeMe() {
+        getAppVersion(function(version) {
+            $rootScope.version = "BETA v." + version;
+        });
+
         geolocation().then(function(position) {  
             $rootScope.position = position;
 
             loadstations().then(function(stations) {
                 $rootScope.stations = stations;
-            });
-
-            getAppVersion(function(version) {
-                $rootScope.version = version;
             });
 
             geoencoder('latLng').then(function(address) {
