@@ -623,20 +623,6 @@ a:link, a:visited, a:hover {
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAJCAYAAAAPU20uAAAAFElEQVQYV2P8DwQMeADjqAJw6AAAy2Yj5u7OmMkAAAAASUVORK5CYII=) center center no-repeat;
 }
 
-/*
-.icon-green:after, .icon-yellow:after, .icon-red:after {
-	content: '';
-	position: absolute;
-	top: 0.2em;
-	left: 0.2em;
-	height: 0.6em;
-	width: 0.6em;
-	display: block;
-	background: #fff;
-	z-index: -1;
-}
-*/
-
 #map_canvas{
 	position: absolute;
 	top: 0;
