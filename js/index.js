@@ -36,7 +36,7 @@ var app = {
         app.receivedEvent('deviceready');
 
         navigator.geolocation.getCurrentPosition(function(data) {
-            navigator.notification.alert("Latitude: " + position.coords.latitude + " - Longitude: " + position.coords.longitude);
+            navigator.notification.alert("Latitude: " + data.coords.latitude + " - Longitude: " + data.coords.longitude);
         });
     },
     // Update DOM on a Received Event
