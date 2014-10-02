@@ -36,9 +36,9 @@ var app = {
         app.receivedEvent('deviceready');
 
         if (navigator.geolocation) {            
-            navigator.notification.alert(navigator.geolocation.getCurrentPosition(showPosition));
+            navigator.notification.alert("Supported");
         } else {
-            navigator.notification.alert("Geolocation is not supported by this browser.");
+            navigator.notification.alert("Not Supported");
         }
     },
     // Update DOM on a Received Event
