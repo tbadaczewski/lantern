@@ -34,7 +34,12 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        angular.bootstrap(document, ["lanternApp"]);
+
+        if (navigator.geolocation) {            
+            navigator.notification.alert(navigator.geolocation.getCurrentPosition(showPosition));
+        } else {
+            navigator.notification.alert("Geolocation is not supported by this browser.");
+        }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
