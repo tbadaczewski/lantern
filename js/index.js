@@ -34,13 +34,14 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-
-        navigator.geolocation.getCurrentPosition(function(data) {
-            navigator.notification.alert("Latitude: " + data.coords.latitude + " - Longitude: " + data.coords.longitude);
-        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        console.log('Received Event: ' + id);
+        getAppVersion(function(version) {         
+            angular.element(document).ready(function() {
+                $rootScope.version = "BETA v." + version;
+                angular.bootstrap(document, ['lanternApp']);
+            });
+        });
     }
 };

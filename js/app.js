@@ -26,7 +26,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
     function intializeMe() {
         getAppVersion(function(version) {
-            $rootScope.version = "BETA v." + version;
+            //$rootScope.version = "BETA v." + version;
         });
 
         geolocation().then(function(position) {  
