@@ -37,11 +37,6 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        getAppVersion(function(version) {         
-            angular.element(document).ready(function() {
-                $rootScope.version = "BETA v." + version;
-                angular.bootstrap(document, ['lanternApp']);
-            });
-        });
+        console.log('Received Event: ' + id);
     }
 };
