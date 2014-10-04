@@ -173,21 +173,21 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
-    	$scope.loading = true;
+    	$rootScope.loading = true;
 
 		if($rootScope.stations == null) {
 	        loadstations().then(function(stations) {
 	        	$rootScope.stations = $scope.stations = stations;
-	        	$scope.loading = false;
+	        	$rootScope.loading = false;
 	        });
 		} else {
 			$scope.stations = $rootScope.stations;
-			$scope.loading = false;
+			$rootScope.loading = false;
 		}
 
         $rootScope.$on('stationsUpdated', function() {
         	$scope.stations = $rootScope.stations;
-        	$scope.loading = false;
+        	$rootScope.loading = false;
     	});
 
    		$scope.tagCancel = function() {
@@ -291,7 +291,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $timeout, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
-		$scope.loading = true;
+		$rootScope.loading = true;
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -323,7 +323,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
     	$scope.$on('markersLoaded', function() {
     		$timeout(function(){
-	    		$scope.loading = false;
+	    		$rootScope.loading = false;
     		}, 500); 		
     	});
 
@@ -426,7 +426,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-    	$scope.loading = true;
+    	$rootScope.loading = true;
 
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
@@ -437,16 +437,16 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		if($rootScope.outages == null) {
 	        loadoutages().then(function(outages) {
 	        	$rootScope.outages = $scope.outages = outages;
-	        	$scope.loading = false;
+	        	$rootScope.loading = false;
 	        });	    	
 		} else {
 			$scope.outages = $rootScope.outages;
-			$scope.loading = false;
+			$rootScope.loading = false;
 		}
 
         $rootScope.$on('outagesUpdated', function() {
         	$scope.outages = $rootScope.outages;
-        	$scope.loading = false;
+        	$rootScope.loading = false;
     	});
 
 		$rootScope.backstate = "visible";
@@ -462,7 +462,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-    	$scope.loading = true; 
+    	$rootScope.loading = true; 
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
@@ -471,7 +471,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 
 		$scope.$on('loaded', function(event, values) {
 			$scope.$apply(function() {
-				$scope.loading = false; 
+				$rootScope.loading = false; 
 			});
 		});
     }
@@ -479,7 +479,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-    	$scope.loading = true; 
+    	$rootScope.loading = true; 
         $scope.disabledback = "disabled", $scope.disabledforward = "disabled";
 
         $scope.$on('onload', function(event, values) {
@@ -495,7 +495,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 	            $scope.disabledforward = "disabled";
 	        }
 
-	        $scope.loading = false;       
+	        $rootScope.loading = false;       
         });
 
         $scope.back = function() {
@@ -515,13 +515,13 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-    	$scope.loading = true; 
+    	$rootScope.loading = true; 
     	$scope.tweets = $rootScope.tweets;
 		$rootScope.backstate = "";
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "twitter";
-		$scope.loading = false; 
+		$rootScope.loading = false; 
 
 		$scope.autoHyperlinkUrls = function(text) {
 			if(text) {
@@ -557,7 +557,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-    	$scope.loading = true; 
+    	$rootScope.loading = true; 
 		$rootScope.backstate = "hidden";
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "slide";
@@ -566,7 +566,7 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 
 		$scope.$on('loaded', function(event, values) {
 			$scope.$apply(function() {
-				$scope.loading = false; 
+				$rootScope.loading = false; 
 			});
 		});
 
