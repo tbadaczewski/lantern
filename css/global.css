@@ -822,7 +822,16 @@ iframe {
 	text-indent: 999em;
 	overflow: hidden;
 	z-index: 2000;
-	
+}
+
+.progress.ng-hide {
+	top:-9999px;
+	left:-9999px;
+}
+
+.progress.ng-show {
+	top: 50%;
+	left: 50%;
 }
 
 .pull-to-refresh {
