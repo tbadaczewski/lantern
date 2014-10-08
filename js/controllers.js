@@ -28,12 +28,15 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.clear = function() {
-			if($scope.searchfocus == false) {
+			//if($scope.searchfocus == false) {
 				$timeout(function(){
 					$scope.address = "";
-					$scope.searchfocus = true;
+
+					if($scope.searchfocus == false) {
+						$scope.searchfocus = true;
+					}
 				}, 500);
-			}
+			//
 		}
 
 		$scope.showFocus = function() {
