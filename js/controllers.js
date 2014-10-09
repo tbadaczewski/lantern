@@ -48,7 +48,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		}
 
 		$scope.hideFocus = function() {
-			if($scope.searchfocus == true) {
+			if($scope.searchfocus == true && document.activeElement.id != "search-text") {
 				$timeout(function(){
 					$scope.searchfocus = false;
 				}, 500);
