@@ -4,6 +4,13 @@
 	        <h4>{{isExists(outage.commercial_company_name) ? outage.commercial_company_name : outage.utility_company_name}}</h4>
 	        {{outage.county}} County, {{outage.state}}<br />
 	        <a href="" ng-click="getMap($event, outage.outage_map_url)">Open Outage Map</a>
-    	</div>
+    	</div>		
     </div>
+	<div ng-show="!outages.length">
+		<div class="item list"><span class="icon-yellow" aria-hidden="true"></span> No outage maps for this location.</div>
+	</div>
 </div>
+
+<br />
+
+<small><strong>Note:</strong> Not all electricity providers have publicily avaliable outage maps. The list shown are providers in the given location above with available outage maps known to DOE.</small>

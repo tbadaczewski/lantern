@@ -7,24 +7,26 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
     	$scope.searchfocus = false;
 
     	$scope.search = function() {
-    		$scope.searchfocus = false;
-    		$rootScope.address = $scope.address;
+			if($scope.address != undefined) {
+	    		$scope.searchfocus = false;
+	    		$rootScope.address = $scope.address;
 
-			geoencoder('address').then(function(address) {
-				$rootScope.address = $scope.address = address[0];
-				$rootScope.county = address[1];
-				$rootScope.state = address[2];
+				geoencoder('address').then(function(address) {
+					$rootScope.address = $scope.address = address[0];
+					$rootScope.county = address[1];
+					$rootScope.state = address[2];
 
-                loadstations().then(function(data) {
-                    $rootScope.stations = data;
-                    $rootScope.$emit('stationsUpdated', new Date());
-                }); 
+	                loadstations().then(function(data) {
+	                    $rootScope.stations = data;
+	                    $rootScope.$emit('stationsUpdated', new Date());
+	                }); 
 
-                loadoutages().then(function(data) {
-                    $rootScope.outages = data;
-                    $rootScope.$emit('outagesUpdated', new Date());
-                });
-			});
+	                loadoutages().then(function(data) {
+	                    $rootScope.outages = data;
+	                    $rootScope.$emit('outagesUpdated', new Date());
+	                });
+				});
+			}
 		}
 
 		$scope.clear = function() {
