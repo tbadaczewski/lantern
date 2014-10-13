@@ -491,6 +491,10 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	margin-top: 0.5em;
 }
 
+.item:last-child {
+	margin-bottom: 0.5em;
+}
+
 .item.list {
 	background: #fff;
 	padding: 1em;
