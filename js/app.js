@@ -17,24 +17,21 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             localStorage.SessionID = guid();
         }
 
-        intializeMe();
+        //intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
-        intializeMe();
+        //intializeMe();
     }, false);
 
     function intializeMe() {
-        /*
         getAppVersion(function(version) {
             $rootScope.version = "BETA v." + version;
         });
-        */
 
         geolocation().then(function(position) {  
             $rootScope.position = position;
             
-            /*
             loadstations().then(function(stations) {
                 $rootScope.stations = stations;
             });
@@ -48,14 +45,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     $rootScope.outages = outages;
                 });
             });
-            */
         });
         
-        /*
         twitter().then(function(timeline) {
             $rootScope.tweets = timeline;
         });
-        */
     }
 
     function guid() {
