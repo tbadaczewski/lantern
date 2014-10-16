@@ -25,9 +25,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     }, false);
 
     function intializeMe() {
+        /*
         getAppVersion(function(version) {
             $rootScope.version = "BETA v." + version;
         });
+        */
 
         geolocation().then(function(position) {  
             $rootScope.position = position;
@@ -47,10 +49,12 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                 });
             });
         });
-
+        
+        /*
         twitter().then(function(timeline) {
             $rootScope.tweets = timeline;
         });
+        */
     }
 
     function guid() {
