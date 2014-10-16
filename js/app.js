@@ -10,7 +10,6 @@ var lanternApp = angular.module('lanternApp', [
 ]);
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
-    /*
     $rootScope.menu = "close";  
 
     document.addEventListener('deviceready', function() {
@@ -62,7 +61,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
         return sGuid;
     }
-    */
 });
 
 lanternApp.config(function($sceProvider) {
@@ -392,7 +390,7 @@ lanternApp.directive('googlemap', function($rootScope) {
             scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();
 
-                angular.forEach(markers, function (marker) {                    
+                angular.forEach(markers, function (marker) {
                     var size = new google.maps.Size(25,40);
                     var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
                     var point = new google.maps.Marker({
