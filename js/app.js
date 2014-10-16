@@ -33,7 +33,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
         geolocation().then(function(position) {  
             $rootScope.position = position;
-
+            
+            /*
             loadstations().then(function(stations) {
                 $rootScope.stations = stations;
             });
@@ -43,11 +44,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
-                //Outages need address data.
                 loadoutages().then(function(outages) {
                     $rootScope.outages = outages;
                 });
             });
+            */
         });
         
         /*
