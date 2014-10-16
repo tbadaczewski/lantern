@@ -10,6 +10,7 @@ var lanternApp = angular.module('lanternApp', [
 ]);
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
+    /*
     $rootScope.menu = "close";  
 
     document.addEventListener('deviceready', function() {
@@ -17,11 +18,11 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             localStorage.SessionID = guid();
         }
 
-        //intializeMe();
+        intializeMe();
     }, false);
 
     document.addEventListener('resume', function() {
-        //intializeMe();
+        intializeMe();
     }, false);
 
     function intializeMe() {
@@ -61,6 +62,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
         return sGuid;
     }
+    */
 });
 
 lanternApp.config(function($sceProvider) {
