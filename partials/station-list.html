@@ -20,13 +20,13 @@
     	<div class="item list">
 	        <h4><span class="icon-{{station.operatingStatus}}" aria-hidden="true"></span> {{station.station}}</h4>
 	        <div class="small">
-	        	{{station.address}}<br />{{station.city}}, {{station.region}} {{station.zip}}
+	        	{{station.addressLine1}}<br />{{station.addressLine2}}, {{station.addressLine3}}
 	    	</div>
     	</div>
 	    <div class="item-options">
 	    	<div>
-	    		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.address + ' ' + station.city + ', ' + station.region + ' ' + station.zip)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
-		    	<!--<div><a href=""><span class="icon-phone" aria-hidden="true"></span> Call</a></div>-->
+	    		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.addressLine1 + ' ' + station.addressLine2 + ', ' + station.addressLine3)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
+		    	<div><a href=""><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
 		    	<div><a href="" ng-click="tagOpenWindow(station.id, station.operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag Status</a></div>
 	    	</div>
 	    </div>

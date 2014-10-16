@@ -236,8 +236,8 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function () {
             var deferred = $q.defer();
 
-            if($rootScope.position) {
-                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + $rootScope.position.coords.latitude + '/' + $rootScope.position.coords.longitude, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            if($rootScope.address) {       
+                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                     deferred.resolve(eval(data));
                 }).error(function(data) {
                     deferred.resolve(null);
