@@ -20,17 +20,17 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                    $rootScope.stations = data;
 	                    $rootScope.$emit('stationsUpdated', new Date());
 						$window.navigator.notification.alert(data.length);
-						gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, data.length, null);
+						gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, data.length, 0);
 	                }); 
 
 	                loadoutages().then(function(data) {
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
 						$window.navigator.notification.alert(data.length);
-						gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, data.length, null);
+						gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, data.length, 0);
 	                });
 
-					gaPlugin.trackEvent(null, null, "Search", $rootScope.address, "button", null);
+					gaPlugin.trackEvent(null, null, "Search", $rootScope.address, "button", 0);
 				});
 			}
 		}
@@ -83,7 +83,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                });
 	            });
 
-				gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button", null);
+				gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button", 0);
 	        });
 		}
 
@@ -243,7 +243,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			        	$scope.showdetails = null;
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", id, status, null);				
+					gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);				
 				});
 			}
 		};
@@ -392,7 +392,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        	$scope.showdetails = null; 
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", id, status, null);					
+					gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);					
 				});
 			}
 		};
