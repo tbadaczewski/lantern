@@ -7,6 +7,12 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
     	$scope.searchfocus = false;
 
     	$scope.search = function() {
+			$rootScope.gaPlugin.trackEvent(function(){
+				$window.navigator.notification.alert("Search Success");
+			}, function(){
+				$window.navigator.notification.alert("Search Error");
+			}, "Button", "Click", "event only", 1);
+
 			if($scope.address != undefined) {
 	    		$scope.searchfocus = false;
 	    		$rootScope.address = $scope.address;

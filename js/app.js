@@ -10,7 +10,8 @@ var lanternApp = angular.module('lanternApp', [
 ]);
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
-    $rootScope.menu = "close";  
+    $rootScope.menu = "close";
+    $rootScope.gaPlugin = gaPlugin;
 
     document.addEventListener('deviceready', function() {
         if(!localStorage.SessionID) {
