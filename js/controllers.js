@@ -19,14 +19,16 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                loadstations().then(function(data) {
 	                    $rootScope.stations = data;
 	                    $rootScope.$emit('stationsUpdated', new Date());
+						gaPlugin.trackEvent(null, null, "Load Stations", "click", $rootScope.address, data.length);
 	                }); 
 
 	                loadoutages().then(function(data) {
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
+						gaPlugin.trackEvent(null, null, "Load Outages", "click", $rootScope.address, data.length);
 	                });
 
-					gaPlugin.trackEvent(null, null, "Search", "click", "button", $scope.address);
+					gaPlugin.trackEvent(null, null, "Search", "click", "button", $rootScope.address);
 				});
 			}
 		}
