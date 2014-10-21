@@ -111,10 +111,6 @@ lanternApp.config(['$routeProvider',
         otherwise({
             redirectTo: '/'
         });
-        
-        if(gaPlugin) {
-            gaPlugin.trackPage(null, null, "blah");
-        }
     }
 ]);
 

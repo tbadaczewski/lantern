@@ -177,6 +177,8 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "fixed";
 		$scope.id = "main";
+
+		gaPlugin.trackPage(null, null, "Main Menu");
     }
 ]);
 
@@ -296,6 +298,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";	
 		$scope.saddr = encodeURI($rootScope.address);
+
+		gaPlugin.trackPage(null, null, "Station List");
     }
 ]);
 
@@ -434,6 +438,8 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtarget = "station-list";
 		$rootScope.animate = "fixed";
 		$scope.id = "station-map";
+
+		gaPlugin.trackPage(null, null, "Station Map");
     }
 ]);
 
@@ -470,6 +476,8 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navtarget = "outage-map";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
+
+		gaPlugin.trackPage(null, null, "Outage List");
     }
 ]);
 
@@ -487,6 +495,8 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 				$rootScope.loading = false; 
 			});
 		});
+
+		gaPlugin.trackPage(null, null, "Outage Map");
     }
 ]);
 
@@ -523,6 +533,8 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 		$rootScope.navstate = "false";
 		$rootScope.animate = "slide";
 		$scope.id = "tips-guides";
+
+		gaPlugin.trackPage(null, null, "Tips & Guides");
     }
 ]);
 
@@ -565,6 +577,8 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 			$event.preventDefault();
 			window.open($url, "_system");
 		}
+
+		gaPlugin.trackPage(null, null, "Twitter Feed");
     }
 ]);
 
@@ -590,5 +604,7 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
    		$scope.searchCurrent= function() {
    			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
 		}
+
+		gaPlugin.trackPage(null, null, "Alternative Fuel List");
     }
 ]);
