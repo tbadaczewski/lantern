@@ -35,7 +35,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
-        gaPlugin.init(function(){}, function(){}, "UA-55927827-1", 10);
+        gaPlugin.init(null, null, "UA-55927827-1", 10);
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
