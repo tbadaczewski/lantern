@@ -11,18 +11,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	    		$scope.searchfocus = false;
 	    		$rootScope.address = $scope.address;
 
-		        gaPlugin.trackPage(function(){
-					alert("Track Page Success");
-				}, function(){
-					alert("Track Page Error");
-				}, "Main Screen");
-		        
-				gaPlugin.trackEvent(function(){
-					alert("Track Event Success");
-				}, function(){
-					alert("Track Event Error");
-				}, "Search", "Click", "event only", 10);
-
 				geoencoder('address').then(function(address) {
 					$rootScope.address = $scope.address = address[0];
 					$rootScope.county = address[1];
@@ -37,6 +25,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
+
+					gaPlugin.trackEvent(function(){}, function(){}, "Search", "click", $scope.address, 10);
 				});
 			}
 		}
@@ -88,6 +78,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
 	            });
+
+				gaPlugin.trackEvent(function(){}, function(){}, "Locate", "click", $scope.address, 10);
 	        });
 		}
 
@@ -243,7 +235,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			        	$rootScope.stations = $scope.stations = data;
 			        	$rootScope.$emit('stationsUpdated', new Date());
 			        	$scope.showdetails = null;
-			        });						
+			        });
+
+					gaPlugin.trackEvent(function(){}, function(){}, "Tag Station", "click", id, status);					
 				});
 			}
 		};
@@ -388,7 +382,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        	$rootScope.stations = data;
 			        	$rootScope.$emit('stationsUpdated', new Date());
 			        	$scope.showdetails = null; 
-			        });						
+			        });
+
+					gaPlugin.trackEvent(function(){}, function(){}, "Tag Station", "click", id, status);					
 				});
 			}
 		};

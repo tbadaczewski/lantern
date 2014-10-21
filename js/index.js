@@ -35,26 +35,8 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
-        gaPlugin.init(successHandler, errorHandler, "UA-55927827-1", 10);
-
-        function successHandler() {
-            alert("init success");
-        }
-
-        function errorHandler() {
-            alert("init failed");
-        }
-
-        function nativePluginResultHandler() {
-            alert("tracking success");
-        }
-
-        function nativePluginErrorHandler() {
-            alert("tracking failed");
-        }
-
+        gaPlugin.init(function(){}, function(){}, "UA-55927827-1", 10);
         app.receivedEvent('deviceready');
-
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
