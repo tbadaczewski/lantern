@@ -20,7 +20,13 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
+    document.addEventListener('pause', function() {
+        gaPlugin.exit(null, null);
+        intializeMe();
+    }, false);
+
     document.addEventListener('resume', function() {
+        gaPlugin.init(null, null, "UA-55927827-1", 10);
         intializeMe();
     }, false);
 
@@ -106,7 +112,7 @@ lanternApp.config(['$routeProvider',
             redirectTo: '/'
         });
 
-        gaPlugin.trackPage(null, null, $route.current.controller);
+        gaPlugin.trackPage(null, null, $route.current.templateUrl);
     }
 ]);
 
