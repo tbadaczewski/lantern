@@ -35,18 +35,26 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
+        gaPlugin.init(successHandler, errorHandler, "UA-55927827-1", 10);
+        gaPlugin.trackPage( nativePluginResultHandler, nativePluginErrorHandler, "index.html");
+        gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Button", "Click", "event only", 10);
+        gaPlugin.exit(nativePluginResultHandler, nativePluginErrorHandler);
 
-        gaPlugin.init(function(){
-            window.navigator.notification.alert("Init Success");
+        function successHandler() {
+            alert("init success");
+        }
 
-            gaPlugin.trackEvent(function(){
-                $window.navigator.notification.alert("Search Success");
-            }, function(){
-                $window.navigator.notification.alert("Search Error");
-            }, "Button", "Click", "event only", 1);
-        }, function(){
-            window.navigator.notification.alert("Init Error");
-        }, "UA-55927827-1", 10);
+        function errorHandler() {
+            alert("init failed");
+        }
+
+        function nativePluginResultHandler() {
+            alert("tracking success");
+        }
+
+        function nativePluginErrorHandler() {
+            alert("tracking failed");
+        }
 
         app.receivedEvent('deviceready');
 
