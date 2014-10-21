@@ -34,16 +34,12 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        window.navigator.notification.alert(window.plugins.gaPlugin);
- 
-        if(window.plugins.gaPlugin) {
-            gaPlugin = window.plugins.gaPlugin;
-            gaPlugin.init(function(){
-                window.navigator.notification.alert("Init Success");
-            }, function(){
-                window.navigator.notification.alert("Init Error");
-            }, "UA-55927827-1", 10);
-        }
+        gaPlugin = window.plugins.gaPlugin;
+        gaPlugin.init(function(){
+            window.navigator.notification.alert("Init Success");
+        }, function(){
+            window.navigator.notification.alert("Init Error");
+        }, "UA-55927827-1", 10);
 
         app.receivedEvent('deviceready');
 
