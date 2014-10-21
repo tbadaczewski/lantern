@@ -56,6 +56,9 @@ var app = {
             alert("tracking failed");
         }
 
+        analytics.startTrackerWithId('UA-55927827-1');
+        analytics.trackView('Screen Title');
+
         app.receivedEvent('deviceready');
 
     },
