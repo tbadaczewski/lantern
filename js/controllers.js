@@ -26,7 +26,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
 
-					gaPlugin.trackEvent(null, null, "Search", "click", $scope.address, 10);
+					gaPlugin.trackEvent(null, null, "Search", "click", "button", $scope.address);
 				});
 			}
 		}
@@ -79,7 +79,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                });
 	            });
 
-				gaPlugin.trackEvent(null, null, "Locate", "click", $scope.address, 10);
+				gaPlugin.trackEvent(null, null, "Locate", "click", "button", $scope.address);
 	        });
 		}
 
@@ -239,7 +239,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			        	$scope.showdetails = null;
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", "click", id, status);					
+					gaPlugin.trackEvent(null, null, "Tag Station", "click", "button", status);				
 				});
 			}
 		};
@@ -388,7 +388,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        	$scope.showdetails = null; 
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", "click", id, status);					
+					gaPlugin.trackEvent(null, null, "Tag Station", "click", "button", status);					
 				});
 			}
 		};
