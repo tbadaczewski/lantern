@@ -38,6 +38,12 @@ var app = {
 
         gaPlugin.init(function(){
             window.navigator.notification.alert("Init Success");
+
+            gaPlugin.trackEvent(function(){
+                $window.navigator.notification.alert("Search Success");
+            }, function(){
+                $window.navigator.notification.alert("Search Error");
+            }, "Button", "Click", "event only", 1);
         }, function(){
             window.navigator.notification.alert("Init Error");
         }, "UA-55927827-1", 10);

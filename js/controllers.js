@@ -25,14 +25,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
 	                });
-
-					$window.navigator.notification.alert(gaPlugin);
-
-					gaPlugin.trackEvent(function(){
-						$window.navigator.notification.alert("Search Success");
-					}, function(){
-						$window.navigator.notification.alert("Search Error");
-					}, "Button", "Click", "event only", 1);
 				});
 			}
 		}
