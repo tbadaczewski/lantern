@@ -35,6 +35,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
+
         gaPlugin.init(function(){
             window.navigator.notification.alert("Init Success");
         }, function(){
