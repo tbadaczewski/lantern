@@ -24,13 +24,9 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    document.addEventListener('unload', function() {
-        gaPlugin.exit(function(){}, function(){});
-    }, false);
-
     function intializeMe() {
         getAppVersion(function(version) {
-            $rootScope.version = "BETA v" + version;
+            $rootScope.version = "BETA v." + version;
         });
 
         geolocation().then(function(position) {  
