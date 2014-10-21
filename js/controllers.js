@@ -19,16 +19,16 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                loadstations().then(function(data) {
 	                    $rootScope.stations = data;
 	                    $rootScope.$emit('stationsUpdated', new Date());
-						gaPlugin.trackEvent(null, null, "Load Stations", "click", $rootScope.address, data.length);
+						gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, data.length);
 	                }); 
 
 	                loadoutages().then(function(data) {
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
-						gaPlugin.trackEvent(null, null, "Load Outages", "click", $rootScope.address, data.length);
+						gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, data.length);
 	                });
 
-					gaPlugin.trackEvent(null, null, "Search", "click", "button", $rootScope.address);
+					gaPlugin.trackEvent(null, null, "Search", $rootScope.address, "button");
 				});
 			}
 		}
@@ -81,7 +81,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                });
 	            });
 
-				gaPlugin.trackEvent(null, null, "Locate", "click", "button", $scope.address);
+				gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button");
 	        });
 		}
 
@@ -241,7 +241,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			        	$scope.showdetails = null;
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", "click", "button", status);				
+					gaPlugin.trackEvent(null, null, "Tag Station", id, status);				
 				});
 			}
 		};
@@ -390,7 +390,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        	$scope.showdetails = null; 
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", "click", "button", status);					
+					gaPlugin.trackEvent(null, null, "Tag Station", id, status);					
 				});
 			}
 		};
