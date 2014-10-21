@@ -11,6 +11,18 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	    		$scope.searchfocus = false;
 	    		$rootScope.address = $scope.address;
 
+		        gaPlugin.trackPage(function(){
+					alert("Track Page Success");
+				}, function(){
+					alert("Track Page Error");
+				}, "Main Screen");
+		        
+				gaPlugin.trackEvent(function(){
+					alert("Track Event Success");
+				}, function(){
+					alert("Track Event Error");
+				}, "Search", "Click", "event only", 10);
+
 				geoencoder('address').then(function(address) {
 					$rootScope.address = $scope.address = address[0];
 					$rootScope.county = address[1];

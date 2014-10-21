@@ -36,9 +36,6 @@ var app = {
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
         gaPlugin.init(successHandler, errorHandler, "UA-55927827-1", 10);
-        gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "Splash");
-        gaPlugin.trackEvent(nativePluginResultHandler, nativePluginErrorHandler, "Search", "Click", "event only", 10);
-        gaPlugin.exit(nativePluginResultHandler, nativePluginErrorHandler);
 
         function successHandler() {
             alert("init success");
