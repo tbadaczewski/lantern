@@ -106,7 +106,7 @@ lanternApp.config(['$routeProvider',
             redirectTo: '/'
         });
 
-        gaPlugin.trackPage(function(){}, function(){}, $route.current.controller);
+        //gaPlugin.trackPage(function(){}, function(){}, $route.current.controller);
     }
 ]);
 
