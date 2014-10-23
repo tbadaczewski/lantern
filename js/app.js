@@ -230,11 +230,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
     }
 ]);
 
-lanternApp.factory('loadphone', ['$q', '$rootScope', '$http',
-    function ($q, $rootScope, $http) {
+lanternApp.factory('loadphone', ['$q', '$http',
+    function ($q, $http) {
         return function (id) {
             var deferred = $q.defer();
-    
+
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstation/phonenumber/' + id, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             });

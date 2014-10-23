@@ -6,7 +6,7 @@
 	        <a href="" ng-click="getMap($event, outage.outage_map_url)">Open Outage Map</a>
     	</div>		
     </div>
-	<div ng-show="!outages.length">
+	<div ng-hide="outages.length">
 		<div class="item list"><span class="icon-yellow" aria-hidden="true"></span> No outage maps for this location.</div>
 	</div>
 </div>

@@ -209,9 +209,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 
    		$scope.callStation = function(id) {
-            loadphone().then(function(data) {
+            loadphone(id).then(function(data) {
 				if(data != null) {
-                	location.href = 'tel:+' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
+                	location.href = 'tel:' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
 				} else {
 					$window.navigator.notification.alert('No phone number for this location.', null, null, 'Close');
 				}
@@ -370,9 +370,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		}
 
    		$scope.callStation = function(id) {
-            loadphone().then(function(data) {
+            loadphone(id).then(function(data) {
 				if(data != null) {
-                	location.href = 'tel:+' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
+                	location.href = 'tel:' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
 				} else {
 					$window.navigator.notification.alert('No phone number for this location.', null, null, 'Close');
 				}
