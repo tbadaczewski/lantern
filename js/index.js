@@ -28,8 +28,8 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('resume', this.onDeviceReady, onResume);
-        document.addEventListener('pause', this.onDeviceReady, onPause);
+        document.addEventListener('resume', this.onResume, false);
+        document.addEventListener('pause', this.onPause, false);
     },
     // deviceready Event Handler
     //

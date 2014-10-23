@@ -862,3 +862,12 @@ iframe {
 	display: block;
 	text-align: center;
 }
+
+.no-results {
+	position: relative;
+	background: #fff;
+	display: block;
+	margin: 0.5em 0;
+	padding: 1em;
+	text-align: left !important;
+}

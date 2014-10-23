@@ -12,24 +12,26 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	    		$rootScope.address = $scope.address;
 
 				geoencoder('address').then(function(address) {
-					$rootScope.address = $scope.address = address[0];
-					$rootScope.county = address[1];
-					$rootScope.state = address[2];
+					if(address != null) {
+						$rootScope.address = $scope.address = address[0];
+						$rootScope.county = address[1];
+						$rootScope.state = address[2];
 
-	                loadstations().then(function(data) {
-	                    $rootScope.stations = data;
-	                    $rootScope.$emit('stationsUpdated', new Date());
-						if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations: " + String(data.length), 0); }
-	                }); 
+		                loadstations().then(function(data) {
+		                    $rootScope.stations = data;
+		                    $rootScope.$emit('stationsUpdated', new Date());
+							if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations: " + String(data.length), 0); }
+		                }); 
 
-	                loadoutages().then(function(data) {
-	                    $rootScope.outages = data;
-	                    $rootScope.$emit('outagesUpdated', new Date());
-						if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Stations: " + String(data.length), 0); }
-	                });
-
-					if(gaPlugin) { gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, "button", 0); }
+		                loadoutages().then(function(data) {
+		                    $rootScope.outages = data;
+		                    $rootScope.$emit('outagesUpdated', new Date());
+							if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Stations: " + String(data.length), 0); }
+		                });
+					}
 				});
+
+				if(gaPlugin) { gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, "button", 0); }
 			}
 		}
 

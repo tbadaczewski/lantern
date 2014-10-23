@@ -218,9 +218,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                     if($type == 'address') {
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
-
+                    
+                    $rootScope.noresults = false;
                     deferred.resolve(location);
                 } else {
+                    $rootScope.noresults = true;
                     deferred.resolve(null);
                 }
             });
@@ -248,16 +250,14 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function () {
             var deferred = $q.defer();
-
-            if($rootScope.address) {       
-                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                    deferred.resolve(eval(data));
-                }).error(function(data) {
-                    deferred.resolve(null);
-                });
-            } else  {
+      
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                $rootScope.noresults = false;
+                deferred.resolve(eval(data));
+            }).error(function(data) {
+                $rootScope.noresults = true;
                 deferred.resolve(null);
-            }
+            });
 
             $rootScope.$emit('stationsUpdated', new Date());
 
@@ -272,8 +272,10 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                $rootScope.noresults = false;
                 deferred.resolve(eval(data));
             }).error(function(data) {
+                $rootScope.noresults = true;
                 deferred.resolve(null);
             });
 
