@@ -28,6 +28,8 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('resume', this.onDeviceReady, onResume);
+        document.addEventListener('pause', this.onDeviceReady, onPause);
     },
     // deviceready Event Handler
     //
@@ -35,8 +37,16 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
-        gaPlugin.init(null, null, "UA-55927827-1", 10);
+        if(gaPlugin) { gaPlugin.init(null, null, "UA-55903649-1", 10); }
         app.receivedEvent('deviceready');
+    },
+    onResume: function() {
+        if(gaPlugin) { gaPlugin.init(null, null, "UA-55903649-1", 10); }
+        app.receivedEvent('resume');
+    },
+    onPause: function() {
+        if(gaPlugin) { gaPlugin.exit(null, null); }
+        app.receivedEvent('pause');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

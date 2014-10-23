@@ -20,13 +20,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    document.addEventListener('pause', function() {
-        gaPlugin.exit(null, null);
-        intializeMe();
-    }, false);
-
     document.addEventListener('resume', function() {
-        gaPlugin.init(null, null, "UA-55927827-1", 10);
         intializeMe();
     }, false);
 
@@ -229,6 +223,20 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                 } else {
                     deferred.resolve(null);
                 }
+            });
+
+            return deferred.promise;
+        };
+    }
+]);
+
+lanternApp.factory('loadphone', ['$q', '$rootScope', '$http',
+    function ($q, $rootScope, $http) {
+        return function (id) {
+            var deferred = $q.defer();
+    
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstation/phonenumber/' + id, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                deferred.resolve(eval(data));
             });
 
             return deferred.promise;

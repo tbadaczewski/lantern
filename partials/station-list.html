@@ -26,7 +26,7 @@
 	    <div class="item-options">
 	    	<div>
 	    		<div><a href="" ng-click="getDirections('http://maps.apple.com/?daddr=' + station.addressLine1 + ' ' + station.addressLine2 + ', ' + station.addressLine3)"><span class="icon-car" aria-hidden="true"></span> Directions</a></div>
-		    	<div><a href=""><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
+		    	<div><a href="" ng-click="callStation(station.id)"><span class="icon-phone" aria-hidden="true"></span> Call</a></div>
 		    	<div><a href="" ng-click="tagOpenWindow(station.id, station.operatingStatus)"><span class="icon-tag" aria-hidden="true"></span> Tag Status</a></div>
 	    	</div>
 	    </div>

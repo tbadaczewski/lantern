@@ -19,16 +19,16 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                loadstations().then(function(data) {
 	                    $rootScope.stations = data;
 	                    $rootScope.$emit('stationsUpdated', new Date());
-						gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, String(data.length), 0);
+						if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations: " + String(data.length), 0); }
 	                }); 
 
 	                loadoutages().then(function(data) {
 	                    $rootScope.outages = data;
 	                    $rootScope.$emit('outagesUpdated', new Date());
-						gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, String(data.length), 0);
+						if(gaPlugin) { gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Stations: " + String(data.length), 0); }
 	                });
 
-					gaPlugin.trackEvent(null, null, "Search", $rootScope.address, "button", 0);
+					if(gaPlugin) { gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, "button", 0); }
 				});
 			}
 		}
@@ -81,7 +81,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 	                });
 	            });
 
-				gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button", 0);
+				if(gaPlugin) { gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button", 0); }
 	        });
 		}
 
@@ -169,9 +169,10 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 					"statuses_updateWithMedia",
 					params,
 					function (reply) { }
-				);
-
+				);				
+				
 				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
+				if(gaPlugin) { gaPlugin.trackEvent(null, null, "Outage Photo Submitted", $rootScope.address, "button", 0); }
 			}
 		}
 
@@ -180,12 +181,12 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		$rootScope.animate = "fixed";
 		$scope.id = "main";
 
-		gaPlugin.trackPage(null, null, "Main Menu");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Main Menu"); }
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadstations', 'validatetag', 'tagstatus',
-    function ($q, $scope, $rootScope, $http, $window, loadstations, validatetag, tagstatus) {
+lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
+    function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
     	$rootScope.loading = true;
 
 		if($rootScope.stations == null) {
@@ -205,6 +206,16 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 
    		$scope.tagCancel = function() {
    			$scope.show = false;
+		};
+
+   		$scope.callStation = function(id) {
+            loadphone().then(function(data) {
+				if(data != null) {
+                	location.href = 'tel:+' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
+				} else {
+					$window.navigator.notification.alert('No phone number for this location.', null, null, 'Close');
+				}
+            });
 		};
 
 		$scope.tagStation = function(id, status) {
@@ -241,7 +252,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			        	$scope.showdetails = null;
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);				
+					if(gaPlugin) { gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0); }				
 				});
 			}
 		};
@@ -275,6 +286,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
+			if(gaPlugin) { gaPlugin.trackEvent(null, null, "Directions Requested", $rootScope.address, url, 0); }
 		}
 
 		$scope.onReload = function() {
@@ -301,12 +313,12 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$scope.id = "station-list";	
 		$scope.saddr = encodeURI($rootScope.address);
 
-		gaPlugin.trackPage(null, null, "Station List");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Station List"); }
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
-    function ($scope, $rootScope, $http, $timeout, $window, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'loadphone', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
+    function ($scope, $rootScope, $http, $timeout, $window, loadphone, geolocation, geoencoder, loadstations, validatetag, tagstatus) {	
 		var station_markers = null;
 		$rootScope.loading = true;
 
@@ -350,11 +362,22 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.getDirections = function(url) {
 			window.open(encodeURI(url) + '&saddr=' + encodeURI($rootScope.address), '_system', 'location=no,enableViewportScale=yes');
+			if(gaPlugin) { gaPlugin.trackEvent(null, null, "Directions Requested", $rootScope.address, url, 0); }
 		}
 
    		$scope.tagCancel = function() {  			
 			$scope.show = false;
 		}
+
+   		$scope.callStation = function(id) {
+            loadphone().then(function(data) {
+				if(data != null) {
+                	location.href = 'tel:+' + data.formattedPhoneNumber.replace(/\(|\)| |\-/g, '');
+				} else {
+					$window.navigator.notification.alert('No phone number for this location.', null, null, 'Close');
+				}
+            });
+		};
 
 		$scope.tagStation = function(id, status) {
 			if(validatetag(id) == true) {
@@ -390,7 +413,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			        	$scope.showdetails = null; 
 			        });
 
-					gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);					
+					if(gaPlugin) { gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0); }					
 				});
 			}
 		};
@@ -441,7 +464,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.animate = "fixed";
 		$scope.id = "station-map";
 
-		gaPlugin.trackPage(null, null, "Station Map");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Station Map"); }
     }
 ]);
 
@@ -479,7 +502,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
 
-		gaPlugin.trackPage(null, null, "Outage List");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Outage List"); }
     }
 ]);
 
@@ -498,7 +521,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 			});
 		});
 
-		gaPlugin.trackPage(null, null, "Outage Map");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Outage Map"); }
     }
 ]);
 
@@ -536,7 +559,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 		$rootScope.animate = "slide";
 		$scope.id = "tips-guides";
 
-		gaPlugin.trackPage(null, null, "Tips & Guides");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Tips & Guides"); }
     }
 ]);
 
@@ -580,7 +603,7 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 			window.open($url, "_system");
 		}
 
-		gaPlugin.trackPage(null, null, "Twitter Feed");
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Twitter Feed"); }
     }
 ]);
 
@@ -605,8 +628,9 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 
    		$scope.searchCurrent= function() {
    			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
+			if(gaPlugin) { gaPlugin.trackEvent(null, null, "Search Alternative Fuels", $rootScope.address, "button", 0); }
 		}
-
-		gaPlugin.trackPage(null, null, "Alternative Fuel List");
+		
+		if(gaPlugin) { gaPlugin.trackPage(null, null, "Alternative Fuel List"); }
     }
 ]);
