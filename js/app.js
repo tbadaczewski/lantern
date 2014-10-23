@@ -516,8 +516,6 @@ lanternApp.directive('modaldialog', function() {
             }
 
             scope.fitHeight = function() {
-                console.log(document.body.clientHeight + " - " + element[0].children[0].offsetHeight);
-
                 if(document.body.clientHeight <= element[0].children[0].offsetHeight) {
                     element[0].children[0].children[0].style.height = (document.body.clientHeight - 75) + "px";
                 }
