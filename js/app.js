@@ -250,14 +250,19 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function () {
             var deferred = $q.defer();
-      
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                $rootScope.noresults = false;
-                deferred.resolve(eval(data));
-            }).error(function(data) {
+            
+            if($rootScope.address != null && $rootScope.address != "") {
+                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                    $rootScope.noresults = false;
+                    deferred.resolve(eval(data));
+                }).error(function(data) {
+                    $rootScope.noresults = true;
+                    deferred.resolve(null);
+                });
+            } else {
                 $rootScope.noresults = true;
                 deferred.resolve(null);
-            });
+            }
 
             $rootScope.$emit('stationsUpdated', new Date());
 
@@ -270,15 +275,19 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function () {
             var deferred = $q.defer();
-
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                $rootScope.noresults = false;
-                deferred.resolve(eval(data));
-            }).error(function(data) {
+            
+            if($rootScope.state != null && $rootScope.state != "") {
+                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                    $rootScope.noresults = false;
+                    deferred.resolve(eval(data));
+                }).error(function(data) {
+                    $rootScope.noresults = true;
+                    deferred.resolve(null);
+                });
+            } else {
                 $rootScope.noresults = true;
                 deferred.resolve(null);
-            });
-
+            }
             $rootScope.$emit('outagesUpdated', new Date());
 
             return deferred.promise;
