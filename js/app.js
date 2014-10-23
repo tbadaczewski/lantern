@@ -499,7 +499,7 @@ lanternApp.directive('modaldialog', function() {
         template: "<div class='ng-modal'><div class='ng-modal-dialog' ng-transclude></div></div>",
         link: function (scope, element, attrs) {
             var showclass = element[0].getAttribute("ng-show");
-
+            
             scope.$watch(showclass, function(newValue, oldValue) {
                 if (newValue !== oldValue) {        
                     scope.toggleModal(newValue);
@@ -511,16 +511,13 @@ lanternApp.directive('modaldialog', function() {
             };
 
             scope.toggleModal = function(value) {
-                scope.fitHeight();
-
-                if(value === true) {
-                    document.body.insertBefore(element[0], document.body.firstChild);
-                } else {
-                    element[0].remove();
-                }
+                scope.fitHeight();                
+                document.body.insertBefore(element[0], document.body.firstChild);
             }
 
             scope.fitHeight = function() {
+                console.log(document.body.clientHeight + " - " + element[0].children[0].offsetHeight);
+
                 if(document.body.clientHeight <= element[0].children[0].offsetHeight) {
                     element[0].children[0].children[0].style.height = (document.body.clientHeight - 75) + "px";
                 }
