@@ -597,6 +597,10 @@ a:link, a:visited, a:hover {
 	font-size: 32px;
 }
 
+.size-48 {
+	font-size: 48px;
+}
+
 #station-details {
 	position: absolute;
 	z-index: 15;
