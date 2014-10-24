@@ -219,10 +219,8 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
                     
-                    $rootScope.noresults = false;
                     deferred.resolve(location);
                 } else {
-                    $rootScope.noresults = true;
                     deferred.resolve(null);
                 }
             });
@@ -248,19 +246,16 @@ lanternApp.factory('loadphone', ['$q', '$http',
 
 lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
-        return function () {
+        return function (scope) {
             var deferred = $q.defer();
             
             if($rootScope.address != null && $rootScope.address != "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                    $rootScope.noresults = false;
                     deferred.resolve(eval(data));
                 }).error(function(data) {
-                    $rootScope.noresults = true;
                     deferred.resolve(null);
                 });
             } else {
-                $rootScope.noresults = true;
                 deferred.resolve(null);
             }
 
@@ -273,21 +268,19 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
 
 lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
-        return function () {
+        return function (scope) {
             var deferred = $q.defer();
             
             if($rootScope.state != null && $rootScope.state != "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                    $rootScope.noresults = false;
                     deferred.resolve(eval(data));
                 }).error(function(data) {
-                    $rootScope.noresults = true;
                     deferred.resolve(null);
                 });
             } else {
-                $rootScope.noresults = true;
                 deferred.resolve(null);
             }
+
             $rootScope.$emit('outagesUpdated', new Date());
 
             return deferred.promise;
