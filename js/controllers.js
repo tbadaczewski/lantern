@@ -597,9 +597,9 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 
 		$scope.autoHyperlinkUrls = function(text) {
 			if(text) {
-		    	text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\" target=\"_system\">$1$2</a>");
-		    	text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1" target=\"_system\">#$1</a>');
-		    	text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1" target=\"_system\">@$1</a>');
+		    	text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\">$1$2</a>");
+		    	text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1">#$1</a>');
+		    	text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1">@$1</a>');
 		    }
 
 		    return text;
@@ -618,12 +618,6 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 		    if (diff < 9999999) {return Math.round(diff / 86400) + "d";}
 		    
 		    return system_date;
-		}
-
-		$scope.openWindow = function($event, $url) {
-			//$event.preventDefault();
-			//console.log($url);
-			//window.open($url, "_system");
 		}
 
 		if(gaPlugin) { gaPlugin.trackPage(null, null, "Twitter Feed"); }
