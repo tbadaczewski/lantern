@@ -621,8 +621,9 @@ lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
 		}
 
 		$scope.openWindow = function($event, $url) {
-			$event.preventDefault();
-			window.open($url, "_system");
+			//$event.preventDefault();
+			//console.log($url);
+			//window.open($url, "_system");
 		}
 
 		if(gaPlugin) { gaPlugin.trackPage(null, null, "Twitter Feed"); }
