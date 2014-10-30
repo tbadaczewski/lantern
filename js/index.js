@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var uaCode = "UA-55903649-1";
 var gaPlugin;
 var app = {
     // Application Constructor
@@ -37,11 +38,11 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         gaPlugin = window.plugins.gaPlugin;
-        if(gaPlugin) { gaPlugin.init(null, null, "UA-55903649-1", 10); }
+        if(gaPlugin) { gaPlugin.init(null, null, uaCode, 10); }
         app.receivedEvent('deviceready');
     },
     onResume: function() {
-        if(gaPlugin) { gaPlugin.init(null, null, "UA-55903649-1", 10); }
+        if(gaPlugin) { gaPlugin.init(null, null, uaCode, 10); }
         app.receivedEvent('resume');
     },
     onPause: function() {

@@ -45,7 +45,10 @@
     <nav id="nav-{{navstate}}">        
         <span class="icon-{{navclass}}" aria-hidden="true"></span>
         <span>{{navtext}}</span>
-        <a id="btn-type" href="#/{{navtarget}}" ng-show="typestate" class="rounded orange small type">{{navbtnlabel}}</a>
+        <div class="view-buttons" ng-show="typestate">
+            <a id="btn-map" href="#/{{maptarget}}" class="small {{mapactive}}">Map</a>
+            <a id="btn-list" href="#/{{listtarget}}" class="small {{listactive}}">List</a>
+        </div>
     </nav> 
     <div id="{{id}}" ng-view class="{{animate}}"></div>
     <script type="text/javascript" src="phonegap.js"></script>

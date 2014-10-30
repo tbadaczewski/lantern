@@ -1,4 +1,6 @@
-"use strict";
+(function () {
+   'use strict';
+}());
 
 var lanternApp = angular.module('lanternApp', [
 	'ngAnimate',
@@ -29,7 +31,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "BETA v." + version;
         });
 
-        geolocation().then(function(position) {  
+        geolocation().then(function(position) {
             $rootScope.position = position;
             
             loadstations().then(function(stations) {
@@ -116,7 +118,7 @@ lanternApp.factory('validatetag', ['$window',
             var tags = eval(localStorage.getItem("tags"));
             var limit = 15;
 
-            if(tags != null) {
+            if(tags !== null) {
                 for(var i = 0; i < tags.length; i++) {
                     if(tags[i].station.id == $id) {
                         last = new Date(tags[i].station.lastupdated);
@@ -151,25 +153,25 @@ lanternApp.factory('twitter', ['$q', '$http',
                 deferred.resolve(eval(data));
             }).error(function(data) {
                 deferred.resolve(null);
-            })
+            });
             
             return deferred.promise;
         };
     }
 ]);
 
-lanternApp.factory('geolocation', ['$q',
-    function ($q) {
+lanternApp.factory('geolocation', ['$q', '$window',
+    function ($q, $window) {
         return function () {
             var deferred = $q.defer();
-            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false }
-            
+            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false };
+
             function onSuccess(position) {
                 deferred.resolve(position);
             }
 
             function onError(error) {
-                navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');            
+                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
                 deferred.resolve(null);
             }
 
@@ -198,7 +200,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                 if (status == google.maps.GeocoderStatus.OK) {
                     var location = new Array("","","");
 
-                    //Beautified Address
+                    //Formatted Address
                     location[0] = results[0].formatted_address;
 
                     //County
@@ -209,9 +211,9 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                     }
 
                     //State
-                    for(var i=0; i < results[0].address_components.length; i++) {
-                        if (results[0].address_components[i].types[0] == "administrative_area_level_1") {
-                            location[2] = results[0].address_components[i].short_name;
+                    for(var j=0; j < results[0].address_components.length; j++) {
+                        if (results[0].address_components[j].types[0] == "administrative_area_level_1") {
+                            location[2] = results[0].address_components[j].short_name;
                         }
                     }
 
@@ -249,14 +251,15 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
             
-            if($rootScope.address != null && $rootScope.address != "") {
+            if($rootScope.address !== null && $rootScope.address !== "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                    localStorage.setItem("stations", eval(data));
                     deferred.resolve(eval(data));
                 }).error(function(data) {
                     deferred.resolve(null);
                 });
             } else {
-                deferred.resolve(null);
+                deferred.resolve(localStorage.stations);
             }
 
             $rootScope.$emit('stationsUpdated', new Date());
@@ -270,15 +273,16 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function (scope) {
             var deferred = $q.defer();
-            
-            if($rootScope.state != null && $rootScope.state != "") {
+
+            if($rootScope.state !== null && $rootScope.state !== "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                    localStorage.setItem("outages", eval(data));
                     deferred.resolve(eval(data));
                 }).error(function(data) {
                     deferred.resolve(null);
                 });
             } else {
-                deferred.resolve(null);
+                deferred.resolve(localStorage.outages);
             }
 
             $rootScope.$emit('outagesUpdated', new Date());
@@ -294,8 +298,8 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                deferred.resolve(eval(data));     
-            }); 
+                deferred.resolve(eval(data));
+            });
 
             return deferred.promise;
         };
@@ -312,8 +316,8 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
             scope.$watch('searchfocus', function(newValue, oldValue) {
                 if (newValue !== oldValue) {
                     $timeout(function() {
-                        if(newValue == true) {
-                            scope.focus();                 
+                        if(newValue === true) {
+                            scope.focus();
                         } else {
                             scope.blur();
                         }
@@ -321,10 +325,10 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
                 }
             });
 
-            element.bind("keyup", function($event) {         
+            element.bind("keyup", function($event) {
                 if($event.keyCode == 13) {
                     $rootScope.$emit('addressUpdated', new Date());
-                } 
+                }
             });
 
             scope.focus = function() {
@@ -336,7 +340,7 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
                         SoftKeyboard.show();
                     }
                 }
-            }
+            };
 
             scope.blur = function() {
                 if(element[0].getAttribute("data-focus") == "true") {
@@ -347,7 +351,7 @@ lanternApp.directive('searchbar', function($timeout, $rootScope) {
                         SoftKeyboard.hide();
                     }
                 }
-            }
+            };
         }
     };
 });
@@ -380,8 +384,8 @@ lanternApp.directive('googlemap', function($rootScope) {
                         scope.showdetails = null;
                     });
 
-                    if(scope.prev != null) {
-                        var normal = { 
+                    if(scope.prev !== null) {
+                        var normal = {
                             url: scope.prev.icon.url,
                             scaledSize: new google.maps.Size(25,40)
                         };
@@ -403,7 +407,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                 mapmarkers = [];
 
                 scope.addMarkers(scope.markers);
-            }
+            };
 
             scope.addMarkers = function (markers) {
                 var bounds = new google.maps.LatLngBounds();
@@ -412,7 +416,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                     var size = new google.maps.Size(25,40);
                     var myLatlng = new google.maps.LatLng(marker.latitude, marker.longitude);
                     var point = new google.maps.Marker({
-                        position: myLatlng, 
+                        position: myLatlng,
                         latitude: marker.latitude,
                         longitude: marker.longitude,
                         map: map,
@@ -426,7 +430,7 @@ lanternApp.directive('googlemap', function($rootScope) {
                         "icon" : {
                             url: 'img/pin-' + marker.operatingStatus.toLowerCase() + '.png',
                             scaledSize: size
-                        } 
+                        }
                     });
 
                     mapmarkers.push(point);
@@ -434,8 +438,8 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                     google.maps.event.addListener(point, 'click', function() {
                         scope.$apply(function () {
-                            if(scope.prev != null) {
-                                var normal = { 
+                            if(scope.prev !== null) {
+                                var normal = {
                                     url: scope.prev.icon.url,
                                     scaledSize: new google.maps.Size(25,40)
                                 };
@@ -472,10 +476,10 @@ lanternApp.directive('googlemap', function($rootScope) {
                 map.fitBounds(bounds);
                 intialized = true;
                 scope.$emit('markersLoaded', true);
-            }
+            };
 
             scope.$watch('markers', function(newValue, oldValue) {
-                if (newValue !== oldValue) {        
+                if (newValue !== oldValue) {
                     scope.init();
                 }
             });
@@ -494,7 +498,7 @@ lanternApp.directive('modaldialog', function() {
             var showclass = element[0].getAttribute("ng-show");
             
             scope.$watch(showclass, function(newValue, oldValue) {
-                if (newValue !== oldValue) {        
+                if (newValue !== oldValue) {
                     scope.toggleModal(newValue);
                 }
             });
@@ -504,15 +508,15 @@ lanternApp.directive('modaldialog', function() {
             };
 
             scope.toggleModal = function(value) {
-                scope.fitHeight();                
+                scope.fitHeight();
                 document.body.insertBefore(element[0], document.body.firstChild);
-            }
+            };
 
             scope.fitHeight = function() {
                 if(document.body.clientHeight <= element[0].children[0].offsetHeight) {
                     element[0].children[0].children[0].style.height = (document.body.clientHeight - 75) + "px";
                 }
-            }
+            };
         }
     };
 });
@@ -547,7 +551,7 @@ lanternApp.directive('contentframe', function($http, $sce) {
 
             scope.changePath = function(path) {
                 $http.get('tips/' + path).success(function(response) {
-                    element.html($sce.trustAsHtml(response));                                          
+                    element.html($sce.trustAsHtml(response));
                     element[0].scrollTop = 0;
 
                     scope.$emit('onload', [scope.index, scope.history.length]);
@@ -558,9 +562,9 @@ lanternApp.directive('contentframe', function($http, $sce) {
                         var href = this.getAttribute("href");
 
                         if(this.getAttribute("target") == "_self") {
-                            scope.history.push(href);  
+                            scope.history.push(href);
                             scope.index++;
-                            scope.changePath(href);                
+                            scope.changePath(href);
                         } else {
                             window.open(href, "_system");
                         }
