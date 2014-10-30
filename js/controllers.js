@@ -400,7 +400,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				var tags = eval(localStorage.getItem("tags"));
 				var updated = false;
 
-				if(tags !== null) {
+				if (tags !== null) {
 					for(var i = 0; i < tags.length; i++) {
 						if(tags[i].station.id == id) {
 							tags[i].station.lastupdated = new Date();

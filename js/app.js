@@ -117,7 +117,7 @@ lanternApp.factory('validatetag', ['$window',
             var count = 0, diffMs = 0, diffMins = 0;
             var tags = eval(localStorage.getItem("tags"));
             var limit = 15;
-
+            
             if(tags !== null) {
                 for(var i = 0; i < tags.length; i++) {
                     if(tags[i].station.id == $id) {
@@ -128,7 +128,7 @@ lanternApp.factory('validatetag', ['$window',
                         diffMins = Math.abs(Math.round(diffMs / 60000)); // minutes
 
                         if(diffMins <= limit && count >= 1) {
-                            $window.navigator.notification.alert('You must wait at least 15 minutes to tag THIS station again.', null, 'Exceeded Tag Limit', 'Close');
+                            //$window.navigator.notification.alert('You must wait at least 15 minutes to tag THIS station again.', null, 'Exceeded Tag Limit', 'Close');
                             
                             return false;
                         } else if(diffMins > limit && count >= 1) {
@@ -171,7 +171,7 @@ lanternApp.factory('geolocation', ['$q', '$window',
             }
 
             function onError(error) {
-                $window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
+                //$window.navigator.notification.alert('There was a problem locating your position, please manually enter your city, state or zipcode.', null, 'Failed to Locate Position', 'Close');
                 deferred.resolve(null);
             }
 
@@ -438,7 +438,7 @@ lanternApp.directive('googlemap', function($rootScope) {
 
                     google.maps.event.addListener(point, 'click', function() {
                         scope.$apply(function () {
-                            if(scope.prev !== null) {
+                            if (typeof scope.prev !== "undefined") {
                                 var normal = {
                                     url: scope.prev.icon.url,
                                     scaledSize: new google.maps.Size(25,40)
