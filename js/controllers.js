@@ -61,6 +61,10 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 			if($scope.searchfocus === true) {
 				$timeout(function(){
 					$scope.searchfocus = false;
+
+					if($scope.address === "") {
+						$scope.address = $rootScope.address;
+					}
 				}, 500);
 			}
 		};
