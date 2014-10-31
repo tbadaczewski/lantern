@@ -11,7 +11,7 @@ var lanternApp = angular.module('lanternApp', [
     'mgcrea.pullToRefresh'
 ]);
 
-lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, twitter) {
+lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     $rootScope.menu = "close";
 
     document.addEventListener('deviceready', function() {
@@ -47,10 +47,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
                     $rootScope.outages = outages;
                 });
             });
-        });
-        
-        twitter().then(function(timeline) {
-            $rootScope.tweets = timeline;
         });
     }
 
@@ -96,10 +92,6 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/tips.html',
             controller: 'TipsCtrl'
         }).
-        when('/twitter', {
-            templateUrl: 'partials/twitter.html',
-            controller: 'TwitterCtrl'
-        }).
         when('/alternative', {
             templateUrl: 'partials/alternative.html',
             controller: 'AlternativeCtrl'
@@ -140,22 +132,6 @@ lanternApp.factory('validatetag', ['$window',
             }
 
             return true;
-        };
-    }
-]);
-
-lanternApp.factory('twitter', ['$q', '$http',
-    function ($q, $http) {
-        return function () {
-            var deferred = $q.defer();
-
-            $http.get('https://doelanternapi.parseapp.com/twitter/doe/timeline').success(function (data) {
-                deferred.resolve(eval(data));
-            }).error(function(data) {
-                deferred.resolve(null);
-            });
-            
-            return deferred.promise;
         };
     }
 ]);
@@ -250,7 +226,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function (scope) {
             var deferred = $q.defer();
-            
+
             if($rootScope.address !== null && $rootScope.address !== "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                     localStorage.setItem("stations", eval(data));

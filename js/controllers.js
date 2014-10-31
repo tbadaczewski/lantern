@@ -323,7 +323,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "Map";
-		$rootScope.navtext = "OPEN GAS STATIONS";
+		$rootScope.navtext = "GAS STATIONS";
 		$rootScope.navclass = "gas";
 		$rootScope.maptarget = "station-map";
 		$rootScope.listtarget = "station-list";
@@ -478,7 +478,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.navbtnlabel = "List";
-		$rootScope.navtext = "OPEN GAS STATIONS";
+		$rootScope.navtext = "GAS STATIONS";
 		$rootScope.navclass = "gas";
 		$rootScope.maptarget = "station-map";
 		$rootScope.listtarget = "station-list";
@@ -591,44 +591,6 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 		$scope.id = "tips-guides";
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Tips & Guides");}
-    }
-]);
-
-lanternControllers.controller('TwitterCtrl', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
-		$rootScope.loading = true;
-		$scope.tweets = $rootScope.tweets;
-		$rootScope.backstate = "";
-		$rootScope.navstate = "false";
-		$rootScope.animate = "slide";
-		$scope.id = "twitter";
-		$rootScope.loading = false;
-
-		$scope.autoHyperlinkUrls = function(text) {
-			if(text) {
-				text = text.replace(/(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/ig, "<a href=\"$1$2\">$1$2</a>");
-				text = text.replace(/#(\S*)/g,'<a href="https://twitter.com/search?q=$1">#$1</a>');
-				text = text.replace(/@(\S*)/g,'<a href="https://twitter.com/$1">@$1</a>');
-			}
-
-			return text;
-		};
-
-		$scope.parseTwitterDate = function(tdate) {
-			var system_date = new Date(Date.parse(tdate));
-			var user_date = new Date();
-			var diff = Math.floor((user_date - system_date) / 1000);
-
-			if (diff <= 1) {return "now";}
-			if (diff < 60) {return diff + " s";}
-			if (diff <= 3540) {return Math.round(diff / 60) + "m";}
-			if (diff <= 86400) {return Math.round(diff / 3600) + "h";}
-			if (diff < 9999999) {return Math.round(diff / 86400) + "d";}
-
-			return system_date;
-		};
-
-		if(gaPlugin){gaPlugin.trackPage(null, null, "Twitter Feed");}
     }
 ]);
 

@@ -158,75 +158,12 @@ button.inline, .button.inline {
 	padding: 75px 1em 50px 1em;
 }
 
-#tips-guides, #twitter, #outage-map, #alternative {
+#tips-guides, #outage-map, #alternative {
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
 	background: #fff;
-}
-
-#twitter .nickname {
-	color: #707070;
-	font-size: 0.9em;
-	font-weight: normal;
-}
-
-#twitter .entry {
-	position: relative;
-	border-top: solid 1px #e8e8e8;
-	padding: 1em;
-	display: block;
-}
-
-#twitter .entry:first-child {
-	border-top: none;
-}
-
-#twitter .message {
-	position: relative;
-	font-size: 0.9em;
-	min-height: 48px;
-	padding-left: 53px;
-	margin: 0;
-	vertical-align: top;
-}
-
-#twitter a.time:link, #twitter a.time:active, #twitter a.time:visited, #twitter a.time:hover {
-	position: absolute;
-	top: 0;
-	right: 0;
-	color: #707070;
-	font-size: 80%;
-}
-
-#twitter .logo {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 48px;
-	width: 48px;
-}
-
-#twitter .logo img {
-	border-radius: 5px;
-}
-
-#twitter a {
-	color: #f18525;
-}
-
-#twitter .nickname {
-	text-transform: lowercase;
-}
-
-#twitter .retweeted {
-	display: block;
-}
-
-#twitter a.title {
-	font-weight: bold;
-	color: inherit;
 }
 
 nav, nav#nav-hidden {
@@ -694,7 +631,7 @@ button#back, button#forward, a#return {
 	display: inline;
 }
 
-#tips-container, #twitter-container, #outage-map-container, #alternative-container {
+#tips-container, #outage-map-container, #alternative-container {
 	height: inherit;
 	width: inherit;
 	background: #fff;
