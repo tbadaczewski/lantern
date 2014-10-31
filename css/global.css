@@ -279,6 +279,10 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	-webkit-transform: translate3d(0,-100%,0);
 }
 
+#handle p {
+	color: #fff;
+}
+
 #handle.open {
 	-webkit-transform: translate3d(0,0,0);
 }
