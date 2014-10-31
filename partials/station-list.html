@@ -11,11 +11,11 @@
     	</div>
     </div>	
 </modaldialog>
-<div id="legend" class="clearfix">
-	<div class="left">Results found are in 2.5 mi. radius.</div>
-	<div class="right"><span class="icon-green"></span> = <strong>Open</strong> &nbsp; <span class="icon-yellow"></span> = <strong>Uncertain</strong> &nbsp; <span class="icon-red"></span> = <strong>Closed</strong></div>
-</div>
 <div class="stations" pull-to-refresh="onReload()">
+	<div id="legend" class="clearfix">
+		<div class="left">Results found are in 2.5 mi. radius.</div>
+		<div class="right"><span class="icon-green"></span> = <strong>Open</strong> &nbsp; <span class="icon-yellow"></span> = <strong>Uncertain</strong> &nbsp; <span class="icon-red"></span> = <strong>Closed</strong></div>
+	</div>
     <div class="station" ng-repeat="station in stations" ng-hide="noresults">
     	<div class="item list">
 	        <h4><span class="icon-{{station.operatingStatus}}" aria-hidden="true"></span> {{station.station}}</h4>
