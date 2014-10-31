@@ -256,7 +256,6 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
                     localStorage.setItem("stations", eval(data));
                     deferred.resolve(eval(data));
                 }).error(function(data) {
-                    //deferred.resolve(null);
                     deferred.resolve(localStorage.stations);
                 });
             } else {
@@ -280,7 +279,6 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
                     localStorage.setItem("outages", eval(data));
                     deferred.resolve(eval(data));
                 }).error(function(data) {
-                    //deferred.resolve(null);
                     deferred.resolve(localStorage.outages);
                 });
             } else {
