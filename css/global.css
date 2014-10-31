@@ -839,7 +839,7 @@ iframe {
 }
 
 .pull-to-refresh {
-	position: absolute;
+	position: relative;
 	display: block;
 	-webkit-box-sizing: border-box;
 	margin: -40px auto 0;
@@ -855,7 +855,7 @@ iframe {
 }
 
 .pull-to-refresh .progress {
-	position: absolute;
+	position: relative;
 	left: auto;
 	top: auto;
 	margin: 0 auto;
