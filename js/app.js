@@ -272,8 +272,13 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function (id, status) {
             var deferred = $q.defer();
+            var text_status = 'open';
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            if(status === 0) {
+                text_status = 'closed';
+            }
+
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + text_status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             });
 

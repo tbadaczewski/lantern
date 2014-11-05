@@ -21,19 +21,19 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 						loadstations().then(function(data) {
 							$rootScope.stations = data;
-							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations: " + String(data.length), 0);}
+							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations", data.length);}
 							$rootScope.$emit('stationsUpdated', new Date());
 						});
 
 						loadoutages().then(function(data) {
 							$rootScope.outages = data;
-							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Stations: " + String(data.length), 0);}
+							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
 							$rootScope.$emit('outagesUpdated', new Date());
 						});
 					}
 				});
 
-				if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, "button", 0);}
+				if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, localStorage.SessionID, 0);}
 			}
 		};
 
@@ -89,7 +89,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 					});
 				});
 
-				if(gaPlugin){gaPlugin.trackEvent(null, null, "Locate", $scope.address, "button", 0);}
+				if(gaPlugin){gaPlugin.trackEvent(null, null, "Locate Current Position", $scope.address, localStorage.SessionID, 0);}
 			});
 		};
 
@@ -180,7 +180,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 				);
 
 				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-				if(gaPlugin){gaPlugin.trackEvent(null, null, "Outage Photo Submitted", $rootScope.address, "button", 0);}
+				if(gaPlugin){gaPlugin.trackEvent(null, null, "Outage Photo Submitted", $rootScope.address, localStorage.SessionID, 0);}
 			}
 		};
 
@@ -234,7 +234,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			});
 		};
 
-		$scope.tagStation = function(id, status) {
+		$scope.tagStation = function(id, title, address, status) {
 			if(validatetag(id) === true) {
 				var tags = eval(localStorage.getItem("tags"));
 				var updated = false;
@@ -268,7 +268,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 						$rootScope.$emit('stationsUpdated', new Date());
 					});
 
-					if(gaPlugin){gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);}
+					if(gaPlugin){gaPlugin.trackEvent(null, null, "Tag Station", (title + " - " + address), localStorage.SessionID, status);}
 				});
 			}
 		};
@@ -399,7 +399,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
             });
 		};
 
-		$scope.tagStation = function(id, status) {
+		$scope.tagStation = function(id, title, address, status) {
 			if(validatetag(id) === true) {
 				var tags = eval(localStorage.getItem("tags"));
 				var updated = false;
@@ -432,7 +432,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 						$rootScope.$emit('stationsUpdated', new Date());
 					});
 
-					if(gaPlugin){gaPlugin.trackEvent(null, null, "Tag Station", id, status, 0);}
+					if(gaPlugin){gaPlugin.trackEvent(null, null, "Tag Station", (title + " - " + address), localStorage.SessionID, status);}
 				});
 			}
 		};
@@ -615,7 +615,7 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 
 		$scope.searchCurrent= function() {
 			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
-			if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Alternative Fuels", $rootScope.address, "button", 0);}
+			if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Alternative Fuels", $rootScope.address, localStorage.SessionID, 0);}
 		};
 		
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Alternative Fuel List");}
