@@ -9,32 +9,35 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		$scope.searchfocus = false;
 
 		$scope.search = function() {
-			if(($scope.address !== undefined) && ($rootScope.address != $scope.address)) {
-				$scope.searchfocus = false;
-				$rootScope.address = $scope.address;
+			$scope.searchfocus = false;
+			$rootScope.address = $scope.address;
 
-				geoencoder('address').then(function(address) {
-					if(address !== null) {
-						$rootScope.address = $scope.address = address[0];
-						$rootScope.county = address[1];
-						$rootScope.state = address[2];
+			geoencoder('address').then(function(address) {
+				if(address !== null) {
+					$rootScope.address = $scope.address = address[0];
+					$rootScope.county = address[1];
+					$rootScope.state = address[2];
 
-						loadstations().then(function(data) {
-							$rootScope.stations = data;
-							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations", data.length);}
-							$rootScope.$emit('stationsUpdated', new Date());
-						});
+					loadstations().then(function(data) {
+						$rootScope.stations = data;
+						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations", data.length);}
+						$rootScope.$emit('stationsUpdated', new Date());
+					});
 
-						loadoutages().then(function(data) {
-							$rootScope.outages = data;
-							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
-							$rootScope.$emit('outagesUpdated', new Date());
-						});
-					}
-				});
+					loadoutages().then(function(data) {
+						$rootScope.outages = data;
+						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
+						$rootScope.$emit('outagesUpdated', new Date());
+					});
+				} else {
+					$rootScope.stations = null;
+					$rootScope.outages = null;
+					$rootScope.$emit('stationsUpdated', new Date());
+					$rootScope.$emit('outagesUpdated', new Date());
+				}
+			});
 
-				if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, localStorage.SessionID, 0);}
-			}
+			if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Stations/Outages", $rootScope.address, localStorage.SessionID, 0);}
 		};
 
 		$scope.clear = function() {
@@ -195,30 +198,16 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
-		$rootScope.loading = true;
-
-		$rootScope.$on('stationsUpdated', function() {
+		$scope.results = function() {
 			$scope.stations = $rootScope.stations;
 			$rootScope.loading = false;
 
-			if($scope.stations !== null || $scope.stations.length > 0) {
-				$scope.noresults = false;
-			} else {
+			if($scope.stations === null) {
 				$scope.noresults = true;
+			} else {
+				$scope.noresults = false;
 			}
-		});
-
-		if($rootScope.stations === null) {
-			loadstations().then(function(stations) {
-				$rootScope.stations = $scope.stations = stations;
-				$rootScope.loading = false;
-				$rootScope.$emit('stationsUpdated', new Date());
-			});
-		} else {
-			$scope.stations = $rootScope.stations;
-			$rootScope.loading = false;
-			$rootScope.$emit('stationsUpdated', new Date());
-		}
+		};
 
 		$scope.tagCancel = function() {
 			$scope.show = false;
@@ -319,6 +308,11 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			return deferred.promise;
 		};
 		
+		$rootScope.$on('stationsUpdated', function() {
+			$scope.results();
+		});
+		
+		$rootScope.loading = true;
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -332,6 +326,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";
 		$scope.saddr = encodeURI($rootScope.address);
+		$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -493,37 +488,28 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-		$rootScope.loading = true;
-
-        $rootScope.$on('outagesUpdated', function() {
-			$scope.outages = $rootScope.outages;
-			$rootScope.loading = false;
-
-			if($scope.outages !== null || $scope.outages.length > 0) {
-                $scope.noresults = false;
-            } else {
-                $scope.noresults = true;
-            }
-		});
-
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
 			$rootScope.outagemap = $url;
 			$location.path("/outage-map");
 		};
 
-		if($rootScope.outages === null) {
-			loadoutages().then(function(outages) {
-				$rootScope.outages = $scope.outages = outages;
-				$rootScope.loading = false;
-				$rootScope.$emit('outagesUpdated', new Date());
-			});
-		} else {
+		$scope.results = function() {
 			$scope.outages = $rootScope.outages;
 			$rootScope.loading = false;
-			$rootScope.$emit('outagesUpdated', new Date());
-		}
 
+			if($scope.outages === null) {
+				$scope.noresults = true;
+			} else {
+				$scope.noresults = false;
+			}
+		};
+
+        $rootScope.$on('outagesUpdated', function() {
+			$scope.results();
+		});
+
+		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
@@ -531,6 +517,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
+		$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
