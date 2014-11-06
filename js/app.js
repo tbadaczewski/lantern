@@ -96,6 +96,14 @@ lanternApp.config(['$routeProvider',
             templateUrl: 'partials/alternative.html',
             controller: 'AlternativeCtrl'
         }).
+        when('/about', {
+            templateUrl: 'partials/about.html',
+            controller: 'AboutCtrl'
+        }).
+        when('/terms', {
+            templateUrl: 'partials/terms.html',
+            controller: 'TermsCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });

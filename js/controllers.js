@@ -608,3 +608,27 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Alternative Fuel List");}
     }
 ]);
+
+lanternControllers.controller('AboutCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+		$rootScope.loading = false;
+		$rootScope.backstate = "";
+		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
+		$scope.id = "about";
+
+		if(gaPlugin){gaPlugin.trackPage(null, null, "About Lantern Live");}
+    }
+]);
+
+lanternControllers.controller('TermsCtrl', ['$scope', '$rootScope',
+    function ($scope, $rootScope) {
+		$rootScope.loading = false;
+		$rootScope.backstate = "";
+		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
+		$scope.id = "terms";
+
+		if(gaPlugin){gaPlugin.trackPage(null, null, "Terms of Use");}
+    }
+]);

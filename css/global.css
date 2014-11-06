@@ -158,12 +158,13 @@ button.inline, .button.inline {
 	padding: 75px 1em 50px 1em;
 }
 
-#tips-guides, #outage-map, #alternative {
+#tips-guides, #outage-map, #alternative, #about, #terms {
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
 	background: #fff;
+	color: #000;
 }
 
 nav, nav#nav-hidden {
@@ -497,18 +498,17 @@ a:link, a:visited, a:hover {
 	padding-left: 20px;
 	vertical-align: top;
 	margin: 0.5em 0;
-	color: #fff;
-	font-size: 0.7em;
+	color: #000;
 }
 
 .arrow-list li:before {
 	position: absolute;
-	left: 0;
-	top: 3px;
+	left: -20px;
+	top: 0.5em;
 	font-family: 'icomoon';
 	font-size: inherit;
 	content: "\e603";
-	color: #703e11;
+	color: #000;
 }
 
 .arrow-list a {
@@ -631,7 +631,7 @@ button#back, button#forward, a#return {
 	display: inline;
 }
 
-#tips-container, #outage-map-container, #alternative-container {
+#tips-container, #outage-map-container, #alternative-container, #about-container, #terms-container {
 	height: inherit;
 	width: inherit;
 	background: #fff;
@@ -681,20 +681,20 @@ button#back, button#forward, a#return {
 	background: #fff;
 }
 
-#frame-content.tips {
+#frame-content {
 	padding: 60px 1em 1em 1em;
 }
 
-#frame-content.tips h2 {
+#frame-content h2 {
 	text-transform: uppercase !important;
 }
 
-#frame-content.tips h4 {
+#frame-content h4 {
 	text-transform: uppercase !important;
 	border-bottom: 1px solid #ededed !important;
 }
 
-#frame-content.tips li {
+#frame-content li {
 	margin-left: 2em;
 	padding: 0.25em 0;
 }
