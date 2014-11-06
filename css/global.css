@@ -372,7 +372,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	height: inherit;
 	background: #f18425;
 	text-align: center;
-	padding: 0;
+	padding: 0.25em 0 0 0;
 	margin: 0;
 }
 
