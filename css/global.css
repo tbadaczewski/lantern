@@ -332,7 +332,7 @@ nav > span[class^='icon-'], #title > span[class^='icon-'] {
 	text-align: center;
 }
 
-*[id^='btn-']:hover {
+*[id^='btn-']:hover, *[id^='btn-'].solid {
 	background: rgba(0, 0, 0, 0.5);
 }
 

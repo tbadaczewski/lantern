@@ -15,7 +15,12 @@
         <a id="energy-logo"><img src="img/energy-logo.png" alt="U.S. Department of Energy" /></a>
     </div>
     <div id="handle" class="{{menu}}">
-        <div class="inner">     
+        <div class="inner">
+            <a id="btn-mail" href="mailto:lanternlivebeta@hq.doe.gov?subject=Beta-Test%20Feedback" class="button rounded solid icon white"><span class="icon-email" aria-hidden="true"></span>Email Beta-Test Feedback</a>   
+            <a id="btn-about" href="" class="button rounded solid icon white"><span class="icon-lantern" aria-hidden="true"></span>About the Lantern Project</a>
+            <a id="btn-terms" href="" class="button rounded solid icon white"><span class="icon-guide" aria-hidden="true"></span>Terms of Use</a>
+
+            <!--
             <h4>About</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eros massa, tincidunt sed consequat sit amet, viverra ac justo. Phasellus et ante dignissim, consequat quam sit amet, suscipit odio. Nullam efficitur purus eu lacinia porta. Nullam eget augue vel urna aliquet mollis bibendum sit amet metus. Suspendisse ultrices leo id leo posuere, in posuere sem egestas. Integer consequat ipsum nisl, id faucibus felis sollicitudin egestas. Aliquam sit amet ex tellus. Fusce dolor urna, porttitor vestibulum purus vel, lacinia vulputate neque. Cras at tellus finibus enim tempor mollis eu ut urna. Vivamus at sapien quis enim interdum viverra in in mi. Vestibulum volutpat consectetur tortor vel blandit.</p>
 
@@ -31,6 +36,7 @@
                 <li>This App should not be used to contact DOE during an emergency. If you are in need of emergency assistance please contact 9-1-1.</li>
             </ul>
             <small>Rev. July 2014</small>
+            -->
         </div>        
     </div>
     <div id="search-bar" ng-controller="SearchCtrl"> 
@@ -42,7 +48,7 @@
             <button id="btn-clear" ng-click="clear()" type="button" title="Clear"><span class="icon-close" aria-hidden="true"><span class="element-invisible">Clear</span></span></button>
             <button id="btn-search" ng-click="search()" ng-show="searchfocus" type="button" title="Search"><span class="icon-search" aria-hidden="true"><span class="element-invisible">Search</span></span></button>
             <button id="btn-target" ng-click="locate()" ng-hide="searchfocus" type="button" title="Locate"><span class="icon-target" aria-hidden="true"><span class="element-invisible">Locate</span></span></button>
-            <button id="btn-lantern" ng-click="toggleMenu()" type="button" title="About Lantern Live"><div class="icon-lantern size-40" aria-hidden="true"></div></button>
+            <button id="btn-lantern" ng-click="toggleMenu()" type="button" title="About Lantern Live"><div class="icon-lantern size-32" aria-hidden="true"></div><div class="icon-list size-22" aria-hidden="true"></div></button>
         </div>    
     </div>
     <nav id="nav-{{navstate}}">        
