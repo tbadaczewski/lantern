@@ -269,17 +269,17 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				switch(status) {
 					case "green":
 						$scope.state = "open";
-						$scope.title = "Gas Stations is Open";
+						$scope.title = "Gas Station Status: Open";
 						$scope.message = "closed";
 						break;
 					case "yellow":
 						$scope.state = "uncertain";
-						$scope.title = "Gas Station Status Uncertain";
-						$scope.message = "open or currently closed";
+						$scope.title = "Gas Station Status: Uncertain";
+						$scope.message = "open or closed";
 						break;
 					case "red":
 						$scope.state = "closed";
-						$scope.title = "Gas Stations is Closed";
+						$scope.title = "Gas Station Status: Closed";
 						$scope.message = "open";
 						break;
 				}
@@ -439,17 +439,17 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				switch(status) {
 					case "green":
 						$scope.state = "open";
-						$scope.title = "Gas Station is Open";
+						$scope.title = "Gas Station Status: Open";
 						$scope.message = "closed";
 						break;
 					case "yellow":
 						$scope.state = "uncertain";
-						$scope.title = "Gas Station Status Uncertain";
-						$scope.message = "open or currently closed";
+						$scope.title = "Gas Station Status: Uncertain";
+						$scope.message = "open or closed";
 						break;
 					case "red":
 						$scope.state = "closed";
-						$scope.title = "Gas Station is Closed";
+						$scope.title = "Gas Station Status: Closed";
 						$scope.message = "open";
 						break;
 				}
