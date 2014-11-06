@@ -187,6 +187,8 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope',
                     //Formatted Address
                     location[0] = results[0].formatted_address;
 
+                    console.log(results[0]);
+
                     //County
                     for(var i=0; i < results[0].address_components.length; i++) {
                         if (results[0].address_components[i].types[0] == "administrative_area_level_2") {

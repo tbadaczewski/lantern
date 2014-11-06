@@ -201,8 +201,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$scope.results = function() {
 			$scope.stations = $rootScope.stations;
 			$rootScope.loading = false;
-
-			if($scope.stations === null) {
+			
+			if($scope.stations === null || $scope.stations === undefined) {
 				$scope.noresults = true;
 			} else {
 				$scope.noresults = false;
@@ -498,7 +498,9 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$scope.outages = $rootScope.outages;
 			$rootScope.loading = false;
 
-			if($scope.outages === null) {
+			console.log($scope.outages);
+
+			if($scope.outages === null || $scope.outages === undefined) {
 				$scope.noresults = true;
 			} else {
 				$scope.noresults = false;
