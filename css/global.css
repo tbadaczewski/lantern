@@ -555,9 +555,9 @@ a:link, a:visited, a:hover {
 }
 
 
-.icon-green { color: #64af00;}
-.icon-yellow { color: #ffd500;}
-.icon-red { color: #ed1c24;}
+.icon-green, span[class^='icon-'].green { color: #64af00;}
+.icon-yellow, span[class^='icon-'].yellow { color: #ffd500;}
+.icon-red, span[class^='icon-'].red { color: #ed1c24;}
 
 .icon-green, .icon-yellow, .icon-red {
 	position: relative;
