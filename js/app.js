@@ -15,9 +15,12 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
 
     document.addEventListener('deviceready', function() {
-        localStorage.SessionID = guid();
-        localStorage.setItem("outages", null);
-        locatingalStorage.setItem("stations", null);
+        if(!localStorage.SessionID) {
+            localStorage.SessionID = guid();
+        }
+
+        //localStorage.setItem("outages", null);
+        //locatingalStorage.setItem("stations", null);
 
         intializeMe();
     }, false);
