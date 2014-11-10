@@ -115,78 +115,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$window', '$location', 'geolocation', 'geoencoder',
     function ($scope, $rootScope, $http, $window, $location, geolocation, geoencoder) {
-		$scope.openDialog = function($target, $value) {
-			switch($target) {
-				case "disclaimer":
-					$scope.disclaimerdialog = true;
-
-					break;
-				case "note":
-					$scope.notedialog = true;
-
-					break;
-			}
-		};
-
-		$scope.closeDialog = function($target, $value) {
-			switch($target) {
-				case "disclaimer":
-					$scope.disclaimerdialog = false;
-
-					if($value) {
-						$scope.camera();
-					}
-
-					break;
-				case "note":
-					$scope.notedialog = false;
-
-					if($value) {
-						$location.path("/outage-list");
-					}
-
-					break;
-			}
-		};
-
-		$scope.camera = function() {
-			$scope.show = false;
-
-			navigator.camera.getPicture(
-				onSuccess,
-				null, {
-					quality: 30,
-					allowEdit : true,
-					sourceType : Camera.PictureSourceType.CAMERA,
-					destinationType : Camera.DestinationType.DATA_URL
-				}
-			);
-
-			function onSuccess(data) {
-				var cb = new Codebird();
-
-				cb.setConsumerKey("m7nsVF0NSPBpipUybhJAXw", "4XwyY0IZ9uqvyARzTCDFQIW2I8CSkOMeh5yW6g");
-				cb.setToken("2161399610-perf69tORepQI8eYEA4JlYZR863TeClEVfq6Z9A","JiQ2zvxYCOnW3hRe76wEd2t25N4syvYu55NLllRHsAP7a");
-
-				var params = {
-					"status": "#powerlinedown",
-					"media[]": data,
-					lat: $rootScope.position.coords.latitude,
-					long: $rootScope.position.coords.longitude,
-					display_coordinates: true
-				};
-
-				cb.__call(
-					"statuses_updateWithMedia",
-					params,
-					function (reply) { }
-				);
-
-				$window.navigator.notification.alert('Your photo and location has been submitted.', null, 'Success', 'Close');
-				if(gaPlugin){gaPlugin.trackEvent(null, null, "Outage Photo Submitted", $rootScope.address, localStorage.SessionID, 0);}
-			}
-		};
-
 		$rootScope.backstate = "";
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "fixed";
@@ -202,7 +130,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			$scope.stations = $rootScope.stations;
 			$rootScope.loading = false;
 			
-			if($scope.stations === null || $scope.stations === undefined) {
+			if(!angular.isObject($scope.stations)) {
 				$scope.noresults = true;
 			} else {
 				$scope.noresults = false;
@@ -498,9 +426,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$scope.outages = $rootScope.outages;
 			$rootScope.loading = false;
 
-			console.log($scope.outages);
-
-			if($scope.outages === null || $scope.outages === undefined) {
+			if(!angular.isObject($scope.outages)) {
 				$scope.noresults = true;
 			} else {
 				$scope.noresults = false;
