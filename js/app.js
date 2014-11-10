@@ -204,12 +204,14 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
                     if($type == 'address') {
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
-
+                    
+                    /*
                     if(location[1] === '') {
                         loadcounty().then(function(data) {
                             $rootScope.county = data;
                         });
                     }
+                    */
 
                     deferred.resolve(location);
                 } else {
