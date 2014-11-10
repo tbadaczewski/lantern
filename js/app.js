@@ -15,12 +15,9 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     $rootScope.menu = "close";
 
     document.addEventListener('deviceready', function() {
-        if(!localStorage.SessionID) {
-            localStorage.SessionID = guid();
-        }
-
-        //localStorage.setItem("outages", null);
-        //locatingalStorage.setItem("stations", null);
+        localStorage.SessionID = guid();
+        localStorage.stations = null;
+        localStorage.outages = null;
 
         intializeMe();
     }, false);
@@ -208,13 +205,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
                     
-                    /*
                     if(location[1] === '') {
                         loadcounty().then(function(data) {
                             $rootScope.county = data;
                         });
                     }
-                    */
 
                     deferred.resolve(location);
                 } else {
