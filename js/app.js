@@ -207,12 +207,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
 
                     if(location[1] === '') {
                         loadcounty().then(function(data) {
-                            location[1] = data;
-                            deferred.resolve(location);
+                            $rootScope.county = data;
                         });
-                    } else {
-                        deferred.resolve(location);
                     }
+
+                    deferred.resolve(location);
                 } else {
                     deferred.resolve(null);
                 }
