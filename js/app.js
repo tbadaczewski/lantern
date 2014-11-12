@@ -27,25 +27,23 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "v" + version;
         });
 
-        //if($rootScope.position === null) {
-            geolocation().then(function(position) {
-                $rootScope.position = position;
+        geolocation().then(function(position) {
+            $rootScope.position = position;
 
-                geoencoder('latLng').then(function(address) {
-                    $rootScope.address = address[0];
-                    $rootScope.county = address[1];
-                    $rootScope.state = address[2];
+            geoencoder('latLng').then(function(address) {
+                $rootScope.address = address[0];
+                $rootScope.county = address[1];
+                $rootScope.state = address[2];
 
-                    loadstations().then(function(stations) {
-                        $rootScope.stations = stations;
-                    });
+                loadstations().then(function(stations) {
+                    $rootScope.stations = stations;
+                });
 
-                    loadoutages().then(function(outages) {
-                        $rootScope.outages = outages;
-                    });
+                loadoutages().then(function(outages) {
+                    $rootScope.outages = outages;
                 });
             });
-        //}
+        });
     }
 
     function guid() {
@@ -261,6 +259,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
                 //} else {
                     //deferred.resolve(localStorage.stations);
                 //}
+                alert("Stations: " + data);
 
                 $rootScope.$emit('stationsUpdated', new Date());
             }).error(function(data) {
@@ -285,6 +284,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
                 //} else {
                     //deferred.resolve(localStorage.outages);
                 //}
+                alert("Outages: " + data);
 
                 $rootScope.$emit('outagesUpdated', new Date());
             }).error(function(data) {
