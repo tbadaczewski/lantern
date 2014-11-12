@@ -286,8 +286,6 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             if($rootScope.state !== null && $rootScope.state !== "") {
-                console.log('https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county);
-                
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                    if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("outages", eval(data));
