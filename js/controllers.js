@@ -237,8 +237,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			alert("Stations Updated");
-			$scope.results();
+			$scope.$apply(function() {
+				$scope.results();
+			});
 		});
 		
 		$rootScope.loading = true;
@@ -435,8 +436,9 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			alert("Outages Updated");
-			$scope.results();
+			$scope.$apply(function() {
+				$scope.results();
+			});
 		});
 
 		$rootScope.loading = true;
