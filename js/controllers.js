@@ -258,7 +258,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";
 		$scope.saddr = encodeURI($rootScope.address);
-		$scope.results();
+		//$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -453,7 +453,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
-		$scope.results();
+		//$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
