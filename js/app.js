@@ -255,31 +255,21 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            //if($rootScope.address !== null && $rootScope.address !== "") {
-                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                    if(typeof data[0] !== 'undefined') {
-                        localStorage.setItem("stations", eval(data));
-                        deferred.resolve(eval(data));
-                    } else {
-                        deferred.resolve(localStorage.stations);
-                    }
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+                //if(typeof data[0] !== 'undefined') {
+                    localStorage.setItem("stations", eval(data));
+                    deferred.resolve(eval(data));
+                //} else {
+                    //deferred.resolve(localStorage.stations);
+                //}
 
-                    $rootScope.$emit('stationsUpdated', new Date());
+                $rootScope.$emit('stationsUpdated', new Date());
+            }).error(function(data) {
+                deferred.resolve(localStorage.stations);
+                $rootScope.$emit('stationsUpdated', new Date());
+            });
 
-                    return deferred.promise;
-                }).error(function(data) {
-                    deferred.resolve(localStorage.stations);
-                    $rootScope.$emit('stationsUpdated', new Date());
-
-                    return deferred.promise;
-                });
-            //} else {
-                //deferred.resolve(localStorage.stations);
-            //}
-
-            
-
-            
+            return deferred.promise;
         };
     }
 ]);
@@ -289,29 +279,21 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            //if($rootScope.state !== null && $rootScope.state !== "") {
-                $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                   if(typeof data[0] !== 'undefined') {
-                        localStorage.setItem("outages", eval(data));
-                        deferred.resolve(eval(data));
-                    } else {
-                        deferred.resolve(localStorage.outages);
-                    }
+            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+               //if(typeof data[0] !== 'undefined') {
+                    localStorage.setItem("outages", eval(data));
+                    deferred.resolve(eval(data));
+                //} else {
+                    //deferred.resolve(localStorage.outages);
+                //}
 
-                    $rootScope.$emit('outagesUpdated', new Date());
+                $rootScope.$emit('outagesUpdated', new Date());
+            }).error(function(data) {
+                deferred.resolve(localStorage.outages);
+                $rootScope.$emit('outagesUpdated', new Date());
+            });
 
-                    return deferred.promise;
-                }).error(function(data) {
-                    deferred.resolve(localStorage.outages);
-                    $rootScope.$emit('outagesUpdated', new Date());
-
-                    return deferred.promise;
-                });
-            //} else {
-                //deferred.resolve(localStorage.outages);
-            //}
-
-            
+            return deferred.promise;
         };
     }
 ]);
