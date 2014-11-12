@@ -23,34 +23,30 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    document.addEventListener('resume', function() {
-        intializeMe();
-    }, false);
-
     function intializeMe() {
         getAppVersion(function(version) {
             $rootScope.version = "v" + version;
         });
-
-        if($rootScope.position === null) {
-            geolocation().then(function(position) {
+        
+        geolocation().then(function(position) {
+            if($rootScope.position === null) {
                 $rootScope.position = position;
+            }
 
-                geoencoder('latLng').then(function(address) {
-                    $rootScope.address = address[0];
-                    $rootScope.county = address[1];
-                    $rootScope.state = address[2];
+            geoencoder('latLng').then(function(address) {
+                $rootScope.address = address[0];
+                $rootScope.county = address[1];
+                $rootScope.state = address[2];
 
-                    loadstations().then(function(stations) {
-                        $rootScope.stations = stations;
-                    });
+                loadstations().then(function(stations) {
+                    $rootScope.stations = stations;
+                });
 
-                    loadoutages().then(function(outages) {
-                        $rootScope.outages = outages;
-                    });
+                loadoutages().then(function(outages) {
+                    $rootScope.outages = outages;
                 });
             });
-        }
+        });
     }
 
     function guid() {
