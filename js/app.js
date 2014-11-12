@@ -261,10 +261,10 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
                 //}
                 alert("Stations: " + data);
 
-                $rootScope.$emit('stationsUpdated', new Date());
+                $rootScope.$broadcast ('stationsUpdated', new Date());
             }).error(function(data) {
                 deferred.resolve(null);
-                $rootScope.$emit('stationsUpdated', new Date());
+                $rootScope.$broadcast ('stationsUpdated', new Date());
             });
 
             return deferred.promise;
@@ -286,10 +286,10 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
                 //}
                 alert("Outages: " + data);
 
-                $rootScope.$emit('outagesUpdated', new Date());
+                $rootScope.$broadcast ('outagesUpdated', new Date());
             }).error(function(data) {
                 deferred.resolve(null);
-                $rootScope.$emit('outagesUpdated', new Date());
+                $rootScope.$broadcast ('outagesUpdated', new Date());
             });
 
             return deferred.promise;
