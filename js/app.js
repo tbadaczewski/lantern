@@ -261,7 +261,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
                         localStorage.setItem("stations", eval(data));
                         deferred.resolve(eval(data));
                     //} else {
-                        deferred.resolve(localStorage.stations);
+                        //deferred.resolve(localStorage.stations);
                     //}
                 }).error(function(data) {
                     deferred.resolve(localStorage.stations);
