@@ -18,7 +18,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         localStorage.SessionID = guid();
         localStorage.stations = null;
         localStorage.outages = null;
-        $rootScope.position = null;
 
         intializeMe();
     }, false);
@@ -29,9 +28,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         });
         
         geolocation().then(function(position) {
-            if($rootScope.position === null) {
-                $rootScope.position = position;
-            }
+            $rootScope.position = position;
 
             geoencoder('latLng').then(function(address) {
                 $rootScope.address = address[0];
