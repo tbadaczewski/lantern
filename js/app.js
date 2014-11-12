@@ -32,7 +32,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "v" + version;
         });
 
-        if(!angular.isObject($rootScope.position)) {
+        if($rootScope.position === null) {
             geolocation().then(function(position) {
                 $rootScope.position = position;
 
