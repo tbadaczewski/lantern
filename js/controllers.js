@@ -126,16 +126,19 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
+		$rootScope.loading = true;
+
 		$scope.results = function() {
 			$scope.$apply(function() {
 				$scope.stations = $rootScope.stations;
-				$rootScope.loading = false;
 				
 				if(!angular.isObject($scope.stations)) {
 					$scope.noresults = true;
 				} else {
 					$scope.noresults = false;
 				}
+
+				$rootScope.loading = false;
 			});
 		};
 
@@ -242,7 +245,6 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			$scope.results();
 		});
 		
-		$rootScope.loading = true;
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -418,16 +420,19 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
+		$rootScope.loading = true;
+
 		$scope.results = function() {
 			$scope.$apply(function() {
 				$scope.outages = $rootScope.outages;
-				$rootScope.loading = false;
 
 				if(!angular.isObject($scope.outages)) {
 					$scope.noresults = true;
 				} else {
 					$scope.noresults = false;
 				}
+
+				$rootScope.loading = false;
 			});
 		};
 
@@ -441,7 +446,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$scope.results();
 		});
 
-		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
