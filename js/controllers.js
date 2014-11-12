@@ -137,9 +137,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				} else {
 					$scope.noresults = false;
 				}
-
-				$rootScope.loading = false;
 			});
+
+			$rootScope.loading = false;
 		};
 
 		$scope.tagCancel = function() {
@@ -431,9 +431,9 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 				} else {
 					$scope.noresults = false;
 				}
-
-				$rootScope.loading = false;
 			});
+
+			$rootScope.loading = false;
 		};
 
 		$scope.getMap = function($event, $url) {
