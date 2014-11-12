@@ -23,10 +23,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-    document.addEventListener('resume', function() {
-        intializeMe();
-    }, false);
-
     function intializeMe() {
         getAppVersion(function(version) {
             $rootScope.version = "v" + version;
