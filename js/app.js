@@ -260,17 +260,19 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
                     //if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("stations", eval(data));
                         deferred.resolve(eval(data));
+                        $rootScope.$emit('stationsUpdated', new Date());
                     //} else {
                         //deferred.resolve(localStorage.stations);
                     //}
                 }).error(function(data) {
                     deferred.resolve(localStorage.stations);
+                    $rootScope.$emit('stationsUpdated', new Date());
                 });
             //} else {
                 //deferred.resolve(localStorage.stations);
             //}
 
-            $rootScope.$emit('stationsUpdated', new Date());
+            
 
             return deferred.promise;
         };
@@ -287,17 +289,17 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
                    //if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("outages", eval(data));
                         deferred.resolve(eval(data));
+                        $rootScope.$emit('outagesUpdated', new Date());
                     //} else {
                         //deferred.resolve(localStorage.outages);
                     //}
                 }).error(function(data) {
                     deferred.resolve(localStorage.outages);
+                    $rootScope.$emit('outagesUpdated', new Date());
                 });
             //} else {
                 //deferred.resolve(localStorage.outages);
             //}
-
-            $rootScope.$emit('outagesUpdated', new Date());
 
             return deferred.promise;
         };
