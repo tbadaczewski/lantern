@@ -18,6 +18,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         localStorage.SessionID = guid();
         localStorage.stations = null;
         localStorage.outages = null;
+        $rootScope.position = null;
 
         intializeMe();
     }, false);
