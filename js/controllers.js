@@ -127,14 +127,16 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
 		$scope.results = function() {
-			$scope.stations = $rootScope.stations;
-			$rootScope.loading = false;
-			
-			if(!angular.isObject($scope.stations)) {
-				$scope.noresults = true;
-			} else {
-				$scope.noresults = false;
-			}
+			$scope.$apply(function() {
+				$scope.stations = $rootScope.stations;
+				$rootScope.loading = false;
+				
+				if(!angular.isObject($scope.stations)) {
+					$scope.noresults = true;
+				} else {
+					$scope.noresults = false;
+				}
+			});
 		};
 
 		$scope.tagCancel = function() {
@@ -237,9 +239,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			$scope.$apply(function() {
-				$scope.results();
-			});
+			$scope.results();
 		});
 		
 		$rootScope.loading = true;
@@ -419,14 +419,16 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
 		$scope.results = function() {
-			$scope.outages = $rootScope.outages;
-			$rootScope.loading = false;
+			$scope.$apply(function() {
+				$scope.outages = $rootScope.outages;
+				$rootScope.loading = false;
 
-			if(!angular.isObject($scope.outages)) {
-				$scope.noresults = true;
-			} else {
-				$scope.noresults = false;
-			}
+				if(!angular.isObject($scope.outages)) {
+					$scope.noresults = true;
+				} else {
+					$scope.noresults = false;
+				}
+			});
 		};
 
 		$scope.getMap = function($event, $url) {
@@ -436,9 +438,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			$scope.$apply(function() {
-				$scope.results();
-			});
+			$scope.results();
 		});
 
 		$rootScope.loading = true;
