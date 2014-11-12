@@ -13,7 +13,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 			$rootScope.address = $scope.address;
 
 			geoencoder('address').then(function(address) {
-				if(address !== null) {
+				if(angular.isObject(address)) {
 					$rootScope.address = $scope.address = address[0];
 					$rootScope.county = address[1];
 					$rootScope.state = address[2];
@@ -127,7 +127,7 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
 		$scope.results = function() {
-			$scope.$apply(function() {
+			//$scope.$apply(function() {
 				$scope.stations = $rootScope.stations;
 				
 				if(!angular.isObject($scope.stations)) {
@@ -135,7 +135,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				} else {
 					$scope.noresults = false;
 				}
-			});
+			//});
 
 			$rootScope.loading = false;
 		};
@@ -420,7 +420,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
 		$scope.results = function() {
-			$scope.$apply(function() {
+			//$scope.$apply(function() {
 				$scope.outages = $rootScope.outages;
 
 				if(!angular.isObject($scope.outages)) {
@@ -428,7 +428,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 				} else {
 					$scope.noresults = false;
 				}
-			});
+			//});
 
 			$rootScope.loading = false;
 		};
