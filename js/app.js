@@ -255,20 +255,20 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            if($rootScope.address !== null && $rootScope.address !== "") {
+            //if($rootScope.address !== null && $rootScope.address !== "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                    if(typeof data[0] !== 'undefined') {
+                    //if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("stations", eval(data));
                         deferred.resolve(eval(data));
-                    } else {
+                    //} else {
                         deferred.resolve(localStorage.stations);
-                    }
+                    //}
                 }).error(function(data) {
                     deferred.resolve(localStorage.stations);
                 });
-            } else {
-                deferred.resolve(localStorage.stations);
-            }
+            //} else {
+                //deferred.resolve(localStorage.stations);
+            //}
 
             $rootScope.$emit('stationsUpdated', new Date());
 
@@ -282,20 +282,20 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            if($rootScope.state !== null && $rootScope.state !== "") {
+            //if($rootScope.state !== null && $rootScope.state !== "") {
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                   if(typeof data[0] !== 'undefined') {
+                   //if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("outages", eval(data));
                         deferred.resolve(eval(data));
-                    } else {
-                        deferred.resolve(localStorage.outages);
-                    }
+                    //} else {
+                        //deferred.resolve(localStorage.outages);
+                    //}
                 }).error(function(data) {
                     deferred.resolve(localStorage.outages);
                 });
-            } else {
-                deferred.resolve(localStorage.outages);
-            }
+            //} else {
+                //deferred.resolve(localStorage.outages);
+            //}
 
             $rootScope.$emit('outagesUpdated', new Date());
 
