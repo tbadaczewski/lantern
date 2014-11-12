@@ -126,8 +126,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
-		$rootScope.loading = true;
-
 		$scope.results = function() {
 			$scope.$apply(function() {
 				$scope.stations = $rootScope.stations;
@@ -244,7 +242,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.$on('stationsUpdated', function() {
 			$scope.results();
 		});
-		
+
+		$rootScope.loading = true;
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -420,8 +419,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-		$rootScope.loading = true;
-
 		$scope.results = function() {
 			$scope.$apply(function() {
 				$scope.outages = $rootScope.outages;
@@ -446,6 +443,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$scope.results();
 		});
 
+		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;

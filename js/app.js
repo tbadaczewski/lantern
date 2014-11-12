@@ -253,12 +253,11 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                //if(typeof data[0] !== 'undefined') {
-                    //localStorage.setItem("stations", eval(data));
+                if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
-                //} else {
-                    //deferred.resolve(localStorage.stations);
-                //}
+                } else {
+                    deferred.resolve(null);
+                }
 
                 $rootScope.$emit('stationsUpdated', new Date());
             }).error(function(data) {
@@ -277,12 +276,11 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-               //if(typeof data[0] !== 'undefined') {
-                    //localStorage.setItem("outages", eval(data));
+               if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
-                //} else {
-                    //deferred.resolve(localStorage.outages);
-                //}
+                } else {
+                    deferred.resolve(null);
+                }
 
                 $rootScope.$emit('outagesUpdated', new Date());
             }).error(function(data) {
