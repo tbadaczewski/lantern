@@ -31,23 +31,25 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "v" + version;
         });
 
-        geolocation().then(function(position) {
-            $rootScope.position = position;
+        if(!angular.isObject($rootScope.position)) {
+            geolocation().then(function(position) {
+                $rootScope.position = position;
 
-            geoencoder('latLng').then(function(address) {
-                $rootScope.address = address[0];
-                $rootScope.county = address[1];
-                $rootScope.state = address[2];
+                geoencoder('latLng').then(function(address) {
+                    $rootScope.address = address[0];
+                    $rootScope.county = address[1];
+                    $rootScope.state = address[2];
 
-                loadstations().then(function(stations) {
-                    $rootScope.stations = stations;
-                });
+                    loadstations().then(function(stations) {
+                        $rootScope.stations = stations;
+                    });
 
-                loadoutages().then(function(outages) {
-                    $rootScope.outages = outages;
+                    loadoutages().then(function(outages) {
+                        $rootScope.outages = outages;
+                    });
                 });
             });
-        });
+        }
     }
 
     function guid() {
@@ -207,11 +209,12 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
                     
                     if(location[1] === '') {
                         loadcounty().then(function(data) {
-                            $rootScope.county = data;
+                            location[1] = data;
+                            deferred.resolve(location);
                         });
+                    } else {
+                        deferred.resolve(location);
                     }
-
-                    deferred.resolve(location);
                 } else {
                     deferred.resolve(null);
                 }
@@ -283,6 +286,8 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
             var deferred = $q.defer();
 
             if($rootScope.state !== null && $rootScope.state !== "") {
+                console.log('https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county);
+                
                 $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                    if(typeof data[0] !== 'undefined') {
                         localStorage.setItem("outages", eval(data));
