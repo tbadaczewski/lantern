@@ -227,8 +227,6 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		
 		$rootScope.$on('stationsUpdated', function() {
 			$scope.stations = $rootScope.stations;
-
-			alert($rootScope.stations);
 			
 			if(!angular.isObject($scope.stations)) {
 				$scope.noresults = true;
@@ -428,8 +426,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			alert($rootScope.outages);
-
 			$scope.outages = $rootScope.outages;
 
 			if(!angular.isObject($scope.outages)) {
