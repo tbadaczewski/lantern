@@ -1,4 +1,4 @@
-<div class="outages" pull-to-refresh="onReload()">
+<div class="outages">
     <div ng-repeat="outage in outages" ng-hide="noresults">
     	<div class="item list">
 	        <h4>{{isExists(outage.commercial_company_name) ? outage.commercial_company_name : outage.utility_company_name}}</h4>

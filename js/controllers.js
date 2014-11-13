@@ -211,20 +211,6 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			if(gaPlugin){gaPlugin.trackEvent(null, null, "Directions Requested", $rootScope.address, url, 0);}
 		};
 
-		$scope.onReload = function() {
-			var deferred = $q.defer();
-
-			setTimeout(function() {
-				loadstations().then(function(stations) {
-					$rootScope.stations = $scope.stations = stations;
-					deferred.resolve(true);
-					$rootScope.$emit('stationsUpdated', new Date());
-				});
-			}, 1000);
-			
-			return deferred.promise;
-		};
-
 		$scope.results = function() {
 			$scope.stations = $rootScope.stations;
 			
@@ -239,6 +225,13 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		
 		$rootScope.$on('stationsUpdated', function() {
 			$scope.results();
+		});
+
+		$rootScope.$on('refresh', function() {
+			loadstations().then(function(stations) {
+				$rootScope.stations = $scope.stations = stations;
+				$rootScope.$emit('stationsUpdated', new Date());
+			});
 		});
 
 		$rootScope.loading = true;

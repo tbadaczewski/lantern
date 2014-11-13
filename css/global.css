@@ -146,7 +146,9 @@ button.inline, .button.inline {
 	left: 0;
 	padding: 145px 1em 50px 1em;
 	background: #c7c7c7;
-	overflow: auto;	
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -842,4 +844,18 @@ iframe {
 .view-buttons .active, .view-buttons .active:hover {
 	background: #f18425;
 	color: #fff !important;
+}
+
+#refresh {
+	position: absolute;
+	top: 48px;
+	left: 0;
+	display: block;
+	width: 100%;
+	text-align: center;
+	-webkit-transform: rotate(0deg);
+}
+
+#refresh.release {
+	-webkit-transform: rotate(180deg);
 }

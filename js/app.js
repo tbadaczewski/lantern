@@ -7,8 +7,7 @@ var lanternApp = angular.module('lanternApp', [
     'ngRoute',
 	'ngTouch',
     'ngSanitize',
-    'lanternControllers',
-    'mgcrea.pullToRefresh'
+    'lanternControllers'
 ]);
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
@@ -306,6 +305,33 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
         };
     }
 ]);
+
+lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
+    return function (scope, element, attrs) {
+        var $refresh = null;
+
+        angular.element(element).prepend("<div id='refresh'><span class='icon-arrow-down' aria-hidden='true'><span></div>");
+        $refresh = angular.element(document.getElementById("refresh"));
+
+        angular.element(element).bind("touchmove", function() {
+            $timeout.cancel($rootScope.refresh);
+            
+            if(element[0].scrollTop < -100) {
+                if(!$refresh.hasClass("release")) {
+                    console.log("Add");
+                    $refresh.addClass("release");
+                }
+            }
+
+            $rootScope.refresh = $timeout(function(){
+                if(element[0].scrollTop > -100) {
+                    $rootScope.$emit('refresh', new Date());
+                    $refresh.removeClass("release");
+                }
+            }, 1000);
+        });
+    };
+});
 
 lanternApp.directive('searchbar', function($timeout, $rootScope) {
     return {
