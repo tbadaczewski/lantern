@@ -708,6 +708,10 @@ iframe {
 	-webkit-overflow-scrolling: touch;
 }
 
+#alternative iframe {
+	padding-bottom: 40px;
+}
+
 #legend {
 	display: block;
 	font-size: 80%;
