@@ -251,6 +251,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";
 		$scope.saddr = encodeURI($rootScope.address);
+		/*
 		$scope.stations = $rootScope.stations;
 		
 		if(!angular.isObject($scope.stations)) {
@@ -258,6 +259,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		} else {
 			$scope.noresults = false;
 		}
+		*/
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -445,6 +447,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
+		/*
 		$scope.outages = $rootScope.outages;
 
 		if(!angular.isObject($scope.outages)) {
@@ -452,6 +455,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		} else {
 			$scope.noresults = false;
 		}
+		*/
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
