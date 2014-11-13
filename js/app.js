@@ -531,7 +531,7 @@ lanternApp.directive('outageframe', function($http, $sce) {
         template: "<iframe ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             element.bind("load", function(e) {
-                angular.element(element).css('height', (element[0].clientHeight - 100) + "px");
+                angular.element(element).attr('height', (element[0].clientHeight - 100) + "px");
                 scope.$emit('loaded', true);
             });
         }
