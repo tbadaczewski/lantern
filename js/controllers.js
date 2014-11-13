@@ -136,6 +136,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			}
 
 			$rootScope.loading = false;
+
+			$scope.$apply();
 		};
 
 		$scope.tagCancel = function() {
@@ -435,6 +437,8 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			}
 
 			$rootScope.loading = false;
+
+			$scope.$apply();
 		};
 
 		$scope.getMap = function($event, $url) {
