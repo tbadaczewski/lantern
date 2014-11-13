@@ -16,7 +16,6 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
     document.addEventListener('deviceready', function() {
         localStorage.SessionID = guid();
-        $rootScope.position = null;
 
         intializeMe();
     }, false);

@@ -136,8 +136,6 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			}
 
 			$rootScope.loading = false;
-
-			$scope.$apply();
 		};
 
 		$scope.tagCancel = function() {
@@ -240,6 +238,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
+			alert("Updated Stations");
 			$scope.results();
 		});
 
@@ -437,8 +436,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			}
 
 			$rootScope.loading = false;
-
-			$scope.$apply();
 		};
 
 		$scope.getMap = function($event, $url) {
@@ -448,6 +445,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
+			alert("Updated Outages");
 			$scope.results();
 		});
 
