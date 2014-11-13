@@ -36,10 +36,12 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
                 loadstations().then(function(stations) {
                     $rootScope.stations = stations;
+                    $rootScope.$emit('stationsUpdated', new Date());
                 });
 
                 loadoutages().then(function(outages) {
                     $rootScope.outages = outages;
+                    $rootScope.$emit('outagesUpdated', new Date());
                 });
             });
         });
@@ -251,19 +253,14 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            alert($rootScope.address);
-
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                //if(typeof data[0] !== 'undefined') {
+                if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
-                //} else {
-                    //deferred.resolve(null);
-                //}
-
-                $rootScope.$emit('stationsUpdated', new Date());
+                } else {
+                    deferred.resolve(null);
+                }
             }).error(function(data) {
                 deferred.resolve(null);
-                $rootScope.$emit('stationsUpdated', new Date());
             });
 
             return deferred.promise;
@@ -276,19 +273,14 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            alert($rootScope.state + " - " + $rootScope.county);
-
             $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
-                //if(typeof data[0] !== 'undefined') {
+                if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
-                // else {
-                    //deferred.resolve(null);
-                //}
-
-                $rootScope.$emit('outagesUpdated', new Date());
+                } else {
+                    deferred.resolve(null);
+                }
             }).error(function(data) {
                 deferred.resolve(null);
-                $rootScope.$emit('outagesUpdated', new Date());
             });
 
             return deferred.promise;
