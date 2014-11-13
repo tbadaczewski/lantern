@@ -224,8 +224,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			
 			return deferred.promise;
 		};
-		
-		$rootScope.$on('stationsUpdated', function() {
+
+		$scope.results = function() {
 			$scope.stations = $rootScope.stations;
 			
 			if(!angular.isObject($scope.stations)) {
@@ -235,9 +235,13 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			}
 
 			$rootScope.loading = false;
+		};
+		
+		$rootScope.$on('stationsUpdated', function() {
+			$scope.results();
 		});
 
-		$rootScope.loading = false;
+		$rootScope.loading = true;
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -251,15 +255,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";
 		$scope.saddr = encodeURI($rootScope.address);
-		/*
-		$scope.stations = $rootScope.stations;
-		
-		if(!angular.isObject($scope.stations)) {
-			$scope.noresults = true;
-		} else {
-			$scope.noresults = false;
-		}
-		*/
+		$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -427,7 +423,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			$location.path("/outage-map");
 		};
 
-        $rootScope.$on('outagesUpdated', function() {
+		$scope.results = function() {
 			$scope.outages = $rootScope.outages;
 
 			if(!angular.isObject($scope.outages)) {
@@ -437,9 +433,13 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 			}
 
 			$rootScope.loading = false;
+		};
+
+        $rootScope.$on('outagesUpdated', function() {
+			$scope.results();
 		});
 
-		$rootScope.loading = false;
+		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
@@ -447,15 +447,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
-		/*
-		$scope.outages = $rootScope.outages;
-
-		if(!angular.isObject($scope.outages)) {
-			$scope.noresults = true;
-		} else {
-			$scope.noresults = false;
-		}
-		*/
+		$scope.results();
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
