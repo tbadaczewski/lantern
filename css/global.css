@@ -716,6 +716,7 @@ iframe {
 	background: #fff;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+	visibility: hidden;
 }
 
 #legend {
