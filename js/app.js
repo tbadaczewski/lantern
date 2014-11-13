@@ -318,7 +318,6 @@ lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
             
             if(element[0].scrollTop < -100) {
                 if(!$refresh.hasClass("release")) {
-                    console.log("Add");
                     $refresh.addClass("release");
                 }
             }
