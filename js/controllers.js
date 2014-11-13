@@ -126,18 +126,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
-		$scope.results = function() {
-			$scope.stations = $rootScope.stations;
-			
-			if(!angular.isObject($scope.stations)) {
-				$scope.noresults = true;
-			} else {
-				$scope.noresults = false;
-			}
-
-			$rootScope.loading = false;
-		};
-
 		$scope.tagCancel = function() {
 			$scope.show = false;
 		};
@@ -238,11 +226,22 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			alert("Updated Stations");
-			$scope.results();
+			$scope.$apply(function(){
+				$scope.stations = $rootScope.stations;
+
+				alert($rootScope.stations);
+				
+				if(!angular.isObject($scope.stations)) {
+					$scope.noresults = true;
+				} else {
+					$scope.noresults = false;
+				}
+
+				$rootScope.loading = false;
+			});
 		});
 
-		$rootScope.loading = true;
+		$rootScope.loading = false;
 		$rootScope.typestate = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
@@ -263,8 +262,6 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		} else {
 			$scope.noresults = false;
 		}
-
-		$rootScope.loading = false;
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -426,18 +423,6 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-		$scope.results = function() {
-			$scope.outages = $rootScope.outages;
-
-			if(!angular.isObject($scope.outages)) {
-				$scope.noresults = true;
-			} else {
-				$scope.noresults = false;
-			}
-
-			$rootScope.loading = false;
-		};
-
 		$scope.getMap = function($event, $url) {
 			$event.preventDefault();
 			$rootScope.outagemap = $url;
@@ -445,11 +430,22 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			alert("Updated Outages");
-			$scope.results();
+			$scope.$apply(function(){
+				alert($rootScope.outages);
+
+				$scope.outages = $rootScope.outages;
+
+				if(!angular.isObject($scope.outages)) {
+					$scope.noresults = true;
+				} else {
+					$scope.noresults = false;
+				}
+
+				$rootScope.loading = false;
+			});
 		});
 
-		$rootScope.loading = true;
+		$rootScope.loading = false;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.typestate = false;
@@ -464,8 +460,6 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		} else {
 			$scope.noresults = false;
 		}
-
-		$rootScope.loading = false;
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
