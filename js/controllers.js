@@ -226,7 +226,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			$scope.$apply(function(){
+			//$scope.$apply(function(){
 				$scope.stations = $rootScope.stations;
 
 				alert($rootScope.stations);
@@ -238,7 +238,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				}
 
 				$rootScope.loading = false;
-			});
+			//});
 		});
 
 		$rootScope.loading = false;
@@ -430,7 +430,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			$scope.$apply(function(){
+			//$scope.$apply(function(){
 				alert($rootScope.outages);
 
 				$scope.outages = $rootScope.outages;
@@ -442,7 +442,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 				}
 
 				$rootScope.loading = false;
-			});
+			//});
 		});
 
 		$rootScope.loading = false;
