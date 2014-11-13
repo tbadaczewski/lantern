@@ -685,15 +685,6 @@ button#back, button#forward, a#return {
 	background: #fff;
 }
 
-#frame-content {
-	padding: 60px 1em 1em 1em;
-}
-
-#alternative #frame-content {
-	padding: 60px 0 0 0;
-}
-
-
 #frame-content h2 {
 	text-transform: uppercase !important;
 }
@@ -715,8 +706,6 @@ iframe {
 	background: #fff;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	-webkit-backface-visibility: hidden;
-	-webkit-transform:translateZ(1px);
 }
 
 #legend {
