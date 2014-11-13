@@ -532,6 +532,7 @@ lanternApp.directive('outageframe', function($http, $sce) {
         link: function (scope, element, attrs) {
             element.bind("load", function(e) {
                 angular.element(element).css('height', (element[0].clientHeight - 100) + "px");
+                angular.element(element).css('-webkit-transform', "translateZ(1px)");
                 scope.$emit('loaded', true);
             });
         }

@@ -716,6 +716,7 @@ iframe {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	-webkit-backface-visibility: hidden;
+	-webkit-transform:translateZ(1px);
 }
 
 #legend {
