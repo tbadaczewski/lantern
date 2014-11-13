@@ -238,9 +238,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			$scope.$apply(function() {
-				$scope.results();
-			});
+			$scope.results();
 		});
 
 		$rootScope.loading = true;
@@ -257,7 +255,15 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$rootScope.animate = "fixed";
 		$scope.id = "station-list";
 		$scope.saddr = encodeURI($rootScope.address);
-		$scope.results();
+		$scope.stations = $rootScope.stations;
+		
+		if(!angular.isObject($scope.stations)) {
+			$scope.noresults = true;
+		} else {
+			$scope.noresults = false;
+		}
+
+		$rootScope.loading = false;
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station List");}
     }
@@ -419,14 +425,14 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http', '$window', 'loadoutages', '$location', '$timeout',
     function ($scope, $rootScope, $http, $window, loadoutages, $location, $timeout) {
-		$scope.results = function() {			
+		$scope.results = function() {
 			$scope.outages = $rootScope.outages;
 
 			if(!angular.isObject($scope.outages)) {
 				$scope.noresults = true;
 			} else {
 				$scope.noresults = false;
-			}			
+			}
 
 			$rootScope.loading = false;
 		};
@@ -438,9 +444,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			$scope.$apply(function() {
-				$scope.results();
-			});
+			$scope.results();
 		});
 
 		$rootScope.loading = true;
@@ -451,7 +455,15 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		$rootScope.navclass = "lightning";
 		$rootScope.animate = "fixed";
 		$scope.id = "outage-list";
-		$scope.results();
+		$scope.outages = $rootScope.outages;
+
+		if(!angular.isObject($scope.outages)) {
+			$scope.noresults = true;
+		} else {
+			$scope.noresults = false;
+		}
+
+		$rootScope.loading = false;
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Outage List");}
     }
