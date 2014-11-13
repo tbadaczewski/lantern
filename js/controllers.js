@@ -226,19 +226,17 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 		
 		$rootScope.$on('stationsUpdated', function() {
-			//$scope.$apply(function(){
-				$scope.stations = $rootScope.stations;
+			$scope.stations = $rootScope.stations;
 
-				alert($rootScope.stations);
-				
-				if(!angular.isObject($scope.stations)) {
-					$scope.noresults = true;
-				} else {
-					$scope.noresults = false;
-				}
+			alert($rootScope.stations);
+			
+			if(!angular.isObject($scope.stations)) {
+				$scope.noresults = true;
+			} else {
+				$scope.noresults = false;
+			}
 
-				$rootScope.loading = false;
-			//});
+			$rootScope.loading = false;
 		});
 
 		$rootScope.loading = false;
@@ -430,19 +428,17 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 		};
 
         $rootScope.$on('outagesUpdated', function() {
-			//$scope.$apply(function(){
-				alert($rootScope.outages);
+			alert($rootScope.outages);
 
-				$scope.outages = $rootScope.outages;
+			$scope.outages = $rootScope.outages;
 
-				if(!angular.isObject($scope.outages)) {
-					$scope.noresults = true;
-				} else {
-					$scope.noresults = false;
-				}
+			if(!angular.isObject($scope.outages)) {
+				$scope.noresults = true;
+			} else {
+				$scope.noresults = false;
+			}
 
-				$rootScope.loading = false;
-			//});
+			$rootScope.loading = false;
 		});
 
 		$rootScope.loading = false;
