@@ -244,8 +244,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			} else {
 				$scope.ios = true;
 			}
-		}
-		catch(err) {
+		} catch(err) {
 			$scope.ios = false;
 		}
 
