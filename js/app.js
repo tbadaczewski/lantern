@@ -313,9 +313,9 @@ lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
         if(scope.id === "station-list") {
             angular.element(element).prepend("<div id='refresh'><span class='icon-arrow-down' aria-hidden='true'><span></div>");
             $refresh = angular.element(document.getElementById("refresh"));
-
-            angular.element(element).bind("touchmove", function() {
-                $timeout.cancel($rootScope.refresh);
+            
+            angular.element(element).bind("touchmove", function(e) {
+                var touches = e.changedTouches;
                 
                 if(element[0].scrollTop < -100) {
                     if(!$refresh.hasClass("release")) {
@@ -323,7 +323,9 @@ lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
                     }
                 }
 
-                $rootScope.refresh = $timeout(function(){
+                $timeout.cancel($rootScope.refresh);
+                
+                $rootScope.refresh = $timeout(function() {
                     if(element[0].scrollTop > -100) {
                         $rootScope.$emit('refresh', new Date());
                         $refresh.removeClass("release");
@@ -557,10 +559,10 @@ lanternApp.directive('outageframe', function($http, $sce) {
         replace: true,
         transclude: true,
         scope: true,
-        template: "<iframe ng-transclude></iframe>",
+        template: "<iframe style='height:{{height}}px' ng-transclude></iframe>",
         link: function (scope, element, attrs) {
             element.bind("load", function(e) {
-                //angular.element(element).css('height', (element[0].clientHeight - 90) + "px");
+                scope.height = element[0].clientHeight + 40;
                 scope.$emit('loaded', true);
             });
         }

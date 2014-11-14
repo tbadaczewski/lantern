@@ -222,6 +222,10 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 
 			$rootScope.loading = false;
 		};
+
+		$scope.refresh = function() {
+			$rootScope.$emit('refresh', new Date());
+		};
 		
 		$rootScope.$on('stationsUpdated', function() {
 			$scope.results();
@@ -233,6 +237,12 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				$rootScope.$emit('stationsUpdated', new Date());
 			});
 		});
+
+		if(angular.lowercase(device.platform) !== "ios") {
+			$scope.ios = false;
+		} else {
+			$scope.ios = true;
+		}
 
 		$rootScope.loading = true;
 		$rootScope.typestate = true;

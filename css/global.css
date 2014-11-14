@@ -72,8 +72,17 @@ button, .button {
 	cursor: pointer;
 }
 
+.button.gray {
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+}
+
 a.button {
 	font-size: 0.9em;
+}
+
+.button.small {
+	font-size: 0.8em;
 }
 
 button.inline, .button.inline {
@@ -146,9 +155,7 @@ button.inline, .button.inline {
 	left: 0;
 	padding: 145px 1em 50px 1em;
 	background: #c7c7c7;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	overflow: scroll;
+	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
 

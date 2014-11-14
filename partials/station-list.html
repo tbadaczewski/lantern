@@ -16,6 +16,7 @@
 		<div class="left">Results found are in 2.5 mi. radius.</div>
 		<div class="right"><span class="icon-green"></span> = <strong>Open</strong> &nbsp; <span class="icon-yellow"></span> = <strong>Uncertain</strong> &nbsp; <span class="icon-red"></span> = <strong>Closed</strong></div>
 	</div>
+	<a href="#" ng-click="refresh()" class="button gray small text-center" ng-hide="ios"><span class="icon-retweet" aria-hidden="true"></span> Refresh Results</a>
     <div class="station" ng-repeat="station in stations" ng-hide="noresults">
     	<div class="item list">
 	        <h4><span class="icon-{{station.operatingStatus}}" aria-hidden="true"></span> {{station.station}}</h4>
