@@ -238,10 +238,14 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 			});
 		});
 
-		if(angular.lowercase(device.platform) !== "ios") {
-			$scope.ios = false;
+		if(angular.isObject(device)) {
+			if(angular.lowercase(device.platform) !== "ios") {
+				$scope.ios = false;
+			} else {
+				$scope.ios = true;
+			}
 		} else {
-			$scope.ios = true;
+			$scope.ios = false;
 		}
 
 		$rootScope.loading = true;
