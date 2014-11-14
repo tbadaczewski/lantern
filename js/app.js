@@ -310,25 +310,29 @@ lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
     return function (scope, element, attrs) {
         var $refresh = null;
 
-        angular.element(element).prepend("<div id='refresh'><span class='icon-arrow-down' aria-hidden='true'><span></div>");
-        $refresh = angular.element(document.getElementById("refresh"));
+        if(scope.id === "station-list") {
+            angular.element(element).prepend("<div id='refresh'><span class='icon-arrow-down' aria-hidden='true'><span></div>");
+            $refresh = angular.element(document.getElementById("refresh"));
 
-        angular.element(element).bind("touchmove", function() {
-            $timeout.cancel($rootScope.refresh);
-            
-            if(element[0].scrollTop < -100) {
-                if(!$refresh.hasClass("release")) {
-                    $refresh.addClass("release");
+            angular.element(element).bind("touchmove", function() {
+                $timeout.cancel($rootScope.refresh);
+                
+                if(element[0].scrollTop < -100) {
+                    if(!$refresh.hasClass("release")) {
+                        $refresh.addClass("release");
+                    }
                 }
-            }
 
-            $rootScope.refresh = $timeout(function(){
-                if(element[0].scrollTop > -100) {
-                    $rootScope.$emit('refresh', new Date());
-                    $refresh.removeClass("release");
-                }
-            }, 1000);
-        });
+                $rootScope.refresh = $timeout(function(){
+                    if(element[0].scrollTop > -100) {
+                        $rootScope.$emit('refresh', new Date());
+                        $refresh.removeClass("release");
+                    }
+                }, 1000);
+            });
+        } else {
+            angular.element(document.getElementById("refresh")).remove();
+        }
     };
 });
 
