@@ -776,10 +776,11 @@ iframe {
 	z-index: 4;
 }
 
-.progress > div {
+.progress div:first-child {
 	position: absolute;
 	top: 50%;
 	left: 0;
+	margin-top: 1em;
 	font-family: 'open_sansregular';
 	font-size: 1em;
 	font-weight: bold;
@@ -788,7 +789,7 @@ iframe {
 	color: #fff;
 	display: block;
  	text-transform: uppercase;
-	background: transparent;
+	display: none;
 }
 
 .progress.ng-hide, .ng-modal.ng-hide {
