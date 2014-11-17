@@ -776,7 +776,7 @@ iframe {
 	z-index: 4;
 }
 
-.progress div:first-child {
+.progress > div {
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -789,6 +789,7 @@ iframe {
 	color: #fff;
 	display: block;
  	text-transform: uppercase;
+	background: transparent;
 }
 
 .progress.ng-hide, .ng-modal.ng-hide {
