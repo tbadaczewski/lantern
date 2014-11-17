@@ -12,7 +12,7 @@ var lanternApp = angular.module('lanternApp', [
 
 lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
     $rootScope.menu = "close";
-
+        
     document.addEventListener('deviceready', function() {
         localStorage.SessionID = guid();
 
@@ -29,17 +29,20 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.position = position;
 
             geoencoder('latLng').then(function(address) {
+                $rootScope.loading = true;
                 $rootScope.address = address[0];
                 $rootScope.county = address[1];
                 $rootScope.state = address[2];
 
                 loadstations().then(function(stations) {
                     $rootScope.stations = stations;
+                    $rootScope.loading = false;
                     $rootScope.$emit('stationsUpdated', new Date());
                 });
 
                 loadoutages().then(function(outages) {
                     $rootScope.outages = outages;
+                    $rootScope.loading = false;
                     $rootScope.$emit('outagesUpdated', new Date());
                 });
             });

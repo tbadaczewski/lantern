@@ -9,6 +9,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		$scope.searchfocus = false;
 
 		$scope.search = function() {
+			$rootScope.loading = true;
 			$scope.searchfocus = false;
 			$rootScope.address = $scope.address;
 
@@ -20,16 +21,19 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadstations().then(function(data) {
 						$rootScope.stations = data;
+						$rootScope.loading = false;
 						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations", data.length);}
 						$rootScope.$emit('stationsUpdated', new Date());
 					});
 
 					loadoutages().then(function(data) {
 						$rootScope.outages = data;
+						$rootScope.loading = false;
 						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
 						$rootScope.$emit('outagesUpdated', new Date());
 					});
 				} else {
+					$rootScope.loading = false;
 					$rootScope.stations = null;
 					$rootScope.outages = null;
 					$rootScope.$emit('stationsUpdated', new Date());
@@ -73,6 +77,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		};
 
 		$scope.locate = function() {
+			$rootScope.loading = true;
+			
 			geolocation().then(function(position) {
 				$rootScope.position = position;
 
@@ -83,11 +89,13 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadstations().then(function(data) {
 						$rootScope.stations = data;
+						$rootScope.loading = false;
 						$rootScope.$emit('stationsUpdated', new Date());
 					});
 
 					loadoutages().then(function(data) {
 						$rootScope.outages = data;
+						$rootScope.loading = false;
 						$rootScope.$emit('outagesUpdated', new Date());
 					});
 				});
@@ -285,9 +293,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					"station" : stations[i].station,
 					"operatingStatus" : stations[i].operatingStatus,
 					"address" : stations[i].addressLine1,
-					"city" : stations[i].addressLine2.replace(" ", ""),
-					"region" : stations[i].addressLine3.substring(0, stations[i].addressLine3.lastIndexOf(" ")).replace(" ", ""),
-					"zip" : stations[i].addressLine3.substring(stations[i].addressLine3.lastIndexOf(" ")).replace(" ", ""),
+					"city" : ((stations[i].addressLine2 !== undefined) ? stations[i].addressLine2.replace(" ", "") : ""),
+					"region" : ((stations[i].addressLine3 !== undefined) ? stations[i].addressLine3.substring(0, stations[i].addressLine3.lastIndexOf(" ")).replace(" ", "") : ""),
+					"zip" : ((stations[i].addressLine3 !== undefined) ? stations[i].addressLine3.substring(stations[i].addressLine3.lastIndexOf(" ")).replace(" ", "") : ""),
 					"latitude" : stations[i].lat,
 					"longitude" : stations[i].lng,
 					"icon" : {
