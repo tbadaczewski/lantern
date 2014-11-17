@@ -774,7 +774,7 @@ iframe {
 	overflow: hidden;
 	z-index: 4;
 }
-/*
+
 .progress div {
 	position: absolute;
 	top: 50%;
@@ -789,7 +789,7 @@ iframe {
 	display: block;
  	text-transform: uppercase;
 }
-*/
+
 .progress.ng-hide, .ng-modal.ng-hide {
 	display: block !important;
 	position: absolute;
