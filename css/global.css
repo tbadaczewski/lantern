@@ -774,6 +774,14 @@ iframe {
 	overflow: hidden;
 	z-index: 4;
 }
+
+.progress img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 3;
+}
+
 /*
 .progress div {
 	position: absolute;
