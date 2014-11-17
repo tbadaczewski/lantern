@@ -773,6 +773,7 @@ iframe {
 	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NkYGCoBwAAiQCB1bUosQAAAABJRU5ErkJggg==) top left repeat;
 	overflow: hidden;
 	z-index: 4;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .progress img {
@@ -780,6 +781,7 @@ iframe {
 	top: 50%;
 	left: 50%;
 	z-index: 3;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 /*
