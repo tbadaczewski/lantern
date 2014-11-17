@@ -770,11 +770,11 @@ iframe {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background: rgba(0,0,0,0.5);
+	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NkYGCoBwAAiQCB1bUosQAAAABJRU5ErkJggg==) top left repeat;
 	overflow: hidden;
 	z-index: 4;
 }
-
+/*
 .progress div {
 	position: absolute;
 	top: 50%;
@@ -789,7 +789,7 @@ iframe {
 	display: block;
  	text-transform: uppercase;
 }
-
+*/
 .progress.ng-hide, .ng-modal.ng-hide {
 	display: block !important;
 	position: absolute;
