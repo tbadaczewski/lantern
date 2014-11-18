@@ -78,7 +78,7 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 		$scope.locate = function() {
 			$rootScope.loading = true;
-			
+
 			geolocation().then(function(position) {
 				$rootScope.position = position;
 
@@ -129,6 +129,14 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
 		$scope.id = "main";
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Main Menu");}
+    }
+]);
+
+lanternControllers.controller('ProgressCtrl', ['$scope', '$rootScope', '$http',
+    function ($scope, $rootScope, $http, $window, $location, geolocation, geoencoder) {
+		$scope.cancelLoading = function() {
+			$rootScope.loading = false;
+		};
     }
 ]);
 

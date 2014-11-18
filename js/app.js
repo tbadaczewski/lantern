@@ -172,7 +172,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
             var geocoder = new google.maps.Geocoder();
             var position = $rootScope.position;
             var params = null;
-
+            
             if($type == 'latLng') {
                 params = {'latLng': new google.maps.LatLng(position.coords.latitude, position.coords.longitude)};
             } else {
