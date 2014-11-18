@@ -28,7 +28,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadoutages().then(function(data) {
 						$rootScope.outages = data;
-						$rootScope.loading = false;
 						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
 						$rootScope.$emit('outagesUpdated', new Date());
 					});
@@ -95,7 +94,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadoutages().then(function(data) {
 						$rootScope.outages = data;
-						$rootScope.loading = false;
 						$rootScope.$emit('outagesUpdated', new Date());
 					});
 				});
