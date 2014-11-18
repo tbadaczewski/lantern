@@ -175,12 +175,12 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 				} else {
 					tags = [{"station" : { "id" : id, "lastupdated" : new Date(), "count" : 1 }}];
 				}
-				
+
 				localStorage.setItem("tags", JSON.stringify(tags));
 
 				$scope.show = false;
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
-				
+
 				tagstatus(id, status).then(function(data) {
 					loadstations().then(function(data) {
 						$rootScope.stations = $scope.stations = data;
@@ -227,7 +227,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 
 		$scope.results = function() {
 			$scope.stations = $rootScope.stations;
-			
+
 			if(!angular.isObject($scope.stations)) {
 				$scope.noresults = true;
 			} else {
@@ -240,7 +240,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		$scope.refresh = function() {
 			$rootScope.$emit('refresh', new Date());
 		};
-		
+
 		$rootScope.$on('stationsUpdated', function() {
 			$scope.results();
 		});
@@ -253,11 +253,12 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		});
 
 		try {
-			if(angular.lowercase(device.platform) !== "ios") {
-				$scope.ios = false;
-			} else {
-				$scope.ios = true;
-			}
+			// if(angular.lowercase(device.platform) !== "ios") {
+			// 	$scope.ios = false;
+			// } else {
+			// 	$scope.ios = true;
+			// }
+      $scope.ios = false;
 		} catch(err) {
 			$scope.ios = false;
 		}
@@ -310,7 +311,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 					}
 				});
 			}
-			
+
 			$scope.markers = station_markers;
 			$scope.showdetails = null;
 		};
@@ -369,7 +370,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 				localStorage.setItem("tags", JSON.stringify(tags));
 				$scope.show = false;
 				$window.navigator.notification.alert('Station Status Reported', null, 'Station Status', 'Close');
-				
+
 				tagstatus(id, status).then(function(data) {
 					loadstations().then(function(data) {
 						$rootScope.stations = data;
@@ -555,7 +556,7 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 			$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
 			if(gaPlugin){gaPlugin.trackEvent(null, null, "Search Alternative Fuels", $rootScope.address, localStorage.SessionID, 0);}
 		};
-		
+
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Alternative Fuel List");}
     }
 ]);
