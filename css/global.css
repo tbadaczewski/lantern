@@ -694,7 +694,7 @@ button#back, button#forward, a#return {
 	background: #fff;
 }
 
-#alternative #frame-content {
+#alternative #frame-content, #outage-map #frame-content {
 	padding: 48px 0 0 0;
 }
 
