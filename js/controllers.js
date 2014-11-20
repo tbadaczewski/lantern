@@ -21,16 +21,18 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadstations().then(function(data) {
 						$rootScope.stations = data;
-						$rootScope.loading = false;
 						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Stations", $rootScope.address, "Stations", data.length);}
 						$rootScope.$emit('stationsUpdated', new Date());
+
+						loadoutages().then(function(data) {
+							$rootScope.outages = data;
+							if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
+							$rootScope.$emit('outagesUpdated', new Date());
+							$rootScope.loading = false;
+						});
 					});
 
-					loadoutages().then(function(data) {
-						$rootScope.outages = data;
-						if(gaPlugin){gaPlugin.trackEvent(null, null, "Load Outages", $rootScope.address, "Outages", data.length);}
-						$rootScope.$emit('outagesUpdated', new Date());
-					});
+
 				} else {
 					$rootScope.loading = false;
 					$rootScope.stations = null;
@@ -88,13 +90,13 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 					loadstations().then(function(data) {
 						$rootScope.stations = data;
-						$rootScope.loading = false;
 						$rootScope.$emit('stationsUpdated', new Date());
-					});
 
-					loadoutages().then(function(data) {
-						$rootScope.outages = data;
-						$rootScope.$emit('outagesUpdated', new Date());
+						loadoutages().then(function(data) {
+							$rootScope.outages = data;
+							$rootScope.$emit('outagesUpdated', new Date());
+							$rootScope.loading = false;
+						});
 					});
 				});
 

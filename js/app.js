@@ -36,14 +36,13 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
                 loadstations().then(function(stations) {
                     $rootScope.stations = stations;
-                    $rootScope.loading = false;
                     $rootScope.$emit('stationsUpdated', new Date());
-                });
 
-                loadoutages().then(function(outages) {
-                    $rootScope.outages = outages;
-                    $rootScope.loading = false;
-                    $rootScope.$emit('outagesUpdated', new Date());
+                    loadoutages().then(function(outages) {
+                        $rootScope.outages = outages;
+                        $rootScope.loading = false;
+                        $rootScope.$emit('outagesUpdated', new Date());
+                    });
                 });
             });
         });
@@ -227,7 +226,7 @@ lanternApp.factory('loadphone', ['$q', '$http',
         return function (id) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstation/phonenumber/' + id, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstation/phonenumber/' + id, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             });
 
@@ -241,7 +240,7 @@ lanternApp.factory('loadcounty', ['$q', '$rootScope', '$http',
         return function (id) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'https://data.fcc.gov/api/block/2010/find?format=json&latitude=' + $rootScope.position.coords.latitude + '&longitude=' + $rootScope.position.coords.longitude + '&showall=true'}).success(function (data) {
+            $http({timeout: 15000, method: 'GET', url: 'https://data.fcc.gov/api/block/2010/find?format=json&latitude=' + $rootScope.position.coords.latitude + '&longitude=' + $rootScope.position.coords.longitude + '&showall=true'}).success(function (data) {
                 deferred.resolve(eval(data).County.name);
             });
 
@@ -255,7 +254,7 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
                 } else {
@@ -275,7 +274,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
                 } else {
@@ -300,7 +299,7 @@ lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
                 text_status = 'closed';
             }
 
-            $http({method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + text_status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/fuelstatus/tag/' + id + '/' + text_status, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 deferred.resolve(eval(data));
             });
 
@@ -586,8 +585,8 @@ lanternApp.directive('contentframe', function($http, $sce) {
             scope.index = 0;
 
             scope.changePath = function(path) {
-                $http.get('tips/' + path).success(function(response) {
-                    element.html($sce.trustAsHtml(response));
+                $http({timeout: 15000, method: 'GET', url: 'tips/' + path}).success(function (data) {
+                    element.html($sce.trustAsHtml(data));
                     element[0].scrollTop = 0;
 
                     scope.$emit('onload', [scope.index, scope.history.length]);
