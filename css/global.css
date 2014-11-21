@@ -772,10 +772,11 @@ iframe {
 	height: 100%;
 	width: 100%;
 	z-index: 4;
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.25);
 	overflow: hidden;
 }
 
+/*
 .progress .text {
 	position: absolute;
 	bottom: 48px;
@@ -805,6 +806,7 @@ iframe {
 	top: 50%;
 	left: 50%;
 }
+*/
 
 .ng-modal.ng-show {
 	top: 0;
