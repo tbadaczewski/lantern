@@ -776,38 +776,6 @@ iframe {
 	overflow: hidden;
 }
 
-/*
-.progress .text {
-	position: absolute;
-	bottom: 48px;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	font-size: 1.2em;
-}
-
-.progress .text a:link, .progress .text a:visited, .progress .text a:hover {
-	color: #f18525 !important;
-}
-
-.progress h3 {
-	position: absolute;
-	top: 48%;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	font-size: 1.75em;
-	font-weight: bold;
-	color: #fff;
-	margin-top: 26px;
-}
-
-.progress.ng-show {
-	top: 50%;
-	left: 50%;
-}
-*/
-
 .ng-modal.ng-show {
 	top: 0;
 	left: 0;

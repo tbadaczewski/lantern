@@ -132,14 +132,6 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     }
 ]);
 
-lanternControllers.controller('ProgressCtrl', ['$scope', '$rootScope', '$http',
-    function ($scope, $rootScope, $http, $window, $location, geolocation, geoencoder) {
-		$scope.cancelLoading = function() {
-			$rootScope.loading = false;
-		};
-    }
-]);
-
 lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus',
     function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus) {
 		$scope.tagCancel = function() {
