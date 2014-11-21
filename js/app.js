@@ -254,6 +254,8 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
         return function (scope) {
             var deferred = $q.defer();
 
+            console.log("Load Stations");
+
             $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/gasstations/search/' + encodeURIComponent($rootScope.address), headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
@@ -273,6 +275,8 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     function ($q, $rootScope, $http) {
         return function (scope) {
             var deferred = $q.defer();
+
+            console.log("Load Outages");
 
             $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 if(typeof data[0] !== 'undefined') {
@@ -322,17 +326,15 @@ lanternApp.directive('pulltorefresh', function($timeout, $rootScope) {
                 if(element[0].scrollTop < -100) {
                     if(!$refresh.hasClass("release")) {
                         $refresh.addClass("release");
+
+                        $timeout.cancel($rootScope.refresh);
+                        
+                        $rootScope.refresh = $timeout(function() {
+                            $rootScope.$emit('refresh', new Date());
+                            $refresh.removeClass("release");
+                        }, 1000);
                     }
                 }
-
-                $timeout.cancel($rootScope.refresh);
-                
-                $rootScope.refresh = $timeout(function() {
-                    if(element[0].scrollTop > -100) {
-                        $rootScope.$emit('refresh', new Date());
-                        $refresh.removeClass("release");
-                    }
-                }, 1000);
             });
         } else {
             angular.element(document.getElementById("refresh")).remove();
