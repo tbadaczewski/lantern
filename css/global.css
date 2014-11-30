@@ -800,14 +800,10 @@ iframe {
 	width: 5em;
 	height: 5em;
 	margin: -2.5em 0 .5em -2.5em;
-	font-size: 12px;
+	font-size: 4px;
 	text-indent: 999em;
 	overflow: hidden;
 	-webkit-animation: spin 1s infinite steps(8);
-}
-
-.small.loader {
-	font-size: 6px;
 }
 
 .loader:before,
