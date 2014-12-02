@@ -25,7 +25,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "v" + version;
         });
 
-        checkconnection().then(function(data) {
+        checkconnection(function(data) {
             if(data === 'No network connection') {
                 return;
             }
@@ -148,34 +148,28 @@ lanternApp.factory('validatetag', ['$window',
     }
 ]);
 
-lanternApp.factory('checkconnection', ['$q',
-    function ($q) {
-        return function (id) {
-            var states = {};
-            var deferred = $q.defer();
-            var networkState = null;
+lanternApp.factory('checkconnection', function() {
+    var states = {};
+    var type = 'Unknown connection';
+    var networkState = null;
 
-            if(angular.isObject(navigator.connection)) {
-                networkState = navigator.connection.type;
+    if(angular.isObject(navigator.connection)) {
+        networkState = navigator.connection.type;
 
-                states[Connection.UNKNOWN]  = 'Unknown connection';
-                states[Connection.ETHERNET] = 'Ethernet connection';
-                states[Connection.WIFI]     = 'WiFi connection';
-                states[Connection.CELL_2G]  = 'Cell 2G connection';
-                states[Connection.CELL_3G]  = 'Cell 3G connection';
-                states[Connection.CELL_4G]  = 'Cell 4G connection';
-                states[Connection.CELL]     = 'Cell generic connection';
-                states[Connection.NONE]     = 'No network connection';
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
 
-                deferred.resolve(states[networkState]);
-            } else {
-                deferred.resolve('Unknown connection');
-            }
-
-            return deferred.promise;
-        };
+        type = states[networkState];
     }
-]);
+
+    return type;
+});
 
 lanternApp.factory('geolocation', ['$q', '$window',
     function ($q, $window) {
