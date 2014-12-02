@@ -521,11 +521,6 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 		$scope.id = "tips-guides";
         $scope.disabledback = "disabled";
 		$scope.disabledforward = "disabled";
-
-		if(connection.type() === 'No network connection') {
-			return;
-		}
-
 		$rootScope.loading = true;
 
 		$scope.$on('onload', function(event, values) {
