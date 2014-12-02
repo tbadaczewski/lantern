@@ -10,19 +10,25 @@ var lanternApp = angular.module('lanternApp', [
     'lanternControllers'
 ]);
 
-lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages) {
+lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, checkconnection) {
     $rootScope.menu = "close";
         
     document.addEventListener('deviceready', function() {
         localStorage.SessionID = guid();
 
-        //intializeMe();
+        intializeMe();
     }, false);
 
 
     function intializeMe() {
         getAppVersion(function(version) {
             $rootScope.version = "v" + version;
+        });
+
+        checkconnection().then(function(data) {
+            if(data === 'No network connection') {
+                return;
+            }
         });
 
         geolocation().then(function(position) {
