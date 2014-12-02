@@ -10,8 +10,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 		$scope.search = function() {
 			checkconnection().then(function(data) {
-				alert(data);
-
 				if(data === 'No network connection') {
 					return;
 				}
@@ -86,7 +84,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		$scope.locate = function() {
 			checkconnection().then(function(data) {
 				alert(data);
-
 				if(data === 'No network connection') {
 					return;
 				}
