@@ -287,7 +287,19 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'loadphone', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
     function ($scope, $rootScope, $http, $timeout, $window, loadphone, geolocation, geoencoder, loadstations, validatetag, tagstatus) {
 		var station_markers = null;
-		$rootScope.loading = true;
+
+		$rootScope.typestate = true;
+		$rootScope.backstate = "visible";
+		$rootScope.navstate = "visible";
+		$rootScope.navbtnlabel = "List";
+		$rootScope.navtext = "GAS STATIONS";
+		$rootScope.navclass = "gas";
+		$rootScope.maptarget = "station-map";
+		$rootScope.listtarget = "station-list";
+		$rootScope.mapactive = "active";
+		$rootScope.listactive = "";
+		$rootScope.animate = "fixed";
+		$scope.id = "station-map";
 
 		$scope.loadMarkers = function() {
 			var stations = $rootScope.stations;
@@ -433,18 +445,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			$scope.loadMarkers();
 		}
 
-		$rootScope.typestate = true;
-		$rootScope.backstate = "visible";
-		$rootScope.navstate = "visible";
-		$rootScope.navbtnlabel = "List";
-		$rootScope.navtext = "GAS STATIONS";
-		$rootScope.navclass = "gas";
-		$rootScope.maptarget = "station-map";
-		$rootScope.listtarget = "station-list";
-		$rootScope.mapactive = "active";
-		$rootScope.listactive = "";
-		$rootScope.animate = "fixed";
-		$scope.id = "station-map";
+		$rootScope.loading = true;
 
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Station Map");}
     }
@@ -490,16 +491,17 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-		if(connection.type() === 'No network connection') {
-			return;
-		}
-
-		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
 		$rootScope.navstate = "visible";
 		$rootScope.animate = "slide";
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
+
+		if(connection.type() === 'No network connection') {
+			return;
+		}
+
+		$rootScope.loading = true;
 
 		$scope.$on('loaded', function(event, values) {
 			$scope.$apply(function() {
@@ -513,13 +515,18 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
+		$rootScope.backstate = "";
+		$rootScope.navstate = "false";
+		$rootScope.animate = "slide";
+		$scope.id = "tips-guides";
+        $scope.disabledback = "disabled";
+		$scope.disabledforward = "disabled";
+
 		if(connection.type() === 'No network connection') {
 			return;
 		}
 
 		$rootScope.loading = true;
-        $scope.disabledback = "disabled";
-		$scope.disabledforward = "disabled";
 
 		$scope.$on('onload', function(event, values) {
 			if(values[0] > 0) {
@@ -545,27 +552,23 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 			$scope.$broadcast('goforward');
         };
 
-		$rootScope.backstate = "";
-		$rootScope.navstate = "false";
-		$rootScope.animate = "slide";
-		$scope.id = "tips-guides";
-
 		if(gaPlugin){gaPlugin.trackPage(null, null, "Tips & Guides");}
     }
 ]);
 
 lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-		if(connection.type() === 'No network connection') {
-			return;
-		}
-
-		$rootScope.loading = true;
 		$rootScope.backstate = "hidden";
 		$rootScope.navstate = "hidden";
 		$rootScope.animate = "slide";
 		$scope.id = "alternative";
 		$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
+
+		if(connection.type() === 'No network connection') {
+			return;
+		}
+
+		$rootScope.loading = true;
 
 		$scope.$on('loaded', function(event, values) {
 			$scope.$apply(function() {
