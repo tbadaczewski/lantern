@@ -431,11 +431,11 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 			}
 		};
 
-		if($rootScope.stations === null) {
-			if(connection.type() === 'No network connection') {
-				return;
-			}
+		if(connection.type() === 'No network connection') {
+			return;
+		}
 
+		if($rootScope.stations === null) {
 			loadstations().then(function(data) {
 				$rootScope.stations = data;
 				$scope.loadMarkers();
