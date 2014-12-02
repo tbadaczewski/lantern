@@ -16,7 +16,7 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
     document.addEventListener('deviceready', function() {
         localStorage.SessionID = guid();
 
-        intializeMe();
+        //intializeMe();
     }, false);
 
 
@@ -142,11 +142,40 @@ lanternApp.factory('validatetag', ['$window',
     }
 ]);
 
+lanternApp.factory('checkconnection', ['$q',
+    function ($q) {
+        return function (id) {
+            var states = {};
+            var deferred = $q.defer();
+            var networkState = null;
+
+            if(angular.isObject(navigator.connection)) {
+                networkState = navigator.connection.type;
+
+                states[Connection.UNKNOWN]  = 'Unknown connection';
+                states[Connection.ETHERNET] = 'Ethernet connection';
+                states[Connection.WIFI]     = 'WiFi connection';
+                states[Connection.CELL_2G]  = 'Cell 2G connection';
+                states[Connection.CELL_3G]  = 'Cell 3G connection';
+                states[Connection.CELL_4G]  = 'Cell 4G connection';
+                states[Connection.CELL]     = 'Cell generic connection';
+                states[Connection.NONE]     = 'No network connection';
+
+                deferred.resolve(states[networkState]);
+            } else {
+                deferred.resolve('Unknown connection');
+            }
+
+            return deferred.promise;
+        };
+    }
+]);
+
 lanternApp.factory('geolocation', ['$q', '$window',
     function ($q, $window) {
         return function () {
             var deferred = $q.defer();
-            var options = { maximumAge: 30000, timeout: 30000, enableHighAccuracy: false };
+            var options = { maximumAge: 15000, timeout: 15000, enableHighAccuracy: false };
 
             function onSuccess(position) {
                 deferred.resolve(position);
@@ -164,8 +193,8 @@ lanternApp.factory('geolocation', ['$q', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
-    function ($q, $rootScope, loadcounty) {
+lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty', '$timeout',
+    function ($q, $rootScope, loadcounty, $timeout) {
         return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
@@ -216,6 +245,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty',
                 }
             });
 
+            $timeout(function() {
+                console.log("Too Slow or Broken");
+                deferred.resolve(null);
+            }, 15000);
+
             return deferred.promise;
         };
     }
@@ -249,8 +283,8 @@ lanternApp.factory('loadcounty', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
-    function ($q, $rootScope, $http) {
+lanternApp.factory('loadstations', ['$q', '$rootScope', '$http', '$timeout',
+    function ($q, $rootScope, $http, $timeout) {
         return function (scope) {
             var deferred = $q.defer();
 
@@ -269,8 +303,8 @@ lanternApp.factory('loadstations', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
-    function ($q, $rootScope, $http) {
+lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http', '$timeout',
+    function ($q, $rootScope, $http, $timeout) {
         return function (scope) {
             var deferred = $q.defer();
 
@@ -289,8 +323,8 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http',
     }
 ]);
 
-lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http',
-    function ($q, $rootScope, $http) {
+lanternApp.factory('tagstatus', ['$q', '$rootScope', '$http', '$timeout',
+    function ($q, $rootScope, $http, $timeout) {
         return function (id, status) {
             var deferred = $q.defer();
             var text_status = 'open';
