@@ -4,16 +4,14 @@
 
 var lanternControllers = angular.module('lanternControllers', []);
 
-lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$timeout', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages', 'checkconnection',
-    function ($scope, $rootScope, $http, $timeout, geolocation, geoencoder, loadstations, loadoutages, checkconnection) {
+lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$timeout', 'geolocation', 'geoencoder', 'loadstations', 'loadoutages', 'connection',
+    function ($scope, $rootScope, $http, $timeout, geolocation, geoencoder, loadstations, loadoutages, connection) {
 		$scope.searchfocus = false;
 
 		$scope.search = function() {
-			checkconnection().then(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			$rootScope.loading = true;
 			$scope.searchfocus = false;
@@ -82,11 +80,9 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 		};
 
 		$scope.locate = function() {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			$rootScope.loading = true;
 
@@ -142,18 +138,16 @@ lanternControllers.controller('MainCtrl', ['$scope', '$rootScope', '$http', '$wi
     }
 ]);
 
-lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus', 'checkconnection',
-    function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus, checkconnection) {
+lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '$http', '$window', 'loadphone', 'loadstations', 'validatetag', 'tagstatus', 'connection',
+    function ($q, $scope, $rootScope, $http, $window, loadphone, loadstations, validatetag, tagstatus, connection) {
 		$scope.tagCancel = function() {
 			$scope.show = false;
 		};
 
 		$scope.callStation = function(id) {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			loadphone(id).then(function(data) {
 				if(data !== null) {
@@ -165,11 +159,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		};
 
 		$scope.tagStation = function(id, title, address, status) {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			if(validatetag(id) === true) {
 				var tags = eval(localStorage.getItem("tags"));
@@ -262,11 +254,9 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 		});
 
 		$rootScope.$on('refresh', function() {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			loadstations().then(function(stations) {
 				$rootScope.stations = $scope.stations = stations;
@@ -347,11 +337,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.callStation = function(id) {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
             loadphone(id).then(function(data) {
 				if(data !== null) {
@@ -363,11 +351,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		$scope.tagStation = function(id, title, address, status) {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			if(validatetag(id) === true) {
 				var tags = eval(localStorage.getItem("tags"));
@@ -434,11 +420,9 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 		};
 
 		if($rootScope.stations === null) {
-			checkconnection(function(data) {
-				if(data === 'No network connection') {
-					return;
-				}
-			});
+			if(connection.type() === 'No network connection') {
+				return;
+			}
 
 			loadstations().then(function(data) {
 				$rootScope.stations = data;
@@ -506,11 +490,9 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-		checkconnection(function(data) {
-            if(data === 'No network connection') {
-                return;
-            }
-        });
+		if(connection.type() === 'No network connection') {
+			return;
+		}
 
 		$rootScope.loading = true;
 		$rootScope.backstate = "visible";
@@ -531,11 +513,9 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
-		checkconnection(function(data) {
-			if(data === 'No network connection') {
-				return;
-			}
-		});
+		if(connection.type() === 'No network connection') {
+			return;
+		}
 
 		$rootScope.loading = true;
         $scope.disabledback = "disabled";
@@ -576,11 +556,9 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 
 lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
-		checkconnection(function(data) {
-			if(data === 'No network connection') {
-				return;
-			}
-		});
+		if(connection.type() === 'No network connection') {
+			return;
+		}
 
 		$rootScope.loading = true;
 		$rootScope.backstate = "hidden";

@@ -10,7 +10,7 @@ var lanternApp = angular.module('lanternApp', [
     'lanternControllers'
 ]);
 
-lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, checkconnection) {
+lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations, loadoutages, connection) {
     $rootScope.menu = "close";
         
     document.addEventListener('deviceready', function() {
@@ -25,11 +25,9 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
             $rootScope.version = "v" + version;
         });
 
-        checkconnection(function(data) {
-            if(data === 'No network connection') {
-                return;
-            }
-        });
+        if(connection.type() === 'No network connection') {
+            return;
+        }
 
         geolocation().then(function(position) {
             $rootScope.position = position;
@@ -148,27 +146,31 @@ lanternApp.factory('validatetag', ['$window',
     }
 ]);
 
-lanternApp.factory('checkconnection', function() {
-    var states = {};
-    var type = 'Unknown connection';
-    var networkState = null;
+lanternApp.factory('connection', function() {
+    return {
+        type: function() {
+            var states = {};
+            var type = 'Unknown connection';
+            var networkState = null;
 
-    if(angular.isObject(navigator.connection)) {
-        networkState = navigator.connection.type;
+            if(angular.isObject(navigator.connection)) {
+                networkState = navigator.connection.type;
 
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
+                states[Connection.UNKNOWN]  = 'Unknown connection';
+                states[Connection.ETHERNET] = 'Ethernet connection';
+                states[Connection.WIFI]     = 'WiFi connection';
+                states[Connection.CELL_2G]  = 'Cell 2G connection';
+                states[Connection.CELL_3G]  = 'Cell 3G connection';
+                states[Connection.CELL_4G]  = 'Cell 4G connection';
+                states[Connection.CELL]     = 'Cell generic connection';
+                states[Connection.NONE]     = 'No network connection';
 
-        type = states[networkState];
-    }
+                type = states[networkState];
+            }
 
-    return type;
+            return type;
+        }
+    };
 });
 
 lanternApp.factory('geolocation', ['$q', '$window',
