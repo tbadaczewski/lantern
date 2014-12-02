@@ -26,6 +26,8 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         });
 
         checkconnection().then(function(data) {
+            alert(data);
+
             if(data === 'No network connection') {
                 return;
             }

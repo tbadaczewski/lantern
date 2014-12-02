@@ -10,6 +10,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 		$scope.search = function() {
 			checkconnection().then(function(data) {
+				alert(data);
+
 				if(data === 'No network connection') {
 					return;
 				}
@@ -83,6 +85,8 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 
 		$scope.locate = function() {
 			checkconnection().then(function(data) {
+				alert(data);
+
 				if(data === 'No network connection') {
 					return;
 				}
@@ -263,6 +267,7 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
 
 		$rootScope.$on('refresh', function() {
 			checkconnection().then(function(data) {
+				alert(data);
 				if(data === 'No network connection') {
 					return;
 				}
@@ -348,6 +353,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.callStation = function(id) {
 			checkconnection().then(function(data) {
+				alert(data);
 				if(data === 'No network connection') {
 					return;
 				}
@@ -364,6 +370,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		$scope.tagStation = function(id, title, address, status) {
 			checkconnection().then(function(data) {
+				alert(data);
 				if(data === 'No network connection') {
 					return;
 				}
@@ -435,6 +442,7 @@ lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http'
 
 		if($rootScope.stations === null) {
 			checkconnection().then(function(data) {
+				alert(data);
 				if(data === 'No network connection') {
 					return;
 				}
@@ -507,6 +515,7 @@ lanternControllers.controller('OutageListCtrl', ['$scope', '$rootScope', '$http'
 lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
 		checkconnection().then(function(data) {
+			alert(data);
 			if(data === 'No network connection') {
 				return;
 			}
@@ -532,6 +541,7 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
     function ($scope, $rootScope) {
 		checkconnection().then(function(data) {
+			alert(data);
 			if(data === 'No network connection') {
 				return;
 			}
@@ -577,6 +587,7 @@ lanternControllers.controller('TipsCtrl', ['$scope', '$rootScope',
 lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$window',
     function ($scope, $rootScope, $window) {
 		checkconnection().then(function(data) {
+			alert(data);
 			if(data === 'No network connection') {
 				return;
 			}
