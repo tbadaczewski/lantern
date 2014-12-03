@@ -19,11 +19,12 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
         intializeMe();
     }, false);
 
-
     function intializeMe() {
-        getAppVersion(function(version) {
-            $rootScope.version = "v" + version;
-        });
+        if(typeof getAppVersion !== 'undefined') {
+            getAppVersion(function(version) {
+                $rootScope.version = "v" + version;
+            });
+        }
 
         if(connection.type() === 'No network connection') {
             return;
@@ -34,20 +35,25 @@ lanternApp.run(function($rootScope, $http, geolocation, geoencoder, loadstations
 
             geoencoder('latLng').then(function(address) {
                 $rootScope.loading = true;
-                $rootScope.address = address[0];
-                $rootScope.county = address[1];
-                $rootScope.state = address[2];
 
-                loadstations().then(function(stations) {
-                    $rootScope.stations = stations;
-                    $rootScope.$emit('stationsUpdated', new Date());
+                if(angular.isObject(address)) {
+                    $rootScope.address = address[0];
+                    $rootScope.county = address[1];
+                    $rootScope.state = address[2];
 
-                    loadoutages().then(function(outages) {
-                        $rootScope.outages = outages;
-                        $rootScope.loading = false;
-                        $rootScope.$emit('outagesUpdated', new Date());
+                    loadstations().then(function(stations) {
+                        $rootScope.stations = stations;
+                        $rootScope.$emit('stationsUpdated', new Date());
+
+                        loadoutages().then(function(outages) {
+                            $rootScope.outages = outages;
+                            $rootScope.loading = false;
+                            $rootScope.$emit('outagesUpdated', new Date());
+                        });
                     });
-                });
+                } else {
+                    $rootScope.loading = false;
+                }
             });
         });
     }
@@ -195,13 +201,13 @@ lanternApp.factory('geolocation', ['$q', '$window',
     }
 ]);
 
-lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty', '$timeout',
-    function ($q, $rootScope, loadcounty, $timeout) {
+lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
+    function ($q, $rootScope, $timeout, loadcounty) {
         return function ($type) {
             var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
             var position = $rootScope.position;
-            var params = null;
+            var params = null, encodetimeout = null;
             
             if($type == 'latLng') {
                 params = {'latLng': new google.maps.LatLng(position.coords.latitude, position.coords.longitude)};
@@ -245,10 +251,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', 'loadcounty', '$timeout',
                 } else {
                     deferred.resolve(null);
                 }
+                
+                $timeout.cancel(encodetimeout);
             });
 
-            $timeout(function() {
-                console.log("Too Slow or Broken");
+            encodetimeout = $timeout(function() {
                 deferred.resolve(null);
             }, 15000);
 
