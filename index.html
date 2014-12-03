@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="progress" ng-show="loading">
-        <div class="small loader">
+        <div class="loader">
             <div>Loading</div>
         </div>
     </div>
@@ -46,6 +46,7 @@
             <a id="btn-list" href="#/{{listtarget}}" class="small {{listactive}}">List</a>
         </div>
     </nav> 
+    <script>alert(window.location);</script>
     <div id="{{id}}" ng-view class="{{animate}}" pulltorefresh></div>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
