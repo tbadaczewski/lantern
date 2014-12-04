@@ -288,8 +288,8 @@ lanternControllers.controller('StationListCtrl', ['$q','$scope', '$rootScope', '
     }
 ]);
 
-lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'loadphone', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus',
-    function ($scope, $rootScope, $http, $timeout, $window, loadphone, geolocation, geoencoder, loadstations, validatetag, tagstatus) {
+lanternControllers.controller('StationMapCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$window', 'loadphone', 'geolocation', 'geoencoder', 'loadstations', 'validatetag', 'tagstatus', 'connection',
+    function ($scope, $rootScope, $http, $timeout, $window, loadphone, geolocation, geoencoder, loadstations, validatetag, tagstatus, connection) {
 		var station_markers = null;
 
 		$rootScope.typestate = true;
