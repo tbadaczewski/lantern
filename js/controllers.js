@@ -559,10 +559,6 @@ lanternControllers.controller('AlternativeCtrl', ['$scope', '$rootScope', '$wind
 		$scope.id = "alternative";
 		$scope.src = "http://www.afdc.energy.gov/afdc/locator/m/stations/r?fuel=ELEC&loc=" + encodeURIComponent($rootScope.address);
 
-		if(connection.type() === 'No network connection') {
-			return;
-		}
-
 		$rootScope.loading = true;
 
 		$scope.$on('loaded', function(event, values) {
