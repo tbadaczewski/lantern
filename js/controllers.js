@@ -501,10 +501,6 @@ lanternControllers.controller('OutageMapCtrl', ['$scope', '$rootScope', '$window
 		$scope.id = "outage-map";
 		$scope.src = $rootScope.outagemap;
 
-		if(connection.type() === 'No network connection') {
-			return;
-		}
-
 		$rootScope.loading = true;
 
 		$scope.$on('loaded', function(event, values) {
