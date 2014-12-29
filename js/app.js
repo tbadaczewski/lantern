@@ -218,14 +218,17 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
             geocoder.geocode(params, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     var location = new Array("","","");
+                    var address_type = results[0].types[0];
 
                     //Formatted Address
                     location[0] = results[0].formatted_address;
-
-                    //County
-                    for(var i=0; i < results[0].address_components.length; i++) {
-                        if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
-                            location[1] = results[0].address_components[i].long_name.toLowerCase().replace("county","").trim();
+                    
+                    if(address_type === "formatted_address") {
+                        //County
+                        for(var i=0; i < results[0].address_components.length; i++) {
+                            if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
+                                location[1] = results[0].address_components[i].long_name.toLowerCase().replace("county","").trim();
+                            }
                         }
                     }
 
@@ -240,7 +243,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
                     
-                    if(location[1] === '') {
+                    if(location[1] === '' && address_type === "formatted_address") {
                         loadcounty().then(function(data) {
                             location[1] = data;
                             deferred.resolve(location);
@@ -316,8 +319,13 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http', '$timeout',
     function ($q, $rootScope, $http, $timeout) {
         return function (scope) {
             var deferred = $q.defer();
+            var params = $rootScope.state + '/' + $rootScope.county;
 
-            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + $rootScope.state + '/' + $rootScope.county, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
+            if(!angular.isObject($rootScope.county)) {
+                params = $rootScope.state;
+            }
+
+            $http({timeout: 15000, method: 'GET', url: 'https://doelanternapi.parseapp.com/utilitycompany/data/territory/' + params, headers: {'SessionID': localStorage.SessionID}}).success(function (data) {
                 if(typeof data[0] !== 'undefined') {
                     deferred.resolve(eval(data));
                 } else {
