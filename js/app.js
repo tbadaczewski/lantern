@@ -223,7 +223,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
                     //Formatted Address
                     location[0] = results[0].formatted_address;
                     
-                    if(address_type === "formatted_address") {
+                    if(address_type === "street_address") {
                         //County
                         for(var i=0; i < results[0].address_components.length; i++) {
                             if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
@@ -243,7 +243,7 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
                     
-                    if(location[1] === '' && address_type === "formatted_address") {
+                    if(location[1] === '' && address_type === "street_address") {
                         loadcounty().then(function(data) {
                             location[1] = data;
                             deferred.resolve(location);
@@ -321,7 +321,7 @@ lanternApp.factory('loadoutages', ['$q', '$rootScope', '$http', '$timeout',
             var deferred = $q.defer();
             var params = $rootScope.state + '/' + $rootScope.county;
 
-            if(!angular.isObject($rootScope.county)) {
+            if($rootScope.county === null) {
                 params = $rootScope.state;
             }
 

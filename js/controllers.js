@@ -37,10 +37,6 @@ lanternControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$http', '$
 					});
 				} else {
 					$rootScope.loading = false;
-					//$rootScope.stations = null;
-					//$rootScope.outages = null;
-					//$rootScope.$emit('stationsUpdated', new Date());
-					//$rootScope.$emit('outagesUpdated', new Date());
 				}
 			});
 
