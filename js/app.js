@@ -220,10 +220,12 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
                     var location = new Array("","","");
                     var address_type = results[0].types[0];
 
+                    console.log(address_type);
+
                     //Formatted Address
                     location[0] = results[0].formatted_address;
                     
-                    if(address_type === "street_address") {
+                    if(address_type === "street_address" || address_type === "postal_code" || address_type === "locality") {
                         //County
                         for(var i=0; i < results[0].address_components.length; i++) {
                             if (results[0].address_components[i].types[0] == "administrative_area_level_2") {
@@ -239,11 +241,11 @@ lanternApp.factory('geoencoder', ['$q', '$rootScope', '$timeout', 'loadcounty',
                         }
                     }
 
-                    if($type == 'address') {
+                    if($type === "address") {
                         $rootScope.position = {"coords" : {"latitude" : results[0].geometry.location.lat(), "longitude" : results[0].geometry.location.lng()}};
                     }
                     
-                    if(location[1] === '' && address_type === "street_address") {
+                    if(location[1] === "" && (address_type === "street_address" || address_type === "postal_code" || address_type === "locality")) {
                         loadcounty().then(function(data) {
                             location[1] = data;
                             deferred.resolve(location);
